@@ -26,6 +26,8 @@ To replicate this project, you'll need the following things:
 - 1x ESP32 Board - ESP32-WROOM-32U
 - 4x Motor Driver - BTS7960 43A H-Bridge
 - 2x Step Down Module DC to DC - LM2596 Buck Converter
+  - 3.3V for ESP32
+  - 12V for future Lights, Music, etc..
 - 1x Circuit Breaker Reset Fuse Box 30A
 - 1x Battery Discharge Protection Module - XH-M609
 - Connectors, Wires, etc..

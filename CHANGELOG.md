@@ -10,6 +10,7 @@ A fresh start as a PlatformIO project, built on the v2.2 motor class and the [co
 - Faults latch and clear only by re-arming from Locked with the sticks centred and the pedal released.
 - GPIO21 is a real kill line: LOW at boot until PWM is zeroed, and dropped on every hard fault and the kill switch.
 - Contactor hold on GPIO12 and steering enable on GPIO2.
+- Pin audit against the ESP32-WROOM-32D datasheet and errata: wheel-speed inputs move to GPIO34/35 (GPIO36/39 glitch when the ADC runs), pedal to GPIO36, battery sense to GPIO39, DS18B20 on GPIO15. New [PINOUT.md](docs/hardware/PINOUT.md) describes every pin. Pin rules run as static_asserts in every build, with a unit test and a docs consistency check in CI.
 - New pin map: the shared pins are gone, and RR_RPWM is off strapping pin 12.
 - Current sensing goes through an ADS1115 at the real 8500:1 ratio, is active in every mode, and treats IS saturation as a driver fault.
 - Out-of-range battery readings are a fault, not "OK". Low-voltage cutoff now has hysteresis.

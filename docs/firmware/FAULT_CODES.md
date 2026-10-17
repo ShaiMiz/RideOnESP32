@@ -9,7 +9,7 @@ Every fault **latches**. It stays set after its cause goes away, until the paren
 | `LINK` | No RC packet for 200 ms, link quality under 40 %, or the receiver's link flag down | Brake | Re-arm after the link returns | Radio on? Receiver powered (5 V)? TX/RX on GPIO16/17? Bound with the same phrase? |
 | `KILL` | Kill switch (CH5) not at run, or not readable | Coast, contactor open | Kill switch to run, then re-arm | Switch position; CH5 mix |
 | `BATT_LOW` | Battery under 21.0 V for more than 2 s | Brake | Re-arm once the battery rests above 22.5 V | Charge the battery |
-| `BATT_SENS` | Battery reading under 5 V or over 32 V | Brake | Re-arm once the reading is plausible | Divider on GPIO35 (150k/12k), loose wire |
+| `BATT_SENS` | Battery reading under 5 V or over 32 V | Brake | Re-arm once the reading is plausible | Divider on GPIO39 / VN (150k/12k), loose wire |
 | `OVERCUR` | One motor over 20 A, or all four over 35 A, for 300 ms | Coast | Re-arm | Stalled wheel, jammed gearbox, short in motor wiring. Check `IS_RESISTOR_OHMS` |
 | `DRIVER` | A BTS7960 IS line at the 3.3 V clamp: the driver reports over-temperature, short or under-voltage | Coast (also resets the driver's latch) | Re-arm once the driver cools | Heatsink temperature, motor short, driver supply |
 | `INPUT` | Throttle, steering or kill channel out of range, or the switch expander not answering in Kid mode | Brake | Re-arm | Radio channel setup; PCF8574 wiring at 0x20 |

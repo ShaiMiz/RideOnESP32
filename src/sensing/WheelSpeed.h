@@ -1,4 +1,4 @@
-// Hall-sensor wheel speed on GPIO36 / GPIO39. (later: traction control)
+// Hall-sensor wheel speed on GPIO34 / GPIO35 (not 36/39: they glitch when the ADC runs). (later: traction control)
 #pragma once
 
 class WheelSpeed {

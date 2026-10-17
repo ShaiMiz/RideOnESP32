@@ -1,7 +1,8 @@
 // ExpressLRS receiver input over CRSF (UART2, 420000 baud) via AlfredoCRSF.
 //
 // AlfredoCRSF does not expose when the last RC packet arrived, so the serial
-// port is wrapped in a small tap that spots valid RC-channels frames and
+// port is wrapped in a small tap that feeds every byte to a
+// rideon::CrsfFrameDetector, which spots valid RC-channels frames and
 // timestamps them. LinkMonitor then judges the link on that packet age, the
 // library's link flag and the link quality, never on channel values.
 #pragma once
@@ -9,6 +10,7 @@
 #include <AlfredoCRSF.h>
 #include <Arduino.h>
 
+#include "CrsfFrameDetector.h"
 #include "LinkMonitor.h"
 
 class RadioInput {
@@ -20,8 +22,8 @@ class RadioInput {
   uint16_t channel(uint8_t ch) const;
 
   bool linkUp() const { return crsf_.isLinkUp(); }
-  bool anyPacket() const { return tap_.frames > 0; }
-  uint32_t lastPacketMs() const { return tap_.lastFrameMs; }
+  bool anyPacket() const { return tap_.frames.frames() > 0; }
+  uint32_t lastPacketMs() const { return tap_.frames.lastFrameMs(); }
   uint8_t linkQuality() const;
   rideon::LinkInputs linkInputs(uint32_t nowMs) const;
 
@@ -39,14 +41,10 @@ class RadioInput {
     size_t write(const uint8_t* buf, size_t len) override { return inner_.write(buf, len); }
     void flush() override { inner_.flush(); }
 
-    uint32_t frames = 0;
-    uint32_t lastFrameMs = 0;
+    rideon::CrsfFrameDetector frames;
 
    private:
-    void feed(uint8_t b);
     Stream& inner_;
-    uint8_t buf_[64];
-    uint8_t pos_ = 0;
   };
 
   TapStream tap_{Serial2};

@@ -31,6 +31,7 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 | `Faults.h` | core | Fault bits, `FaultLatch`, `HoldTimer` |
 | `ModeMachine` | core | Locked, Kid, Parent and Killed rules |
 | `ArmingCheck` | core | Sticks centred and pedal released |
+| `CrsfFrameDetector` | core | Finds and timestamps RC frames in the receiver's bytes, resyncing like AlfredoCRSF |
 | `LinkMonitor` | core | Link Ok, Degraded or Lost from the flag, packet age and LQ |
 | `ChannelMap.h` | core | Channel numbers and stick and switch decoding |
 | `Ramp` | core | Accel and brake ramps, no reverse until stopped, caps |

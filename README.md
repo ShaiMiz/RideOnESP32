@@ -42,7 +42,8 @@ The parent always outranks the child: pulling the stick back in Kid mode brakes 
 This is a [PlatformIO](https://platformio.org/) project. It uses the pioarduino platform for Arduino core 3.x.
 
 ```sh
-pio test -e native        # safety logic tests, on the PC
+pio test -e native        # safety logic and pin map tests, on the PC
+python3 tools/check_pin_docs.py  # pins.h, PINOUT.md and WIRING.md agree
 pio run -e radio_check    # phase 2 bench firmware
 pio run -e one_motor      # phase 4 bench firmware
 pio run -e car            # the car firmware
@@ -50,13 +51,16 @@ pio run -e car -t upload  # flash over USB
 pio device monitor        # serial log, 115200 baud
 ```
 
+CI (`.github/workflows/build.yml`) runs on every push and pull request: the pin docs check, all unit tests, and a build of every firmware. The pin rules in `include/pin_rules.h` run inside every build, so a GPIO used twice or put on the wrong kind of pin stops the build. See [docs/hardware/PINOUT.md](docs/hardware/PINOUT.md).
+
 ## Layout
 
 ```
-include/        pins.h (the pin map) and config.h (every limit and tunable)
+include/        pins.h (the pin map, checked on every build), config.h (every limit and tunable)
 lib/rideon_core safety and control logic with no hardware calls, unit-tested
 src/            hardware modules and main.cpp; src/bench/ holds the bench firmwares
-test/           unit tests for lib/rideon_core
+test/           unit tests for lib/rideon_core and the pin map
+tools/          CI helper scripts
 radio/          T-Lite model and ELRS setup
 docs/           commissioning, hardware, firmware, reviews
 archive/        the v2 sketches and docs, kept for reference only

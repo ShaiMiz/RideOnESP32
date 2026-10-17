@@ -5,6 +5,16 @@ on:
   pull_request:
 
 jobs:
+  pins:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pin map, PINOUT.md and WIRING.md agree
+        run: python3 tools/check_pin_docs.py
+
   test:
     runs-on: ubuntu-latest
     steps:
@@ -13,7 +23,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install platformio
-      - name: Safety logic unit tests
+      - name: Safety logic and pin map unit tests
         run: pio test -e native
 
   build:

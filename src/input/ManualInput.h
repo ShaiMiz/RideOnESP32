@@ -1,4 +1,4 @@
-// The child's controls: the pedal on GPIO34 and the shifter, horn, E-stop
+// The child's controls: the pedal on GPIO36 (VP) and the shifter, horn, E-stop
 // sense and seat switch on the PCF8574 I2C expander.
 #pragma once
 

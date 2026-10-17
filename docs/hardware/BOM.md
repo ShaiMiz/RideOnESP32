@@ -44,6 +44,21 @@ From the gear photos (Desktop\ss, 17 Oct 2026) and the hardware plan.
 | 18650 cell, protected | 1 | For the T-Lite |
 | DFPlayer Mini and 3" 4 Ω full-range speaker | 1 | Engine and horn sounds |
 
+### Enclosure and wiring (added 17 Oct 2026)
+
+| Part | Qty | Why |
+| --- | --- | --- |
+| ABS project box with lid, about 250 x 200 x 100 mm, IP54 or better | 1 | Holds the ESP32, receiver, bucks, fuse block and the five BTS7960s, like the stock controller's box |
+| 24 V 80 mm fan with finger guard and dust filter | 2 | One pulls air in, one pushes it out across the driver heatsinks |
+| DS18B20 waterproof temperature probe | 1 | Lets the ESP32 run the fans and cut power if the box overheats |
+| Cable glands, PG9 and PG13.5 | 10 | Seal the motor, battery and sensor cables where they enter the box |
+| Nylon M3 standoffs and a mounting plate | kit | Boards mounted off the floor, nothing loose |
+| 0.1 µF ceramic capacitors | 10 | One across each motor's terminals for noise |
+| 12 or 14 AWG wire, red and black | 10 m each | Driver to motor runs (the 10 AWG is for the battery feed) |
+| Wire ferrules, heat shrink, crimp kit | kit | Clean screw-terminal joints that survive vibration |
+| Locking JST-XH or Molex connectors | kit | Sensor and signal plugs that can't shake loose |
+| 22 AWG silicone wire, assorted colours | 1 set | Signal wiring |
+
 ## Not needed
 
 HC-12 433 MHz module (a second, unsecured radio path), BMP280 barometers, DDT-S30 tweeters (they only play above 4 kHz), and the MCP23017 library.

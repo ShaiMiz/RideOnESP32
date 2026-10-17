@@ -1,6 +1,6 @@
 // Battery voltage and motor current.
 //
-// Battery: GPIO35 through a 150k/12k divider, read with analogReadMilliVolts()
+// Battery: GPIO39 (VN) through a 150k/12k divider, read with analogReadMilliVolts()
 // (calibrated), about 2.2 V at 29.4 V, inside the ESP32's accurate range.
 //
 // Current: each BTS7960 board's R_IS and L_IS are joined into one sense line,

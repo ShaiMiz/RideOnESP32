@@ -1,0 +1,8 @@
+{
+  "name": "rideon_core",
+  "version": "3.0.0",
+  "description": "Hardware-free safety and control logic for RideOnESP32. No Arduino calls, so it is unit-tested on the PC.",
+  "frameworks": "*",
+  "platforms": "*",
+  "build": { "flags": "-std=gnu++17" }
+}

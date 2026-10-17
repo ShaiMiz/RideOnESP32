@@ -10,6 +10,22 @@ Priorities, in order: **1. safety, 2. smooth driving, 3. everything else.** When
 
 Status: v3 has never driven a car. Only bench checks so far. Follow [docs/COMMISSIONING.md](docs/COMMISSIONING.md) phase by phase; no child rides before phase 6 passes.
 
+## Hardware decisions so far
+
+- **Plug and play:** the new electronics go in one removable box that plugs into the stock harness plugs and fits where the stock controller sits under the seat. The car must stay able to go back to stock (spare HY2005RX controller). If the harness pairs motors, use a reversible splitter adapter at the motor plugs, never cut the stock wiring (#33).
+- **Per-wheel control stays:** four independent drive channels, for e-diff, traction control and per-motor fault detection. Variant A is 4+1 IBT-2 boards; variant B is 2x Cytron MDD20A, more compact, with a 74LVC08 PWM gate and external current sensors (#32, undecided).
+- **Parts:** Shai orders from AliExpress (2–3 weeks shipping); local Israeli shops for urgent safety parts (fuse, contactor, E-stop, wire). Plan purchases so one AliExpress order covers a phase (#28).
+- **Waiting on Shai at the car:** photos of every stock controller plug (#17), box and under-seat measurements (#18), battery label and chemistry (#13), motor labels (#14), IBT-2 sense resistor (#15), pedal type (#16). Don't guess these values in `config.h`; leave the TODO and point to the issue.
+- The full reasoning is in the [hardware plan](https://claude.ai/code/artifact/17bcaa28-e72d-40de-8aa5-4d734f5fe4ad).
+
+## Not in this repo yet
+
+Some work lives only in the claude.ai project's shared folder, so Claude in Cursor can't see it. Ask Shai for it, or for it to be moved here, before redoing it:
+
+- Draft schematic v0.2 (5 sheets, `generate.py` makes the SVGs; variants A and B, 12 TBDs). Moving it into `docs/hardware/schematic/` is #31.
+- Safety-standards report: EN 71-1 4.15 and EN 62115 (Annex J, remote-controlled ride-ons) against this design, 8 gaps not yet filed as issues (roll-away when killed, no km/h cap, single-motor stall backstop, ELRS power above 100 mW, box fire rating, audio loudness, EMC, no stall test).
+- Audio plan: music on a ZK-502T Bluetooth amp off a 12 V rail, separate from the ESP32 (#47); car sounds through a DFPlayer driven by the ESP32 (#46). The Bluetooth is on the amp only, never the ESP32.
+
 ## Build, test, flash
 
 PlatformIO project (pioarduino platform, Arduino core 3.x). Libraries come from `lib_deps` in `platformio.ini`, not from Arduino IDE's library manager.
@@ -46,6 +62,7 @@ On Windows, if `pio` is not on PATH, use the PlatformIO terminal in Cursor or `%
 ## Workflow
 
 - `main` is protected. Every change goes through a branch and a PR, with CI green (`pins`, `test`, and builds of `car`, `radio_check`, `one_motor`). Shai reviews and merges; don't merge yourself.
+- Claude in Shai's claude.ai project also opens PRs here from the cloud, and chats aren't shared. The repo, PRs and issues are the shared record: `git pull` and check open PRs before starting, and write decisions into an issue or doc rather than leaving them only in chat.
 - Add a line to [CHANGELOG.md](CHANGELOG.md) for user-visible or safety-relevant changes.
 - Tracking lives in GitHub issues: phase parents #6 (phase 1) to #12 (phase 7), task issues under them, labelled `phase-N`, `safety`, `firmware`, `hardware`, `radio`, `waiting-on-car`. Reference the issue in the PR.
 

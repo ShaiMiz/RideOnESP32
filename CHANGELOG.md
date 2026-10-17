@@ -19,6 +19,11 @@ A fresh start as a PlatformIO project, built on the v2.2 motor class and the [co
 - Bench firmwares `radio_check` (phase 2) and `one_motor` (phase 4).
 - The pioarduino platform for Arduino core 3.x. AlfredoCRSF is pinned to a commit. The MCP23017 libraries are dropped.
 - The v2 docs, sketches and PDFs moved to `archive/`.
+- New `ESTOP` fault: the E-stop sense input locks the car and holds the contactor open, so releasing the E-stop with the pedal held no longer restarts it.
+- New `CUR_SENS` fault: every ADS1115 transfer is checked, and a current channel with no good reading for 250 ms stops the car instead of keeping its last value. The Adafruit ADS1X15 and BusIO libraries are dropped.
+- `DRIVER` waits 300 ms like `OVERCUR`, so start-up inrush no longer trips it, and the steering board's IS line is checked too.
+- The `one_motor` bench firmware has the task watchdog.
+- RC frames are found with the same resync as AlfredoCRSF, so a stray byte no longer hides a real frame and trips `LINK`.
 
 ## 2.2 (2026)
 

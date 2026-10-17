@@ -19,6 +19,7 @@ FaultMask SafetyManager::evaluate(const SafetySignals& s) {
   if (s.killSwitch) f |= FAULT_KILL_SWITCH;
   if (!s.radioChannelsValid) f |= FAULT_INPUT;
   if (s.kidRequested && !s.manualOk) f |= FAULT_INPUT;
+  if (s.estop) f |= FAULT_ESTOP;
 
   switch (battery_.update(s.batteryVolts, s.nowMs, BATTERY)) {
     case BatteryState::SensorFault: f |= FAULT_BATTERY_SENSOR; break;

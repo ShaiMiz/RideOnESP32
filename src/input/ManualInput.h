@@ -14,7 +14,7 @@ class ManualInput {
   float pedal() const { return pedal_; }          // 0 released .. 1 fully pressed
   int8_t direction() const { return direction_; } // +1 forward, -1 reverse, 0 neutral
   bool horn() const { return horn_; }
-  bool estopPressed() const { return estop_; }
+  bool estopPressed() const { return estop_; }  // the E-stop cuts power in hardware; this only reports it
   bool seat() const { return seat_; }
   bool ok() const { return ok_; }                 // false: expander not answering
 

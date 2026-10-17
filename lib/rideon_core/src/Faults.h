@@ -23,14 +23,16 @@ enum Fault : FaultMask {
   FAULT_INPUT = 1u << 6,           // pedal or switch expander unreadable, or a radio channel out of range
   FAULT_TILT = 1u << 7,            // car tipped past the limit (later, MPU-6050)
   FAULT_SETUP = 1u << 8,           // hardware failed to start; only a reboot clears it
+  FAULT_ESTOP = 1u << 9,           // E-stop pressed: it cut driver power behind the firmware's back
 };
 
 // Faults that cut the drivers at once (coast) instead of braking to a stop.
 constexpr FaultMask HARD_FAULTS =
-    FAULT_KILL_SWITCH | FAULT_OVERCURRENT | FAULT_DRIVER | FAULT_TILT | FAULT_SETUP;
+    FAULT_KILL_SWITCH | FAULT_OVERCURRENT | FAULT_DRIVER | FAULT_TILT | FAULT_SETUP | FAULT_ESTOP;
 
-// Faults that also open the main contactor.
-constexpr FaultMask CONTACTOR_FAULTS = FAULT_KILL_SWITCH | FAULT_SETUP;
+// Faults that also open the main contactor. For the E-stop this keeps the
+// contactor open after the button is released, until the parent re-arms.
+constexpr FaultMask CONTACTOR_FAULTS = FAULT_KILL_SWITCH | FAULT_SETUP | FAULT_ESTOP;
 
 // Faults that a re-arm can never clear.
 constexpr FaultMask PERMANENT_FAULTS = FAULT_SETUP;

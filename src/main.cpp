@@ -129,8 +129,17 @@ void loop() {
   bool channelsValid = !linkUsable || (channelValid(throttleUs, CHANNELS) && channelValid(steeringUs, CHANNELS) &&
                                        killPos >= 0);
 
-  SafetySignals signals = {link,  killSwitch, channelsValid, manual.ok(),   request == ModeRequest::Kid,
-                           power.batteryVolts(), &power,     DriveController::WHEELS, imu.tilted(), now};
+  SafetySignals signals = {link,
+                           killSwitch,
+                           channelsValid,
+                           manual.ok(),
+                           manual.ok() && manual.estopPressed(),
+                           request == ModeRequest::Kid,
+                           power.batteryVolts(),
+                           &power,
+                           DriveController::WHEELS,
+                           imu.tilted(),
+                           now};
   faults.update(safety.evaluate(signals));
 
   bool arming = armingOk({throttleUs, steeringUs, manual.pedal()}, ARMING);

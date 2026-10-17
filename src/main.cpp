@@ -7,7 +7,6 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <esp_system.h>
-#include <esp_task_wdt.h>
 
 #include "ArmingCheck.h"
 #include "ChannelMap.h"
@@ -24,6 +23,7 @@
 #include "pins.h"
 #include "safety/KillLines.h"
 #include "safety/SafetyManager.h"
+#include "safety/Watchdog.h"
 #include "sensing/Imu.h"
 #include "sensing/PowerMonitor.h"
 #include "telemetry/Log.h"
@@ -75,15 +75,6 @@ float kidSpeedCap(uint16_t us) {
   }
 }
 
-void startWatchdog() {
-  esp_task_wdt_config_t wdt = {};
-  wdt.timeout_ms = cfg::WATCHDOG_MS;
-  wdt.idle_core_mask = 0;
-  wdt.trigger_panic = true;
-  if (esp_task_wdt_reconfigure(&wdt) != ESP_OK) esp_task_wdt_init(&wdt);
-  esp_task_wdt_add(NULL);
-}
-
 }  // namespace
 
 void setup() {
@@ -106,7 +97,7 @@ void setup() {
     logx::line("SETUP FAILED: car stays locked until reboot");
   }
 
-  startWatchdog();
+  watchdog::begin();
   nextTickUs = micros();
 }
 
@@ -117,7 +108,7 @@ void loop() {
   nextTickUs += cfg::LOOP_PERIOD_US;
   if ((int32_t)(nowUs - nextTickUs) > (int32_t)cfg::LOOP_PERIOD_US) nextTickUs = nowUs;  // fell behind: resync
   const float dtS = cfg::LOOP_PERIOD_US / 1e6f;
-  esp_task_wdt_reset();
+  watchdog::feed();
 
   uint32_t now = millis();
   manual.update();

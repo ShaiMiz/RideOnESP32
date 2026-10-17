@@ -25,6 +25,7 @@
 #include "input/RadioInput.h"
 #include "pins.h"
 #include "safety/KillLines.h"
+#include "safety/Watchdog.h"
 #include "sensing/PowerMonitor.h"
 #include "telemetry/Log.h"
 
@@ -62,6 +63,7 @@ void setup() {
   ok &= power.begin(true);
   if (!ok) faults.raise(FAULT_SETUP);
   logx::line("one_motor: %s", ok ? "ready, put the mode switch to Locked" : "SETUP FAILED");
+  watchdog::begin();
 }
 
 void loop() {
@@ -70,6 +72,7 @@ void loop() {
   if ((int32_t)(now - nextTickMs) < 0) return;
   nextTickMs = now + 10;
   const float dtS = 0.01f;
+  watchdog::feed();
 
   power.update();
   LinkState link = evaluateLink(radio.linkInputs(now), LINK);

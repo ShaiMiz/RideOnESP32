@@ -16,6 +16,7 @@ A fresh start as a PlatformIO project, built on the v2.2 motor class and the [co
 - Out-of-range battery readings are a fault, not "OK". Low-voltage cutoff now has hysteresis.
 - Separate acceleration and braking ramps, no reverse until stopped, and reverse capped at 50 %.
 - Fixed 100 Hz loop, task watchdog, reset reason logged, and a serial log that never blocks.
+- Docs: draft schematic v0.2, safety-standards review, audio plan, and a CLAUDE.md for Claude Code.
 - Bench firmwares `radio_check` (phase 2) and `one_motor` (phase 4).
 - The pioarduino platform for Arduino core 3.x. AlfredoCRSF is pinned to a commit. The MCP23017 libraries are dropped.
 - The v2 docs, sketches and PDFs moved to `archive/`.

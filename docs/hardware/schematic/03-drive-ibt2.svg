@@ -1,0 +1,496 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" font-family="DejaVu Sans, Arial, Helvetica, sans-serif">
+<rect x="0" y="0" width="1600" height="1200" fill="#ffffff"/>
+<rect x="360" y="90" width="180" height="260" rx="4" fill="#f4f6f9" stroke="#37474f" stroke-width="1.4"/>
+<text x="450.0" y="83" font-size="12" text-anchor="middle" font-weight="bold" fill="#212121">U10 · front-left drive</text>
+<text x="365" y="124" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">VCC</text>
+<text x="365" y="154" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">GND</text>
+<text x="365" y="184" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">RPWM</text>
+<text x="365" y="214" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">LPWM</text>
+<text x="365" y="244" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">R_IS</text>
+<text x="365" y="274" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">L_IS</text>
+<text x="365" y="304" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">R_EN</text>
+<text x="365" y="334" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">L_EN</text>
+<text x="535" y="134" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">B+</text>
+<text x="535" y="184" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">B−</text>
+<text x="535" y="264" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">M+</text>
+<text x="535" y="314" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">M−</text>
+<text x="455" y="202" font-size="12" text-anchor="middle" font-weight="bold" fill="#212121">IBT-2</text>
+<text x="455" y="218" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#212121">BTS7960 ×2</text>
+<text x="455" y="233" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">on-board IS R</text>
+<text x="455" y="245" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">(VERIFY, 1 k?)</text>
+<polyline points="360,120 320,120" fill="none" stroke="#8d6e00" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="320,120 313,112 246.3,112 246.3,128 313,128" fill="#ffffff" stroke="#8d6e00" stroke-width="1.3"/>
+<text x="311" y="124" font-size="10.5" text-anchor="end" font-weight="normal" fill="#8d6e00">3V3_SENSE</text>
+<polyline points="360,150 330,150" fill="none" stroke="#212121" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g stroke="#212121" stroke-width="1.6"><line x1="330" y1="150" x2="330" y2="157"/><line x1="321" y1="157" x2="339" y2="157"/><line x1="324.5" y1="161" x2="335.5" y2="161"/><line x1="327.5" y1="165" x2="332.5" y2="165"/></g>
+<polyline points="360,180 320,180" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="320,180 313,172 202.2,172 202.2,188 313,188" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="311" y="184" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">FL_RPWM · GPIO25</text>
+<polyline points="360,210 320,210" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="320,210 313,202 202.2,202 202.2,218 313,218" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="311" y="214" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">FL_LPWM · GPIO26</text>
+<polyline points="360,240 310,240 310,270 360,270" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="310" cy="255" r="3.4" fill="#212121"/>
+<polyline points="310,255 300,255" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="300,255 292.5,255.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="262.5,255.0 255,255" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(277.5,255.0) rotate(180)"><rect x="-15" y="-6" width="30" height="12" fill="#fff" stroke="#212121" stroke-width="1.5"/></g>
+<text x="277.5" y="242.0" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#212121">R10A 4.7 k</text>
+<polyline points="255,255 190,255" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="242" cy="255" r="3.4" fill="#212121"/>
+<polyline points="242,255 242.0,268.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="242.0,292.0 242,305" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(242.0,280.0) rotate(90)"><line x1="-12" y1="0" x2="-3" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="3" y1="0" x2="12" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="-3" y1="-10" x2="-3" y2="10" stroke="#212121" stroke-width="2"/><line x1="3" y1="-10" x2="3" y2="10" stroke="#212121" stroke-width="2"/></g>
+<text x="255.0" y="284.0" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">10 nF</text>
+<g stroke="#212121" stroke-width="1.6"><line x1="242" y1="305" x2="242" y2="312"/><line x1="233" y1="312" x2="251" y2="312"/><line x1="236.5" y1="316" x2="247.5" y2="316"/><line x1="239.5" y1="320" x2="244.5" y2="320"/></g>
+<circle cx="190" cy="255" r="3.4" fill="#212121"/>
+<polyline points="190,255 190.0,265.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="190.0,295.0 190,305" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(190.0,280.0) rotate(90)"><line x1="-15" y1="0" x2="-8" y2="0" stroke="#212121" stroke-width="1.5"/><polygon points="-8,-8 -8,8 7,0" fill="#fff" stroke="#212121" stroke-width="1.5"/><line x1="7" y1="-8" x2="7" y2="8" stroke="#212121" stroke-width="2"/><line x1="7" y1="0" x2="15" y2="0" stroke="#212121" stroke-width="1.5"/></g>
+<text x="177.0" y="284.0" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">D10 clamp</text>
+<polygon points="190,305 223.35,310 223.35,325 156.65,325 156.65,310" fill="#ffffff" stroke="#8d6e00" stroke-width="1.3"/>
+<text x="190" y="321.5" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#8d6e00">3V3_SENSE</text>
+<polyline points="190,255 155,255" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="155,255 148,247 37.2,247 37.2,263 148,263" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="146" y="259" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">IS_FL → ADS#1 A0</text>
+<polyline points="360,300 320,300 320,360" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="360,330 320,330" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="320" cy="330" r="3.4" fill="#212121"/>
+<polyline points="320,360 155,360" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="155,360 148,352 30.900000000000006,352 30.900000000000006,368 148,368" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="146" y="364" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">DRIVE_EN · GPIO21</text>
+<circle cx="270" cy="360" r="3.4" fill="#212121"/>
+<polyline points="270,360 270.0,372.5" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="270.0,402.5 270,415" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(270.0,387.5) rotate(90)"><rect x="-15" y="-6" width="30" height="12" fill="#fff" stroke="#212121" stroke-width="1.5"/></g>
+<text x="283.0" y="391.5" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">R10B 10 k pull-down</text>
+<g stroke="#212121" stroke-width="1.6"><line x1="270" y1="415" x2="270" y2="422"/><line x1="261" y1="422" x2="279" y2="422"/><line x1="264.5" y1="426" x2="275.5" y2="426"/><line x1="267.5" y1="430" x2="272.5" y2="430"/></g>
+<polyline points="540,130 700,130" fill="none" stroke="#c62828" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="700,130 707,122 773.7,122 773.7,138 707,138" fill="#ffffff" stroke="#c62828" stroke-width="1.3"/>
+<text x="709" y="134" font-size="10.5" text-anchor="start" font-weight="normal" fill="#c62828">MOTOR_24V</text>
+<polyline points="540,180 700,180" fill="none" stroke="#212121" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="700,180 707,172 773.7,172 773.7,188 707,188" fill="#ffffff" stroke="#212121" stroke-width="1.3"/>
+<text x="709" y="184" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">MOTOR_GND</text>
+<circle cx="600" cy="130" r="3.4" fill="#212121"/>
+<circle cx="600" cy="180" r="3.4" fill="#212121"/>
+<polyline points="600,130 600.0,143.0" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="600.0,167.0 600,180" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(600.0,155.0) rotate(90)"><line x1="-12" y1="0" x2="-3" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="3" y1="0" x2="12" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="-3" y1="-10" x2="-3" y2="10" stroke="#212121" stroke-width="2"/><path d="M5,-10 Q2,0 5,10" fill="none" stroke="#212121" stroke-width="2"/><text x="-9" y="-6" font-size="10" fill="#212121" transform="rotate(-90 -9 -9)">+</text></g>
+<text x="613.0" y="159.0" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">C10B 470 µF 35 V</text>
+<polyline points="540,260 640,260" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="540,310 640,310" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="640" y="242" width="36" height="86" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="658" y="236" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#212121">J6.1</text>
+<text x="658" y="264" font-size="10" text-anchor="middle" font-weight="normal" fill="#212121">1</text>
+<text x="658" y="314" font-size="10" text-anchor="middle" font-weight="normal" fill="#212121">2</text>
+<polyline points="676,260 720,260 720,263" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="676,310 720,310 720,307" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="720" cy="285" r="22" fill="#fff" stroke="#212121" stroke-width="1.8"/>
+<text x="720" y="291" font-size="17" text-anchor="middle" font-weight="bold" fill="#212121">M</text>
+<circle cx="720" cy="260" r="3.4" fill="#212121"/>
+<circle cx="720" cy="310" r="3.4" fill="#212121"/>
+<polyline points="720,260 765,260" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="765,260 765.0,273.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="765.0,297.0 765,310" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(765.0,285.0) rotate(90)"><line x1="-12" y1="0" x2="-3" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="3" y1="0" x2="12" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="-3" y1="-10" x2="-3" y2="10" stroke="#212121" stroke-width="2"/><line x1="3" y1="-10" x2="3" y2="10" stroke="#212121" stroke-width="2"/></g>
+<polyline points="765,310 720,310" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="725" y="336" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#212121">M_FL</text>
+<text x="725" y="350" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">100 nF across terminals</text>
+<text x="725" y="363" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">leads twisted, 12–14 AWG</text>
+<rect x="1150" y="90" width="180" height="260" rx="4" fill="#f4f6f9" stroke="#37474f" stroke-width="1.4"/>
+<text x="1240.0" y="83" font-size="12" text-anchor="middle" font-weight="bold" fill="#212121">U11 · front-right drive</text>
+<text x="1155" y="124" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">VCC</text>
+<text x="1155" y="154" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">GND</text>
+<text x="1155" y="184" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">RPWM</text>
+<text x="1155" y="214" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">LPWM</text>
+<text x="1155" y="244" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">R_IS</text>
+<text x="1155" y="274" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">L_IS</text>
+<text x="1155" y="304" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">R_EN</text>
+<text x="1155" y="334" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">L_EN</text>
+<text x="1325" y="134" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">B+</text>
+<text x="1325" y="184" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">B−</text>
+<text x="1325" y="264" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">M+</text>
+<text x="1325" y="314" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">M−</text>
+<text x="1245" y="202" font-size="12" text-anchor="middle" font-weight="bold" fill="#212121">IBT-2</text>
+<text x="1245" y="218" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#212121">BTS7960 ×2</text>
+<text x="1245" y="233" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">on-board IS R</text>
+<text x="1245" y="245" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">(VERIFY, 1 k?)</text>
+<polyline points="1150,120 1110,120" fill="none" stroke="#8d6e00" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="1110,120 1103,112 1036.3,112 1036.3,128 1103,128" fill="#ffffff" stroke="#8d6e00" stroke-width="1.3"/>
+<text x="1101" y="124" font-size="10.5" text-anchor="end" font-weight="normal" fill="#8d6e00">3V3_SENSE</text>
+<polyline points="1150,150 1120,150" fill="none" stroke="#212121" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g stroke="#212121" stroke-width="1.6"><line x1="1120" y1="150" x2="1120" y2="157"/><line x1="1111" y1="157" x2="1129" y2="157"/><line x1="1114.5" y1="161" x2="1125.5" y2="161"/><line x1="1117.5" y1="165" x2="1122.5" y2="165"/></g>
+<polyline points="1150,180 1110,180" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="1110,180 1103,172 992.2,172 992.2,188 1103,188" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="1101" y="184" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">FR_RPWM · GPIO27</text>
+<polyline points="1150,210 1110,210" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="1110,210 1103,202 992.2,202 992.2,218 1103,218" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="1101" y="214" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">FR_LPWM · GPIO14</text>
+<polyline points="1150,240 1100,240 1100,270 1150,270" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1100" cy="255" r="3.4" fill="#212121"/>
+<polyline points="1100,255 1090,255" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1090,255 1082.5,255.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1052.5,255.0 1045,255" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(1067.5,255.0) rotate(180)"><rect x="-15" y="-6" width="30" height="12" fill="#fff" stroke="#212121" stroke-width="1.5"/></g>
+<text x="1067.5" y="242.0" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#212121">R11A 4.7 k</text>
+<polyline points="1045,255 980,255" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1032" cy="255" r="3.4" fill="#212121"/>
+<polyline points="1032,255 1032.0,268.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1032.0,292.0 1032,305" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(1032.0,280.0) rotate(90)"><line x1="-12" y1="0" x2="-3" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="3" y1="0" x2="12" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="-3" y1="-10" x2="-3" y2="10" stroke="#212121" stroke-width="2"/><line x1="3" y1="-10" x2="3" y2="10" stroke="#212121" stroke-width="2"/></g>
+<text x="1045.0" y="284.0" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">10 nF</text>
+<g stroke="#212121" stroke-width="1.6"><line x1="1032" y1="305" x2="1032" y2="312"/><line x1="1023" y1="312" x2="1041" y2="312"/><line x1="1026.5" y1="316" x2="1037.5" y2="316"/><line x1="1029.5" y1="320" x2="1034.5" y2="320"/></g>
+<circle cx="980" cy="255" r="3.4" fill="#212121"/>
+<polyline points="980,255 980.0,265.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="980.0,295.0 980,305" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(980.0,280.0) rotate(90)"><line x1="-15" y1="0" x2="-8" y2="0" stroke="#212121" stroke-width="1.5"/><polygon points="-8,-8 -8,8 7,0" fill="#fff" stroke="#212121" stroke-width="1.5"/><line x1="7" y1="-8" x2="7" y2="8" stroke="#212121" stroke-width="2"/><line x1="7" y1="0" x2="15" y2="0" stroke="#212121" stroke-width="1.5"/></g>
+<text x="967.0" y="284.0" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">D11 clamp</text>
+<polygon points="980,305 1013.35,310 1013.35,325 946.65,325 946.65,310" fill="#ffffff" stroke="#8d6e00" stroke-width="1.3"/>
+<text x="980" y="321.5" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#8d6e00">3V3_SENSE</text>
+<polyline points="980,255 945,255" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="945,255 938,247 827.2,247 827.2,263 938,263" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="936" y="259" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">IS_FR → ADS#1 A1</text>
+<polyline points="1150,300 1110,300 1110,360" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1150,330 1110,330" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1110" cy="330" r="3.4" fill="#212121"/>
+<polyline points="1110,360 945,360" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="945,360 938,352 820.9,352 820.9,368 938,368" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="936" y="364" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">DRIVE_EN · GPIO21</text>
+<text x="950" y="382" font-size="9.5" text-anchor="start" font-weight="normal" fill="#546e7a">(shared pull-down R10B on the FL board)</text>
+<polyline points="1330,130 1490,130" fill="none" stroke="#c62828" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="1490,130 1497,122 1563.7,122 1563.7,138 1497,138" fill="#ffffff" stroke="#c62828" stroke-width="1.3"/>
+<text x="1499" y="134" font-size="10.5" text-anchor="start" font-weight="normal" fill="#c62828">MOTOR_24V</text>
+<polyline points="1330,180 1490,180" fill="none" stroke="#212121" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="1490,180 1497,172 1563.7,172 1563.7,188 1497,188" fill="#ffffff" stroke="#212121" stroke-width="1.3"/>
+<text x="1499" y="184" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">MOTOR_GND</text>
+<circle cx="1390" cy="130" r="3.4" fill="#212121"/>
+<circle cx="1390" cy="180" r="3.4" fill="#212121"/>
+<polyline points="1390,130 1390.0,143.0" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1390.0,167.0 1390,180" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(1390.0,155.0) rotate(90)"><line x1="-12" y1="0" x2="-3" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="3" y1="0" x2="12" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="-3" y1="-10" x2="-3" y2="10" stroke="#212121" stroke-width="2"/><path d="M5,-10 Q2,0 5,10" fill="none" stroke="#212121" stroke-width="2"/><text x="-9" y="-6" font-size="10" fill="#212121" transform="rotate(-90 -9 -9)">+</text></g>
+<text x="1403.0" y="159.0" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">C11B 470 µF 35 V</text>
+<polyline points="1330,260 1430,260" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1330,310 1430,310" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1430" y="242" width="36" height="86" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="1448" y="236" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#212121">J6.2</text>
+<text x="1448" y="264" font-size="10" text-anchor="middle" font-weight="normal" fill="#212121">1</text>
+<text x="1448" y="314" font-size="10" text-anchor="middle" font-weight="normal" fill="#212121">2</text>
+<polyline points="1466,260 1510,260 1510,263" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1466,310 1510,310 1510,307" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1510" cy="285" r="22" fill="#fff" stroke="#212121" stroke-width="1.8"/>
+<text x="1510" y="291" font-size="17" text-anchor="middle" font-weight="bold" fill="#212121">M</text>
+<circle cx="1510" cy="260" r="3.4" fill="#212121"/>
+<circle cx="1510" cy="310" r="3.4" fill="#212121"/>
+<polyline points="1510,260 1555,260" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1555,260 1555.0,273.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1555.0,297.0 1555,310" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(1555.0,285.0) rotate(90)"><line x1="-12" y1="0" x2="-3" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="3" y1="0" x2="12" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="-3" y1="-10" x2="-3" y2="10" stroke="#212121" stroke-width="2"/><line x1="3" y1="-10" x2="3" y2="10" stroke="#212121" stroke-width="2"/></g>
+<polyline points="1555,310 1510,310" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="1515" y="336" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#212121">M_FR</text>
+<text x="1515" y="350" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">100 nF across terminals</text>
+<text x="1515" y="363" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">leads twisted, 12–14 AWG</text>
+<rect x="360" y="450" width="180" height="260" rx="4" fill="#f4f6f9" stroke="#37474f" stroke-width="1.4"/>
+<text x="450.0" y="443" font-size="12" text-anchor="middle" font-weight="bold" fill="#212121">U12 · rear-left drive</text>
+<text x="365" y="484" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">VCC</text>
+<text x="365" y="514" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">GND</text>
+<text x="365" y="544" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">RPWM</text>
+<text x="365" y="574" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">LPWM</text>
+<text x="365" y="604" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">R_IS</text>
+<text x="365" y="634" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">L_IS</text>
+<text x="365" y="664" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">R_EN</text>
+<text x="365" y="694" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">L_EN</text>
+<text x="535" y="494" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">B+</text>
+<text x="535" y="544" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">B−</text>
+<text x="535" y="624" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">M+</text>
+<text x="535" y="674" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">M−</text>
+<text x="455" y="562" font-size="12" text-anchor="middle" font-weight="bold" fill="#212121">IBT-2</text>
+<text x="455" y="578" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#212121">BTS7960 ×2</text>
+<text x="455" y="593" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">on-board IS R</text>
+<text x="455" y="605" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">(VERIFY, 1 k?)</text>
+<polyline points="360,480 320,480" fill="none" stroke="#8d6e00" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="320,480 313,472 246.3,472 246.3,488 313,488" fill="#ffffff" stroke="#8d6e00" stroke-width="1.3"/>
+<text x="311" y="484" font-size="10.5" text-anchor="end" font-weight="normal" fill="#8d6e00">3V3_SENSE</text>
+<polyline points="360,510 330,510" fill="none" stroke="#212121" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g stroke="#212121" stroke-width="1.6"><line x1="330" y1="510" x2="330" y2="517"/><line x1="321" y1="517" x2="339" y2="517"/><line x1="324.5" y1="521" x2="335.5" y2="521"/><line x1="327.5" y1="525" x2="332.5" y2="525"/></g>
+<polyline points="360,540 320,540" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="320,540 313,532 202.2,532 202.2,548 313,548" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="311" y="544" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">RL_RPWM · GPIO32</text>
+<polyline points="360,570 320,570" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="320,570 313,562 202.2,562 202.2,578 313,578" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="311" y="574" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">RL_LPWM · GPIO33</text>
+<polyline points="360,600 310,600 310,630 360,630" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="310" cy="615" r="3.4" fill="#212121"/>
+<polyline points="310,615 300,615" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="300,615 292.5,615.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="262.5,615.0 255,615" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(277.5,615.0) rotate(180)"><rect x="-15" y="-6" width="30" height="12" fill="#fff" stroke="#212121" stroke-width="1.5"/></g>
+<text x="277.5" y="602.0" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#212121">R12A 4.7 k</text>
+<polyline points="255,615 190,615" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="242" cy="615" r="3.4" fill="#212121"/>
+<polyline points="242,615 242.0,628.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="242.0,652.0 242,665" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(242.0,640.0) rotate(90)"><line x1="-12" y1="0" x2="-3" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="3" y1="0" x2="12" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="-3" y1="-10" x2="-3" y2="10" stroke="#212121" stroke-width="2"/><line x1="3" y1="-10" x2="3" y2="10" stroke="#212121" stroke-width="2"/></g>
+<text x="255.0" y="644.0" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">10 nF</text>
+<g stroke="#212121" stroke-width="1.6"><line x1="242" y1="665" x2="242" y2="672"/><line x1="233" y1="672" x2="251" y2="672"/><line x1="236.5" y1="676" x2="247.5" y2="676"/><line x1="239.5" y1="680" x2="244.5" y2="680"/></g>
+<circle cx="190" cy="615" r="3.4" fill="#212121"/>
+<polyline points="190,615 190.0,625.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="190.0,655.0 190,665" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(190.0,640.0) rotate(90)"><line x1="-15" y1="0" x2="-8" y2="0" stroke="#212121" stroke-width="1.5"/><polygon points="-8,-8 -8,8 7,0" fill="#fff" stroke="#212121" stroke-width="1.5"/><line x1="7" y1="-8" x2="7" y2="8" stroke="#212121" stroke-width="2"/><line x1="7" y1="0" x2="15" y2="0" stroke="#212121" stroke-width="1.5"/></g>
+<text x="177.0" y="644.0" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">D12 clamp</text>
+<polygon points="190,665 223.35,670 223.35,685 156.65,685 156.65,670" fill="#ffffff" stroke="#8d6e00" stroke-width="1.3"/>
+<text x="190" y="681.5" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#8d6e00">3V3_SENSE</text>
+<polyline points="190,615 155,615" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="155,615 148,607 37.2,607 37.2,623 148,623" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="146" y="619" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">IS_RL → ADS#1 A2</text>
+<polyline points="360,660 320,660 320,720" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="360,690 320,690" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="320" cy="690" r="3.4" fill="#212121"/>
+<polyline points="320,720 155,720" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="155,720 148,712 30.900000000000006,712 30.900000000000006,728 148,728" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="146" y="724" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">DRIVE_EN · GPIO21</text>
+<text x="160" y="742" font-size="9.5" text-anchor="start" font-weight="normal" fill="#546e7a">(shared pull-down R10B on the FL board)</text>
+<polyline points="540,490 700,490" fill="none" stroke="#c62828" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="700,490 707,482 773.7,482 773.7,498 707,498" fill="#ffffff" stroke="#c62828" stroke-width="1.3"/>
+<text x="709" y="494" font-size="10.5" text-anchor="start" font-weight="normal" fill="#c62828">MOTOR_24V</text>
+<polyline points="540,540 700,540" fill="none" stroke="#212121" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="700,540 707,532 773.7,532 773.7,548 707,548" fill="#ffffff" stroke="#212121" stroke-width="1.3"/>
+<text x="709" y="544" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">MOTOR_GND</text>
+<circle cx="600" cy="490" r="3.4" fill="#212121"/>
+<circle cx="600" cy="540" r="3.4" fill="#212121"/>
+<polyline points="600,490 600.0,503.0" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="600.0,527.0 600,540" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(600.0,515.0) rotate(90)"><line x1="-12" y1="0" x2="-3" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="3" y1="0" x2="12" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="-3" y1="-10" x2="-3" y2="10" stroke="#212121" stroke-width="2"/><path d="M5,-10 Q2,0 5,10" fill="none" stroke="#212121" stroke-width="2"/><text x="-9" y="-6" font-size="10" fill="#212121" transform="rotate(-90 -9 -9)">+</text></g>
+<text x="613.0" y="519.0" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">C12B 470 µF 35 V</text>
+<polyline points="540,620 640,620" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="540,670 640,670" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="640" y="602" width="36" height="86" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="658" y="596" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#212121">J7.1</text>
+<text x="658" y="624" font-size="10" text-anchor="middle" font-weight="normal" fill="#212121">1</text>
+<text x="658" y="674" font-size="10" text-anchor="middle" font-weight="normal" fill="#212121">2</text>
+<polyline points="676,620 720,620 720,623" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="676,670 720,670 720,667" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="720" cy="645" r="22" fill="#fff" stroke="#212121" stroke-width="1.8"/>
+<text x="720" y="651" font-size="17" text-anchor="middle" font-weight="bold" fill="#212121">M</text>
+<circle cx="720" cy="620" r="3.4" fill="#212121"/>
+<circle cx="720" cy="670" r="3.4" fill="#212121"/>
+<polyline points="720,620 765,620" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="765,620 765.0,633.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="765.0,657.0 765,670" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(765.0,645.0) rotate(90)"><line x1="-12" y1="0" x2="-3" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="3" y1="0" x2="12" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="-3" y1="-10" x2="-3" y2="10" stroke="#212121" stroke-width="2"/><line x1="3" y1="-10" x2="3" y2="10" stroke="#212121" stroke-width="2"/></g>
+<polyline points="765,670 720,670" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="725" y="696" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#212121">M_RL</text>
+<text x="725" y="710" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">100 nF across terminals</text>
+<text x="725" y="723" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">leads twisted, 12–14 AWG</text>
+<rect x="1150" y="450" width="180" height="260" rx="4" fill="#f4f6f9" stroke="#37474f" stroke-width="1.4"/>
+<text x="1240.0" y="443" font-size="12" text-anchor="middle" font-weight="bold" fill="#212121">U13 · rear-right drive</text>
+<text x="1155" y="484" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">VCC</text>
+<text x="1155" y="514" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">GND</text>
+<text x="1155" y="544" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">RPWM</text>
+<text x="1155" y="574" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">LPWM</text>
+<text x="1155" y="604" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">R_IS</text>
+<text x="1155" y="634" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">L_IS</text>
+<text x="1155" y="664" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">R_EN</text>
+<text x="1155" y="694" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">L_EN</text>
+<text x="1325" y="494" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">B+</text>
+<text x="1325" y="544" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">B−</text>
+<text x="1325" y="624" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">M+</text>
+<text x="1325" y="674" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">M−</text>
+<text x="1245" y="562" font-size="12" text-anchor="middle" font-weight="bold" fill="#212121">IBT-2</text>
+<text x="1245" y="578" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#212121">BTS7960 ×2</text>
+<text x="1245" y="593" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">on-board IS R</text>
+<text x="1245" y="605" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">(VERIFY, 1 k?)</text>
+<polyline points="1150,480 1110,480" fill="none" stroke="#8d6e00" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="1110,480 1103,472 1036.3,472 1036.3,488 1103,488" fill="#ffffff" stroke="#8d6e00" stroke-width="1.3"/>
+<text x="1101" y="484" font-size="10.5" text-anchor="end" font-weight="normal" fill="#8d6e00">3V3_SENSE</text>
+<polyline points="1150,510 1120,510" fill="none" stroke="#212121" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g stroke="#212121" stroke-width="1.6"><line x1="1120" y1="510" x2="1120" y2="517"/><line x1="1111" y1="517" x2="1129" y2="517"/><line x1="1114.5" y1="521" x2="1125.5" y2="521"/><line x1="1117.5" y1="525" x2="1122.5" y2="525"/></g>
+<polyline points="1150,540 1110,540" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="1110,540 1103,532 992.2,532 992.2,548 1103,548" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="1101" y="544" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">RR_RPWM · GPIO13</text>
+<polyline points="1150,570 1110,570" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="1110,570 1103,562 998.5,562 998.5,578 1103,578" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="1101" y="574" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">RR_LPWM · GPIO4</text>
+<polyline points="1150,600 1100,600 1100,630 1150,630" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1100" cy="615" r="3.4" fill="#212121"/>
+<polyline points="1100,615 1090,615" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1090,615 1082.5,615.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1052.5,615.0 1045,615" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(1067.5,615.0) rotate(180)"><rect x="-15" y="-6" width="30" height="12" fill="#fff" stroke="#212121" stroke-width="1.5"/></g>
+<text x="1067.5" y="602.0" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#212121">R13A 4.7 k</text>
+<polyline points="1045,615 980,615" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1032" cy="615" r="3.4" fill="#212121"/>
+<polyline points="1032,615 1032.0,628.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1032.0,652.0 1032,665" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(1032.0,640.0) rotate(90)"><line x1="-12" y1="0" x2="-3" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="3" y1="0" x2="12" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="-3" y1="-10" x2="-3" y2="10" stroke="#212121" stroke-width="2"/><line x1="3" y1="-10" x2="3" y2="10" stroke="#212121" stroke-width="2"/></g>
+<text x="1045.0" y="644.0" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">10 nF</text>
+<g stroke="#212121" stroke-width="1.6"><line x1="1032" y1="665" x2="1032" y2="672"/><line x1="1023" y1="672" x2="1041" y2="672"/><line x1="1026.5" y1="676" x2="1037.5" y2="676"/><line x1="1029.5" y1="680" x2="1034.5" y2="680"/></g>
+<circle cx="980" cy="615" r="3.4" fill="#212121"/>
+<polyline points="980,615 980.0,625.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="980.0,655.0 980,665" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(980.0,640.0) rotate(90)"><line x1="-15" y1="0" x2="-8" y2="0" stroke="#212121" stroke-width="1.5"/><polygon points="-8,-8 -8,8 7,0" fill="#fff" stroke="#212121" stroke-width="1.5"/><line x1="7" y1="-8" x2="7" y2="8" stroke="#212121" stroke-width="2"/><line x1="7" y1="0" x2="15" y2="0" stroke="#212121" stroke-width="1.5"/></g>
+<text x="967.0" y="644.0" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">D13 clamp</text>
+<polygon points="980,665 1013.35,670 1013.35,685 946.65,685 946.65,670" fill="#ffffff" stroke="#8d6e00" stroke-width="1.3"/>
+<text x="980" y="681.5" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#8d6e00">3V3_SENSE</text>
+<polyline points="980,615 945,615" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="945,615 938,607 827.2,607 827.2,623 938,623" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="936" y="619" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">IS_RR → ADS#1 A3</text>
+<polyline points="1150,660 1110,660 1110,720" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1150,690 1110,690" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1110" cy="690" r="3.4" fill="#212121"/>
+<polyline points="1110,720 945,720" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="945,720 938,712 820.9,712 820.9,728 938,728" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="936" y="724" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">DRIVE_EN · GPIO21</text>
+<text x="950" y="742" font-size="9.5" text-anchor="start" font-weight="normal" fill="#546e7a">(shared pull-down R10B on the FL board)</text>
+<polyline points="1330,490 1490,490" fill="none" stroke="#c62828" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="1490,490 1497,482 1563.7,482 1563.7,498 1497,498" fill="#ffffff" stroke="#c62828" stroke-width="1.3"/>
+<text x="1499" y="494" font-size="10.5" text-anchor="start" font-weight="normal" fill="#c62828">MOTOR_24V</text>
+<polyline points="1330,540 1490,540" fill="none" stroke="#212121" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="1490,540 1497,532 1563.7,532 1563.7,548 1497,548" fill="#ffffff" stroke="#212121" stroke-width="1.3"/>
+<text x="1499" y="544" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">MOTOR_GND</text>
+<circle cx="1390" cy="490" r="3.4" fill="#212121"/>
+<circle cx="1390" cy="540" r="3.4" fill="#212121"/>
+<polyline points="1390,490 1390.0,503.0" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1390.0,527.0 1390,540" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(1390.0,515.0) rotate(90)"><line x1="-12" y1="0" x2="-3" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="3" y1="0" x2="12" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="-3" y1="-10" x2="-3" y2="10" stroke="#212121" stroke-width="2"/><path d="M5,-10 Q2,0 5,10" fill="none" stroke="#212121" stroke-width="2"/><text x="-9" y="-6" font-size="10" fill="#212121" transform="rotate(-90 -9 -9)">+</text></g>
+<text x="1403.0" y="519.0" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">C13B 470 µF 35 V</text>
+<polyline points="1330,620 1430,620" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1330,670 1430,670" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1430" y="602" width="36" height="86" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="1448" y="596" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#212121">J7.2</text>
+<text x="1448" y="624" font-size="10" text-anchor="middle" font-weight="normal" fill="#212121">1</text>
+<text x="1448" y="674" font-size="10" text-anchor="middle" font-weight="normal" fill="#212121">2</text>
+<polyline points="1466,620 1510,620 1510,623" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1466,670 1510,670 1510,667" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1510" cy="645" r="22" fill="#fff" stroke="#212121" stroke-width="1.8"/>
+<text x="1510" y="651" font-size="17" text-anchor="middle" font-weight="bold" fill="#212121">M</text>
+<circle cx="1510" cy="620" r="3.4" fill="#212121"/>
+<circle cx="1510" cy="670" r="3.4" fill="#212121"/>
+<polyline points="1510,620 1555,620" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1555,620 1555.0,633.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1555.0,657.0 1555,670" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(1555.0,645.0) rotate(90)"><line x1="-12" y1="0" x2="-3" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="3" y1="0" x2="12" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="-3" y1="-10" x2="-3" y2="10" stroke="#212121" stroke-width="2"/><line x1="3" y1="-10" x2="3" y2="10" stroke="#212121" stroke-width="2"/></g>
+<polyline points="1555,670 1510,670" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="1515" y="696" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#212121">M_RR</text>
+<text x="1515" y="710" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">100 nF across terminals</text>
+<text x="1515" y="723" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">leads twisted, 12–14 AWG</text>
+<rect x="360" y="810" width="180" height="260" rx="4" fill="#f4f6f9" stroke="#37474f" stroke-width="1.4"/>
+<text x="450.0" y="803" font-size="12" text-anchor="middle" font-weight="bold" fill="#212121">U14 · steering</text>
+<text x="365" y="844" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">VCC</text>
+<text x="365" y="874" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">GND</text>
+<text x="365" y="904" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">RPWM</text>
+<text x="365" y="934" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">LPWM</text>
+<text x="365" y="964" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">R_IS</text>
+<text x="365" y="994" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">L_IS</text>
+<text x="365" y="1024" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">R_EN</text>
+<text x="365" y="1054" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">L_EN</text>
+<text x="535" y="854" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">B+</text>
+<text x="535" y="904" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">B−</text>
+<text x="535" y="984" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">M+</text>
+<text x="535" y="1034" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">M−</text>
+<text x="455" y="922" font-size="12" text-anchor="middle" font-weight="bold" fill="#212121">IBT-2</text>
+<text x="455" y="938" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#212121">BTS7960 ×2</text>
+<text x="455" y="953" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">on-board IS R</text>
+<text x="455" y="965" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">(VERIFY, 1 k?)</text>
+<polyline points="360,840 320,840" fill="none" stroke="#8d6e00" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="320,840 313,832 246.3,832 246.3,848 313,848" fill="#ffffff" stroke="#8d6e00" stroke-width="1.3"/>
+<text x="311" y="844" font-size="10.5" text-anchor="end" font-weight="normal" fill="#8d6e00">3V3_SENSE</text>
+<polyline points="360,870 330,870" fill="none" stroke="#212121" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g stroke="#212121" stroke-width="1.6"><line x1="330" y1="870" x2="330" y2="877"/><line x1="321" y1="877" x2="339" y2="877"/><line x1="324.5" y1="881" x2="335.5" y2="881"/><line x1="327.5" y1="885" x2="332.5" y2="885"/></g>
+<polyline points="360,900 320,900" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="320,900 313,892 183.3,892 183.3,908 313,908" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="311" y="904" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">STEER_RPWM · GPIO18</text>
+<polyline points="360,930 320,930" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="320,930 313,922 183.3,922 183.3,938 313,938" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="311" y="934" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">STEER_LPWM · GPIO19</text>
+<polyline points="360,960 310,960 310,990 360,990" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="310" cy="975" r="3.4" fill="#212121"/>
+<polyline points="310,975 300,975" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="300,975 292.5,975.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="262.5,975.0 255,975" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(277.5,975.0) rotate(180)"><rect x="-15" y="-6" width="30" height="12" fill="#fff" stroke="#212121" stroke-width="1.5"/></g>
+<text x="277.5" y="962.0" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#212121">R14A 4.7 k</text>
+<polyline points="255,975 190,975" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="242" cy="975" r="3.4" fill="#212121"/>
+<polyline points="242,975 242.0,988.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="242.0,1012.0 242,1025" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(242.0,1000.0) rotate(90)"><line x1="-12" y1="0" x2="-3" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="3" y1="0" x2="12" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="-3" y1="-10" x2="-3" y2="10" stroke="#212121" stroke-width="2"/><line x1="3" y1="-10" x2="3" y2="10" stroke="#212121" stroke-width="2"/></g>
+<text x="255.0" y="1004.0" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">10 nF</text>
+<g stroke="#212121" stroke-width="1.6"><line x1="242" y1="1025" x2="242" y2="1032"/><line x1="233" y1="1032" x2="251" y2="1032"/><line x1="236.5" y1="1036" x2="247.5" y2="1036"/><line x1="239.5" y1="1040" x2="244.5" y2="1040"/></g>
+<circle cx="190" cy="975" r="3.4" fill="#212121"/>
+<polyline points="190,975 190.0,985.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="190.0,1015.0 190,1025" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(190.0,1000.0) rotate(90)"><line x1="-15" y1="0" x2="-8" y2="0" stroke="#212121" stroke-width="1.5"/><polygon points="-8,-8 -8,8 7,0" fill="#fff" stroke="#212121" stroke-width="1.5"/><line x1="7" y1="-8" x2="7" y2="8" stroke="#212121" stroke-width="2"/><line x1="7" y1="0" x2="15" y2="0" stroke="#212121" stroke-width="1.5"/></g>
+<text x="177.0" y="1004.0" font-size="10.5" text-anchor="end" font-weight="normal" fill="#212121">D14 clamp</text>
+<polygon points="190,1025 223.35,1030 223.35,1045 156.65,1045 156.65,1030" fill="#ffffff" stroke="#8d6e00" stroke-width="1.3"/>
+<text x="190" y="1041.5" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#8d6e00">3V3_SENSE</text>
+<polyline points="190,975 155,975" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="155,975 148,967 37.2,967 37.2,983 148,983" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="146" y="979" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">IS_ST → ADS#2 A0</text>
+<polyline points="360,1020 320,1020 320,1080" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="360,1050 320,1050" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="320" cy="1050" r="3.4" fill="#212121"/>
+<polyline points="320,1080 155,1080" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="155,1080 148,1072 37.2,1072 37.2,1088 148,1088" fill="#ffffff" stroke="#1565c0" stroke-width="1.3"/>
+<text x="146" y="1084" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">STEER_EN · GPIO2</text>
+<circle cx="270" cy="1080" r="3.4" fill="#212121"/>
+<polyline points="270,1080 270.0,1092.5" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="270.0,1122.5 270,1135" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(270.0,1107.5) rotate(90)"><rect x="-15" y="-6" width="30" height="12" fill="#fff" stroke="#212121" stroke-width="1.5"/></g>
+<text x="283.0" y="1111.5" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">R14B 10 k pull-down</text>
+<g stroke="#212121" stroke-width="1.6"><line x1="270" y1="1135" x2="270" y2="1142"/><line x1="261" y1="1142" x2="279" y2="1142"/><line x1="264.5" y1="1146" x2="275.5" y2="1146"/><line x1="267.5" y1="1150" x2="272.5" y2="1150"/></g>
+<polyline points="540,850 700,850" fill="none" stroke="#c62828" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="700,850 707,842 773.7,842 773.7,858 707,858" fill="#ffffff" stroke="#c62828" stroke-width="1.3"/>
+<text x="709" y="854" font-size="10.5" text-anchor="start" font-weight="normal" fill="#c62828">MOTOR_24V</text>
+<polyline points="540,900 700,900" fill="none" stroke="#212121" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="700,900 707,892 773.7,892 773.7,908 707,908" fill="#ffffff" stroke="#212121" stroke-width="1.3"/>
+<text x="709" y="904" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">MOTOR_GND</text>
+<circle cx="600" cy="850" r="3.4" fill="#212121"/>
+<circle cx="600" cy="900" r="3.4" fill="#212121"/>
+<polyline points="600,850 600.0,863.0" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="600.0,887.0 600,900" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(600.0,875.0) rotate(90)"><line x1="-12" y1="0" x2="-3" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="3" y1="0" x2="12" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="-3" y1="-10" x2="-3" y2="10" stroke="#212121" stroke-width="2"/><path d="M5,-10 Q2,0 5,10" fill="none" stroke="#212121" stroke-width="2"/><text x="-9" y="-6" font-size="10" fill="#212121" transform="rotate(-90 -9 -9)">+</text></g>
+<text x="613.0" y="879.0" font-size="10.5" text-anchor="start" font-weight="normal" fill="#212121">C14B 470 µF 35 V</text>
+<polyline points="540,980 640,980" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="540,1030 640,1030" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="640" y="962" width="36" height="86" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="658" y="956" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#212121">J5</text>
+<text x="658" y="984" font-size="10" text-anchor="middle" font-weight="normal" fill="#212121">1</text>
+<text x="658" y="1034" font-size="10" text-anchor="middle" font-weight="normal" fill="#212121">2</text>
+<polyline points="676,980 720,980 720,983" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="676,1030 720,1030 720,1027" fill="none" stroke="#c62828" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="720" cy="1005" r="22" fill="#fff" stroke="#212121" stroke-width="1.8"/>
+<text x="720" y="1011" font-size="17" text-anchor="middle" font-weight="bold" fill="#212121">M</text>
+<circle cx="720" cy="980" r="3.4" fill="#212121"/>
+<circle cx="720" cy="1030" r="3.4" fill="#212121"/>
+<polyline points="720,980 765,980" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="765,980 765.0,993.0" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="765.0,1017.0 765,1030" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(765.0,1005.0) rotate(90)"><line x1="-12" y1="0" x2="-3" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="3" y1="0" x2="12" y2="0" stroke="#212121" stroke-width="1.5"/><line x1="-3" y1="-10" x2="-3" y2="10" stroke="#212121" stroke-width="2"/><line x1="3" y1="-10" x2="3" y2="10" stroke="#212121" stroke-width="2"/></g>
+<polyline points="765,1030 720,1030" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="725" y="1056" font-size="10.5" text-anchor="middle" font-weight="bold" fill="#212121">M_STEER</text>
+<text x="725" y="1070" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">100 nF across terminals</text>
+<text x="725" y="1083" font-size="9.5" text-anchor="middle" font-weight="normal" fill="#546e7a">leads twisted, 12–14 AWG</text>
+<polyline points="800,70 800,1150" fill="none" stroke="#cfd8dc" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="30,420 1570,420" fill="none" stroke="#cfd8dc" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="30,780 1570,780" fill="none" stroke="#cfd8dc" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="830" y="800" width="740" height="160" rx="6" fill="#f1f5f9" stroke="#90a4ae" stroke-width="1.2"/>
+<text x="840" y="821" font-size="12.0" text-anchor="start" font-weight="bold" fill="#212121">Notes</text>
+<text x="840" y="837" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">B+ / B−: 10 AWG from K1 and the star point to a short bus, then 12–14 AWG to each board.</text>
+<text x="840" y="853" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">R_IS and L_IS are joined: only the active half-bridge drives its IS pin. 4.7 k + clamp</text>
+<text x="840" y="869" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">diode keep the ADS1115 input under 3.3 V; 10 nF (suggested) smooths the 16 kHz PWM.</text>
+<text x="840" y="885" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">An IS pin pinned at the clamp (&gt; 3.2 V) is the BTS7960 fault flag (config.h).</text>
+<text x="840" y="901" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">IBT-2 VCC is 3.3 V so the ESP32 signals read as a clean HIGH. Never tie R_EN/L_EN high.</text>
+<text x="840" y="917" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">Enable low = outputs off (high impedance): the motor coasts and the child can</text>
+<text x="840" y="933" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">back-drive the steering by hand in Kid mode.</text>
+<text x="840" y="949" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">IBT-2 logic GND joins B− on the board, so all grounds meet only at the star point.</text>
+<rect x="830" y="972" width="740" height="96" rx="6" fill="#fff8e1" stroke="#b8860b" stroke-width="1.2" stroke-dasharray="5 3"/>
+<text x="840" y="993" font-size="12.0" text-anchor="start" font-weight="bold" fill="#212121">TBD (photos and labels)</text>
+<text x="840" y="1009" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">J5, J6, J7: stock motor plug type and pin count. If the harness pairs the motors,</text>
+<text x="840" y="1025" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">J6/J7 become a new 4-lead cable to the motor plugs (see sheet 1, going back to stock).</text>
+<text x="840" y="1041" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">Motor and battery labels: the BTS7960 runs to 27.5 V; a full 7-cell lithium pack is 29.4 V.</text>
+<text x="840" y="1057" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">IS resistor value on the IBT-2 board sets IS_RESISTOR_OHMS in config.h.</text>
+<text x="30" y="38" font-size="20" text-anchor="start" font-weight="bold" fill="#212121">RideOnESP32 · Sheet 3 of 5 · Drive stage, variant A: 4 × IBT-2 drive + 1 × IBT-2 steering</text>
+<text x="1570" y="30" font-size="13" text-anchor="end" font-weight="bold" fill="#c62828">DRAFT v0.2 · 2026-10-17</text>
+<text x="1570" y="47" font-size="11" text-anchor="end" font-weight="normal" fill="#c62828">Not for building until the TBD items are closed</text>
+<line x1="30" y1="54" x2="1570" y2="54" stroke="#cfd8dc" stroke-width="1"/>
+</svg>

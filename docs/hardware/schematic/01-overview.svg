@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1020" viewBox="0 0 1600 1020" font-family="DejaVu Sans, Arial, Helvetica, sans-serif">
+<rect x="0" y="0" width="1600" height="1020" fill="#ffffff"/>
+<text x="190" y="86" font-size="12" text-anchor="middle" font-weight="bold" fill="#546e7a">CAR SIDE (stock, left untouched)</text>
+<text x="790" y="86" font-size="12" text-anchor="middle" font-weight="bold" fill="#546e7a">NEW CONTROLLER BOX</text>
+<text x="1360" y="86" font-size="12" text-anchor="middle" font-weight="bold" fill="#546e7a">OFF-BOX PARTS</text>
+<rect x="480" y="96" width="620" height="664" rx="10" fill="#fafbfc" stroke="#37474f" stroke-width="2.2" stroke-dasharray="10 5"/>
+<text x="790" y="752" font-size="11" text-anchor="middle" font-weight="bold" fill="#546e7a">Fits the stock controller spot under the seat · box size TBD (photos)</text>
+<rect x="40" y="110" width="300" height="46" rx="4" fill="#eef2f5" stroke="#37474f" stroke-width="1.4"/>
+<text x="190" y="138" font-size="12" text-anchor="middle" font-weight="normal" fill="#212121">Battery 24 V (Ah, chemistry TBD)</text>
+<polyline points="340,133 480,133" fill="none" stroke="#c62828" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="480" y="116" width="84" height="34" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="522" y="137" font-size="11" text-anchor="middle" font-weight="bold" fill="#212121">J1 BAT</text>
+<rect x="40" y="175" width="300" height="46" rx="4" fill="#eef2f5" stroke="#37474f" stroke-width="1.4"/>
+<text x="190" y="203" font-size="12" text-anchor="middle" font-weight="normal" fill="#212121">Key switch (stock dash)</text>
+<polyline points="340,198 480,198" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="480" y="181" width="84" height="34" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="522" y="202" font-size="11" text-anchor="middle" font-weight="bold" fill="#212121">J2 KEY</text>
+<rect x="40" y="290" width="300" height="46" rx="4" fill="#eef2f5" stroke="#37474f" stroke-width="1.4"/>
+<text x="190" y="318" font-size="12" text-anchor="middle" font-weight="normal" fill="#212121">Foot pedal (switch or pot: TBD)</text>
+<polyline points="340,313 480,313" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="480" y="296" width="84" height="34" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="522" y="317" font-size="11" text-anchor="middle" font-weight="bold" fill="#212121">J3 PEDAL</text>
+<rect x="40" y="355" width="300" height="46" rx="4" fill="#eef2f5" stroke="#37474f" stroke-width="1.4"/>
+<text x="190" y="383" font-size="12" text-anchor="middle" font-weight="normal" fill="#212121">Shifter F / R (+ speed switch?)</text>
+<polyline points="340,378 480,378" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="480" y="361" width="84" height="34" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="522" y="382" font-size="11" text-anchor="middle" font-weight="bold" fill="#212121">J4 SHIFT</text>
+<rect x="40" y="460" width="300" height="46" rx="4" fill="#eef2f5" stroke="#37474f" stroke-width="1.4"/>
+<text x="190" y="488" font-size="12" text-anchor="middle" font-weight="normal" fill="#212121">Steering motor (kid steers by hand)</text>
+<polyline points="340,483 480,483" fill="none" stroke="#c62828" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="480" y="466" width="84" height="34" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="522" y="487" font-size="11" text-anchor="middle" font-weight="bold" fill="#212121">J5 STEER</text>
+<rect x="40" y="530" width="300" height="46" rx="4" fill="#eef2f5" stroke="#37474f" stroke-width="1.4"/>
+<text x="190" y="558" font-size="12" text-anchor="middle" font-weight="normal" fill="#212121">Front motors FL, FR</text>
+<polyline points="340,553 480,553" fill="none" stroke="#c62828" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="480" y="536" width="84" height="34" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="522" y="557" font-size="11" text-anchor="middle" font-weight="bold" fill="#212121">J6 FRONT</text>
+<rect x="40" y="600" width="300" height="46" rx="4" fill="#eef2f5" stroke="#37474f" stroke-width="1.4"/>
+<text x="190" y="628" font-size="12" text-anchor="middle" font-weight="normal" fill="#212121">Rear motors RL, RR</text>
+<polyline points="340,623 480,623" fill="none" stroke="#c62828" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="480" y="606" width="84" height="34" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="522" y="627" font-size="11" text-anchor="middle" font-weight="bold" fill="#212121">J7 REAR</text>
+<rect x="40" y="690" width="300" height="46" rx="4" fill="#eef2f5" stroke="#37474f" stroke-width="1.4"/>
+<text x="190" y="718" font-size="12" text-anchor="middle" font-weight="normal" fill="#212121">Lights, horn, music (stock, TBD)</text>
+<polyline points="340,713 480,713" fill="none" stroke="#8a8a8a" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>
+<rect x="480" y="696" width="84" height="34" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="522" y="717" font-size="11" text-anchor="middle" font-weight="bold" fill="#212121">J8 ACC</text>
+<text x="410" y="110" font-size="10" text-anchor="middle" font-weight="normal" fill="#546e7a">stock plugs</text>
+<rect x="610" y="110" width="250" height="150" rx="6" fill="#ffffff" stroke="#37474f" stroke-width="1.6"/>
+<text x="620" y="130" font-size="13" text-anchor="start" font-weight="bold" fill="#212121">Power and safety</text>
+<text x="850" y="130" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">sheet 2</text>
+<text x="620" y="150" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">F1 40 A main fuse</text>
+<text x="620" y="166" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">K1 contactor, Q1 hold MOSFET</text>
+<text x="620" y="182" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">Key → E-stop → K1 coil</text>
+<text x="620" y="198" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">FB1 fuse block, U1–U4 rails</text>
+<rect x="610" y="290" width="250" height="150" rx="6" fill="#ffffff" stroke="#37474f" stroke-width="1.6"/>
+<text x="620" y="310" font-size="13" text-anchor="start" font-weight="bold" fill="#212121">Logic and sensors</text>
+<text x="850" y="310" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">sheet 4</text>
+<text x="620" y="330" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">ESP32 on MRD068A, ELRS RX</text>
+<text x="620" y="346" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">ADS1115 ×2, PCF8574, MPU-6050</text>
+<text x="620" y="362" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">PCA9685, DFPlayer, DS18B20</text>
+<text x="620" y="378" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">pedal and shifter inputs</text>
+<rect x="610" y="460" width="250" height="180" rx="6" fill="#ffffff" stroke="#37474f" stroke-width="1.6"/>
+<text x="620" y="480" font-size="13" text-anchor="start" font-weight="bold" fill="#212121">Drive stage</text>
+<text x="850" y="480" font-size="10.5" text-anchor="end" font-weight="normal" fill="#1565c0">sheets 3 and 5</text>
+<text x="620" y="500" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">4 independent drive channels</text>
+<text x="620" y="516" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">A: 4× IBT-2 (BTS7960)</text>
+<text x="620" y="532" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">B: 2× Cytron MDD20A</text>
+<text x="620" y="548" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">Steering: 1× IBT-2</text>
+<text x="620" y="564" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">current sense per wheel</text>
+<rect x="610" y="670" width="250" height="60" rx="6" fill="#ffffff" stroke="#37474f" stroke-width="1.6"/>
+<text x="620" y="690" font-size="13" text-anchor="start" font-weight="bold" fill="#212121">Accessories</text>
+<text x="620" y="710" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">U29 MOSFET board, 12 V / 5 V rails</text>
+<polyline points="564,133 610,133" fill="none" stroke="#c62828" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="564,198 610,198" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="564,313 610,313" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="564,378 610,378" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="564,483 610,483" fill="none" stroke="#c62828" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="564,553 610,553" fill="none" stroke="#c62828" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="564,623 610,623" fill="none" stroke="#c62828" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="564,713 610,713" fill="none" stroke="#8a8a8a" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>
+<polyline points="660,260 660,290" fill="none" stroke="#e65100" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="668" y="279" font-size="10" text-anchor="start" font-weight="normal" fill="#e65100">5 V, 3.3 V</text>
+<polyline points="700,440 700,460" fill="none" stroke="#1565c0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="708" y="454" font-size="10" text-anchor="start" font-weight="normal" fill="#1565c0">PWM ×10, EN ×2</text>
+<polyline points="860,180 900,180 900,560 860,560" fill="none" stroke="#c62828" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="906" y="250" font-size="10" text-anchor="start" font-weight="normal" fill="#c62828">MOTOR_24V</text>
+<polyline points="800,640 800,670" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1180" y="125" width="360" height="46" rx="4" fill="#eef2f5" stroke="#37474f" stroke-width="1.4"/>
+<text x="1360" y="145" font-size="12" text-anchor="middle" font-weight="normal" fill="#212121">E-stop S2, latching (dash)</text>
+<text x="1360" y="161" font-size="10" text-anchor="middle" font-weight="normal" fill="#546e7a">optional 2nd E-stop at the rear</text>
+<rect x="1056" y="131" width="84" height="34" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="1098" y="152" font-size="11" text-anchor="middle" font-weight="bold" fill="#212121">J9 E-STOP</text>
+<polyline points="1140,148 1180,148" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1180" y="300" width="360" height="46" rx="4" fill="#eef2f5" stroke="#37474f" stroke-width="1.4"/>
+<text x="1360" y="320" font-size="12" text-anchor="middle" font-weight="normal" fill="#212121">AS5600 steering angle</text>
+<text x="1360" y="336" font-size="10" text-anchor="middle" font-weight="normal" fill="#546e7a">on the steering column</text>
+<rect x="1056" y="306" width="84" height="34" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="1098" y="327" font-size="11" text-anchor="middle" font-weight="bold" fill="#212121">J10 SENS</text>
+<polyline points="1140,323 1180,323" fill="none" stroke="#6a1b9a" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1180" y="365" width="360" height="46" rx="4" fill="#eef2f5" stroke="#37474f" stroke-width="1.4"/>
+<text x="1360" y="385" font-size="12" text-anchor="middle" font-weight="normal" fill="#212121">Hall sensors ×2 (wheels)</text>
+<text x="1360" y="401" font-size="10" text-anchor="middle" font-weight="normal" fill="#546e7a">A3144 + magnets</text>
+<rect x="1056" y="371" width="84" height="34" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="1098" y="392" font-size="11" text-anchor="middle" font-weight="bold" fill="#212121">J10 SENS</text>
+<polyline points="1140,388 1180,388" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1180" y="430" width="360" height="46" rx="4" fill="#eef2f5" stroke="#37474f" stroke-width="1.4"/>
+<text x="1360" y="450" font-size="12" text-anchor="middle" font-weight="normal" fill="#212121">OLED dash, speaker</text>
+<text x="1360" y="466" font-size="10" text-anchor="middle" font-weight="normal" fill="#546e7a">later</text>
+<rect x="1056" y="436" width="84" height="34" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1.4"/>
+<text x="1098" y="457" font-size="11" text-anchor="middle" font-weight="bold" fill="#212121">J11 DASH</text>
+<polyline points="1140,453 1180,453" fill="none" stroke="#6a1b9a" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1056,148 960,148 960,150 860,150" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1056,323 860,323" fill="none" stroke="#6a1b9a" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1056,388 860,388" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1056,453 980,453 980,425 860,425" fill="none" stroke="#6a1b9a" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1180" y="540" width="360" height="64" rx="4" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.4"/>
+<text x="1360" y="565" font-size="12" text-anchor="middle" font-weight="bold" fill="#212121">Parent&#x27;s radio: Jumper T-Lite V2</text>
+<text x="1360" y="584" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#212121">ELRS 2.4 GHz · CRSF · the only remote path</text>
+<polyline points="1180,572 1000,572 1000,360 860,360" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="3 5"/>
+<text x="1010" y="560" font-size="10" text-anchor="start" font-weight="normal" fill="#1565c0">2.4 GHz link to the receiver</text>
+<rect x="1180" y="640" width="360" height="112" rx="6" fill="#fff8e1" stroke="#b8860b" stroke-width="1.2" stroke-dasharray="5 3"/>
+<text x="1190" y="661" font-size="12.0" text-anchor="start" font-weight="bold" fill="#212121">Stock plugs</text>
+<text x="1190" y="677" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">Every plug on the box edge (J1–J8) is a mating</text>
+<text x="1190" y="693" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">connector for a stock plug, so the box swaps</text>
+<text x="1190" y="709" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">with the HY2005RX controller one-for-one.</text>
+<text x="1190" y="725" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">Connector types and pin counts: TBD from</text>
+<text x="1190" y="741" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">the photos of the stock controller.</text>
+<rect x="40" y="800" width="700" height="128" rx="6" fill="#f1f5f9" stroke="#90a4ae" stroke-width="1.2"/>
+<text x="50" y="821" font-size="12.0" text-anchor="start" font-weight="bold" fill="#212121">Going back to stock</text>
+<text x="50" y="837" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">1. Key off. Unplug J1–J8 from the new box.</text>
+<text x="50" y="853" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">2. Plug the same stock plugs into the HY2005RX controller.</text>
+<text x="50" y="869" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">3. If the stock harness joins the motors in pairs: the new box has its own</text>
+<text x="50" y="885" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">   4-lead motor cable (J6, J7). Unplug each motor from it and plug it back</text>
+<text x="50" y="901" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">   into its stock harness branch. Nothing is cut or spliced.</text>
+<text x="50" y="917" font-size="11.5" text-anchor="start" font-weight="normal" fill="#212121">4. Unplug the E-stop and sensors (J9–J11); the stock car has none.</text>
+<rect x="800" y="800" width="760" height="190" rx="6" fill="#f1f5f9" stroke="#90a4ae" stroke-width="1.2"/>
+<text x="812" y="824" font-size="12.5" text-anchor="start" font-weight="bold" fill="#212121">Legend (all sheets)</text>
+<polyline points="816,846 866,846" fill="none" stroke="#c62828" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="876" y="850" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">Battery / motor current (thick = 10–14 AWG)</text>
+<polyline points="1186,846 1236,846" fill="none" stroke="#c62828" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="1246" y="850" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">24 V switched, low current</text>
+<polyline points="816,870 866,870" fill="none" stroke="#e65100" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="876" y="874" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">5 V rails</text>
+<polyline points="1186,870 1236,870" fill="none" stroke="#8d6e00" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="1246" y="874" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">3.3 V sensor rail</text>
+<polyline points="816,894 866,894" fill="none" stroke="#212121" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="876" y="898" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">Ground</text>
+<polyline points="1186,894 1236,894" fill="none" stroke="#1565c0" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="1246" y="898" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">Signal</text>
+<polyline points="816,918 866,918" fill="none" stroke="#6a1b9a" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="876" y="922" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">I2C</text>
+<polyline points="1186,918 1236,918" fill="none" stroke="#8a8a8a" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>
+<text x="1246" y="922" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">TBD / not confirmed</text>
+<text x="816" y="958" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">Net labels (flags) join wires with the same name across sheets.</text>
+<text x="816" y="976" font-size="11" text-anchor="start" font-weight="normal" fill="#212121">Sheets: 1 overview · 2 power and safety · 3 drive (IBT-2) · 4 logic · 5 variant B (MDD20A)</text>
+<text x="30" y="38" font-size="20" text-anchor="start" font-weight="bold" fill="#212121">RideOnESP32 · Sheet 1 of 5 · Overview and plug-and-play interface</text>
+<text x="1570" y="30" font-size="13" text-anchor="end" font-weight="bold" fill="#c62828">DRAFT v0.2 · 2026-10-17</text>
+<text x="1570" y="47" font-size="11" text-anchor="end" font-weight="normal" fill="#c62828">Not for building until the TBD items are closed</text>
+<line x1="30" y1="54" x2="1570" y2="54" stroke="#cfd8dc" stroke-width="1"/>
+</svg>

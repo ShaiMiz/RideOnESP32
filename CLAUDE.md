@@ -18,13 +18,12 @@ Status: v3 has never driven a car. Only bench checks so far. Follow [docs/COMMIS
 - **Waiting on Shai at the car:** photos of every stock controller plug (#17), box and under-seat measurements (#18), battery label and chemistry (#13), motor labels (#14), IBT-2 sense resistor (#15), pedal type (#16). Don't guess these values in `config.h`; leave the TODO and point to the issue.
 - The full reasoning is in the [hardware plan](https://claude.ai/code/artifact/17bcaa28-e72d-40de-8aa5-4d734f5fe4ad).
 
-## Not in this repo yet
+## Plans and reviews
 
-Some work lives only in the claude.ai project's shared folder, so Claude in Cursor can't see it. Ask Shai for it, or for it to be moved here, before redoing it:
-
-- Draft schematic v0.2 (5 sheets, `generate.py` makes the SVGs; variants A and B, 12 TBDs). Moving it into `docs/hardware/schematic/` is #31.
-- Safety-standards report: EN 71-1 4.15 and EN 62115 (Annex J, remote-controlled ride-ons) against this design, 8 gaps not yet filed as issues (roll-away when killed, no km/h cap, single-motor stall backstop, ELRS power above 100 mW, box fire rating, audio loudness, EMC, no stall test).
-- Audio plan: music on a ZK-502T Bluetooth amp off a 12 V rail, separate from the ESP32 (#47); car sounds through a DFPlayer driven by the ESP32 (#46). The Bluetooth is on the amp only, never the ESP32.
+- Draft schematic v0.2: [docs/hardware/schematic/](docs/hardware/schematic/) (variants A and B, 12 TBDs, and where it differs from WIRING.md and POWER_CHAIN.md, #31). Edit `generate.py`, not the SVGs.
+- Safety-standards review: [docs/reviews/2026-10-safety-standards.md](docs/reviews/2026-10-safety-standards.md), EN 71-1 4.15 and EN 62115 (Annex J, remote-controlled ride-ons) against this design. Its 8 gaps are not yet filed as issues; Shai decides which to take on.
+- Audio plan: [docs/hardware/AUDIO.md](docs/hardware/AUDIO.md). Bluetooth is on the music amp only, never the ESP32.
+- Firmware code review of v2: [docs/reviews/2026-10-firmware-code-tour.md](docs/reviews/2026-10-firmware-code-tour.md).
 
 ## Build, test, flash
 

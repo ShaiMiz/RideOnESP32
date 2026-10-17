@@ -138,6 +138,7 @@ void loop() {
                            power.batteryVolts(),
                            &power,
                            DriveController::WHEELS,
+                           true,
                            imu.tilted(),
                            now};
   faults.update(safety.evaluate(signals));

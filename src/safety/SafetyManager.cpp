@@ -31,8 +31,11 @@ FaultMask SafetyManager::evaluate(const SafetySignals& s) {
     for (int i = 0; i < s.wheelsSensed; i++) {
       if (overcurrent_[i].update(s.power->amps(i) > cfg::MOTOR_CURRENT_LIMIT_A, s.nowMs, cfg::OVERCURRENT_HOLD_MS))
         f |= FAULT_OVERCURRENT;
-      if (s.power->driverFault(i)) f |= FAULT_DRIVER;
+      if (driverFault_[i].update(s.power->driverFault(i), s.nowMs, cfg::DRIVER_FAULT_HOLD_MS)) f |= FAULT_DRIVER;
     }
+    if (s.steerSensed && driverFault_[PowerMonitor::STEER].update(s.power->driverFault(PowerMonitor::STEER), s.nowMs,
+                                                                  cfg::DRIVER_FAULT_HOLD_MS))
+      f |= FAULT_DRIVER;
     if (totalOvercurrent_.update(s.power->driveAmps() > cfg::TOTAL_CURRENT_LIMIT_A, s.nowMs,
                                  cfg::OVERCURRENT_HOLD_MS))
       f |= FAULT_OVERCURRENT;

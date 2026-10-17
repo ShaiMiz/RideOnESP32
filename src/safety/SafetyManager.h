@@ -28,6 +28,7 @@ struct SafetySignals {
   float batteryVolts;
   const PowerMonitor* power;  // nullptr: no current sensing
   int wheelsSensed;           // how many drive channels to check (bench: 1)
+  bool steerSensed;           // also check the steering driver's IS line
   bool tilted;
   uint32_t nowMs;
 };
@@ -46,5 +47,6 @@ class SafetyManager {
  private:
   rideon::BatteryCheck battery_;
   rideon::HoldTimer overcurrent_[5];
+  rideon::HoldTimer driverFault_[5];
   rideon::HoldTimer totalOvercurrent_;
 };

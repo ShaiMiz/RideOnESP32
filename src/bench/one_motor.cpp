@@ -50,6 +50,7 @@ ModeMachine modes;
 Ramp ramp;
 BatteryCheck battery;
 HoldTimer overcurrent;
+HoldTimer driverFault;
 uint32_t nextTickMs = 0;
 uint32_t lastLogMs = 0;
 }  // namespace
@@ -91,7 +92,7 @@ void loop() {
   if (bs == BatteryState::Cutoff) active |= FAULT_BATTERY_LOW;
   if (overcurrent.update(power.amps(PowerMonitor::FL) > cfg::MOTOR_CURRENT_LIMIT_A, now, cfg::OVERCURRENT_HOLD_MS))
     active |= FAULT_OVERCURRENT;
-  if (power.driverFault(PowerMonitor::FL)) active |= FAULT_DRIVER;
+  if (driverFault.update(power.driverFault(PowerMonitor::FL), now, cfg::DRIVER_FAULT_HOLD_MS)) active |= FAULT_DRIVER;
   faults.update(active);
 
   bool arming = armingOk({thrUs, cfg::CH_CENTER, 0.0f}, ARMING);

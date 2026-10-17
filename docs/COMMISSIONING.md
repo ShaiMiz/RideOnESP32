@@ -16,7 +16,7 @@ Build the new electronics as a removable box and leave the stock wiring intact. 
 ## Phase 2: radio on the desk
 
 - [ ] Charge the T-Lite (18650 cell).
-- [ ] Flash the radio and receiver to the same ELRS 3.x and set the binding phrase and Model Match ([radio/ELRS_SETUP.md](../radio/ELRS_SETUP.md)).
+- [ ] Update the radio to EdgeTX 2.8 or newer, then flash the radio module and receiver to the same ELRS 3.x ([hardware/DEVICE_FIRMWARE.md](hardware/DEVICE_FIRMWARE.md)) and set the binding phrase and Model Match ([radio/ELRS_SETUP.md](../radio/ELRS_SETUP.md)).
 - [ ] Build the `RideOn` model ([radio/MODEL_SETUP.md](../radio/MODEL_SETUP.md)).
 - [ ] Wire only the receiver to the ESP32. Flash `pio run -e radio_check -t upload` and open the monitor.
 

@@ -2,7 +2,7 @@
 
 The radio's built-in ELRS module and the Jumper AION RX Mini receiver.
 
-1. **Same firmware.** Update both to the same ExpressLRS 3.x release with the ExpressLRS Configurator. A mismatch can fail to bind or behave oddly.
+1. **Same firmware.** Update both to the same ExpressLRS 3.x release with the ExpressLRS Configurator. A mismatch can fail to bind or behave oddly. Step-by-step flashing for both is in [docs/hardware/DEVICE_FIRMWARE.md](../docs/hardware/DEVICE_FIRMWARE.md).
 2. **Binding phrase.** Set a long, unique phrase in both. It stops your radio from binding to anyone else's receiver, and theirs to yours. ELRS has no encryption, so this prevents accidents, not a determined attacker.
 3. **Model Match.** Turn it on, and set the receiver's model ID to the `RideOn` model. The car then ignores the radio when a different model is selected.
 4. **Receiver Wi-Fi off.** Turn off the receiver's automatic Wi-Fi hotspot ("Wi-Fi auto on interval"). It starts by default after a period without a link.

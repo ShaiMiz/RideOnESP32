@@ -14,7 +14,7 @@ An ESP32 controller for a 24 V ride-on car, driven by a parent's ExpressLRS radi
 - **Radio:** Jumper T-Lite V2 (EdgeTX, ELRS 2.4 GHz) and a Jumper AION RX Mini receiver on CRSF. There is no phone app, Wi-Fi or Bluetooth.
 - **Power:** 40 A main fuse, key switch, red E-stop and a contactor that cut motor power in hardware, whatever the ESP32 does.
 
-Details: [docs/hardware/](docs/hardware/). The full reasoning lives in the [hardware plan](https://claude.ai/code/artifact/17bcaa28-e72d-40de-8aa5-4d734f5fe4ad).
+Details: [docs/hardware/](docs/hardware/). How to update the firmware on each device: [DEVICE_FIRMWARE.md](docs/hardware/DEVICE_FIRMWARE.md). The full reasoning lives in the [hardware plan](https://claude.ai/code/artifact/17bcaa28-e72d-40de-8aa5-4d734f5fe4ad).
 
 ## How it drives
 

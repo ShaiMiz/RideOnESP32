@@ -50,6 +50,14 @@ void test_battery_sensor_fault_is_not_ok() {
   TEST_ASSERT_EQUAL(BatteryState::SensorFault, b.update(40.0f, 20, BP));
 }
 
+void test_battery_sensor_fault_clears_high_warning() {
+  BatteryCheck b;
+  b.update(28.0f, 0, BP);
+  TEST_ASSERT_TRUE(b.highWarning());
+  b.update(40.0f, 10, BP);  // divider broken: the old high reading must not stick
+  TEST_ASSERT_FALSE(b.highWarning());
+}
+
 void test_battery_cutoff_needs_hold_and_hysteresis() {
   BatteryCheck b;
   TEST_ASSERT_EQUAL(BatteryState::Ok, b.update(25.0f, 0, BP));
@@ -81,6 +89,7 @@ int main() {
   RUN_TEST(test_setup_fault_is_permanent);
   RUN_TEST(test_hold_timer_ignores_short_spikes);
   RUN_TEST(test_battery_sensor_fault_is_not_ok);
+  RUN_TEST(test_battery_sensor_fault_clears_high_warning);
   RUN_TEST(test_battery_cutoff_needs_hold_and_hysteresis);
   RUN_TEST(test_battery_high_warning);
   RUN_TEST(test_fault_names);

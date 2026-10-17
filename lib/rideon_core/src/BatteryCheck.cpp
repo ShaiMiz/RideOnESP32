@@ -5,6 +5,7 @@ namespace rideon {
 BatteryState BatteryCheck::update(float volts, uint32_t nowMs, const BatteryParams& p) {
   if (volts < p.sensorMinV || volts > p.sensorMaxV) {
     below_.update(false, nowMs, p.cutoffHoldMs);
+    high_ = false;  // an impossible reading says nothing about the pack
     state_ = BatteryState::SensorFault;
     return state_;
   }

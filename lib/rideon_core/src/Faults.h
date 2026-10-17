@@ -24,6 +24,7 @@ enum Fault : FaultMask {
   FAULT_TILT = 1u << 7,            // car tipped past the limit (later, MPU-6050)
   FAULT_SETUP = 1u << 8,           // hardware failed to start; only a reboot clears it
   FAULT_ESTOP = 1u << 9,           // E-stop pressed: it cut driver power behind the firmware's back
+  FAULT_CURRENT_SENSE = 1u << 10,  // a current-sense reading stopped updating (I2C bus or ADS1115 lost)
 };
 
 // Faults that cut the drivers at once (coast) instead of braking to a stop.

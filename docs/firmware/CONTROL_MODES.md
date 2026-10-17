@@ -29,7 +29,7 @@ If the mode switch is already at Kid or Parent at power-on, nothing happens unti
 | Link quality 40 to 70 % | Still drives, at half the speed cap | Automatic when the link improves |
 | Over-current, driver fault, tilt | Locked, drive enable cut at once (coast) | The steps above, once the cause is gone |
 | E-stop pressed | Killed in hardware; the firmware also locks, cuts the drive enable and holds the contactor open | Release the E-stop, then the steps above |
-| Battery cutoff, battery sensor fault, input fault | Locked, brakes to a stop | The steps above, once the cause is gone |
+| Battery cutoff, battery sensor fault, input fault, current sensing lost | Locked, brakes to a stop | The steps above, once the cause is gone |
 | Setup failure | Locked, contactor open | Reboot only |
 
 See [FAULT_CODES.md](FAULT_CODES.md) for each fault.

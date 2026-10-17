@@ -15,6 +15,7 @@ Every fault **latches**. It stays set after its cause goes away, until the paren
 | `INPUT` | Throttle, steering or kill channel out of range, or the switch expander not answering in Kid mode | Brake | Re-arm | Radio channel setup; PCF8574 wiring at 0x20 |
 | `TILT` | Car tipped past the limit (later, MPU-6050) | Coast | Re-arm once level | |
 | `ESTOP` | The E-stop sense input (PCF8574 P3) reads pressed. The E-stop already cut the contactor coil in hardware, but the ESP32 stays powered | Coast, contactor held open | Release the E-stop, then re-arm. Releasing alone never restarts the car | E-stop contact block wiring to P3; it reads pressed when pulled to GND |
+| `CUR_SENS` | A current-sense channel (ADS1115) has not given a good reading for 250 ms: I2C bus stuck, an ADS1115 unplugged or not answering | Brake | Re-arm once readings flow again | I2C wiring at 0x48 / 0x49, ADS1115 power, bus length |
 | `SETUP` | A driver, PWM channel or ADS1115 failed to start at boot | Contactor open | Reboot only | Serial log at boot; I2C wiring |
 
 The serial log also prints the **reset reason** at every boot. `WATCHDOG`, `BROWNOUT` or `PANIC` means the ESP32 restarted unexpectedly. The pull-downs keep the car stopped through the restart, but find the cause before driving again.

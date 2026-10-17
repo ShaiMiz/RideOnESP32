@@ -83,6 +83,7 @@ void setup() {
   logx::line("RideOnESP32 v3 boot, reset reason: %s", resetReasonName(esp_reset_reason()));
 
   Wire.begin(pins::I2C_SDA, pins::I2C_SCL, 400000);
+  Wire.setTimeOut(cfg::I2C_TIMEOUT_MS);
 
   bool ok = drive.begin();
   ok &= steering.begin();

@@ -9,9 +9,13 @@
 // driver is signalling a fault (it sources 4-7 mA). One channel is converted
 // per call, so the loop never waits on the ADC; each channel refreshes at
 // LOOP_HZ / 5.
+//
+// Every I2C transfer is checked. A channel whose reading stops updating (bus
+// stuck, ADS1115 unplugged) shows up in currentFresh(), so the safety layer
+// can stop the car instead of trusting the last value.
 #pragma once
 
-#include <Adafruit_ADS1X15.h>
+#include <stdint.h>
 
 class PowerMonitor {
  public:
@@ -29,15 +33,21 @@ class PowerMonitor {
   bool driverFault(int ch) const { return faultFlag_[ch]; }
   bool anyDriverFault() const;
 
- private:
-  void startConversion();
+  // True while channel `ch` has had a good reading within cfg::CURRENT_SENSE_STALE_MS.
+  bool currentFresh(int ch, uint32_t nowMs) const;
 
-  Adafruit_ADS1115 adsDrive_;
-  Adafruit_ADS1115 adsAux_;
+ private:
+  int channelCount() const { return driveOnly_ ? 4 : CHANNELS; }
+  void startConversion(uint32_t nowMs);
+  // Polls the running conversion. Returns false while it is still busy.
+  bool pollConversion(uint32_t nowMs);
+
   bool driveOnly_ = false;
   int next_ = 0;
   bool converting_ = false;
+  uint32_t convStartMs_ = 0;
   float batteryV_ = 0.0f;
   float amps_[CHANNELS] = {};
   bool faultFlag_[CHANNELS] = {};
+  uint32_t lastSampleMs_[CHANNELS] = {};
 };

@@ -59,6 +59,7 @@ void setup() {
   lines.begin();
   logx::begin(115200);
   Wire.begin(pins::I2C_SDA, pins::I2C_SCL, 400000);
+  Wire.setTimeOut(cfg::I2C_TIMEOUT_MS);
   bool ok = motor.begin(cfg::PWM_FREQ_HZ, cfg::PWM_BITS);
   ok &= radio.begin();
   ok &= power.begin(true);
@@ -92,6 +93,7 @@ void loop() {
   if (bs == BatteryState::Cutoff) active |= FAULT_BATTERY_LOW;
   if (overcurrent.update(power.amps(PowerMonitor::FL) > cfg::MOTOR_CURRENT_LIMIT_A, now, cfg::OVERCURRENT_HOLD_MS))
     active |= FAULT_OVERCURRENT;
+  if (!power.currentFresh(PowerMonitor::FL, now)) active |= FAULT_CURRENT_SENSE;
   if (driverFault.update(power.driverFault(PowerMonitor::FL), now, cfg::DRIVER_FAULT_HOLD_MS)) active |= FAULT_DRIVER;
   faults.update(active);
 

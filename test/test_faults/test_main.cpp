@@ -81,6 +81,7 @@ void test_fault_names() {
   TEST_ASSERT_EQUAL_STRING("LINK", faultName(FAULT_LINK_LOST | FAULT_DRIVER));
   TEST_ASSERT_EQUAL_STRING("DRIVER", faultName(FAULT_DRIVER));
   TEST_ASSERT_EQUAL_STRING("ESTOP", faultName(FAULT_ESTOP));
+  TEST_ASSERT_EQUAL_STRING("CUR_SENS", faultName(FAULT_CURRENT_SENSE));
 }
 
 void test_estop_coasts_and_holds_contactor_open() {

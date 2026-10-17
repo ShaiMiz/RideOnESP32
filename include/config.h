@@ -74,5 +74,10 @@ constexpr uint32_t OVERCURRENT_HOLD_MS = 300;   // allow start-up inrush
 // keeps the line pinned (the driver latches it), and the driver has already
 // switched itself off, so waiting costs nothing.
 constexpr uint32_t DRIVER_FAULT_HOLD_MS = 300;
+constexpr uint32_t ADS_CONVERSION_TIMEOUT_MS = 20;  // one conversion takes about 1.2 ms at 860 SPS
+constexpr uint32_t CURRENT_SENSE_STALE_MS = 250;    // each channel normally refreshes every 50 ms
+
+// ---- I2C -------------------------------------------------------------------------
+constexpr uint16_t I2C_TIMEOUT_MS = 5;  // a stuck bus fails a transfer fast instead of stalling the loop
 
 }  // namespace cfg

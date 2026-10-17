@@ -28,6 +28,12 @@ FaultMask SafetyManager::evaluate(const SafetySignals& s) {
   }
 
   if (s.power) {
+    // Without fresh readings the over-current and driver checks below would
+    // be judging old values, so a lost ADS1115 is a fault of its own.
+    for (int i = 0; i < s.wheelsSensed; i++)
+      if (!s.power->currentFresh(i, s.nowMs)) f |= FAULT_CURRENT_SENSE;
+    if (s.steerSensed && !s.power->currentFresh(PowerMonitor::STEER, s.nowMs)) f |= FAULT_CURRENT_SENSE;
+
     for (int i = 0; i < s.wheelsSensed; i++) {
       if (overcurrent_[i].update(s.power->amps(i) > cfg::MOTOR_CURRENT_LIMIT_A, s.nowMs, cfg::OVERCURRENT_HOLD_MS))
         f |= FAULT_OVERCURRENT;

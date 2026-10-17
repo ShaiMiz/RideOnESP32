@@ -19,6 +19,7 @@ FaultMask SafetyManager::evaluate(const SafetySignals& s) {
   if (s.killSwitch) f |= FAULT_KILL_SWITCH;
   if (!s.radioChannelsValid) f |= FAULT_INPUT;
   if (s.kidRequested && !s.manualOk) f |= FAULT_INPUT;
+  if (s.estop) f |= FAULT_ESTOP;
 
   switch (battery_.update(s.batteryVolts, s.nowMs, BATTERY)) {
     case BatteryState::SensorFault: f |= FAULT_BATTERY_SENSOR; break;
@@ -27,11 +28,20 @@ FaultMask SafetyManager::evaluate(const SafetySignals& s) {
   }
 
   if (s.power) {
+    // Without fresh readings the over-current and driver checks below would
+    // be judging old values, so a lost ADS1115 is a fault of its own.
+    for (int i = 0; i < s.wheelsSensed; i++)
+      if (!s.power->currentFresh(i, s.nowMs)) f |= FAULT_CURRENT_SENSE;
+    if (s.steerSensed && !s.power->currentFresh(PowerMonitor::STEER, s.nowMs)) f |= FAULT_CURRENT_SENSE;
+
     for (int i = 0; i < s.wheelsSensed; i++) {
       if (overcurrent_[i].update(s.power->amps(i) > cfg::MOTOR_CURRENT_LIMIT_A, s.nowMs, cfg::OVERCURRENT_HOLD_MS))
         f |= FAULT_OVERCURRENT;
-      if (s.power->driverFault(i)) f |= FAULT_DRIVER;
+      if (driverFault_[i].update(s.power->driverFault(i), s.nowMs, cfg::DRIVER_FAULT_HOLD_MS)) f |= FAULT_DRIVER;
     }
+    if (s.steerSensed && driverFault_[PowerMonitor::STEER].update(s.power->driverFault(PowerMonitor::STEER), s.nowMs,
+                                                                  cfg::DRIVER_FAULT_HOLD_MS))
+      f |= FAULT_DRIVER;
     if (totalOvercurrent_.update(s.power->driveAmps() > cfg::TOTAL_CURRENT_LIMIT_A, s.nowMs,
                                  cfg::OVERCURRENT_HOLD_MS))
       f |= FAULT_OVERCURRENT;

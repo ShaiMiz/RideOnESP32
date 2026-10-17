@@ -25,6 +25,7 @@
 #include "input/RadioInput.h"
 #include "pins.h"
 #include "safety/KillLines.h"
+#include "safety/Watchdog.h"
 #include "sensing/PowerMonitor.h"
 #include "telemetry/Log.h"
 
@@ -49,6 +50,7 @@ ModeMachine modes;
 Ramp ramp;
 BatteryCheck battery;
 HoldTimer overcurrent;
+HoldTimer driverFault;
 uint32_t nextTickMs = 0;
 uint32_t lastLogMs = 0;
 }  // namespace
@@ -57,11 +59,13 @@ void setup() {
   lines.begin();
   logx::begin(115200);
   Wire.begin(pins::I2C_SDA, pins::I2C_SCL, 400000);
+  Wire.setTimeOut(cfg::I2C_TIMEOUT_MS);
   bool ok = motor.begin(cfg::PWM_FREQ_HZ, cfg::PWM_BITS);
   ok &= radio.begin();
   ok &= power.begin(true);
   if (!ok) faults.raise(FAULT_SETUP);
   logx::line("one_motor: %s", ok ? "ready, put the mode switch to Locked" : "SETUP FAILED");
+  watchdog::begin();
 }
 
 void loop() {
@@ -70,6 +74,7 @@ void loop() {
   if ((int32_t)(now - nextTickMs) < 0) return;
   nextTickMs = now + 10;
   const float dtS = 0.01f;
+  watchdog::feed();
 
   power.update();
   LinkState link = evaluateLink(radio.linkInputs(now), LINK);
@@ -88,7 +93,8 @@ void loop() {
   if (bs == BatteryState::Cutoff) active |= FAULT_BATTERY_LOW;
   if (overcurrent.update(power.amps(PowerMonitor::FL) > cfg::MOTOR_CURRENT_LIMIT_A, now, cfg::OVERCURRENT_HOLD_MS))
     active |= FAULT_OVERCURRENT;
-  if (power.driverFault(PowerMonitor::FL)) active |= FAULT_DRIVER;
+  if (!power.currentFresh(PowerMonitor::FL, now)) active |= FAULT_CURRENT_SENSE;
+  if (driverFault.update(power.driverFault(PowerMonitor::FL), now, cfg::DRIVER_FAULT_HOLD_MS)) active |= FAULT_DRIVER;
   faults.update(active);
 
   bool arming = armingOk({thrUs, cfg::CH_CENTER, 0.0f}, ARMING);

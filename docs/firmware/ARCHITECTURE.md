@@ -31,13 +31,15 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 | `Faults.h` | core | Fault bits, `FaultLatch`, `HoldTimer` |
 | `ModeMachine` | core | Locked, Kid, Parent and Killed rules |
 | `ArmingCheck` | core | Sticks centred and pedal released |
+| `CrsfFrameDetector` | core | Finds and timestamps RC frames in the receiver's bytes, resyncing like AlfredoCRSF |
 | `LinkMonitor` | core | Link Ok, Degraded or Lost from the flag, packet age and LQ |
 | `ChannelMap.h` | core | Channel numbers and stick and switch decoding |
 | `Ramp` | core | Accel and brake ramps, no reverse until stopped, caps |
 | `BatteryCheck` | core | Voltage bands with hold time and hysteresis |
 | `Pid` | core | Steering loop (phase 5) |
-| `main.cpp` | src | Setup order, fixed-rate loop, watchdog, command selection |
+| `main.cpp` | src | Setup order, fixed-rate loop, command selection |
 | `safety/KillLines` | src | GPIO21, GPIO2, GPIO12 |
+| `safety/Watchdog` | src | Task watchdog on the loop, used by `car` and `one_motor` |
 | `safety/SafetyManager` | src | Turns sensor readings into fault conditions; sets the kill lines |
 | `input/RadioInput` | src | AlfredoCRSF on UART2, plus a tap that timestamps RC frames |
 | `input/ManualInput` | src | Pedal ADC and PCF8574 switches |
@@ -61,7 +63,7 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 | --- | --- | --- |
 | `car` | `src/` except `src/bench/` | Phase 5 onward |
 | `radio_check` | `src/bench/radio_check.cpp` + RadioInput + KillLines | Phase 2 |
-| `one_motor` | `src/bench/one_motor.cpp` + one motor, radio, power, log | Phase 4 |
+| `one_motor` | `src/bench/one_motor.cpp` + one motor, radio, power, log, watchdog | Phase 4 |
 | `native` | `lib/rideon_core` + `test/` on the PC | Every change |
 
 ## Adding a feature

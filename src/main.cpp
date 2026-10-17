@@ -7,7 +7,6 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <esp_system.h>
-#include <esp_task_wdt.h>
 
 #include "ArmingCheck.h"
 #include "ChannelMap.h"
@@ -24,6 +23,7 @@
 #include "pins.h"
 #include "safety/KillLines.h"
 #include "safety/SafetyManager.h"
+#include "safety/Watchdog.h"
 #include "sensing/Imu.h"
 #include "sensing/PowerMonitor.h"
 #include "telemetry/Log.h"
@@ -75,15 +75,6 @@ float kidSpeedCap(uint16_t us) {
   }
 }
 
-void startWatchdog() {
-  esp_task_wdt_config_t wdt = {};
-  wdt.timeout_ms = cfg::WATCHDOG_MS;
-  wdt.idle_core_mask = 0;
-  wdt.trigger_panic = true;
-  if (esp_task_wdt_reconfigure(&wdt) != ESP_OK) esp_task_wdt_init(&wdt);
-  esp_task_wdt_add(NULL);
-}
-
 }  // namespace
 
 void setup() {
@@ -92,6 +83,7 @@ void setup() {
   logx::line("RideOnESP32 v3 boot, reset reason: %s", resetReasonName(esp_reset_reason()));
 
   Wire.begin(pins::I2C_SDA, pins::I2C_SCL, 400000);
+  Wire.setTimeOut(cfg::I2C_TIMEOUT_MS);
 
   bool ok = drive.begin();
   ok &= steering.begin();
@@ -106,7 +98,7 @@ void setup() {
     logx::line("SETUP FAILED: car stays locked until reboot");
   }
 
-  startWatchdog();
+  watchdog::begin();
   nextTickUs = micros();
 }
 
@@ -117,7 +109,7 @@ void loop() {
   nextTickUs += cfg::LOOP_PERIOD_US;
   if ((int32_t)(nowUs - nextTickUs) > (int32_t)cfg::LOOP_PERIOD_US) nextTickUs = nowUs;  // fell behind: resync
   const float dtS = cfg::LOOP_PERIOD_US / 1e6f;
-  esp_task_wdt_reset();
+  watchdog::feed();
 
   uint32_t now = millis();
   manual.update();
@@ -138,8 +130,18 @@ void loop() {
   bool channelsValid = !linkUsable || (channelValid(throttleUs, CHANNELS) && channelValid(steeringUs, CHANNELS) &&
                                        killPos >= 0);
 
-  SafetySignals signals = {link,  killSwitch, channelsValid, manual.ok(),   request == ModeRequest::Kid,
-                           power.batteryVolts(), &power,     DriveController::WHEELS, imu.tilted(), now};
+  SafetySignals signals = {link,
+                           killSwitch,
+                           channelsValid,
+                           manual.ok(),
+                           manual.ok() && manual.estopPressed(),
+                           request == ModeRequest::Kid,
+                           power.batteryVolts(),
+                           &power,
+                           DriveController::WHEELS,
+                           true,
+                           imu.tilted(),
+                           now};
   faults.update(safety.evaluate(signals));
 
   bool arming = armingOk({throttleUs, steeringUs, manual.pedal()}, ARMING);

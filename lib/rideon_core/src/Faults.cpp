@@ -12,6 +12,8 @@ const char* faultName(FaultMask mask) {
   if (mask & FAULT_INPUT) return "INPUT";
   if (mask & FAULT_TILT) return "TILT";
   if (mask & FAULT_SETUP) return "SETUP";
+  if (mask & FAULT_ESTOP) return "ESTOP";
+  if (mask & FAULT_CURRENT_SENSE) return "CUR_SENS";
   return "OK";
 }
 

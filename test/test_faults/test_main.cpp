@@ -50,6 +50,14 @@ void test_battery_sensor_fault_is_not_ok() {
   TEST_ASSERT_EQUAL(BatteryState::SensorFault, b.update(40.0f, 20, BP));
 }
 
+void test_battery_sensor_fault_clears_high_warning() {
+  BatteryCheck b;
+  b.update(28.0f, 0, BP);
+  TEST_ASSERT_TRUE(b.highWarning());
+  b.update(40.0f, 10, BP);  // divider broken: the old high reading must not stick
+  TEST_ASSERT_FALSE(b.highWarning());
+}
+
 void test_battery_cutoff_needs_hold_and_hysteresis() {
   BatteryCheck b;
   TEST_ASSERT_EQUAL(BatteryState::Ok, b.update(25.0f, 0, BP));
@@ -72,6 +80,19 @@ void test_fault_names() {
   TEST_ASSERT_EQUAL_STRING("OK", faultName(FAULT_NONE));
   TEST_ASSERT_EQUAL_STRING("LINK", faultName(FAULT_LINK_LOST | FAULT_DRIVER));
   TEST_ASSERT_EQUAL_STRING("DRIVER", faultName(FAULT_DRIVER));
+  TEST_ASSERT_EQUAL_STRING("ESTOP", faultName(FAULT_ESTOP));
+  TEST_ASSERT_EQUAL_STRING("CUR_SENS", faultName(FAULT_CURRENT_SENSE));
+}
+
+void test_estop_coasts_and_holds_contactor_open() {
+  // The ESP32 stays powered through an E-stop. Releasing the button must not
+  // bring driver power back while the pedal or stick is held.
+  TEST_ASSERT_TRUE(HARD_FAULTS & FAULT_ESTOP);
+  TEST_ASSERT_TRUE(CONTACTOR_FAULTS & FAULT_ESTOP);
+  FaultLatch f;
+  f.update(FAULT_ESTOP);
+  f.update(FAULT_NONE);  // button released
+  TEST_ASSERT_TRUE(f.has(CONTACTOR_FAULTS));
 }
 
 int main() {
@@ -81,8 +102,10 @@ int main() {
   RUN_TEST(test_setup_fault_is_permanent);
   RUN_TEST(test_hold_timer_ignores_short_spikes);
   RUN_TEST(test_battery_sensor_fault_is_not_ok);
+  RUN_TEST(test_battery_sensor_fault_clears_high_warning);
   RUN_TEST(test_battery_cutoff_needs_hold_and_hysteresis);
   RUN_TEST(test_battery_high_warning);
   RUN_TEST(test_fault_names);
+  RUN_TEST(test_estop_coasts_and_holds_contactor_open);
   return UNITY_END();
 }

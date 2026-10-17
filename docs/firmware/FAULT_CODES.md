@@ -11,9 +11,11 @@ Every fault **latches**. It stays set after its cause goes away, until the paren
 | `BATT_LOW` | Battery under 21.0 V for more than 2 s | Brake | Re-arm once the battery rests above 22.5 V | Charge the battery |
 | `BATT_SENS` | Battery reading under 5 V or over 32 V | Brake | Re-arm once the reading is plausible | Divider on GPIO39 / VN (150k/12k), loose wire |
 | `OVERCUR` | One motor over 20 A, or all four over 35 A, for 300 ms | Coast | Re-arm | Stalled wheel, jammed gearbox, short in motor wiring. Check `IS_RESISTOR_OHMS` |
-| `DRIVER` | A BTS7960 IS line at the 3.3 V clamp: the driver reports over-temperature, short or under-voltage | Coast (also resets the driver's latch) | Re-arm once the driver cools | Heatsink temperature, motor short, driver supply |
+| `DRIVER` | A BTS7960 IS line (a drive wheel or the steering board) at the 3.3 V clamp for 300 ms: the driver reports over-temperature, short or under-voltage | Coast (also resets the driver's latch) | Re-arm once the driver cools | Heatsink temperature, motor short, driver supply |
 | `INPUT` | Throttle, steering or kill channel out of range, or the switch expander not answering in Kid mode | Brake | Re-arm | Radio channel setup; PCF8574 wiring at 0x20 |
 | `TILT` | Car tipped past the limit (later, MPU-6050) | Coast | Re-arm once level | |
+| `ESTOP` | The E-stop sense input (PCF8574 P3) reads pressed. The E-stop already cut the contactor coil in hardware, but the ESP32 stays powered | Coast, contactor held open | Release the E-stop, then re-arm. Releasing alone never restarts the car | E-stop contact block wiring to P3; it reads pressed when pulled to GND |
+| `CUR_SENS` | A current-sense channel (ADS1115) has not given a good reading for 250 ms: I2C bus stuck, an ADS1115 unplugged or not answering | Brake | Re-arm once readings flow again | I2C wiring at 0x48 / 0x49, ADS1115 power, bus length |
 | `SETUP` | A driver, PWM channel or ADS1115 failed to start at boot | Contactor open | Reboot only | Serial log at boot; I2C wiring |
 
 The serial log also prints the **reset reason** at every boot. `WATCHDOG`, `BROWNOUT` or `PANIC` means the ESP32 restarted unexpectedly. The pull-downs keep the car stopped through the restart, but find the cause before driving again.

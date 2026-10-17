@@ -2,7 +2,7 @@
 // conditions, and sets the kill lines for the current mode.
 //
 // Output rules:
-//   contactor  open while a CONTACTOR_FAULT is latched (kill switch, setup)
+//   contactor  open while a CONTACTOR_FAULT is latched (kill switch, E-stop, setup)
 //   drive EN   LOW at once on a latched HARD_FAULT (motors coast);
 //              HIGH in Kid and Parent; in Locked, HIGH only while the car
 //              brakes to a stop, then LOW
@@ -23,10 +23,12 @@ struct SafetySignals {
   bool killSwitch;
   bool radioChannelsValid;  // throttle, steering, kill channels in range
   bool manualOk;            // pedal/switch expander answering
+  bool estop;               // E-stop sense input reads pressed
   bool kidRequested;        // mode switch at Kid
   float batteryVolts;
   const PowerMonitor* power;  // nullptr: no current sensing
   int wheelsSensed;           // how many drive channels to check (bench: 1)
+  bool steerSensed;           // also check the steering driver's IS line
   bool tilted;
   uint32_t nowMs;
 };
@@ -45,5 +47,6 @@ class SafetyManager {
  private:
   rideon::BatteryCheck battery_;
   rideon::HoldTimer overcurrent_[5];
+  rideon::HoldTimer driverFault_[5];
   rideon::HoldTimer totalOvercurrent_;
 };

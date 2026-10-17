@@ -1,34 +1,75 @@
 #include "PowerMonitor.h"
 
 #include <Arduino.h>
+#include <Wire.h>
 
+#include "Ads1115.h"
 #include "config.h"
 #include "pins.h"
 
+using namespace rideon;
+
 namespace {
-const uint16_t MUX[4] = {ADS1X15_REG_CONFIG_MUX_SINGLE_0, ADS1X15_REG_CONFIG_MUX_SINGLE_1,
-                         ADS1X15_REG_CONFIG_MUX_SINGLE_2, ADS1X15_REG_CONFIG_MUX_SINGLE_3};
+
+bool writeRegister(uint8_t addr, uint8_t reg, uint16_t value) {
+  Wire.beginTransmission(addr);
+  Wire.write(reg);
+  Wire.write((uint8_t)(value >> 8));
+  Wire.write((uint8_t)(value & 0xFF));
+  return Wire.endTransmission() == 0;
 }
+
+bool readRegister(uint8_t addr, uint8_t reg, uint16_t& value) {
+  Wire.beginTransmission(addr);
+  Wire.write(reg);
+  if (Wire.endTransmission() != 0) return false;
+  if (Wire.requestFrom(addr, (uint8_t)2) != 2) return false;
+  uint8_t hi = (uint8_t)Wire.read();
+  uint8_t lo = (uint8_t)Wire.read();
+  value = (uint16_t)((hi << 8) | lo);
+  return true;
+}
+
+uint8_t addressFor(int ch) { return ch < 4 ? i2c::ADS_DRIVE : i2c::ADS_AUX; }
+
+}  // namespace
 
 bool PowerMonitor::begin(bool driveOnly) {
   driveOnly_ = driveOnly;
   pinMode(pins::BATTERY_SENSE, INPUT);
   analogSetPinAttenuation(pins::BATTERY_SENSE, ADC_11db);
 
-  bool ok = adsDrive_.begin(i2c::ADS_DRIVE);
-  if (!driveOnly_) ok &= adsAux_.begin(i2c::ADS_AUX);
-  for (Adafruit_ADS1115* a : {&adsDrive_, &adsAux_}) {
-    a->setGain(GAIN_ONE);  // +/-4.096 V full scale, covers the 3.3 V clamp
-    a->setDataRate(RATE_ADS1115_860SPS);
-  }
-  if (ok) startConversion();
+  uint16_t unused;
+  bool ok = readRegister(i2c::ADS_DRIVE, ads1115::REG_CONFIG, unused);
+  if (!driveOnly_) ok &= readRegister(i2c::ADS_AUX, ads1115::REG_CONFIG, unused);
+
+  uint32_t now = millis();
+  for (uint32_t& t : lastSampleMs_) t = now;  // give every channel one stale period to report
+  next_ = 0;
+  startConversion(now);
   return ok;
 }
 
-void PowerMonitor::startConversion() {
-  Adafruit_ADS1115& ads = next_ < 4 ? adsDrive_ : adsAux_;
-  ads.startADCReading(MUX[next_ % 4], false);
-  converting_ = true;
+void PowerMonitor::startConversion(uint32_t nowMs) {
+  converting_ = writeRegister(addressFor(next_), ads1115::REG_CONFIG, ads1115::singleShotConfig(next_ % 4));
+  convStartMs_ = nowMs;
+  if (!converting_) next_ = (next_ + 1) % channelCount();  // skip it this round; it goes stale if it keeps failing
+}
+
+bool PowerMonitor::pollConversion(uint32_t nowMs) {
+  uint8_t addr = addressFor(next_);
+  uint16_t config;
+  if (!readRegister(addr, ads1115::REG_CONFIG, config)) return true;  // failed: move on
+  if (!ads1115::conversionDone(config)) return (uint32_t)(nowMs - convStartMs_) > cfg::ADS_CONVERSION_TIMEOUT_MS;
+
+  uint16_t raw;
+  if (!readRegister(addr, ads1115::REG_CONVERSION, raw)) return true;
+  float volts = ads1115::rawToVolts((int16_t)raw);
+  if (volts < 0.0f) volts = 0.0f;
+  amps_[next_] = volts / cfg::IS_RESISTOR_OHMS * cfg::IS_RATIO;
+  faultFlag_[next_] = volts >= cfg::IS_FAULT_VOLTS;
+  lastSampleMs_[next_] = nowMs;
+  return true;
 }
 
 void PowerMonitor::update() {
@@ -36,23 +77,23 @@ void PowerMonitor::update() {
   for (int i = 0; i < 4; i++) mv += analogReadMilliVolts(pins::BATTERY_SENSE);
   batteryV_ = (mv / 4.0f) / 1000.0f * cfg::BATTERY_DIVIDER;
 
-  if (!converting_) return;
-  Adafruit_ADS1115& ads = next_ < 4 ? adsDrive_ : adsAux_;
-  if (!ads.conversionComplete()) return;
-  float volts = ads.computeVolts(ads.getLastConversionResults());
-  if (volts < 0.0f) volts = 0.0f;
-  amps_[next_] = volts / cfg::IS_RESISTOR_OHMS * cfg::IS_RATIO;
-  faultFlag_[next_] = volts >= cfg::IS_FAULT_VOLTS;
-
-  int channels = driveOnly_ ? 4 : CHANNELS;
-  next_ = (next_ + 1) % channels;
-  startConversion();
+  uint32_t now = millis();
+  if (converting_) {
+    if (!pollConversion(now)) return;
+    next_ = (next_ + 1) % channelCount();
+  }
+  startConversion(now);
 }
 
 float PowerMonitor::driveAmps() const { return amps_[FL] + amps_[FR] + amps_[RL] + amps_[RR]; }
 
 bool PowerMonitor::anyDriverFault() const {
-  for (int i = 0; i < (driveOnly_ ? 4 : CHANNELS); i++)
+  for (int i = 0; i < channelCount(); i++)
     if (faultFlag_[i]) return true;
   return false;
+}
+
+bool PowerMonitor::currentFresh(int ch, uint32_t nowMs) const {
+  if (ch >= channelCount()) return false;
+  return !readingStale(lastSampleMs_[ch], nowMs, cfg::CURRENT_SENSE_STALE_MS);
 }

@@ -4,42 +4,12 @@
 
 namespace {
 constexpr uint32_t CRSF_BAUD = 420000;
-constexpr uint8_t FRAME_RC_CHANNELS = 0x16;
-
-uint8_t crc8DvbS2(const uint8_t* data, uint8_t len) {
-  uint8_t crc = 0;
-  for (uint8_t i = 0; i < len; i++) {
-    crc ^= data[i];
-    for (uint8_t b = 0; b < 8; b++) crc = (crc & 0x80) ? (uint8_t)((crc << 1) ^ 0xD5) : (uint8_t)(crc << 1);
-  }
-  return crc;
-}
 }  // namespace
 
 int RadioInput::TapStream::read() {
   int b = inner_.read();
-  if (b >= 0) feed((uint8_t)b);
+  if (b >= 0) frames.feed((uint8_t)b, millis());
   return b;
-}
-
-// Frame: [address][length][type][payload...][crc]; length counts type..crc.
-void RadioInput::TapStream::feed(uint8_t b) {
-  if (pos_ == 0) {
-    if (b != 0xC8 && b != 0xEE && b != 0xEA && b != 0xEC) return;  // not a sync byte
-  } else if (pos_ == 1 && (b < 2 || b > 62)) {
-    pos_ = 0;
-    return;
-  }
-  buf_[pos_++] = b;
-  if (pos_ < 2) return;
-  uint8_t total = buf_[1] + 2;
-  if (pos_ < total) return;
-  uint8_t len = buf_[1];
-  if (buf_[2] == FRAME_RC_CHANNELS && crc8DvbS2(&buf_[2], len - 1) == buf_[total - 1]) {
-    frames++;
-    lastFrameMs = millis();
-  }
-  pos_ = 0;
 }
 
 bool RadioInput::begin() {

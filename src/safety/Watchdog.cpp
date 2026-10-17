@@ -12,7 +12,7 @@ void begin() {
   wdt.idle_core_mask = 0;
   wdt.trigger_panic = true;
   if (esp_task_wdt_reconfigure(&wdt) != ESP_OK) esp_task_wdt_init(&wdt);
-  esp_task_wdt_add(NULL);
+  esp_task_wdt_add(nullptr);  // the calling task: the Arduino loop
 }
 
 void feed() { esp_task_wdt_reset(); }

@@ -66,4 +66,4 @@ Never tie R_EN or L_EN to VCC. Only one IS side conducts at a time, which is why
 | TX | GPIO16 |
 | RX | GPIO17 |
 
-Wiring photos go in [photos/](photos/), and the drawn diagram in [schematic/](schematic/).
+Wiring photos go in [photos/](photos/), and the schematic in [kicad/](kicad/) (with [CONNECTORS.md](kicad/CONNECTORS.md) and [WIRE_LIST.md](kicad/WIRE_LIST.md)).

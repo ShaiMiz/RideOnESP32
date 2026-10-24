@@ -1,6 +1,6 @@
 # Bill of materials
 
-From the gear photos (Desktop\ss, 17 Oct 2026) and the hardware plan.
+From the gear photos (Desktop\ss, 17 Oct 2026) and the hardware plan. The per-reference BOM, matched to the 24 Oct order, is [kicad/BOM.md](kicad/BOM.md).
 
 ## Owned
 

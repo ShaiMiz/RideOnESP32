@@ -1,0 +1,706 @@
+(kicad_sch (version 20250114) (generator "rideonesp32_gen") (generator_version "9.0")
+(uuid "0e6bea45-9606-53d6-8b51-ea8d47f4bbd1")
+(paper "A3")
+(title_block (title "Accessories: fans, lights, sound") (date "2026-10-24") (rev "0.3") (company "RideOnESP32 · Can-Am Maverick X3 24 V 4WD") (comment 1 "Draft v0.3, not for building the car-facing side until the TBDs close"))
+(lib_symbols
+(symbol "Device:Fuse"
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "F"
+			(at 2.032 0 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Fuse"
+			(at -1.905 0 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at -1.778 0 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Fuse"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "ki_keywords" "fuse"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "ki_fp_filters" "*Fuse*"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "Fuse_0_1"
+			(rectangle
+				(start -0.762 -2.54)
+				(end 0.762 2.54)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 2.54) (xy 0 -2.54)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "Fuse_1_1"
+			(pin passive line
+				(at 0 3.81 270)
+				(length 1.27)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -3.81 90)
+				(length 1.27)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "Motor:Fan"
+		(pin_names
+			(offset 0)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "M"
+			(at 2.54 5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Fan"
+			(at 2.54 -2.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0.254 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 0 0.254 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Fan"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "ki_keywords" "Fan Motor"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "ki_fp_filters" "PinHeader*P2.54mm* TerminalBlock*"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "Fan_0_1"
+			(arc
+				(start 0 3.81)
+				(mid -0.0015 0.9048)
+				(end -2.54 -0.508)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 4.572) (xy 0 5.08)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 4.2672) (xy 0 4.6228)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(circle
+				(center 0 1.016)
+				(radius 3.2512)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(arc
+				(start -2.54 -0.508)
+				(mid 0 1.0618)
+				(end 2.54 -0.508)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 -2.2352) (xy 0 -2.6416)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 -5.08) (xy 0 -4.572)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(arc
+				(start 2.54 -0.508)
+				(mid 0.047 0.9315)
+				(end 0 3.81)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "Fan_1_1"
+			(pin passive line
+				(at 0 7.62 270)
+				(length 2.54)
+				(name "+"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -5.08 90)
+				(length 2.54)
+				(name "-"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "power:PWR_FLAG"
+		(power)
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "#FLG"
+			(at 0 1.905 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 0 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "ki_keywords" "flag power"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "PWR_FLAG_0_0"
+			(pin power_out line
+				(at 0 0 90)
+				(length 0)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "PWR_FLAG_0_1"
+			(polyline
+				(pts
+					(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+(symbol "rideonesp32:BT_Amp_ZK502T" (pin_numbers (hide yes)) (pin_names (offset 1.016)) (exclude_from_sim no) (in_bom yes) (on_board yes)
+  (property "Reference" "U" (at 0 8.89 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "BT_Amp_ZK502T" (at 0 -6.35 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Description" "ZK-502T 2 x 50 W Bluetooth amplifier board (Bluetooth on this board only)" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (symbol "BT_Amp_ZK502T_0_1" (rectangle (start -7.62 7.62) (end 7.62 -5.08) (stroke (width 0.254) (type default)) (fill (type background))) )
+  (symbol "BT_Amp_ZK502T_1_1"
+    (pin power_in line (at -10.16 5.08 0) (length 2.54) (name "VIN+" (effects (font (size 1.27 1.27)))) (number "VIN+" (effects (font (size 1.27 1.27)))))
+    (pin power_in line (at -10.16 2.54 0) (length 2.54) (name "VIN-" (effects (font (size 1.27 1.27)))) (number "VIN-" (effects (font (size 1.27 1.27)))))
+    (pin passive line (at 10.16 5.08 180) (length 2.54) (name "L+" (effects (font (size 1.27 1.27)))) (number "L+" (effects (font (size 1.27 1.27)))))
+    (pin passive line (at 10.16 2.54 180) (length 2.54) (name "L-" (effects (font (size 1.27 1.27)))) (number "L-" (effects (font (size 1.27 1.27)))))
+    (pin passive line (at 10.16 0 180) (length 2.54) (name "R+" (effects (font (size 1.27 1.27)))) (number "R+" (effects (font (size 1.27 1.27)))))
+    (pin passive line (at 10.16 -2.54 180) (length 2.54) (name "R-" (effects (font (size 1.27 1.27)))) (number "R-" (effects (font (size 1.27 1.27))))))
+)
+(symbol "rideonesp32:DFPlayer_Mini" (pin_names (offset 1.016)) (exclude_from_sim no) (in_bom yes) (on_board yes)
+  (property "Reference" "U" (at 0 8.89 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "DFPlayer_Mini" (at 0 -6.35 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Description" "DFPlayer Mini MP3 module with 3 W speaker amp (pin numbers are the module's)" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (symbol "DFPlayer_Mini_0_1" (rectangle (start -7.62 7.62) (end 7.62 -5.08) (stroke (width 0.254) (type default)) (fill (type background))) )
+  (symbol "DFPlayer_Mini_1_1"
+    (pin power_in line (at -10.16 5.08 0) (length 2.54) (name "VCC" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+    (pin power_in line (at -10.16 2.54 0) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+    (pin input line (at -10.16 0 0) (length 2.54) (name "RX" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+    (pin output line (at -10.16 -2.54 0) (length 2.54) (name "TX" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+    (pin passive line (at 10.16 5.08 180) (length 2.54) (name "SPK_1" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+    (pin passive line (at 10.16 2.54 180) (length 2.54) (name "SPK_2" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+    (pin output line (at 10.16 0 180) (length 2.54) (name "BUSY" (effects (font (size 1.27 1.27)))) (number "16" (effects (font (size 1.27 1.27))))))
+)
+(symbol "rideonesp32:MOSFET_Board_4ch" (pin_numbers (hide yes)) (pin_names (offset 1.016)) (exclude_from_sim no) (in_bom yes) (on_board yes)
+  (property "Reference" "U" (at 0 8.89 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "MOSFET_Board_4ch" (at 0 -8.89 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Description" "4-channel low-side MOSFET switch board, logic-level inputs" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (symbol "MOSFET_Board_4ch_0_1" (rectangle (start -7.62 7.62) (end 7.62 -7.62) (stroke (width 0.254) (type default)) (fill (type background))) )
+  (symbol "MOSFET_Board_4ch_1_1"
+    (pin input line (at -10.16 5.08 0) (length 2.54) (name "IN1" (effects (font (size 1.27 1.27)))) (number "IN1" (effects (font (size 1.27 1.27)))))
+    (pin input line (at -10.16 2.54 0) (length 2.54) (name "IN2" (effects (font (size 1.27 1.27)))) (number "IN2" (effects (font (size 1.27 1.27)))))
+    (pin input line (at -10.16 0 0) (length 2.54) (name "IN3" (effects (font (size 1.27 1.27)))) (number "IN3" (effects (font (size 1.27 1.27)))))
+    (pin input line (at -10.16 -2.54 0) (length 2.54) (name "IN4" (effects (font (size 1.27 1.27)))) (number "IN4" (effects (font (size 1.27 1.27)))))
+    (pin power_in line (at -10.16 -5.08 0) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "GND" (effects (font (size 1.27 1.27)))))
+    (pin passive line (at 10.16 5.08 180) (length 2.54) (name "OUT1" (effects (font (size 1.27 1.27)))) (number "OUT1" (effects (font (size 1.27 1.27)))))
+    (pin passive line (at 10.16 2.54 180) (length 2.54) (name "OUT2" (effects (font (size 1.27 1.27)))) (number "OUT2" (effects (font (size 1.27 1.27)))))
+    (pin passive line (at 10.16 0 180) (length 2.54) (name "OUT3" (effects (font (size 1.27 1.27)))) (number "OUT3" (effects (font (size 1.27 1.27)))))
+    (pin passive line (at 10.16 -2.54 180) (length 2.54) (name "OUT4" (effects (font (size 1.27 1.27)))) (number "OUT4" (effects (font (size 1.27 1.27)))))
+    (pin passive line (at 10.16 -5.08 180) (length 2.54) (name "PGND" (effects (font (size 1.27 1.27)))) (number "PGND" (effects (font (size 1.27 1.27))))))
+)
+)
+(text "Switched loads" (exclude_from_sim no) (at 15 27.2 0) (effects (font (size 2 2) (bold yes)) (justify left top)) (uuid "7c62d995-f18c-5b2b-bc89-71b7fb817be9"))
+(symbol (lib_id "rideonesp32:MOSFET_Board_4ch") (at 45.72 45.72 0) (unit 1)
+  (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
+  (uuid "212a6be7-78a1-51b1-8afc-606b4c7849c0")
+  (property "Reference" "U29" (at 45.72 36.3 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "4ch MOSFET" (at 45.72 55.34 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 45.72 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 45.72 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Description" "4-channel low-side MOSFET board, logic-level" (at 45.72 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Part" "4-channel low-side MOSFET board, logic-level" (at 45.72 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Source" "To buy" (at 45.72 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Location" "box" (at 45.72 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "IN1" (uuid "2374ef0e-acf5-5e05-9050-b2d8aa7e3199"))
+  (pin "IN2" (uuid "b44a673f-b884-5481-a7fd-b82041fbc30e"))
+  (pin "IN3" (uuid "047ce7f0-f307-5d3e-9f39-79a943024336"))
+  (pin "IN4" (uuid "47f3a6b1-0ca6-5fae-9859-e22338284e87"))
+  (pin "GND" (uuid "f6ecc807-b628-58a0-a224-24dea67c45f9"))
+  (pin "OUT1" (uuid "c824920f-ac31-5dfd-b990-97aaa0a82d1a"))
+  (pin "OUT2" (uuid "9577312c-77a7-56b7-813d-24c2f800a33b"))
+  (pin "OUT3" (uuid "9f843514-a1a1-56e6-a671-338a5454e364"))
+  (pin "OUT4" (uuid "760c54f9-d7fc-536b-ae1d-e75978a20965"))
+  (pin "PGND" (uuid "b78b6a5e-03cc-5b93-a589-efbb25b4f4ae"))
+  (instances (project "rideonesp32" (path "/e0e78d72-bf5c-51da-8e0f-d8642949b63b/103d9753-9a27-5ff0-afc4-391bd962ed77" (reference "U29") (unit 1))))
+)
+(wire (pts (xy 35.56 40.64) (xy 30.48 40.64)) (stroke (width 0) (type default)) (uuid "1ba0e542-d481-5114-984e-a1bc7e6bfdd5"))
+(global_label "LIGHTS_PWM" (shape passive) (at 30.48 40.64 180) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "3e004b4e-9e36-51f9-a372-b9b68781ad02") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 30.48 40.64 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(wire (pts (xy 35.56 43.18) (xy 30.48 43.18)) (stroke (width 0) (type default)) (uuid "53f4344b-6f56-5fb0-9439-c718a8be4957"))
+(global_label "FAN_PWM" (shape passive) (at 30.48 43.18 180) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "a8756fb1-b6dc-52cb-966a-d4c374bccf01") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 30.48 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(no_connect (at 35.56 45.72) (uuid "2b3c4dd8-dd48-575c-9e9c-273282c530ce"))
+(no_connect (at 35.56 48.26) (uuid "9da89ae5-4e1d-5594-beea-67048c32e4f7"))
+(wire (pts (xy 35.56 50.8) (xy 30.48 50.8)) (stroke (width 0) (type default)) (uuid "818a3910-bc06-5cf8-baec-67b9f28c1b90"))
+(global_label "GND" (shape passive) (at 30.48 50.8 180) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "981aaf56-4d10-57c8-a215-8cee78be235f") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 30.48 50.8 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(wire (pts (xy 55.88 40.64) (xy 60.96 40.64)) (stroke (width 0) (type default)) (uuid "622c081c-3d0a-5198-a09b-1ce8cd79ae5f"))
+(global_label "LIGHTS_SW" (shape passive) (at 60.96 40.64 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "0614861c-2091-56b7-82f1-09974ad0534d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 60.96 40.64 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(wire (pts (xy 55.88 43.18) (xy 60.96 43.18)) (stroke (width 0) (type default)) (uuid "330dbf84-dd66-57be-be43-97b29884aceb"))
+(label "FAN_LOW" (at 60.96 43.18 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "d74822d9-7cbc-5ba9-acdb-ed18656f3770"))
+(no_connect (at 55.88 45.72) (uuid "7da9b5c6-126f-5f41-8036-5da25b269bb5"))
+(no_connect (at 55.88 48.26) (uuid "16f3ccb7-3150-5854-b71c-49b4b849e4d5"))
+(wire (pts (xy 55.88 50.8) (xy 60.96 50.8)) (stroke (width 0) (type default)) (uuid "1937a734-1d5d-586e-ba6f-02f98faa2a96"))
+(global_label "GND" (shape passive) (at 60.96 50.8 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "73110315-f922-5caa-bfaa-f3118cc43ee8") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 60.96 50.8 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(symbol (lib_id "Motor:Fan") (at 38.1 66.04 90) (unit 1)
+  (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
+  (uuid "babda586-9aa1-537d-9e02-bc3edecb5c0a")
+  (property "Reference" "FAN1" (at 38.1 61.7 270) (effects (font (size 1.27 1.27))))
+  (property "Value" "24 V 80 mm" (at 38.1 70.58 270) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 38.1 66.04 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 38.1 66.04 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Description" "24 V 80 mm fan, finger guard, filter (intake)" (at 38.1 66.04 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Part" "24 V 80 mm fan, finger guard, filter (intake)" (at 38.1 66.04 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Source" "To buy" (at 38.1 66.04 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Location" "box wall" (at 38.1 66.04 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid "aa813bf6-4121-583a-8ace-8787f087cc63"))
+  (pin "2" (uuid "783fb9d1-b242-5d3e-b6f6-d92d56d3fec0"))
+  (instances (project "rideonesp32" (path "/e0e78d72-bf5c-51da-8e0f-d8642949b63b/103d9753-9a27-5ff0-afc4-391bd962ed77" (reference "FAN1") (unit 1))))
+)
+(wire (pts (xy 30.48 66.04) (xy 25.4 66.04)) (stroke (width 0) (type default)) (uuid "772c4042-33ab-560e-a897-4968876825a4"))
+(global_label "FAN_24V" (shape passive) (at 25.4 66.04 180) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "cbcef51f-12e6-5829-ae8b-5e9116302786") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 25.4 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(wire (pts (xy 43.18 66.04) (xy 48.26 66.04)) (stroke (width 0) (type default)) (uuid "b1449014-9891-51a5-9853-32b53dec4bc9"))
+(label "FAN_LOW" (at 48.26 66.04 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "9a241bc0-69c5-5f7a-ba40-2b70b0e9ff91"))
+(symbol (lib_id "Motor:Fan") (at 38.1 81.28 90) (unit 1)
+  (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
+  (uuid "9cb90555-ae28-5815-9e16-55c67b88427a")
+  (property "Reference" "FAN2" (at 38.1 76.94 270) (effects (font (size 1.27 1.27))))
+  (property "Value" "24 V 80 mm" (at 38.1 85.82 270) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 38.1 81.28 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 38.1 81.28 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Description" "24 V 80 mm fan, finger guard (exhaust)" (at 38.1 81.28 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Part" "24 V 80 mm fan, finger guard (exhaust)" (at 38.1 81.28 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Source" "To buy" (at 38.1 81.28 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Location" "box wall" (at 38.1 81.28 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid "f230f246-7e41-52b9-851c-687961859467"))
+  (pin "2" (uuid "4035aadb-bf6a-5b71-a42d-74b04715a0a7"))
+  (instances (project "rideonesp32" (path "/e0e78d72-bf5c-51da-8e0f-d8642949b63b/103d9753-9a27-5ff0-afc4-391bd962ed77" (reference "FAN2") (unit 1))))
+)
+(wire (pts (xy 30.48 81.28) (xy 25.4 81.28)) (stroke (width 0) (type default)) (uuid "0afe93c8-55cb-5081-bdde-1866ed05de27"))
+(global_label "FAN_24V" (shape passive) (at 25.4 81.28 180) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "873a35b0-482a-5479-b3c5-90ea22333021") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 25.4 81.28 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(wire (pts (xy 43.18 81.28) (xy 48.26 81.28)) (stroke (width 0) (type default)) (uuid "c6ca7e40-336e-50bc-85bb-ab787b7e60e8"))
+(label "FAN_LOW" (at 48.26 81.28 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "21e34e62-f225-574f-bb12-fba2277f1fa3"))
+(text "12 V branches" (exclude_from_sim no) (at 82.3 27.2 0) (effects (font (size 2 2) (bold yes)) (justify left top)) (uuid "e0152476-669c-58c2-876c-74d0cdc59ebe"))
+(symbol (lib_id "Device:Fuse") (at 101.6 38.1 90) (unit 1)
+  (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
+  (uuid "12baa59e-5b08-51d6-8e0a-7a7bdb9fd87b")
+  (property "Reference" "F9" (at 101.6 35.538 270) (effects (font (size 1.27 1.27))))
+  (property "Value" "3 A" (at 101.6 40.862 270) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 101.6 38.1 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 101.6 38.1 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Description" "Inline blade fuse holder (ordered, 3 pcs) + 3 A" (at 101.6 38.1 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Part" "Inline blade fuse holder (ordered, 3 pcs) + 3 A" (at 101.6 38.1 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Source" "Ordered 24 Oct" (at 101.6 38.1 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Location" "box" (at 101.6 38.1 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Note" "Lights branch of the 10-20 A buck" (at 101.6 38.1 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid "97316753-b49f-5e8c-9ca7-bd3349b2c1a7"))
+  (pin "2" (uuid "b7e62a93-e7b8-5bb2-a9c5-388110089163"))
+  (instances (project "rideonesp32" (path "/e0e78d72-bf5c-51da-8e0f-d8642949b63b/103d9753-9a27-5ff0-afc4-391bd962ed77" (reference "F9") (unit 1))))
+)
+(wire (pts (xy 97.79 38.1) (xy 92.71 38.1)) (stroke (width 0) (type default)) (uuid "151edc1b-d1f3-5e3a-a493-e4b4b406f51c"))
+(global_label "12V_ACC" (shape passive) (at 92.71 38.1 180) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "629af7ee-0de4-5f94-a011-dc213e36a20d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 92.71 38.1 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(wire (pts (xy 105.41 38.1) (xy 110.49 38.1)) (stroke (width 0) (type default)) (uuid "f43be6e5-8a1f-5075-819c-38dd2e742e22"))
+(global_label "LIGHTS_12V" (shape passive) (at 110.49 38.1 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "47bce35d-dc89-5bdc-8286-7b58d5321a30") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 110.49 38.1 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(symbol (lib_id "Device:Fuse") (at 101.6 50.8 90) (unit 1)
+  (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
+  (uuid "09851503-422d-5bfc-991c-59d7415e9b80")
+  (property "Reference" "F10" (at 101.6 48.238 270) (effects (font (size 1.27 1.27))))
+  (property "Value" "10 A" (at 101.6 53.562 270) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 101.6 50.8 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 101.6 50.8 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Description" "Inline blade fuse holder (ordered, 3 pcs) + 10 A" (at 101.6 50.8 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Part" "Inline blade fuse holder (ordered, 3 pcs) + 10 A" (at 101.6 50.8 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Source" "Ordered 24 Oct" (at 101.6 50.8 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Location" "box" (at 101.6 50.8 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Note" "Music amp branch" (at 101.6 50.8 270) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid "4c401ee6-123e-560b-aa3a-3f12c9b902fe"))
+  (pin "2" (uuid "f3ad4c1a-664f-5d86-afd5-c15ed4e3218b"))
+  (instances (project "rideonesp32" (path "/e0e78d72-bf5c-51da-8e0f-d8642949b63b/103d9753-9a27-5ff0-afc4-391bd962ed77" (reference "F10") (unit 1))))
+)
+(wire (pts (xy 97.79 50.8) (xy 92.71 50.8)) (stroke (width 0) (type default)) (uuid "6261efb1-60f5-542a-a3ea-3cc080233792"))
+(global_label "12V_ACC" (shape passive) (at 92.71 50.8 180) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "3634c0f8-7d40-594a-87cc-d2e619ac7879") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 92.71 50.8 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(wire (pts (xy 105.41 50.8) (xy 110.49 50.8)) (stroke (width 0) (type default)) (uuid "a182a421-1e5b-58f9-8941-78e20d296d43"))
+(label "AMP_12V" (at 110.49 50.8 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "a1f6d72f-8ca5-5135-bb5b-6e2d16204b9a"))
+(symbol (lib_id "rideonesp32:BT_Amp_ZK502T") (at 106.68 71.12 0) (unit 1)
+  (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
+  (uuid "52ab7967-1abb-5e15-8a31-0893ea471507")
+  (property "Reference" "U32" (at 106.68 61.7 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "ZK-502T" (at 106.68 78.2 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 106.68 71.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 106.68 71.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Description" "ZK-502T Bluetooth amp" (at 106.68 71.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Part" "ZK-502T Bluetooth amp" (at 106.68 71.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Source" "To buy" (at 106.68 71.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Location" "box or dash" (at 106.68 71.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Note" "Cap the volume (EN 71-1 loudness, see the safety review)" (at 106.68 71.12 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "VIN+" (uuid "7c19d7b8-b099-5169-a5b8-18791e801aad"))
+  (pin "VIN-" (uuid "32304e01-c958-53b8-b5ae-1a166f4f792e"))
+  (pin "L+" (uuid "06d14a92-399c-54e8-8fa3-723ccaf51f08"))
+  (pin "L-" (uuid "a940f495-b2f9-56fc-a465-1cb3652c518d"))
+  (pin "R+" (uuid "643571fb-26c1-54e1-bd2c-c74b12025a0f"))
+  (pin "R-" (uuid "ec3da131-067d-5b67-90e8-bab867fcaa4f"))
+  (instances (project "rideonesp32" (path "/e0e78d72-bf5c-51da-8e0f-d8642949b63b/103d9753-9a27-5ff0-afc4-391bd962ed77" (reference "U32") (unit 1))))
+)
+(wire (pts (xy 96.52 66.04) (xy 91.44 66.04)) (stroke (width 0) (type default)) (uuid "8410b428-1fac-59b7-8324-162248db47af"))
+(label "AMP_12V" (at 91.44 66.04 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "518c1898-2234-5475-bed1-ea6c756f6bff"))
+(wire (pts (xy 96.52 68.58) (xy 91.44 68.58)) (stroke (width 0) (type default)) (uuid "3ef046f0-9410-5c74-aee1-77e5d15e4944"))
+(global_label "GND" (shape passive) (at 91.44 68.58 180) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "63c8fa06-78e7-573e-8909-60a8a2c4fa21") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 91.44 68.58 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(wire (pts (xy 116.84 66.04) (xy 121.92 66.04)) (stroke (width 0) (type default)) (uuid "249cfbbf-8775-5a75-9499-f94ab0b24632"))
+(global_label "SPK_L_P" (shape passive) (at 121.92 66.04 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "53b305ac-9f6d-5d06-984d-57a801a3bdf4") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 121.92 66.04 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(wire (pts (xy 116.84 68.58) (xy 121.92 68.58)) (stroke (width 0) (type default)) (uuid "5a81dd90-5d3f-5049-9ef6-44768441f137"))
+(global_label "SPK_L_N" (shape passive) (at 121.92 68.58 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "22d70803-9d80-5cce-bcfa-2a1f521df81a") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 121.92 68.58 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(wire (pts (xy 116.84 71.12) (xy 121.92 71.12)) (stroke (width 0) (type default)) (uuid "12b7e345-bf29-5f1f-838b-14a9b607dda8"))
+(global_label "SPK_R_P" (shape passive) (at 121.92 71.12 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "9be1d6c5-8175-5c82-b418-ce5b993aadd3") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 121.92 71.12 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(wire (pts (xy 116.84 73.66) (xy 121.92 73.66)) (stroke (width 0) (type default)) (uuid "84606f08-e0ab-5be8-a4b5-32f397aa310f"))
+(global_label "SPK_R_N" (shape passive) (at 121.92 73.66 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "e90d8193-cc68-5e2b-9650-bab97680c436") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 121.92 73.66 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(symbol (lib_id "power:PWR_FLAG") (at 83.82 88.9 0) (unit 1)
+  (exclude_from_sim no) (in_bom no) (on_board yes) (dnp no)
+  (uuid "3c510744-b346-535c-9bc2-7167df80f035")
+  (property "Reference" "#FLG07" (at 83.82 84.56 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "PWR_FLAG" (at 83.82 90.9 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 83.82 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 83.82 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Description" "" (at 83.82 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Part" "" (at 83.82 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Source" "" (at 83.82 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Location" "" (at 83.82 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid "bb8a668d-0230-5ac0-99e3-c7ac4289cb3b"))
+  (instances (project "rideonesp32" (path "/e0e78d72-bf5c-51da-8e0f-d8642949b63b/103d9753-9a27-5ff0-afc4-391bd962ed77" (reference "#FLG07") (unit 1))))
+)
+(wire (pts (xy 83.82 88.9) (xy 83.82 93.98)) (stroke (width 0) (type default)) (uuid "5573df20-1584-583f-8915-9517bc9a647c"))
+(label "AMP_12V" (at 83.82 93.98 270) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "36f10931-710c-50d7-ace4-cabbbe8a07be"))
+(text "Car sounds" (exclude_from_sim no) (at 141 27.2 0) (effects (font (size 2 2) (bold yes)) (justify left top)) (uuid "5a35c960-8d64-5e91-bef3-81ec8f1124dd"))
+(symbol (lib_id "rideonesp32:DFPlayer_Mini") (at 167.64 45.72 0) (unit 1)
+  (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
+  (uuid "43cfe9d8-4d39-5502-81b7-ee54dc056e1c")
+  (property "Reference" "U30" (at 167.64 36.3 0) (effects (font (size 1.27 1.27))))
+  (property "Value" "DFPlayer Mini" (at 167.64 52.8 0) (effects (font (size 1.27 1.27))))
+  (property "Footprint" "" (at 167.64 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Datasheet" "" (at 167.64 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Description" "DFPlayer Mini + micro-SD card" (at 167.64 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Part" "DFPlayer Mini + micro-SD card" (at 167.64 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Source" "To buy" (at 167.64 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Location" "box" (at 167.64 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (pin "1" (uuid "fb9e2c8c-ed80-5507-9407-12548bb9de4d"))
+  (pin "7" (uuid "612ed228-a7ca-558e-997e-f21be936d122"))
+  (pin "2" (uuid "0d595e2a-513d-5208-872e-03fd7ff3dd49"))
+  (pin "3" (uuid "5a0daac3-4b7d-5027-993d-1a2badcd0508"))
+  (pin "6" (uuid "080bf027-966e-5a9b-8413-2b15022321d1"))
+  (pin "8" (uuid "e2ca776b-14dc-5eb5-bf3d-18f618729f84"))
+  (pin "16" (uuid "e1b1a910-6f97-5c0d-90e1-8d1d3685f394"))
+  (instances (project "rideonesp32" (path "/e0e78d72-bf5c-51da-8e0f-d8642949b63b/103d9753-9a27-5ff0-afc4-391bd962ed77" (reference "U30") (unit 1))))
+)
+(wire (pts (xy 157.48 40.64) (xy 152.4 40.64)) (stroke (width 0) (type default)) (uuid "26add959-b12f-58a7-87a5-9e62e95a0551"))
+(global_label "5V_ACC" (shape passive) (at 152.4 40.64 180) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "7fcf9dd9-8142-5fb2-84e2-2393626fc84a") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 152.4 40.64 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(wire (pts (xy 157.48 43.18) (xy 152.4 43.18)) (stroke (width 0) (type default)) (uuid "fd5e208d-ac8a-51e1-8ca7-032586aafe93"))
+(global_label "GND" (shape passive) (at 152.4 43.18 180) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "9808a84e-739c-59e6-8440-c07f6fd0340a") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 152.4 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(wire (pts (xy 157.48 45.72) (xy 152.4 45.72)) (stroke (width 0) (type default)) (uuid "636f159f-a207-5de8-af53-8a3885ea2d17"))
+(global_label "DF_RX" (shape passive) (at 152.4 45.72 180) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "8e70cf01-b814-5b4c-bbe1-14d520c5e1ac") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 152.4 45.72 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(no_connect (at 157.48 48.26) (uuid "26b5535b-cf47-5ec5-b2ea-a72e3b88bfee"))
+(wire (pts (xy 177.8 40.64) (xy 182.88 40.64)) (stroke (width 0) (type default)) (uuid "8be1debb-7c46-549c-8eb7-b8f6a6fdc805"))
+(global_label "SPK_ALERT_P" (shape passive) (at 182.88 40.64 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "d405d774-02e2-5dfc-8634-30cbb1949bd3") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 182.88 40.64 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(wire (pts (xy 177.8 43.18) (xy 182.88 43.18)) (stroke (width 0) (type default)) (uuid "c7c2130d-4844-5288-9bbf-822763026207"))
+(global_label "SPK_ALERT_N" (shape passive) (at 182.88 43.18 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "2955be2c-75c6-50c9-9097-6874ffdab87d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 182.88 43.18 0) (effects (font (size 1.27 1.27)) (hide yes))))
+(no_connect (at 177.8 45.72) (uuid "4258a0ff-b847-570e-ae1c-34a7167fa486"))
+(text "Audio" (exclude_from_sim no) (at 141 58.88 0) (effects (font (size 1.6 1.6) (bold yes)) (justify left top)) (uuid "d97cb7a9-277e-59bf-92db-2a9314a6e792"))
+(text "DFPlayer on 5V_ACC so speaker current stays\noff the ESP32 supply. See docs/hardware/AUDIO.md." (exclude_from_sim no) (at 141 61.88 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "d8e187e4-b0a6-5e6c-8667-ad8215025aaa"))
+(text "Phase 7. Nothing here is in the 24 Oct order except the inline fuse holders." (exclude_from_sim no) (at 15 15 0) (effects (font (size 1.5 1.5) (italic yes)) (justify left top)) (uuid "1de7e511-c16f-56fb-a472-ed67e1fe4547"))
+(text "Music has its own amp with Bluetooth on that board only; the ESP32 never runs Wi-Fi or Bluetooth." (exclude_from_sim no) (at 15 17.6 0) (effects (font (size 1.5 1.5) (italic yes)) (justify left top)) (uuid "3f4756aa-da87-56be-8ca9-b2872734cfa6"))
+(embedded_fonts no)
+)

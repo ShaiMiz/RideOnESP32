@@ -1,0 +1,16 @@
+(kicad_sch (version 20250114) (generator "rideonesp32_gen") (generator_version "9.0")
+(uuid "067ee173-dfbf-594e-b2e0-9afde87d43d0")
+(paper "A3")
+(title_block (title "RideOnESP32 v3, drive variant B (2 x MDD20A)") (date "2026-10-24") (rev "0.3") (company "RideOnESP32 · Can-Am Maverick X3 24 V 4WD") (comment 1 "Draft v0.3, not for building the car-facing side until the TBDs close"))
+(lib_symbols
+
+)
+(sheet (at 20.32 30.48) (size 81.28 20.32) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
+  (stroke (width 0.1524) (type solid)) (fill (color 0 0 0 0.0000)) (uuid "65bf137a-4796-5d88-a7c3-e9f3dedd34c3")
+  (property "Sheetname" "2 Drive, variant B (2 x MDD20A)" (at 20.32 29.78 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
+  (property "Sheetfile" "drive_b.kicad_sch" (at 20.32 51.48 0) (effects (font (size 1.27 1.27)) (justify left top)))
+  (instances (project "variant_b" (path "/067ee173-dfbf-594e-b2e0-9afde87d43d0" (page "2"))))
+)
+(sheet_instances (path "/" (page "1")))
+(embedded_fonts no)
+)

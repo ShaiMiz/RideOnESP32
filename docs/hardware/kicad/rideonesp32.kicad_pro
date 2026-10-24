@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "filename": "rideonesp32.kicad_pro",
+    "version": 3
+  },
+  "erc": {
+    "erc_exclusions": [],
+    "meta": {
+      "version": 0
+    },
+    "pin_map": [],
+    "rule_severities": {
+      "single_global_label": "ignore",
+      "lib_symbol_issues": "warning",
+      "lib_symbol_mismatch": "ignore",
+      "footprint_link_issues": "ignore"
+    }
+  },
+  "schematic": {
+    "legacy_lib_dir": "",
+    "legacy_lib_list": []
+  },
+  "sheets": [
+    [
+      "e0e78d72-bf5c-51da-8e0f-d8642949b63b",
+      "Root"
+    ],
+    [
+      "8e3c7701-8813-524d-9ed8-eac752cd77dd",
+      "Car harness and box edge"
+    ],
+    [
+      "23a9df4e-7b07-52d0-a9de-91e09c3d1aa7",
+      "Power and safety chain"
+    ],
+    [
+      "6659fd52-b281-5366-b2e7-00ecbb55cc6c",
+      "Low-voltage rails"
+    ],
+    [
+      "6e75f03c-d0d2-5a99-a681-1a6d7cbfcd29",
+      "Drive, variant A (4 + 1 IBT-2)"
+    ],
+    [
+      "60fb54a3-8b44-551e-9b8a-2c73288ddd08",
+      "Controller and inputs"
+    ],
+    [
+      "06fd6ea6-9bed-536b-b6c3-e4f31f1ef18d",
+      "I2C bus and switch inputs"
+    ],
+    [
+      "103d9753-9a27-5ff0-afc4-391bd962ed77",
+      "Accessories: fans, lights, sound"
+    ]
+  ],
+  "text_variables": {}
+}

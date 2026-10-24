@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "filename": "variant_b.kicad_pro",
+    "version": 3
+  },
+  "erc": {
+    "erc_exclusions": [],
+    "meta": {
+      "version": 0
+    },
+    "pin_map": [],
+    "rule_severities": {
+      "single_global_label": "ignore", "global_label_dangling": "ignore", "pin_not_driven": "ignore",
+      "lib_symbol_issues": "warning",
+      "lib_symbol_mismatch": "ignore",
+      "footprint_link_issues": "ignore"
+    }
+  },
+  "schematic": {
+    "legacy_lib_dir": "",
+    "legacy_lib_list": []
+  },
+  "sheets": [
+    [
+      "067ee173-dfbf-594e-b2e0-9afde87d43d0",
+      "Root"
+    ],
+    [
+      "65bf137a-4796-5d88-a7c3-e9f3dedd34c3",
+      "Drive, variant B (2 x MDD20A)"
+    ]
+  ],
+  "text_variables": {}
+}

@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "rideonesp32")(type "KiCad")(uri "${KIPRJMOD}/../rideonesp32.kicad_sym")(options "")(descr "RideOnESP32 module symbols"))
+)

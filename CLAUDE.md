@@ -20,7 +20,8 @@ Status: v3 has never driven a car. Only bench checks so far. Follow [docs/COMMIS
 
 ## Plans and reviews
 
-- Draft schematic v0.2: [docs/hardware/schematic/](docs/hardware/schematic/) (variants A and B, 12 TBDs, and where it differs from WIRING.md and POWER_CHAIN.md, #31). Edit `generate.py`, not the SVGs.
+- Schematic v0.3 in KiCad: [docs/hardware/kicad/](docs/hardware/kicad/), with CONNECTORS.md, WIRE_LIST.md, BOM.md (matched to the 24 Oct order) and NETS.md. Generated: edit `gen/design.py` and `gen/wiring.py`, run `python3 docs/hardware/kicad/gen/generate.py`, then `docs/hardware/kicad/check.sh` (KiCad ERC + netlist check via Docker). The ESP32 nets come from pins.h, so a pin change means regenerating; CI fails if the committed files are stale. J1-J8 (car-facing) stay TBD until #17. The SVG draft v0.2 in [docs/hardware/schematic/](docs/hardware/schematic/) is superseded but kept.
+- v2 vs v3 hardware comparison: [docs/reviews/2026-10-v2-vs-v3-hardware.md](docs/reviews/2026-10-v2-vs-v3-hardware.md).
 - Safety-standards review: [docs/reviews/2026-10-safety-standards.md](docs/reviews/2026-10-safety-standards.md), EN 71-1 4.15 and EN 62115 (Annex J, remote-controlled ride-ons) against this design. Its 8 gaps are not yet filed as issues; Shai decides which to take on.
 - Audio plan: [docs/hardware/AUDIO.md](docs/hardware/AUDIO.md). Bluetooth is on the music amp only, never the ESP32.
 - Firmware code review of v2: [docs/reviews/2026-10-firmware-code-tour.md](docs/reviews/2026-10-firmware-code-tour.md).
@@ -52,7 +53,7 @@ On Windows, if `pio` is not on PATH, use the PlatformIO terminal in Cursor or `%
 
 - `lib/rideon_core/` holds safety and control logic with no hardware calls. New logic goes here when it can, with a test in `test/test_<name>/`.
 - `src/` is hardware glue; `src/bench/` holds the bench firmwares. `include/config.h` holds every limit and tunable; `include/pins.h` is the pin map.
-- **Pins:** `include/pins.h`, [docs/hardware/PINOUT.md](docs/hardware/PINOUT.md) and [docs/hardware/WIRING.md](docs/hardware/WIRING.md) change together in the same PR. `include/pin_rules.h` static-asserts the rules (no GPIO used twice, no outputs on 34–39, analog on ADC1 only, strapping pins handled) and the CI `pins` job checks the docs match.
+- **Pins:** `include/pins.h`, [docs/hardware/PINOUT.md](docs/hardware/PINOUT.md) and [docs/hardware/WIRING.md](docs/hardware/WIRING.md) change together in the same PR, and the KiCad schematic is regenerated. `include/pin_rules.h` static-asserts the rules (no GPIO used twice, no outputs on 34–39, analog on ADC1 only, strapping pins handled) and the CI `pins` job checks the docs match.
 - Faults latch until the parent re-arms from Locked; never add a fault that clears itself. Link loss is judged by the CRSF link state, never by channel values. Fault codes: [docs/firmware/FAULT_CODES.md](docs/firmware/FAULT_CODES.md).
 - Changing a `config.h` limit means re-running the commissioning gates that depend on it; say which in the PR.
 - Firmware design: [docs/firmware/ARCHITECTURE.md](docs/firmware/ARCHITECTURE.md), modes: [CONTROL_MODES.md](docs/firmware/CONTROL_MODES.md), radio channels: [CHANNEL_MAP.md](docs/firmware/CHANNEL_MAP.md) and [radio/](radio/).

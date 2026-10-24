@@ -20,6 +20,7 @@ sys.path.insert(0, str(HERE))
 
 import design as D  # noqa: E402
 import kicad as K  # noqa: E402
+import overview  # noqa: E402
 import tables  # noqa: E402
 
 PROJECT = "rideonesp32"
@@ -131,11 +132,17 @@ def build_project(name, sheets_def, syms, root_notes, allow_single=()):
 
     sheet_objs = []
     for i, sd in enumerate(sheets_def):
+        su = K.uid(name, "sheet", sd["file"])
+        path = f"/{root_uuid}/{su}"
+        if sd.get("drawing"):  # a drawing-only page (the system overview): graphics, no parts or nets
+            s = K.Sheet(sd["name"], f"{sd['file']}.kicad_sch", sd["name"], str(i + 2))
+            s.paper = sd["paper"]
+            (outdir / s.filename).write_text(w.sheet_file(s, K.uid(name, "file", sd["file"]), path, set(), extra_items=sd["drawing"]()))
+            sheet_objs.append((s, su))
+            continue
         s = resolve_columns(sd, sd["parts"])
         s.page = str(i + 2)
         placed = w.layout(s)
-        su = K.uid(name, "sheet", sd["file"])
-        path = f"/{root_uuid}/{su}"
         libs = {p.sym for p in sd["parts"]}
         (outdir / s.filename).write_text(w.sheet_file(s, K.uid(name, "file", sd["file"]), path, libs, placed=placed))
         sheet_objs.append((s, su))
@@ -240,10 +247,13 @@ def main():
     gpio = pins_h()
     esp = next(p for p in D.controller if p.ref == "U20")
     wire_esp32(esp, syms[esp.sym], gpio)
-    parts, nets, global_nets = build_project(PROJECT, D.SHEETS, syms, ROOT_NOTES)
+    overview_sheet = dict(file="overview", name="System wiring overview", paper=("A2", 594.0, 420.0), parts=[],
+                          drawing=overview.build,
+                          blurb="Every assembly on one page, joined by real wires:\nbattery to motors, the safety chain, rails, ESP32,\nI2C chain. Drawing only; nets are on pages 3-9.")
+    parts, nets, global_nets = build_project(PROJECT, [overview_sheet] + D.SHEETS, syms, ROOT_NOTES)
     write_symbol_lib(syms)
     vb_root = dict(title="RideOnESP32 v3, drive variant B (2 x MDD20A)",
-                   comments=["Alternative to sheet 5 of the main project; undecided (#32).",
+                   comments=["Alternative to sheet 6 of the main project; undecided (#32).",
                              "Nets with flag labels connect to the main project's nets of the same name."],
                    notes=[])
     # variant B's ESP32-side and motor-side nets end on the main project, so they show one pin here
@@ -252,7 +262,7 @@ def main():
                  "IS_FL", "IS_FR", "IS_RL", "IS_RR"]
     vb_parts, vb_nets, _ = build_project("variant_b", [D.VARIANT_B_SHEET], syms, vb_root, allow_single=vb_single)
     tables.write_all(OUT, parts, nets, syms, gpio, vb_parts)
-    print(f"{len(parts)} parts, {len(nets)} nets, {len(D.SHEETS)} sheets; variant B {len(vb_parts)} parts")
+    print(f"{len(parts)} parts, {len(nets)} nets, {len(D.SHEETS) + 1} sheets; variant B {len(vb_parts)} parts")
 
 
 if __name__ == "__main__":

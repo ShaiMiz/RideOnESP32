@@ -151,7 +151,7 @@ CH_NAME = {"FL": "front-left", "FR": "front-right", "RL": "rear-left", "RR": "re
 DRV_REF = {"FL": "U10", "FR": "U11", "RL": "U12", "RR": "U13", "STEER": "U14"}
 MOTOR_REF = {"FL": "M1", "FR": "M2", "RL": "M3", "RR": "M4", "STEER": "M5"}
 
-# ---- Sheet 2: car side and the box edge -------------------------------------------------------
+# ---- Sheet 3: car side and the box edge -------------------------------------------------------
 
 car = [
     Part("BT1", "Device:Battery", "24 V pack", {"1": "BATT_RAW", "2": "GND"}, "Stock 24 V battery; voltage, Ah, chemistry TBD",
@@ -214,7 +214,7 @@ car = [
       note="Our own plug; music path only, never shared with the ESP32"),
 ]
 
-# ---- Sheet 3: power and safety chain ------------------------------------------------------------
+# ---- Sheet 4: power and safety chain ------------------------------------------------------------
 
 power = [
     Part("K1", M("Contactor_SW80"), "125 A 24 V", {"C+": "COIL_24V", "C-": "COIL_LOW", "A": "BATT_FUSED", "B": "MOTOR_24V"},
@@ -245,7 +245,7 @@ power = [
     PWR("#FLG01", "MOTOR_24V"), PWR("#FLG02", "GND"), PWR("#FLG03", "U1_IN"), PWR("#FLG04", "U3_IN"), PWR("#FLG05", "U4_IN"),
 ]
 
-# ---- Sheet 4: rails ------------------------------------------------------------------------------
+# ---- Sheet 5: rails ------------------------------------------------------------------------------
 
 rails = [
     Part("U1", M("DCDC_Buck_Module"), "LM2596 → 5.0 V", {"IN+": "U1_IN", "IN-": "GND", "OUT+": "5V_LOGIC", "OUT-": "GND"},
@@ -258,7 +258,7 @@ rails = [
          "24 to 12 V 10-20 A sealed buck", BUY, "box", "Lights and music amp"),
 ]
 
-# ---- Sheet 5: drive, variant A -------------------------------------------------------------------
+# ---- Sheet 6: drive, variant A -------------------------------------------------------------------
 
 
 def drive_channel(c, n):
@@ -286,7 +286,7 @@ drive = []
 for i, c in enumerate(CH + ["STEER"]):
     drive += drive_channel(c, i + 1)
 
-# ---- Sheet 6: controller -------------------------------------------------------------------------
+# ---- Sheet 7: controller -------------------------------------------------------------------------
 
 controller = [
     Part("U20", M("ESP32_DevKit_30pin"), "ESP32-WROOM-32D", {}, "ESP32-WROOM-32D 30-pin DevKit, USB-C, on MRD068A", OWNED, "box",
@@ -308,7 +308,7 @@ controller = [
     R("R28", "1k", "SOUND_TX", "DF_RX", note="DFPlayer RX series resistor"),
 ]
 
-# ---- Sheet 7: I2C bus and inputs -----------------------------------------------------------------
+# ---- Sheet 8: I2C bus and inputs -----------------------------------------------------------------
 
 i2c = [
     R("R25", "4.7k", "3V3_SENSE", "I2C_SCL", dnp=True,
@@ -332,7 +332,7 @@ i2c = [
          "PCA9685 16-channel PWM board", BUY, "box", "Accessory PWM; PWM2-15 spare"),
 ]
 
-# ---- Sheet 8: accessories ------------------------------------------------------------------------
+# ---- Sheet 9: accessories ------------------------------------------------------------------------
 
 acc = [
     Part("U29", M("MOSFET_Board_4ch"), "4ch MOSFET", {"IN1": "LIGHTS_PWM", "IN2": "FAN_PWM", "IN3": None, "IN4": None, "GND": "GND",
@@ -488,7 +488,7 @@ VARIANT_B = [
 ] + [PWR("#FLG40", "MOTOR_24V"), PWR("#FLG41", "GND"), PWR("#FLG42", "3V3_SENSE")]
 
 VARIANT_B_SHEET = dict(file="drive_b", name="Drive, variant B (2 x MDD20A)", parts=VARIANT_B, comments=[
-    "Replaces sheet 5 (drive, variant A) for the four drive wheels. Steering stays on the U14 IBT-2.",
+    "Replaces sheet 6 (drive, variant A) for the four drive wheels. Steering stays on the U14 IBT-2.",
     "Same ESP32 pins with new meaning: xx_RPWM = PWM, xx_LPWM = DIR. Undecided (#32)."], columns=[
     ("PWM gate", ["U40", "C40", "R40"]),
     ("Drivers", ["U41", "C41", "U42", "C42"]),

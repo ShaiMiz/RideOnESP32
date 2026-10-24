@@ -980,7 +980,7 @@
 )
 (wire (pts (xy 200.66 81.28) (xy 200.66 86.36)) (stroke (width 0) (type default)) (uuid "8762721c-0fb8-5204-95ab-057ece333f8b"))
 (label "3V3_SENSE" (at 200.66 86.36 270) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "3435612a-48ec-56cb-9ff3-9ad24aed2710"))
-(text "Replaces sheet 5 (drive, variant A) for the four drive wheels. Steering stays on the U14 IBT-2." (exclude_from_sim no) (at 15 15 0) (effects (font (size 1.5 1.5) (italic yes)) (justify left top)) (uuid "72673eed-26f8-5ef1-8bf4-c41ce709dbaf"))
+(text "Replaces sheet 6 (drive, variant A) for the four drive wheels. Steering stays on the U14 IBT-2." (exclude_from_sim no) (at 15 15 0) (effects (font (size 1.5 1.5) (italic yes)) (justify left top)) (uuid "6c4fcb55-da1f-5e38-8d6b-051d40e8ae51"))
 (text "Same ESP32 pins with new meaning: xx_RPWM = PWM, xx_LPWM = DIR. Undecided (#32)." (exclude_from_sim no) (at 15 17.6 0) (effects (font (size 1.5 1.5) (italic yes)) (justify left top)) (uuid "97a2ddca-2330-5151-b057-b57b92bd119d"))
 (embedded_fonts no)
 )

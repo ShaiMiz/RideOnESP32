@@ -353,7 +353,7 @@ acc = [
 # Each sheet: file, title, columns of (title, [refs or Note keys]).
 
 SHEETS = [
-    dict(file="harness", name="Car harness and box edge", parts=car, comments=[
+    dict(file="harness", blurb='Everything outside the box: battery + F1, key, pedal,\nshifter, 5 motors, E-stop, sensors, dash, speakers.\nBox plugs J1-J12 (J1-J8 mate the stock plugs, TBD #17).', name="Car harness and box edge", parts=car, comments=[
         "Left: what stays in the car (stock parts and our off-box parts). Right of each plug: into the box.",
         "Plugs facing the stock harness (J1-J8) are TBD until the stock plug photos (#17).",
         "J9-J12 are our own sealed plugs."], columns=[
@@ -368,7 +368,7 @@ SHEETS = [
         ("Dash", ["U27", "LS1", "J11"]),
         ("Music", ["LS2", "LS3", "J12"]),
     ]),
-    dict(file="power", name="Power and safety chain", parts=power, comments=[
+    dict(file="power", blurb='K1 contactor and its coil chain: key, E-stop (2 NC),\nQ1 hold MOSFET. F2 key feed, fuse block F3-F8,\nground star TB1, motor bus TB2, battery divider.', name="Power and safety chain", parts=power, comments=[
         "Layer 1, no software: key and E-stop in series with the K1 coil; either one opens K1 whatever the ESP32 does.",
         "Q1 lets the ESP32 open K1 but never close it. Reset, crash or brown-out opens it (R2 pull-down).",
         "Rails come from the key side, before K1, so the ESP32 stays up after an E-stop and can report why."], columns=[
@@ -377,35 +377,35 @@ SHEETS = [
         ("Fuse block (key side)", ["F4", "F5", "F6", "F7", "F8", "R3", "R4", "C1"]),
         ("Notes", ["NOTE:main_path", "NOTE:fuses", "#FLG01", "#FLG02", "#FLG03", "#FLG04", "#FLG05"]),
     ]),
-    dict(file="rails", name="Low-voltage rails", parts=rails, comments=[
+    dict(file="rails", blurb='U1 LM2596 5V_LOGIC, U2 AMS1117 3V3_SENSE,\nU3 5V_ACC and U4 12V_ACC for accessories.', name="Low-voltage rails", parts=rails, comments=[
         "Logic and accessories never share a converter. 3V3_SENSE comes from 5V_LOGIC, not the ESP32's own 3.3 V pin.",
         "Set each buck's output with a meter before connecting any load."], columns=[
         ("Logic", ["U1", "U2"]),
         ("Accessories", ["U3", "U4"]),
         ("Budget", ["NOTE:rails"]),
     ]),
-    dict(file="drive", name="Drive, variant A (4 + 1 IBT-2)", parts=drive, comments=[
+    dict(file="drive", blurb='U10-U13 IBT-2 per wheel, U14 steering IBT-2.\n470 µF each, enable pull-down per board,\nIS current-sense networks to the ADS1115s.', name="Drive, variant A (4 + 1 IBT-2)", parts=drive, comments=[
         "Layer 2: DRIVE_EN and STEER_EN are pulled down at every board, so boot, reset, flashing and crashes leave the drivers off.",
         "IS sense: R_IS + L_IS joined (only one side conducts at a time) -> 4.7k -> ADS1115, 10 nF filter, clamp to 3.3 V.",
         "Variant B (2 x MDD20A) replaces this sheet: see variant_b/."], columns=[
         (f"{c} ({CH_NAME[c]})", [DRV_REF[c], f"C11{i + 1}", f"R11{i + 1}", f"R10{i + 1}", f"C10{i + 1}", f"D10{i + 1}"])
         for i, c in enumerate(CH + ["STEER"])
     ]),
-    dict(file="controller", name="Controller and inputs", parts=controller, comments=[
+    dict(file="controller", blurb='ESP32 (nets from include/pins.h), ELRS receiver,\npedal input protection, wheel-speed pull-ups,\nDS18B20, DFPlayer serial.', name="Controller and inputs", parts=controller, comments=[
         "Pin nets come from include/pins.h; CI keeps pins.h, PINOUT.md and WIRING.md in step and check_netlist.py checks this sheet.",
         "Analog inputs on ADC1 only. GPIO36/39 carry analog only (they glitch when the ADC runs). Kill lines on pins quiet at boot."], columns=[
         ("ESP32", ["U20", "U21"]),
         ("Pedal", ["R22", "R20", "R21", "C20", "D20", "NOTE:pedal"]),
         ("Wheel speed, temperature, sound", ["R23", "C21", "R24", "C22", "R27", "U31", "R28"]),
     ]),
-    dict(file="i2c_io", name="I2C bus and switch inputs", parts=i2c, comments=[
+    dict(file="i2c_io", blurb='2 x ADS1115 current sense, PCF8574 switches\n(shifter, horn, E-stop sense, seat), MPU-6050,\nPCA9685 accessory PWM.', name="I2C bus and switch inputs", parts=i2c, comments=[
         "I2C on GPIO22 (SCL) / GPIO23 (SDA) at 3.3 V. Addresses: 0x20 0x36 0x3C 0x40 (+0x70 all-call) 0x48 0x49 0x68.",
         "Off-box I2C (AS5600 on the steering column, OLED on the dash) is the weak spot: keep runs short, twisted with GND (#36)."], columns=[
         ("Current sense ADCs", ["U22", "U23"]),
         ("Switches", ["U24", "NOTE:pcf"]),
         ("IMU, PWM, pull-ups", ["U26", "U28", "R25", "R26"]),
     ]),
-    dict(file="accessories", name="Accessories: fans, lights, sound", parts=acc, comments=[
+    dict(file="accessories", blurb='MOSFET board for lights and fans, 12 V branch\nfuses F9/F10, music amp, DFPlayer + alert speaker.', name="Accessories: fans, lights, sound", parts=acc, comments=[
         "Phase 7. Nothing here is in the 24 Oct order except the inline fuse holders.",
         "Music has its own amp with Bluetooth on that board only; the ESP32 never runs Wi-Fi or Bluetooth."], columns=[
         ("Switched loads", ["U29", "FAN1", "FAN2"]),

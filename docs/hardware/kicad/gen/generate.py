@@ -154,6 +154,10 @@ def build_project(name, sheets_def, syms, root_notes, allow_single=()):
             f"  (property \"Sheetname\" {K.q(f'{s.page} {s.name}')} (at {K.fmt(x)} {K.fmt(y - 0.7)} 0) {K.effects(justify='left bottom')})\n"
             f"  (property \"Sheetfile\" {K.q(s.filename)} (at {K.fmt(x)} {K.fmt(y + 21)} 0) {K.effects(justify='left top')})\n"
             f"  (instances (project {K.q(name)} (path {K.q('/' + root_uuid)} (page {K.q(s.page)}))))\n)")
+        blurb = sheets_def[i].get("blurb")
+        if blurb:  # what the sheet holds, inside its box; double-click the box to open the sheet
+            items.append(f"(text {K.q(blurb)} (exclude_from_sim no) (at {K.fmt(x + 2.54)} {K.fmt(y + 2.54)} 0) "
+                         f"{K.effects(justify='left top')} (uuid {K.q(K.uid(name, 'blurb', s.filename))}))")
     ny = y0 + ((len(sheet_objs) + 3) // 4) * 33.02 + 4
     nx = x0
     for title, lines, width in root_notes["notes"]:
@@ -200,7 +204,8 @@ ROOT_NOTES = dict(
             "Every pin has a stub and a net label: the label names the net, so",
             "each pin says where it goes. Labels with a flag shape are global",
             "(used on more than one sheet); plain text labels stay on one sheet.",
-            "Location field: box, A1 (the interface board inside the box),",
+            "Each box above is a sheet: double-click it in KiCad to open it",
+            "(or page down in the PDF). Location field: box, A1 (the interface board),",
             "car, dash. Source field: owned, ordered 24 Oct, stock car, to buy, TBD.",
             "Tables: NETS.md, CONNECTORS.md, WIRE_LIST.md, BOM.md (same data)."], 125.0),
         ("Three safety layers (POWER_CHAIN.md)", [

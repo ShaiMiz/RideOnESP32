@@ -11,7 +11,7 @@
   "issuesUrl": "https://github.com/ShaiMiz/RideOnESP32/issues/"
  },
  "car": {
-  "Model": "Can-Am Maverick X3 24 V, 4WD",
+  "Model": "Can-Am Maverick X3 24V Ride-On Buggy",
   "Drive motors": "4, one per wheel",
   "Steering": "Electric steering motor; the child steers by hand in Kid mode",
   "Weight / size": "42 kg, 147 × 86 × 88 cm, two seats",

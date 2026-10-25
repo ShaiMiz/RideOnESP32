@@ -51,23 +51,28 @@ function heatsink(w, d, h, fins, p, m = 'aluminiumDark') {
   return out;
 }
 
-// Spoked rim + tyre, axle along z.
-function wheel({ r = 0.16, w = 0.12, side = 1 }) {
+// Knobby tyre on a red beadlock rim, axle along z.
+function wheel({ r = 0.17, w = 0.13, side = 1 }) {
   const out = [
-    cyl(r, r, w, [0, 0, 0], 'rubber', [H, 0, 0], 40),
-    tor(r - 0.004, 0.012, [0, 0, w / 2 - 0.004], 'rubber'),
-    tor(r - 0.004, 0.012, [0, 0, -w / 2 + 0.004], 'rubber'),
-    cyl(r * 0.62, r * 0.62, w * 0.9, [0, 0, 0.002 * side], 'bodyAccent', [H, 0, 0], 36),
-    cyl(r * 0.18, r * 0.18, w * 0.96, [0, 0, 0.004 * side], 'chrome', [H, 0, 0]),
+    cyl(r - 0.012, r - 0.012, w, [0, 0, 0], 'rubber', [H, 0, 0], 40),
+    tor(r - 0.02, 0.018, [0, 0, w / 2 - 0.016], 'rubber'),
+    tor(r - 0.02, 0.018, [0, 0, -w / 2 + 0.016], 'rubber'),
+    cyl(r * 0.6, r * 0.6, w * 0.92, [0, 0, 0], 'rimBlack', [H, 0, 0], 36),
+    tor(r * 0.6, 0.012, [0, 0, (w / 2) * side * 0.95], 'rimRed'), // beadlock ring
+    cyl(r * 0.16, r * 0.16, w * 0.96, [0, 0, 0.004 * side], 'rimBlack', [H, 0, 0]),
+    cyl(r * 0.06, r * 0.06, w, [0, 0, 0.008 * side], 'chrome', [H, 0, 0]),
   ];
-  for (let i = 0; i < 5; i++) {
-    const a = (i / 5) * 2 * PI;
-    out.push(box(r * 0.48, 0.018, 0.012, [Math.cos(a) * r * 0.36, Math.sin(a) * r * 0.36, (w / 2) * side * 0.95], 'chrome', [0, 0, a]));
+  for (let i = 0; i < 6; i++) {
+    const a = (i / 6) * 2 * PI;
+    out.push(box(r * 0.42, 0.022, 0.01, [Math.cos(a) * r * 0.36, Math.sin(a) * r * 0.36, (w / 2) * side * 0.94], 'rimBlack', [0, 0, a]));
+    out.push(cyl(0.004, 0.004, 0.006, [Math.cos(a + 0.5) * r * 0.6, Math.sin(a + 0.5) * r * 0.6, (w / 2) * side * 0.98], 'steel', [H, 0, 0], 8));
   }
-  // tread blocks
-  for (let i = 0; i < 18; i++) {
-    const a = (i / 18) * 2 * PI;
-    out.push(box(0.022, 0.012, w * 0.9, [Math.cos(a) * r, Math.sin(a) * r, 0], 'rubber', [0, 0, a + H]));
+  // staggered tread knobs, two rows, plus shoulder lugs
+  for (let i = 0; i < 22; i++) {
+    const a = (i / 22) * 2 * PI;
+    const off = i % 2 ? 0.025 : -0.025;
+    out.push(box(0.03, 0.016, w * 0.42, [Math.cos(a) * (r - 0.004), Math.sin(a) * (r - 0.004), off], 'rubber', [0, 0, a + H]));
+    out.push(box(0.022, 0.014, 0.02, [Math.cos(a) * (r - 0.012), Math.sin(a) * (r - 0.012), (i % 2 ? 1 : -1) * (w / 2 + 0.002)], 'rubber', [0, 0, a + H]));
   }
   return out;
 }
@@ -343,11 +348,13 @@ function probe() {
   ];
 }
 
+// Slim angled LED headlight bars either side of the grille.
 function headlights() {
   const out = [];
-  for (const z of [-0.27, 0.27]) {
-    out.push(cyl(0.035, 0.035, 0.02, [0, 0, z], 'chrome', [0, 0, H], 28));
-    out.push(cyl(0.03, 0.03, 0.004, [0.011, 0, z], 'lens', [0, 0, H], 28));
+  for (const s of [-1, 1]) {
+    out.push(box(0.04, 0.035, 0.13, [0, 0.0, 0.18 * s], 'bodyAccent', [0, -0.35 * s, 0.25]));
+    out.push(box(0.006, 0.012, 0.12, [0.021, 0.006, 0.18 * s], 'lens', [0, -0.35 * s, 0.25]));
+    out.push(box(0.005, 0.02, 0.06, [0.021, -0.01, 0.2 * s], 'glass', [0, -0.35 * s, 0.25]));
   }
   return out;
 }
@@ -408,60 +415,131 @@ function boxLid({ w = 0.25, d = 0.2 }) {
   return [box(w + 0.004, 0.004, d + 0.004, [0, 0, 0], 'boxAbs'), box(w - 0.01, 0.002, d - 0.01, [0, -0.003, 0], 'rubber'), box(0.06, 0.0006, 0.03, [0.06, 0.0023, 0.05], 'label')];
 }
 
-// ---- stock car body, procedural from the listing size (147 x 86 x 88 cm) ----
+// ---- stock car body: Can-Am Maverick X3 24V Ride-On Buggy, from the listing photos and size
+// (147 x 86 x 88 cm). Gloss black body, sand "RS" door panels, red grilles, red coil-overs,
+// black tube cage, knobby tyres on red beadlock rims. Shapes are approximate.
 
 function tub() {
   return [
-    box(1.26, 0.03, 0.58, [0, 0.125, 0], 'bodyAccent'),
-    box(1.2, 0.12, 0.012, [0, 0.19, 0.29], 'bodyAccent'),
-    box(1.2, 0.12, 0.012, [0, 0.19, -0.29], 'bodyAccent'),
-    box(0.012, 0.12, 0.58, [0.6, 0.19, 0], 'bodyAccent'),
-    box(0.012, 0.12, 0.58, [-0.6, 0.19, 0], 'bodyAccent'),
-    cyl(0.01, 0.01, 0.86, [0.47, 0.16, 0], 'steel', [H, 0, 0]),
-    cyl(0.01, 0.01, 0.86, [-0.47, 0.16, 0], 'steel', [H, 0, 0]),
-    box(0.06, 0.03, 0.7, [0.47, 0.16, 0], 'brushed'),
-    box(0.06, 0.03, 0.7, [-0.47, 0.16, 0], 'brushed'),
+    box(1.26, 0.03, 0.56, [0, 0.135, 0], 'bodyAccent'),
+    box(1.16, 0.1, 0.012, [0, 0.19, 0.28], 'bodyAccent'),
+    box(1.16, 0.1, 0.012, [0, 0.19, -0.28], 'bodyAccent'),
+    box(0.012, 0.1, 0.56, [0.6, 0.19, 0], 'bodyAccent'),
+    box(0.012, 0.1, 0.56, [-0.6, 0.19, 0], 'bodyAccent'),
+    cyl(0.01, 0.01, 0.74, [0.47, 0.17, 0], 'steel', [H, 0, 0]),
+    cyl(0.01, 0.01, 0.74, [-0.47, 0.17, 0], 'steel', [H, 0, 0]),
+    // A-arms out to the front hubs, trailing arms at the rear
+    ...[-1, 1].flatMap((s) => [
+      box(0.03, 0.015, 0.2, [0.47, 0.15, 0.2 * s], 'cageBlack', [0, 0.25 * s, 0]),
+      box(0.03, 0.015, 0.2, [0.47, 0.2, 0.2 * s], 'cageBlack', [0, -0.25 * s, 0]),
+      box(0.05, 0.03, 0.18, [-0.47, 0.17, 0.2 * s], 'cageBlack'),
+    ]),
+    box(0.1, 0.012, 0.3, [0.6, 0.1, 0], 'brushed'), // skid plate
   ];
 }
 
+// Nose, rear deck, side panels and fender flares.
 function bodyShell() {
-  // side profile of the hood and rear deck, extruded across the car
-  const hood = [[0.25, 0.0], [0.74, 0.0], [0.74, 0.1], [0.62, 0.17], [0.3, 0.2], [0.25, 0.2]];
-  const rear = [[-0.74, 0.0], [-0.33, 0.0], [-0.33, 0.2], [-0.62, 0.18], [-0.74, 0.12]];
+  const nose = [[0.26, 0.0], [0.74, 0.0], [0.77, 0.06], [0.72, 0.13], [0.55, 0.19], [0.36, 0.22], [0.26, 0.23]];
+  const rear = [[-0.75, 0.02], [-0.32, 0.0], [-0.32, 0.2], [-0.45, 0.21], [-0.68, 0.17], [-0.75, 0.11]];
   const out = [
-    extrude(hood, 0.6, [0, 0.25, -0.3], 'bodyPlastic'),
-    extrude(rear, 0.6, [0, 0.25, -0.3], 'bodyPlastic'),
-    box(0.58, 0.16, 0.012, [-0.04, 0.33, 0.3], 'bodyPlastic'),
-    box(0.58, 0.16, 0.012, [-0.04, 0.33, -0.3], 'bodyPlastic'),
-    box(0.2, 0.012, 0.5, [0.64, 0.42, 0], 'bodyAccent'), // grille top
-    box(0.012, 0.09, 0.42, [0.745, 0.3, 0], 'bodyAccent'),
+    extrude(nose, 0.5, [0, 0.2, -0.25], 'bodyPlastic'),
+    extrude(rear, 0.5, [0, 0.2, -0.25], 'bodyPlastic'),
+    // hood scoop and bulges
+    box(0.18, 0.025, 0.14, [0.47, 0.4, 0], 'bodyAccent', [0, 0, -0.18]),
+    box(0.22, 0.02, 0.08, [0.5, 0.39, 0.17], 'bodyPlastic', [0, 0, -0.2]),
+    box(0.22, 0.02, 0.08, [0.5, 0.39, -0.17], 'bodyPlastic', [0, 0, -0.2]),
+    // red mesh grilles, front and rear
+    box(0.012, 0.11, 0.22, [0.765, 0.29, 0], 'grilleRed'),
+    box(0.03, 0.03, 0.26, [0.76, 0.355, 0], 'bodyPlastic'),
+    box(0.012, 0.09, 0.2, [-0.755, 0.28, 0], 'grilleRed'),
+    // front bumper, tow hook
+    box(0.05, 0.05, 0.46, [0.78, 0.2, 0], 'bodyAccent'),
+    tor(0.018, 0.005, [0.81, 0.17, 0], 'red', [0, H, 0]),
+    // side sills
+    box(0.62, 0.05, 0.03, [-0.03, 0.22, 0.3], 'bodyAccent'),
+    box(0.62, 0.05, 0.03, [-0.03, 0.22, -0.3], 'bodyAccent'),
   ];
+  // sand "RS" door panels and rear quarters
+  for (const s of [-1, 1]) {
+    out.push(box(0.5, 0.18, 0.02, [-0.02, 0.35, 0.305 * s], 'doorSand'));
+    out.push(box(0.2, 0.15, 0.02, [-0.44, 0.34, 0.3 * s], 'sand'));
+    out.push(box(0.5, 0.012, 0.024, [-0.02, 0.445, 0.305 * s], 'bodyAccent'));
+  }
+  // fender flares
   for (const [x, z] of [[0.47, 0.37], [0.47, -0.37], [-0.47, 0.37], [-0.47, -0.37]]) {
-    out.push(tor(0.2, 0.025, [x, 0.16, z], 'bodyPlastic', [0, 0, 0.15], PI * 0.85));
+    out.push(tor(0.205, 0.022, [x, 0.17, z], 'bodyAccent', [0, 0, 0.35], PI * 0.62));
+    out.push(box(0.1, 0.012, 0.12, [x, 0.395, z * 0.86], 'bodyAccent'));
+  }
+  return out;
+}
+
+// Red coil-over shocks, one per wheel: chrome body, red helical spring, top and bottom eyes.
+function coilover({ len = 0.2 }) {
+  const turns = 7;
+  const r = 0.016;
+  const pts = [];
+  for (let i = 0; i <= turns * 12; i++) {
+    const t = i / (turns * 12);
+    pts.push([Math.cos(t * turns * 2 * PI) * r, 0.03 + t * (len - 0.06), Math.sin(t * turns * 2 * PI) * r]);
+  }
+  return [
+    cyl(0.011, 0.011, len * 0.55, [0, len * 0.3, 0], 'chrome'),
+    cyl(0.006, 0.006, len * 0.5, [0, len * 0.72, 0], 'steel'),
+    tube(pts, 0.0035, 'shockRed'),
+    cyl(0.021, 0.021, 0.008, [0, 0.03, 0], 'shockRed'),
+    cyl(0.021, 0.021, 0.008, [0, len - 0.03, 0], 'shockRed'),
+    cyl(0.013, 0.013, 0.05, [0.0, len * 0.55, 0.03], 'shockRed', [H, 0, 0]), // remote reservoir
+    tor(0.01, 0.004, [0, 0, 0], 'steel', [0, H, 0]),
+    tor(0.01, 0.004, [0, len, 0], 'steel', [0, H, 0]),
+  ];
+}
+
+function shocks() {
+  const out = [];
+  for (const [x, z] of [[0.47, 0.25], [0.47, -0.25], [-0.47, 0.25], [-0.47, -0.25]]) {
+    for (const p of coilover({ len: 0.22 })) {
+      // tubes carry their own points and no position
+      if (p.pts) out.push({ ...p, pts: p.pts.map(([a, b, c]) => [a + x, b + 0.17, c + z]) });
+      else out.push({ ...p, p: [p.p[0] + x, p.p[1] + 0.17, p.p[2] + z] });
+    }
   }
   return out;
 }
 
 function rollCage() {
+  const m = 'cageBlack';
   const out = [];
-  for (const z of [-0.36, 0.36]) {
-    out.push(tube([[0.3, 0.45, z], [0.18, 0.7, z * 0.95], [0.02, 0.86, z * 0.9], [-0.3, 0.86, z * 0.9], [-0.42, 0.7, z * 0.95], [-0.5, 0.45, z]], 0.014, 'chrome'));
+  for (const z of [-0.3, 0.3]) {
+    // A-pillar, roof rail, rear pillar, all one bent tube
+    out.push(tube([[0.3, 0.42, z], [0.2, 0.62, z * 0.97], [0.06, 0.83, z * 0.93], [-0.14, 0.86, z * 0.92], [-0.32, 0.84, z * 0.93], [-0.4, 0.66, z * 0.97], [-0.43, 0.44, z]], 0.014, m));
+    // door bar
+    out.push(tube([[0.27, 0.47, z * 1.03], [-0.38, 0.47, z * 1.03]], 0.01, m));
   }
-  out.push(tube([[0.02, 0.86, -0.324], [0.02, 0.86, 0.324]], 0.012, 'chrome'));
-  out.push(tube([[-0.3, 0.86, -0.324], [-0.3, 0.86, 0.324]], 0.012, 'chrome'));
-  out.push(tube([[-0.42, 0.7, -0.342], [-0.42, 0.7, 0.342]], 0.012, 'chrome'));
-  out.push(box(0.36, 0.008, 0.66, [-0.14, 0.87, 0], 'bodyAccent'));
-  // brackets where the cage meets the tub
-  for (const [x, z] of [[0.3, 0.36], [0.3, -0.36], [-0.5, 0.36], [-0.5, -0.36]]) out.push(box(0.05, 0.02, 0.04, [x, 0.44, z], 'brushed'));
+  out.push(tube([[0.06, 0.83, -0.279], [0.06, 0.83, 0.279]], 0.012, m)); // front roof hoop
+  out.push(tube([[-0.32, 0.84, -0.279], [-0.32, 0.84, 0.279]], 0.012, m)); // rear roof hoop
+  out.push(tube([[-0.14, 0.86, -0.276], [-0.14, 0.86, 0.276]], 0.01, m));
+  out.push(tube([[0.2, 0.62, -0.291], [0.13, 0.6, 0], [0.2, 0.62, 0.291]], 0.011, m)); // dash bar
+  // rear X brace behind the seats, and the harness bar
+  out.push(tube([[-0.39, 0.8, -0.28], [-0.41, 0.5, 0.29]], 0.009, m));
+  out.push(tube([[-0.39, 0.8, 0.28], [-0.41, 0.5, -0.29]], 0.009, m));
+  out.push(tube([[-0.38, 0.68, -0.29], [-0.38, 0.68, 0.29]], 0.01, m));
+  // brackets where the cage meets the body
+  for (const [x, z] of [[0.3, 0.3], [0.3, -0.3], [-0.43, 0.3], [-0.43, -0.3]]) out.push(box(0.05, 0.02, 0.04, [x, 0.43, z], 'brushed'));
   return out;
 }
 
 function seat() {
   return [
-    box(0.24, 0.05, 0.24, [0, 0.025, 0], 'seatFabric'),
-    box(0.05, 0.3, 0.24, [-0.12, 0.17, 0], 'seatFabric', [0, 0, 0.18]),
-    box(0.03, 0.08, 0.24, [-0.135, 0.36, 0], 'seatFabric', [0, 0, 0.18]),
-    box(0.24, 0.02, 0.24, [0, -0.01, 0], 'blackPlastic'),
+    box(0.24, 0.05, 0.22, [0, 0.025, 0], 'seatFabric'),
+    box(0.05, 0.32, 0.22, [-0.12, 0.18, 0], 'seatFabric', [0, 0, 0.18]),
+    box(0.035, 0.09, 0.16, [-0.14, 0.38, 0], 'seatFabric', [0, 0, 0.18]),
+    // red side bolsters, as on the listing photos
+    box(0.24, 0.06, 0.03, [0, 0.05, 0.11], 'seatRed'),
+    box(0.24, 0.06, 0.03, [0, 0.05, -0.11], 'seatRed'),
+    box(0.06, 0.24, 0.03, [-0.115, 0.17, 0.11], 'seatRed', [0, 0, 0.18]),
+    box(0.06, 0.24, 0.03, [-0.115, 0.17, -0.11], 'seatRed', [0, 0, 0.18]),
+    box(0.24, 0.02, 0.22, [0, -0.01, 0], 'blackPlastic'),
   ];
 }
 
@@ -485,7 +563,7 @@ export const BUILDERS = {
   wheel, driveMotor, steeringMotor, battery, contactor, anlFuse, inlineFuse, fuseBlock, busbar, ibt2, mdd20a,
   esp32, receiver, buck, sealedBuck, fan, deutsch, estop, keySwitch, button, oled, speaker, hall, pedal, shifter,
   microSwitch, seatSwitch, probe, headlights, resistor, ceramicCap, electrolytic, diode, to220, tvs, protoBoard,
-  boxTray, boxLid, tub, bodyShell, rollCage, seat, dashPanel, steeringWheel, module,
+  boxTray, boxLid, tub, bodyShell, rollCage, shocks, seat, dashPanel, steeringWheel, module,
   bladeFuse: ({ m }) => bladeFuse(m),
 };
 

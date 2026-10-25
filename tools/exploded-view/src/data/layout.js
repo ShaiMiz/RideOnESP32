@@ -50,7 +50,7 @@ const put = (id, o) => { L[id] = o; };
 // ---- stock body (not in the BOM: no part to buy, drawn so the electronics have context) ----
 put('body.tub', { kind: 'tub', assembly: 'body', pos: [0, 0, 0], name: 'Chassis tub', type: 'Stock structure', usage: 'Holds everything; the electronics box sits on its floor under the seats.' });
 put('body.shell', { kind: 'bodyShell', assembly: 'body', pos: [0, 0, 0], explode: [0, 0.75, 0], name: 'Body shell: hood, fenders, side panels', type: 'Stock molded plastic', usage: 'Outer housing. Hide it to see the battery, the motors and the box.' });
-put('body.cage', { kind: 'rollCage', assembly: 'body', pos: [0, 0, 0], explode: [0, 1.05, 0], name: 'Roll cage and roof', type: 'Stock tube frame', usage: 'Cage with brackets to the tub.' });
+put('body.cage', { kind: 'rollCage', assembly: 'body', pos: [0, 0, 0], explode: [0, 1.05, 0], name: 'Roll cage (open, no roof)', type: 'Stock black tube frame', usage: 'Open tube cage with brackets to the tub; the stock car has no roof panel.' });
 put('body.seatL', { kind: 'seat', assembly: 'body', pos: [-0.12, 0.36, -0.15], explode: [0, 0.55, -0.12], name: 'Driver seat (left)', type: 'Stock seat', usage: 'Sits over the electronics box. The seat switch SW5 goes under its cushion.' });
 put('body.seatR', { kind: 'seat', assembly: 'body', pos: [-0.12, 0.36, 0.15], explode: [0, 0.55, 0.12], name: 'Passenger seat (right)', type: 'Stock seat', usage: 'Sits over the electronics box.' });
 put('body.dash', { kind: 'dashPanel', assembly: 'dash', pos: [0.24, 0.5, 0], name: 'Dash panel', type: 'Stock molded plastic', usage: 'Carries the key, the E-stop, the OLED and the alert speaker.' });
@@ -69,6 +69,7 @@ for (const [w, [x, s]] of Object.entries(WHEELS)) {
 put('M5', { kind: 'steeringMotor', assembly: 'steering', pos: [0.5, 0.22, 0.04] });
 put('C205', { kind: 'ceramicCap', assembly: 'steering', pos: [0.5, 0.25, -0.07], explode: [0, 0.04, -0.04] });
 put('U25', { kind: 'module', params: { w: 0.023, d: 0.023, pcb: 'pcbPurple', header: 7 }, assembly: 'steering', pos: [0.5, 0.29, 0.04], explode: [0, 0.12, 0] });
+put('body.shocks', { kind: 'shocks', assembly: 'wheels', pos: [0, 0, 0], explode: [0, 0.2, 0], name: 'Coil-over shocks (red)', type: 'Stock suspension', usage: 'Four red coil-overs between the A-arms and the body.' });
 put('body.steer', { kind: 'steeringWheel', assembly: 'steering', pos: [0.12, 0.62, -0.15], explode: [-0.1, 0.25, 0], name: 'Steering wheel and column', type: 'Stock', usage: 'The child steers by hand in Kid mode; the steering motor M5 turns it under radio control.' });
 
 // ---- battery and main fuse ----

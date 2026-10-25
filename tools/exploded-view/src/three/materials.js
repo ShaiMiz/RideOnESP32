@@ -59,6 +59,44 @@ function textures() {
       g.fillStyle = '#7a5a26';
       for (let x = 4; x < s; x += 8) for (let y = 4; y < s; y += 8) { g.beginPath(); g.arc(x, y, 1.6, 0, 7); g.fill(); }
     }, 3),
+    // red hex mesh for the front and rear grilles
+    grille: canvasTexture(128, (g, s) => {
+      g.fillStyle = '#2a0606';
+      g.fillRect(0, 0, s, s);
+      g.strokeStyle = '#d0201c';
+      g.lineWidth = 3;
+      const r = s / 8;
+      const h = r * Math.sqrt(3) / 2;
+      for (let row = -1; row < s / h + 1; row++) for (let col = -1; col < s / (r * 1.5) + 1; col++) {
+        const cx = col * r * 1.5;
+        const cy = row * h * 2 + (col % 2 ? h : 0);
+        g.beginPath();
+        for (let k = 0; k < 6; k++) g.lineTo(cx + r * 0.85 * Math.cos(k * Math.PI / 3), cy + r * 0.85 * Math.sin(k * Math.PI / 3));
+        g.closePath();
+        g.stroke();
+      }
+    }, 2),
+    // sand door panel with the black lower stripe and the "RS" decal
+    door: (() => {
+      const t = canvasTexture(256, (g, s) => {
+        g.fillStyle = '#cdb68c';
+        g.fillRect(0, 0, s, s);
+        g.fillStyle = '#16171a';
+        g.beginPath();
+        g.moveTo(0, s * 0.68); g.lineTo(s, s * 0.6); g.lineTo(s, s); g.lineTo(0, s);
+        g.fill();
+        g.fillStyle = '#b81c1c';
+        g.fillRect(0, s * 0.62, s, s * 0.03);
+        g.fillStyle = '#16171a';
+        g.font = 'italic bold 92px sans-serif';
+        g.fillText('RS', s * 0.3, s * 0.48);
+        g.font = 'bold 22px sans-serif';
+        g.fillText('MAVERICK X3', s * 0.26, s * 0.57);
+      }, 1);
+      t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
+      t.colorSpace = THREE.SRGBColorSpace;
+      return t;
+    })(),
     label: canvasTexture(128, (g, s) => {
       g.fillStyle = '#f2f2ee';
       g.fillRect(0, 0, s, s);
@@ -82,12 +120,21 @@ export function realisticMaterials() {
   const t = textures();
   realistic = {
     // molded matte plastics
-    bodyPlastic: phys({ color: '#d4471f', roughness: 0.55, metalness: 0, clearcoat: 0.25, clearcoatRoughness: 0.6, bumpMap: t.molded, bumpScale: 0.6 }),
-    bodyAccent: std({ color: '#26282b', roughness: 0.8, bumpMap: t.molded, bumpScale: 0.6 }),
+    // body colours from the stock car: gloss black shell, sand RS panels, red details
+    bodyPlastic: phys({ color: '#0e0f11', roughness: 0.22, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.08 }),
+    bodyAccent: std({ color: '#1a1b1e', roughness: 0.85, bumpMap: t.molded, bumpScale: 0.6 }),
+    sand: phys({ color: '#cdb68c', roughness: 0.4, clearcoat: 0.6, clearcoatRoughness: 0.2 }),
+    doorSand: phys({ map: t.door, roughness: 0.4, clearcoat: 0.6, clearcoatRoughness: 0.2 }),
+    grilleRed: std({ map: t.grille, roughness: 0.55 }),
+    cageBlack: std({ color: '#141518', roughness: 0.45, metalness: 0.3 }),
+    shockRed: std({ color: '#d11d1d', roughness: 0.3, metalness: 0.4 }),
+    seatRed: std({ color: '#b01818', roughness: 0.75, bumpMap: t.molded, bumpScale: 0.8 }),
+    rimRed: std({ color: '#cc1f1f', roughness: 0.35, metalness: 0.3 }),
+    rimBlack: std({ color: '#1b1c1f', roughness: 0.4, metalness: 0.5 }),
     blackPlastic: std({ color: '#1d1e20', roughness: 0.65 }),
     greyPlastic: std({ color: '#8b8f94', roughness: 0.6 }),
     boxAbs: std({ color: '#3c4148', roughness: 0.7, bumpMap: t.molded, bumpScale: 0.4 }),
-    seatFabric: std({ color: '#2f3237', roughness: 0.95, bumpMap: t.molded, bumpScale: 1.2 }),
+    seatFabric: std({ color: '#151619', roughness: 0.95, bumpMap: t.molded, bumpScale: 1.2 }),
     rubber: std({ color: '#141414', roughness: 0.92 }),
     whiteNylon: std({ color: '#e8e6df', roughness: 0.6 }),
     white: std({ color: '#f1f1ee', roughness: 0.5 }),

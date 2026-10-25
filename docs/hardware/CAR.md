@@ -2,7 +2,7 @@
 
 | Fact | Value | Source |
 | --- | --- | --- |
-| Model | Can-Am Maverick X3 24 V, 4WD | kolbosima.co.il item 8419715; confirmed by Shai |
+| Model | Can-Am Maverick X3 24V Ride-On Buggy | kolbosima.co.il item 8419715; confirmed by Shai |
 | Drive motors | 4, one per wheel | Confirmed by Shai |
 | Steering | Electric steering motor; the child steers by hand in Kid mode | |
 | Weight / size | 42 kg, 147 × 86 × 88 cm, two seats | Listing |

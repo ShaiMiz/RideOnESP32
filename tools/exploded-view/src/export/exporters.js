@@ -108,7 +108,7 @@ export async function exportPDF({ three, model, data, state, revision, filename 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9);
   const meta = [
-    `Car: ${pdfText(data.car.Model || 'Can-Am Maverick X3 24 V, 4WD')}  |  ${pdfText(data.car['Weight / size'] || '')}`,
+    `Car: ${pdfText(data.car.Model || 'Can-Am Maverick X3 24V Ride-On Buggy')}  |  ${pdfText(data.car['Weight / size'] || '')}`,
     `Drive: ${pdfText(model.variant.name)}  |  Style: ${state.visualStyle}  |  Explode factor: ${state.explode.toFixed(2)}`,
     `Revision: ${pdfText(revision ? `${revision.n}. ${revision.label} (${new Date(revision.time).toLocaleString()})` : '-')}`,
     `Visible: ${visible.length} of ${model.parts.length} parts, ${wires.length} of ${model.connections.length} connections  |  Data: ${pdfText(data.meta.sources.bom)}, ${pdfText(data.meta.sources.wires)} (${pdfText(data.meta.gitRef)})`,

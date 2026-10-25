@@ -162,7 +162,7 @@ export default function App() {
       <header className="topbar">
         <button className="icon-btn" onClick={() => setSidebarOpen((v) => !v)} aria-label="Parts list">☰</button>
         <div className="title">
-          <b>RideOnESP32</b> <span className="muted">Can-Am Maverick X3 24 V · exploded view</span>
+          <b>RideOnESP32</b> <span className="muted">{data.car.Model || 'Can-Am Maverick X3 24V Ride-On Buggy'} · exploded view</span>
         </div>
         <div className="seg" role="group" aria-label="Visual style">
           <button className={visualStyle === 'realistic' ? 'on' : ''} onClick={() => setStyle('realistic')}>Realistic</button>

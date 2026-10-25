@@ -38,6 +38,8 @@ export const ASSEMBLIES = [
   { id: 'sensors', name: 'Wheel and steering sensors', explode: [0, 0.1, 0] },
   { id: 'audio', name: 'Music speakers', explode: [-0.25, 0.35, 0] },
   { id: 'lights', name: 'Lights (stock)', explode: [0.35, 0.1, 0] },
+  { id: 'power.pack', parent: 'power', name: 'Contactor pack at the battery', explode: [0, 0.05, -0.2] },
+  { id: 'acc', name: 'Accessory box (behind the seats)', explode: [-0.4, 0.4, 0] },
   { id: 'unplaced', name: 'Not placed yet', explode: [0, 0, 0] },
 ];
 
@@ -176,6 +178,85 @@ put('LS3', { kind: 'speaker', assembly: 'audio', pos: [-0.45, 0.45, 0.25], explo
 put('LP1', { kind: 'headlights', assembly: 'lights', pos: [0.72, 0.31, 0], name: 'Stock lights (headlights)', type: 'Stock lamp', usage: 'Switched low-side by U29 OUT1 through J8.', tbd: ['Lamp type and pin use wait on the stock plug photos (#17)'] });
 
 export const LAYOUT = L;
+
+// ---- compact packaging (variant C) ----
+// Variant B's drive (2 x MDD20A) in a smaller main box, about 18 x 12 x 6 cm. The contactor and
+// its parts move next to the battery, and the comfort extras (12 V buck, music amp, lights and fan
+// outputs) go to a small accessory box behind the seats. Driving needs only the main box. Sizes
+// are estimates from the module sizes, not a fit check: that waits on #18.
+export const BOX_C = { center: [-0.08, 0.185, 0], size: [0.18, 0.06, 0.12], wall: 0.003 };
+const FLOOR_C = BOX_C.center[1] - BOX_C.size[1] / 2 + BOX_C.wall;
+const inC = (x, y, z) => [BOX_C.center[0] + x, FLOOR_C + y, BOX_C.center[2] + z];
+const ACC = { center: [-0.36, 0.18, 0], size: [0.16, 0.05, 0.1] };
+const ACC_FLOOR = ACC.center[1] - ACC.size[1] / 2 + 0.003;
+const inAcc = (x, y, z) => [ACC.center[0] + x, ACC_FLOOR + y, ACC.center[2] + z];
+
+const C = {};
+const move = (id, pos, o = {}) => { C[id] = { ...L[id], pos, ...o }; };
+
+move('BOX', BOX_C.center, { params: { w: BOX_C.size[0], h: BOX_C.size[1], d: BOX_C.size[2] }, name: 'Main box (compact, ~18 x 12 x 6 cm): flame-retardant (UL94 V-0) ABS or metal, IP54' });
+move('BOX.lid', [BOX_C.center[0], BOX_C.center[1] + BOX_C.size[1] / 2 + 0.002, BOX_C.center[2]], { params: { w: BOX_C.size[0], d: BOX_C.size[2] }, badge: 'Compact box · #18' });
+C['BOX2'] = { kind: 'boxTray', params: { w: ACC.size[0], h: ACC.size[1], d: ACC.size[2] }, assembly: 'acc', pos: ACC.center, name: 'Accessory box (~16 x 10 x 5 cm)', type: 'Enclosure', usage: 'Holds the parts driving does not need: the 12 V buck, the music amp and the lights and fan outputs. Fed from F6 in the main box.', tbd: ['Spot behind the seats is a guess; waits on #18'], badge: false };
+C['BOX2.lid'] = { kind: 'boxLid', params: { w: ACC.size[0], d: ACC.size[2] }, assembly: 'acc', pos: [ACC.center[0], ACC.center[1] + ACC.size[1] / 2 + 0.002, ACC.center[2]], explode: [0, 0.25, 0], name: 'Accessory box lid', type: 'Enclosure', badge: false };
+
+// plugs: the car-facing J1-J8 in two rows on the front wall, J9-J11 on the back, J12 (music) on the accessory box
+['J1', 'J2', 'J3', 'J4', 'J5', 'J6', 'J7', 'J8'].forEach((j, i) => move(j, inC(BOX_C.size[0] / 2, 0.015 + (i % 2) * 0.027, -0.045 + Math.floor(i / 2) * 0.03)));
+['J9', 'J10', 'J11'].forEach((j, i) => move(j, inC(-BOX_C.size[0] / 2, 0.028, -0.04 + i * 0.04)));
+move('J12', inAcc(-ACC.size[0] / 2, 0.022, 0), { assembly: 'acc', tier: null, explode: [-0.12, 0, 0] });
+// both fans lie on the lid, blowing down into the box
+move('FAN1', [BOX_C.center[0] - 0.045, BOX_C.center[1] + BOX_C.size[1] / 2 + 0.017, 0], { rot: [Math.PI / 2, 0, 0], tier: 'top', explode: [0, 0.12, 0] });
+move('FAN2', [BOX_C.center[0] + 0.045, BOX_C.center[1] + BOX_C.size[1] / 2 + 0.017, 0], { rot: [Math.PI / 2, 0, 0], tier: 'top', explode: [0, 0.12, 0] });
+
+// contactor pack at the battery: K1 with its flyback diode, the switched stud, the bleed resistor and the TVS
+const pack = (id, pos) => move(id, pos, { assembly: 'power.pack', tier: null });
+pack('K1', [0.15, 0.08, -0.1]);
+pack('D1', [0.15, 0.17, -0.075]);
+pack('TB2', [0.15, 0.08, 0.06]);
+pack('R7', [0.15, 0.08, 0.1]);
+pack('D2', [0.19, 0.08, 0.1]);
+
+// tier 0: ground star and the contactor feedback divider
+move('TB1', inC(0.03, 0, -0.045));
+move('R5', inC(0.03, 0, -0.025));
+
+// tier 1: the two MDD20As, the steering IBT-2 and the current sensors
+move('U41', inC(-0.042, 0.004, -0.028));
+move('U42', inC(0.045, 0.004, -0.028));
+move('U14', inC(-0.06, 0.004, 0.032));
+move('C115', inC(-0.025, 0.004, 0.025));
+move('R115', inC(-0.025, 0.004, 0.045));
+move('C41', inC(-0.005, 0.004, 0.025));
+move('C42', inC(-0.005, 0.004, 0.045));
+['U43', 'U44', 'U45', 'U46'].forEach((u, i) => move(u, inC(0.035 + (i % 2) * 0.03, 0.004, 0.022 + Math.floor(i / 2) * 0.024)));
+
+// tier 2: bucks and fuses
+move('FB1', inC(-0.04, 0.004, -0.03));
+Object.keys(FB_SLOTS).forEach((f, i) => move(f, inC(-0.073 + i * 0.0132, 0.012, -0.034)));
+move('U1', inC(0.05, 0.004, -0.045));
+move('U3', inC(0.05, 0.004, -0.015));
+move('F2', inC(-0.06, 0.004, 0.035));
+
+// tiers 3 and 4: interface board, ESP32 and receiver side by side
+export const A1_C = { pos: inC(-0.04, 0.012, 0), size: A1.size };
+move('A1', A1_C.pos);
+move('Q1', [A1_C.pos[0] + 0.035, A1_C.pos[1] + 0.0016, A1_C.pos[2] + 0.02]);
+move('U40', [A1_C.pos[0] + 0.035, A1_C.pos[1] + 0.0016, A1_C.pos[2] - 0.005]);
+move('U2', inC(0.0, 0.012, 0.045));
+move('U20', inC(0.055, 0.024, 0));
+move('U21', inC(0.065, 0.024, 0.048));
+
+// tier 5: I2C modules, sound player and temperature probe
+['U22', 'U23', 'U24', 'U26', 'U28', 'U30', 'U31'].forEach((u, i) => move(u, inC(-0.055 + (i % 3) * 0.055, 0.04, -0.04 + Math.floor(i / 3) * 0.04)));
+
+// accessory box: 12 V buck, its two fuses, the music amp and the MOSFET board
+const acc = (id, pos, explode) => move(id, pos, { assembly: 'acc', tier: null, explode });
+acc('U4', inAcc(-0.036, 0.0, -0.016), [0, 0.06, -0.04]);
+acc('F9', inAcc(-0.05, 0.004, 0.035), [0, 0.1, 0.04]);
+acc('F10', inAcc(-0.02, 0.004, 0.035), [0, 0.1, 0.04]);
+acc('U32', inAcc(0.045, 0.004, -0.02), [0.03, 0.1, -0.03]);
+acc('U29', inAcc(0.045, 0.004, 0.028), [0.03, 0.1, 0.03]);
+
+export const COMPACT = C;
 
 // Variant B (2 x MDD20A, #32) replaces the four drive IBT-2s and their current-sense networks.
 // Steering keeps U14 and its parts. Source: docs/hardware/kicad/variant_b and gen/design.py.

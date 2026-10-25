@@ -2,7 +2,7 @@
 // lists the viewer draws. Pure data in, pure data out, so the JSON export and the tests use the
 // same thing the canvas does.
 import { buildPrimitives } from '../geometry/builders.js';
-import { ASSEMBLIES, LAYOUT, A1, ON_A1, VARIANT_A_ONLY, RAIL_ANCHOR, TYPE_BY_KIND, KIND_BY_PREFIX } from './layout.js';
+import { ASSEMBLIES, LAYOUT, COMPACT, A1, A1_C, ON_A1, VARIANT_A_ONLY, RAIL_ANCHOR, TYPE_BY_KIND, KIND_BY_PREFIX } from './layout.js';
 
 const ISSUE_RE = /#(\d+)/g;
 const issuesIn = (...t) => [...new Set(t.join(' ').match(ISSUE_RE) || [])].map((s) => s.slice(1));
@@ -10,6 +10,7 @@ const issuesIn = (...t) => [...new Set(t.join(' ').match(ISSUE_RE) || [])].map((
 export const VARIANTS = {
   A: { id: 'A', name: 'Variant A: 4 + 1 IBT-2', blurb: 'One IBT-2 per wheel plus the steering IBT-2 (main design).' },
   B: { id: 'B', name: 'Variant B: 2 x MDD20A', blurb: '2 x Cytron MDD20A with a 74LVC08 PWM gate and external current sensors. Undecided (#32).' },
+  C: { id: 'C', name: 'Compact: 2 x MDD20A, split boxes', blurb: 'Variant B drive in a ~18 x 12 x 6 cm main box; the contactor sits at the battery and the extras go to a small accessory box. Sizes are estimates until #18.' },
 };
 
 function bomFor(data, ref) {
@@ -24,42 +25,45 @@ function tbdReasons(...texts) {
 }
 
 // Place parts that live on the A1 board on a grid over it.
-function boardSlots(refs) {
+function boardSlots(refs, board) {
   const cols = 8;
-  const [w, d] = A1.size;
+  const [w, d] = board.size;
   return Object.fromEntries(refs.map((r, i) => {
     const c = i % cols;
     const row = Math.floor(i / cols);
-    return [r, [A1.pos[0] - w / 2 + 0.008 + c * ((w - 0.03) / (cols - 1)), A1.pos[1] + 0.0016, A1.pos[2] - d / 2 + 0.014 + row * 0.011]];
+    return [r, [board.pos[0] - w / 2 + 0.008 + c * ((w - 0.03) / (cols - 1)), board.pos[1] + 0.0016, board.pos[2] - d / 2 + 0.014 + row * 0.011]];
   }));
 }
 
 export function buildModel(data, variant = 'A') {
+  // variant C (compact) uses variant B's drive parts and wiring, packed differently
+  const drive = variant === 'A' ? 'A' : 'B';
+  const layout = variant === 'C' ? { ...LAYOUT, ...COMPACT } : LAYOUT;
   const designB = Object.fromEntries((data.variantB || []).map((p) => [p.ref, p]));
-  const removed = new Set(variant === 'B' ? VARIANT_A_ONLY : []);
+  const removed = new Set(drive === 'B' ? VARIANT_A_ONLY : []);
   const refs = new Set(Object.keys(data.partIndex));
   for (const w of data.wires) for (const e of [w.from, w.to]) if (/^[A-Z]+\d+$/.test(e.ref)) refs.add(e.ref);
-  if (variant === 'B') Object.keys(designB).forEach((r) => refs.add(r));
+  if (drive === 'B') Object.keys(designB).forEach((r) => refs.add(r));
   else Object.keys(designB).forEach((r) => refs.delete(r));
   removed.forEach((r) => refs.delete(r));
 
   const parts = [];
 
   // procedural stock body parts and the box shell
-  for (const [id, lay] of Object.entries(LAYOUT)) {
-    if (!id.includes('.') && id !== 'BOX') continue;
+  for (const [id, lay] of Object.entries(layout)) {
+    if (!id.includes('.') && !/^BOX\d?$/.test(id)) continue;
     let bom = null;
     if (lay.match) bom = data.bom.find((b) => lay.match.test(b.part)) || null;
     parts.push(makePart(data, id, lay, bom, null, bom ? 'bom' : 'procedural'));
   }
 
   // board parts without a hand-placed spot
-  const boardRefs = [...refs].filter((r) => !LAYOUT[r] && ((designB[r]?.where || data.design[r]?.where || bomFor(data, r)?.where) === 'A1')).sort(naturalRef);
-  const slots = boardSlots(boardRefs);
+  const boardRefs = [...refs].filter((r) => !layout[r] && ((designB[r]?.where || data.design[r]?.where || bomFor(data, r)?.where) === 'A1')).sort(naturalRef);
+  const slots = boardSlots(boardRefs, variant === 'C' ? A1_C : A1);
 
   let unplaced = 0;
   for (const ref of [...refs].sort(naturalRef)) {
-    let lay = LAYOUT[ref];
+    let lay = layout[ref];
     if (!lay && slots[ref]) lay = { kind: KIND_BY_PREFIX[ref[0]] || 'module', assembly: 'box.logic', pos: slots[ref], tier: 3, onBoard: ON_A1 };
     if (!lay) {
       lay = { kind: KIND_BY_PREFIX[ref[0]] || 'module', assembly: 'unplaced', pos: [-1.05 - 0.08 * (unplaced % 4), 0.02, -0.4 + 0.12 * Math.floor(unplaced / 4)], unplaced: true };
@@ -69,7 +73,7 @@ export function buildModel(data, variant = 'A') {
     parts.push(makePart(data, ref, lay, bom, designB[ref] || data.design[ref] || null, designB[ref] ? 'variantB' : bom ? 'bom' : 'wireList'));
   }
 
-  const connections = buildConnections(data, variant, removed, designB, new Set(parts.map((p) => p.id)));
+  const connections = buildConnections(data, drive, removed, designB, new Set(parts.map((p) => p.id)));
   return { parts, connections, assemblies: ASSEMBLIES, variant: VARIANTS[variant] };
 }
 

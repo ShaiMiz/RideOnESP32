@@ -45,3 +45,16 @@ test('car-facing plugs are flagged TBD', () => {
   const m = buildModel(data, 'A');
   for (const j of ['J1', 'J5', 'J8']) assert.ok(m.parts.find((p) => p.id === j).tbd.length > 0, j);
 });
+
+test('compact variant packs every box part inside the smaller box', async () => {
+  const { BOX_C } = await import('../src/data/layout.js');
+  const m = buildModel(data, 'C');
+  const b = buildModel(data, 'B');
+  assert.equal(m.connections.length, b.connections.length, 'same wiring as variant B');
+  const out = m.parts.filter((p) => p.assembly.startsWith('box') && p.tier !== 'top').filter((p) =>
+    [0, 2].some((k) => Math.abs(p.position[k] - BOX_C.center[k]) > BOX_C.size[k] / 2 + 0.002));
+  assert.deepEqual(out.map((p) => p.id), [], 'parts outside the compact box');
+  for (const r of ['K1', 'D1', 'TB2']) assert.equal(m.parts.find((p) => p.id === r).assembly, 'power.pack', r);
+  for (const r of ['U4', 'U32', 'U29', 'BOX2']) assert.equal(m.parts.find((p) => p.id === r).assembly, 'acc', r);
+  assert.ok(!buildModel(data, 'A').parts.some((p) => p.id === 'BOX2'), 'accessory box only in compact');
+});

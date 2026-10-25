@@ -33,6 +33,7 @@ FaultMask SafetyManager::evaluate(const SafetySignals& s) {
     for (int i = 0; i < s.wheelsSensed; i++)
       if (!s.power->currentFresh(i, s.nowMs)) f |= FAULT_CURRENT_SENSE;
     if (s.steerSensed && !s.power->currentFresh(PowerMonitor::STEER, s.nowMs)) f |= FAULT_CURRENT_SENSE;
+    if (s.busSensed && !s.power->currentFresh(PowerMonitor::BUS, s.nowMs)) f |= FAULT_CURRENT_SENSE;
 
     for (int i = 0; i < s.wheelsSensed; i++) {
       if (overcurrent_[i].update(s.power->amps(i) > cfg::MOTOR_CURRENT_LIMIT_A, s.nowMs, cfg::OVERCURRENT_HOLD_MS))
@@ -47,18 +48,22 @@ FaultMask SafetyManager::evaluate(const SafetySignals& s) {
       f |= FAULT_OVERCURRENT;
   }
 
+  if (s.contactor) {
+    if (s.contactor->busMissing()) f |= FAULT_NO_BUS;
+    if (s.contactor->welded()) f |= FAULT_K1_WELDED;
+  }
+  if (s.boxHot) f |= FAULT_OVERTEMP;
   if (s.tilted) f |= FAULT_TILT;
   return f;
 }
 
-bool SafetyManager::apply(Mode mode, const FaultLatch& faults, bool driveStopped, KillLines& lines) {
-  lines.setContactor(!faults.has(CONTACTOR_FAULTS));
-
-  if (mode == Mode::Killed || faults.has(HARD_FAULTS)) {
-    lines.setDrive(false);
-    return true;
-  }
+bool SafetyManager::apply(Mode mode, const FaultLatch& faults, bool driveStopped, bool contactorAllowed,
+                          KillLines& lines) {
+  bool cut = mode == Mode::Killed || faults.has(HARD_FAULTS);
   bool driving = mode == Mode::Kid || mode == Mode::Parent;
-  lines.setDrive(driving || !driveStopped);
-  return false;
+  lines.setDrive(!cut && (driving || !driveStopped));
+  // After the enable, so on a driver or over-current fault the drivers are
+  // already off when K1 opens.
+  lines.setContactor(contactorAllowed && !faults.has(CONTACTOR_FAULTS));
+  return cut;
 }

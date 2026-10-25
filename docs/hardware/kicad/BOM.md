@@ -19,7 +19,7 @@ Generated from the schematic fields (Part, Source, Location) and matched line by
 |  | 1 | 12 AWG wire, red + black | box | 10 m/lot wire (lot 2) | Driver to motor plugs |
 |  | 1 | Ring lugs (M6/M8 for 10 AWG), pre-insulated terminals, ferrules | box | Ring terminals 220/110 pcs; Pre-insulated terminal kit |  |
 |  | 1 | Heat shrink assortment (also the colour bands) | box | Heat shrink 300-2000 pcs |  |
-| C1 C20 C21 C22 | 4 | Ceramic capacitor 100n, 50 V | A1 | 50 V monolithic caps x100 (2 lines) |  |
+| C1 C2 C20 C21 C22 | 5 | Ceramic capacitor 100n, 50 V | A1 | 50 V monolithic caps x100 (2 lines) |  |
 | C101 C102 C103 C104 C105 | 5 | Ceramic capacitor 10n, 50 V | A1 | 50 V monolithic caps x100 (2 lines) |  |
 | C111 C112 C113 C114 C115 | 5 | Electrolytic 470 µF ≥35 V low-ESR (50 V preferred) | box | Electrolytic caps 10-25 V... (check the voltage) |  |
 | C201 C202 C203 C204 C205 | 5 | Ceramic capacitor 100 nF 50 V, across the motor terminals | car | 50 V monolithic caps x100 (2 lines) |  |
@@ -45,7 +45,8 @@ Generated from the schematic fields (Part, Source, Location) and matched line by
 | R27 R101 R102 R103 R104 R105 | 6 | Resistor 4.7k, metal film 1 %, 0.25 W | A1 | Resistor kit, 60 values; metal film x100 (2 lines) |  |
 | R28 | 1 | Resistor 1k, metal film 1 %, 0.25 W | A1 | Resistor kit, 60 values; metal film x100 (2 lines) | DFPlayer RX series resistor |
 | R3 | 1 | Resistor 150k, metal film 1 %, 0.25 W | A1 | Resistor kit, 60 values; metal film x100 (2 lines) | 2.2 V at 29.4 V |
-| R4 | 1 | Resistor 12k, metal film 1 %, 0.25 W | A1 | Resistor kit, 60 values; metal film x100 (2 lines) |  |
+| R4 R6 | 2 | Resistor 12k, metal film 1 %, 0.25 W | A1 | Resistor kit, 60 values; metal film x100 (2 lines) |  |
+| R5 | 1 | Resistor 150k, metal film 1 %, 0.25 W | box | Resistor kit, 60 values; metal film x100 (2 lines) | Motor-bus sense for the K1 checks; at the stud, so only the divided signal runs to A1 |
 | S2 | 1 | 22 mm latching E-stop 2NO + 2NC | dash | 22 mm E-stop 2NO+2NC | Both NC blocks in series with the K1 coil (a welded NC block still leaves one that opens). NO3 reads the state |
 | U2 | 1 | AMS1117-3.3 module | box | AMS1117 3.3 V | 3V3_SENSE: IBT-2 logic, I2C devices, clamps, pedal. About 0.1 A |
 | U22 U23 | 2 | ADS1115 module | box | ADS1115 |  |
@@ -90,6 +91,7 @@ Generated from the schematic fields (Part, Source, Location) and matched line by
 | LS1 | 1 | 3 in 4 Ω full-range speaker, car sounds | dash |  |
 | LS2 | 1 | 3 in full-range speaker (+ DDT-S30 tweeter via 10 µF film cap, AUDIO.md) | car |  |
 | LS3 | 1 | 3 in full-range speaker (+ DDT-S30 tweeter via 10 µF film cap, AUDIO.md) | car |  |
+| R7 | 1 | Resistor 2.2k, 3 W wirewound or metal oxide | box | Bleed: drains the driver caps with K1 open (5 s time constant), so the boot weld check can see a welded K1. 0.4 W with K1 closed |
 | SW5 | 1 | Seat switch, closes with a child seated (optional) | car |  |
 | TB1 | 1 | M6 brass stud or bus bar: the one ground star point | box | Battery −, every driver B−, rails and logic ground meet here and nowhere else |
 | TB2 | 1 | M6 stud or bus bar after K1 stud B | box |  |

@@ -26,6 +26,13 @@ A fresh start as a PlatformIO project, built on the v2.2 motor class and the [co
 - `DRIVER` waits 300 ms like `OVERCUR`, so start-up inrush no longer trips it, and the steering board's IS line is checked too.
 - The `one_motor` bench firmware has the task watchdog.
 - RC frames are found with the same resync as AlfredoCRSF, so a stray byte no longer hides a real frame and trips `LINK`.
+- Firmware matched to schematic v0.3:
+  - Current sense now uses half the per-pin IS resistor (`IS_PIN_RESISTOR_OHMS`), since R_IS and L_IS are joined. Before this, current read about half the real value, so the 20 A limit really sat near 40 A. The `DRIVER` level comes from the resistor (1.8 V with 1k boards) instead of a fixed 3.2 V.
+  - `DRIVER` and `OVERCUR` open the contactor, because a shorted driver MOSFET ignores its enable. The drive enable now drops before the contactor opens.
+  - The motor bus is read on ADS1115 #2 A2 (new R5-R7 in the schematic, with a bleed resistor). At boot the contactor stays open until the bus has drained; a bus still live after 10 s is the new permanent `K1_WELD` fault. A contactor held closed with no bus is the new `NO_BUS` fault.
+  - I2C runs at 100 kHz, the PCF8574's rating, instead of 400 kHz.
+  - The box fans run whenever the ESP32 runs (PCA9685 channel 1). The DS18B20 is read, and a box above 65 °C is the new `HOT` fault.
+  - `WHEEL_REVERSED` in `config.h` flips any wheel whose motor turns backwards.
 
 ## 2.2 (2026)
 

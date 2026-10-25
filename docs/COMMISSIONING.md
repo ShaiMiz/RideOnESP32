@@ -34,12 +34,15 @@ Passed: ____
 **Gate:**
 - [ ] With the ESP32 unplugged, the key and the E-stop each cut the load.
 - [ ] With the ESP32 running and the contactor held, pressing the ESP32's reset button opens the contactor.
+- [ ] With R5-R7 fitted (motor-bus sense and bleed), the log shows `bus=` near the battery voltage with the contactor closed and under 30 % within 10 s of it opening.
+- [ ] A 100 Ω 5 W resistor across the contactor studs (standing in for a weld) before key-on gives `K1_WELD`, and the contactor never closes.
+- [ ] Pulling the F3 coil fuse with the car armed gives `NO_BUS`.
 
 Passed: ____
 
 ## Phase 4: one motor, one driver
 
-- [ ] One IBT-2 on the front-left pins, one motor, one ADS1115 at 0x48. Fill in `IS_RESISTOR_OHMS` and the battery thresholds in `config.h`.
+- [ ] One IBT-2 on the front-left pins, one motor, one ADS1115 at 0x48. Fill in `IS_PIN_RESISTOR_OHMS` (the resistor on one IS pin; the firmware halves it) and the battery thresholds in `config.h`.
 - [ ] Flash `pio run -e one_motor -t upload`.
 
 **Gate:**
@@ -47,20 +50,24 @@ Passed: ____
 - [ ] Turning the radio off while the motor runs stops it within 0.5 s.
 - [ ] After any fault, holding the throttle never restarts the motor. It restarts only after the mode switch goes through Locked with the stick centred.
 - [ ] The kill switch stops the motor and opens the contactor.
-- [ ] The logged current agrees with a clamp meter at three loads (free spin, light brake, heavy brake).
+- [ ] The logged current agrees with a clamp meter at three loads (free spin, light brake, heavy brake). If it reads about half or double, `IS_PIN_RESISTOR_OHMS` is wrong (the firmware halves it for the joined IS pins).
+- [ ] A driver or over-current fault opens the contactor as well as cutting the drive enable.
 - [ ] Driver temperature after 10 minutes at 16 kHz PWM is acceptable to the touch.
 
 Passed: ____
 
 ## Phase 5: whole car, wheels off the ground
 
-- [ ] Car on blocks. All five drivers, both ADS1115s, the PCF8574 and the pedal connected. Steering calibrated (once `SteeringController` is written).
+- [ ] Car on blocks. All five drivers, both ADS1115s, the PCF8574, the PCA9685, the DS18B20 and the pedal connected. Steering calibrated (once `SteeringController` is written).
+- [ ] Wheel direction: give a small forward command and check each wheel on its own. Set `WHEEL_REVERSED` in `config.h` for any wheel that turns backwards, reflash, and check again.
+- [ ] Both box fans run from key-on (log `fan=1`), and the log shows a sensible `box=` temperature. Then set `BOX_TEMP_REQUIRED = true`.
 - [ ] Flash `pio run -e car -t upload`.
 
 **Gate:** every fault you can cause stops all wheels:
 - [ ] Link loss (radio off, receiver unplugged)
 - [ ] Low voltage (bench supply turned down), and the battery sense wire unplugged
 - [ ] Kill switch, E-stop, key
+- [ ] Box temperature: warming the DS18B20 past 65 °C (hair dryer) gives `HOT`, and unplugging it gives `HOT` once required
 - [ ] Pedal held while re-arming does not start the wheels
 - [ ] Steering never fights a hand in Kid mode
 - [ ] The parent stick-back brake overrides the pedal in Kid mode

@@ -44,7 +44,7 @@ const BatteryParams BATTERY = {cfg::BATTERY_SENSOR_MIN_V, cfg::BATTERY_SENSOR_MA
 KillLines lines;
 RadioInput radio;
 PowerMonitor power;
-BTS7960Motor motor("FL", pins::FL_RPWM, pins::FL_LPWM);
+BTS7960Motor motor("FL", pins::FL_RPWM, pins::FL_LPWM, cfg::WHEEL_REVERSED[0]);
 FaultLatch faults;
 ModeMachine modes;
 Ramp ramp;
@@ -58,7 +58,7 @@ uint32_t lastLogMs = 0;
 void setup() {
   lines.begin();
   logx::begin(115200);
-  Wire.begin(pins::I2C_SDA, pins::I2C_SCL, 400000);
+  Wire.begin(pins::I2C_SDA, pins::I2C_SCL, cfg::I2C_HZ);
   Wire.setTimeOut(cfg::I2C_TIMEOUT_MS);
   bool ok = motor.begin(cfg::PWM_FREQ_HZ, cfg::PWM_BITS);
   ok &= radio.begin();
@@ -100,7 +100,6 @@ void loop() {
   bool arming = armingOk({thrUs, cfg::CH_CENTER, 0.0f}, ARMING);
   Mode mode = modes.update({kill, req, arming}, faults);
 
-  lines.setContactor(!faults.has(CONTACTOR_FAULTS));
   if (mode == Mode::Killed || faults.has(HARD_FAULTS)) {
     lines.setDrive(false);
     ramp.reset();
@@ -110,6 +109,9 @@ void loop() {
     motor.write(ramp.step(cmd, dtS, RAMP));
     lines.setDrive(mode == Mode::Parent || !ramp.stopped(RAMP));
   }
+  // After the enable: on a driver or over-current fault the drivers are off
+  // before K1 opens. No bus sense on the bench, so no weld check here.
+  lines.setContactor(!faults.has(CONTACTOR_FAULTS));
 
   if (logx::every(lastLogMs, 200)) {
     logx::line("%s link=%s out=%+.2f I=%.2fA bat=%.1fV en=%d fault=%s", modeName(mode), linkName(link),

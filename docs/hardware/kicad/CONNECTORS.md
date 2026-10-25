@@ -45,9 +45,9 @@ Mate of the stock pedal plug. Status: TBD (#17).
 
 | Pin | Net | AWG | Colour | Protected by | Box side | Car side |
 |---|---|---|---|---|---|---|
-| 1 | `PEDAL_VCC` | 22 | BN | - | R22.2 (W139) | PED1.V+ (W142) |
-| 2 | `PEDAL_IN` | 22 | BN | - | R20.1 (W140) | PED1.SIG (W143) |
-| 3 | `GND` | 22 | BK | - | A1:GND (W141) | PED1.GND (W144) |
+| 1 | `PEDAL_VCC` | 22 | BN | - | R22.2 (W142) | PED1.V+ (W145) |
+| 2 | `PEDAL_IN` | 22 | BN | - | R20.1 (W143) | PED1.SIG (W146) |
+| 3 | `GND` | 22 | BK | - | A1:GND (W144) | PED1.GND (W147) |
 
 ## J4 SHIFTER
 
@@ -55,9 +55,9 @@ Mate of the stock shifter plug. Status: TBD (#17).
 
 | Pin | Net | AWG | Colour | Protected by | Box side | Car side |
 |---|---|---|---|---|---|---|
-| 1 | `SHIFT_FORWARD` | 22 | WH | - | U24.P0 (W183) | SW2.1 (W186) |
-| 2 | `SHIFT_REVERSE` | 22 | WH | - | U24.P1 (W184) | SW3.1 (W188) |
-| 3 | `GND` | 22 | BK | - | A1:GND (W185) | SW2.2 (W187), SW3.2 (W189) |
+| 1 | `SHIFT_FORWARD` | 22 | WH | - | U24.P0 (W186) | SW2.1 (W189) |
+| 2 | `SHIFT_REVERSE` | 22 | WH | - | U24.P1 (W187) | SW3.1 (W191) |
+| 3 | `GND` | 22 | BK | - | A1:GND (W188) | SW2.2 (W190), SW3.2 (W192) |
 
 ## J5 STEER MOTOR
 
@@ -96,10 +96,10 @@ Mate of the stock lights/horn plug (pin use TBD from photos). Status: TBD (#17).
 
 | Pin | Net | AWG | Colour | Protected by | Box side | Car side |
 |---|---|---|---|---|---|---|
-| 1 | `LIGHTS_12V` | 20 | OG | F9 3 A | F9.2 (W061) | LP1.1 (W194) |
-| 2 | `LIGHTS_SW` | 20 | BK/WH | F9 3 A | U29.OUT1 (W062) | LP1.2 (W195) |
-| 3 | `HORN` | 22 | WH | - | U24.P2 (W190) | SW4.1 (W192) |
-| 4 | `GND` | 22 | BK | - | A1:GND (W191) | SW4.2 (W193) |
+| 1 | `LIGHTS_12V` | 20 | OG | F9 3 A | F9.2 (W061) | LP1.1 (W197) |
+| 2 | `LIGHTS_SW` | 20 | BK/WH | F9 3 A | U29.OUT1 (W062) | LP1.2 (W198) |
+| 3 | `HORN` | 22 | WH | - | U24.P2 (W193) | SW4.1 (W195) |
+| 4 | `GND` | 22 | BK | - | A1:GND (W194) | SW4.2 (W196) |
 
 ## J9 E-STOP
 
@@ -118,14 +118,14 @@ Sealed 8-way, Deutsch DT04-08PA / DT06-08SA (or clone). Status: To buy. Our own 
 
 | Pin | Net | AWG | Colour | Protected by | Box side | Car side |
 |---|---|---|---|---|---|---|
-| 1 | `5V_LOGIC` | 20 | RD | F4 2 A (24 V side) | A1:5V (W051) | H1.1 (W199), H2.1 (W200) |
-| 2 | `GND` | 20 | BK | - | A1:GND (W175) | H1.2 (W201), H2.2 (W202), U25.GND (W206), SW5.2 (W211) |
-| 3 | `WHEEL_SPEED_L` | 20 | WH | - | R23.2 (W197) | H1.3 (W203) |
-| 4 | `WHEEL_SPEED_R` | 20 | WH | - | R24.2 (W198) | H2.3 (W204) |
-| 5 | `3V3_SENSE` | 20 | VT | U2 current limit | A1:3V3 (W174) | U25.VCC (W205) |
-| 6 | `I2C_SCL` | 20 | GY | - | U28.SCL (W172) | U25.SCL (W207) |
-| 7 | `I2C_SDA` | 20 | GN | - | U28.SDA (W173) | U25.SDA (W208) |
-| 8 | `SEAT` | 20 | WH | - | U24.P4 (W196) | SW5.1 (W210) |
+| 1 | `5V_LOGIC` | 20 | RD | F4 2 A (24 V side) | A1:5V (W051) | H1.1 (W202), H2.1 (W203) |
+| 2 | `GND` | 20 | BK | - | A1:GND (W178) | H1.2 (W204), H2.2 (W205), U25.GND (W209), SW5.2 (W214) |
+| 3 | `WHEEL_SPEED_L` | 20 | WH | - | R23.2 (W200) | H1.3 (W206) |
+| 4 | `WHEEL_SPEED_R` | 20 | WH | - | R24.2 (W201) | H2.3 (W207) |
+| 5 | `3V3_SENSE` | 20 | VT | U2 current limit | A1:3V3 (W177) | U25.VCC (W208) |
+| 6 | `I2C_SCL` | 20 | GY | - | U28.SCL (W175) | U25.SCL (W210) |
+| 7 | `I2C_SDA` | 20 | GN | - | U28.SDA (W176) | U25.SDA (W211) |
+| 8 | `SEAT` | 20 | WH | - | U24.P4 (W199) | SW5.1 (W213) |
 
 ## J11 DASH
 
@@ -133,12 +133,12 @@ Sealed 6-way, Deutsch DT04-6P / DT06-6S (or clone). Status: To buy. Our own plug
 
 | Pin | Net | AWG | Colour | Protected by | Box side | Car side |
 |---|---|---|---|---|---|---|
-| 1 | `3V3_SENSE` | 20 | VT | U2 current limit | A1:3V3 (W178) | U27.VCC (W212) |
-| 2 | `GND` | 20 | BK | - | A1:GND (W179) | U27.GND (W213) |
-| 3 | `I2C_SCL` | 20 | GY | - | U28.SCL (W176) | U27.SCL (W214) |
-| 4 | `I2C_SDA` | 20 | GN | - | U28.SDA (W177) | U27.SDA (W215) |
-| 5 | `SPK_ALERT_P` | 18 | RD | amp output | U30.6 (W216) | LS1.1 (W218) |
-| 6 | `SPK_ALERT_N` | 18 | BK | amp output | U30.8 (W217) | LS1.2 (W219) |
+| 1 | `3V3_SENSE` | 20 | VT | U2 current limit | A1:3V3 (W181) | U27.VCC (W215) |
+| 2 | `GND` | 20 | BK | - | A1:GND (W182) | U27.GND (W216) |
+| 3 | `I2C_SCL` | 20 | GY | - | U28.SCL (W179) | U27.SCL (W217) |
+| 4 | `I2C_SDA` | 20 | GN | - | U28.SDA (W180) | U27.SDA (W218) |
+| 5 | `SPK_ALERT_P` | 18 | RD | amp output | U30.6 (W219) | LS1.1 (W221) |
+| 6 | `SPK_ALERT_N` | 18 | BK | amp output | U30.8 (W220) | LS1.2 (W222) |
 
 ## J12 MUSIC
 
@@ -146,8 +146,8 @@ Sealed 6-way, Deutsch DT04-6P / DT06-6S (or clone). Status: To buy. Our own plug
 
 | Pin | Net | AWG | Colour | Protected by | Box side | Car side |
 |---|---|---|---|---|---|---|
-| 1 | `SPK_L_P` | 18 | RD | amp output | U32.L+ (W220) | LS2.1 (W224) |
-| 2 | `SPK_L_N` | 18 | BK | amp output | U32.L- (W221) | LS2.2 (W225) |
-| 3 | `SPK_R_P` | 18 | RD | amp output | U32.R+ (W222) | LS3.1 (W226) |
-| 4 | `SPK_R_N` | 18 | BK | amp output | U32.R- (W223) | LS3.2 (W227) |
+| 1 | `SPK_L_P` | 18 | RD | amp output | U32.L+ (W223) | LS2.1 (W227) |
+| 2 | `SPK_L_N` | 18 | BK | amp output | U32.L- (W224) | LS2.2 (W228) |
+| 3 | `SPK_R_P` | 18 | RD | amp output | U32.R+ (W225) | LS3.1 (W229) |
+| 4 | `SPK_R_N` | 18 | BK | amp output | U32.R- (W226) | LS3.2 (W230) |
 

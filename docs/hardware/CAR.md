@@ -17,6 +17,6 @@ These change values in [include/config.h](../../include/config.h). Fill them in 
 - [ ] **Battery:** voltage, Ah, and lead-acid or lithium. A 24 V lead-acid pack is up to 28.8 V on the charger, and a 7-cell lithium pack reaches 29.4 V. The BTS7960 runs up to 27.5 V and locks out at 27.6 to 30 V. This sets `BATTERY_*` in config.h.
 - [ ] **Drive motor label:** voltage and size. This sets `MOTOR_CURRENT_LIMIT_A`.
 - [ ] **Steering motor label** and the stock controller inside the car.
-- [ ] **IBT-2 current-sense resistor:** read it on one board up close. This sets `IS_RESISTOR_OHMS` (assumed 1 kΩ).
+- [ ] **IBT-2 current-sense resistor:** read it on one board up close. This sets `IS_PIN_RESISTOR_OHMS` (assumed 1 kΩ; the firmware halves it because R_IS and L_IS are joined).
 - [ ] **Pedal:** potentiometer or on/off switch? This sets `PEDAL_*`.
 - [ ] **The voltmeter module:** its label (probably an XH-M609 low-voltage cutoff), and the five bags whose labels came out blurred in the photos.

@@ -14,6 +14,9 @@ const char* faultName(FaultMask mask) {
   if (mask & FAULT_SETUP) return "SETUP";
   if (mask & FAULT_ESTOP) return "ESTOP";
   if (mask & FAULT_CURRENT_SENSE) return "CUR_SENS";
+  if (mask & FAULT_NO_BUS) return "NO_BUS";
+  if (mask & FAULT_K1_WELDED) return "K1_WELD";
+  if (mask & FAULT_OVERTEMP) return "HOT";
   return "OK";
 }
 

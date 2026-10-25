@@ -73,3 +73,9 @@ Left over from PR #49; they need real hardware and can't be checked in CI:
 - **E-stop sense polarity:** confirm the ESTOP fault (bit 9) reads the right way with the E-stop pressed and released.
 - **CUR_SENS unplug test:** unplug the ADS1115 (or its I2C lines) while running and confirm the CUR_SENS fault (bit 10) trips and brakes within about 250 ms.
 - Also still open: I2C bus recovery (#36), and a pedal shorted high reads as full pedal (waits on #16).
+
+From the firmware-vs-schematic fixes (contactor checks, fans, box temperature):
+
+- **Contactor checks:** the `K1_WELD` and `NO_BUS` gates in phase 3 need R5-R7 fitted.
+- **DS18B20 timing:** the 1-Wire code in `src/sensing/BoxTemp.cpp` is our own bit-banging and has not run on hardware yet. Confirm good readings (no `box=?`) before setting `BOX_TEMP_REQUIRED`.
+- **D2 TVS:** driver and over-current faults now open the contactor, maybe on a rolling car. Fit D2 once the battery voltage is known (#13), before phase 6.

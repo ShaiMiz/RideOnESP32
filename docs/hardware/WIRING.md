@@ -36,12 +36,12 @@ Pin-by-pin reasons, boot behaviour and the header position of each pin are in [P
 | Address | Device | Job |
 | --- | --- | --- |
 | 0x48 | ADS1115 #1 (ADDR to GND) | A0 FL, A1 FR, A2 RL, A3 RR current sense |
-| 0x49 | ADS1115 #2 (ADDR to VDD) | A0 steering current sense; A1 to A3 spare |
+| 0x49 | ADS1115 #2 (ADDR to VDD) | A0 steering current sense; A2 motor bus (MOTOR_24V through 150k / 12k); A1 kept for AS5600 OUT, A3 spare |
 | 0x20 | PCF8574 | P0 shift forward, P1 shift reverse, P2 horn, P3 E-stop sense, P4 seat switch. Switches pull to GND |
 | 0x36 | AS5600 | Steering angle (phase 5) |
 | 0x68 | MPU-6050 | Tilt and crash (later) |
 | 0x3C | SSD1306 OLED 0.91" | Dash (later) |
-| 0x40 | PCA9685 | Accessory PWM (later) |
+| 0x40 | PCA9685 | Channel 0 lights (later), channel 1 box fans (full on whenever the ESP32 runs) |
 
 ## Each IBT-2 (BTS7960) board
 
@@ -55,7 +55,7 @@ Pin-by-pin reasons, boot behaviour and the header position of each pin are in [P
 | B+ / B− | Switched 24 V after the contactor, 10 AWG, 470 µF 35 V+ capacitor at the board |
 | M+ / M− | Motor |
 
-Never tie R_EN or L_EN to VCC. Only one IS side conducts at a time, which is why joining them works.
+Never tie R_EN or L_EN to VCC. Only one IS side conducts at a time, which is why joining them works. The board's two IS resistors are then in parallel, so the firmware divides by half of one (`IS_SENSE_OHMS`).
 
 ## Receiver (Jumper AION RX Mini)
 

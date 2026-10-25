@@ -25,7 +25,7 @@
   (property "Sheetfile" "power.kicad_sch" (at 213.36 51.48 0) (effects (font (size 1.27 1.27)) (justify left top)))
   (instances (project "rideonesp32" (path "/e0e78d72-bf5c-51da-8e0f-d8642949b63b" (page "4"))))
 )
-(text "K1 contactor and its coil chain: key, E-stop (2 NC),\nQ1 hold MOSFET. F2 key feed, fuse block F3-F8,\nground star TB1, motor bus TB2, battery divider." (exclude_from_sim no) (at 215.9 33.02 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "597589e5-f280-5b32-ab6f-e2d6c4622394"))
+(text "K1 contactor and its coil chain: key, E-stop (2 NC),\nQ1 hold MOSFET. F2 key feed, fuse block F3-F8,\nground star TB1, motor bus TB2, battery divider,\nmotor-bus sense and bleed." (exclude_from_sim no) (at 215.9 33.02 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "597589e5-f280-5b32-ab6f-e2d6c4622394"))
 (sheet (at 309.88 30.48) (size 81.28 20.32) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
   (stroke (width 0.1524) (type solid)) (fill (color 0 0 0 0.0000)) (uuid "6659fd52-b281-5366-b2e7-00ecbb55cc6c")
   (property "Sheetname" "5 Low-voltage rails" (at 309.88 29.78 0) (effects (font (size 1.27 1.27)) (justify left bottom)))

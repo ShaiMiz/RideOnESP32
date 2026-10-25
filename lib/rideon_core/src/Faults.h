@@ -24,19 +24,25 @@ enum Fault : FaultMask {
   FAULT_TILT = 1u << 7,            // car tipped past the limit (later, MPU-6050)
   FAULT_SETUP = 1u << 8,           // hardware failed to start; only a reboot clears it
   FAULT_ESTOP = 1u << 9,           // E-stop pressed: it cut driver power behind the firmware's back
-  FAULT_CURRENT_SENSE = 1u << 10,  // a current-sense reading stopped updating (I2C bus or ADS1115 lost)
+  FAULT_CURRENT_SENSE = 1u << 10,  // a current-sense or bus reading stopped updating (I2C bus or ADS1115 lost)
+  FAULT_NO_BUS = 1u << 11,         // no motor bus: boot weld check still running, or K1 did not close
+  FAULT_K1_WELDED = 1u << 12,      // motor bus still live at boot with K1 open: contactor welded
+  FAULT_OVERTEMP = 1u << 13,       // box too hot (DS18B20), or its reading lost while required
 };
 
 // Faults that cut the drivers at once (coast) instead of braking to a stop.
-constexpr FaultMask HARD_FAULTS =
-    FAULT_KILL_SWITCH | FAULT_OVERCURRENT | FAULT_DRIVER | FAULT_TILT | FAULT_SETUP | FAULT_ESTOP;
+constexpr FaultMask HARD_FAULTS = FAULT_KILL_SWITCH | FAULT_OVERCURRENT | FAULT_DRIVER | FAULT_TILT | FAULT_SETUP |
+                                  FAULT_ESTOP | FAULT_NO_BUS | FAULT_K1_WELDED;
 
 // Faults that also open the main contactor. For the E-stop this keeps the
 // contactor open after the button is released, until the parent re-arms.
-constexpr FaultMask CONTACTOR_FAULTS = FAULT_KILL_SWITCH | FAULT_SETUP | FAULT_ESTOP;
+// DRIVER and OVERCURRENT are here because a shorted driver MOSFET ignores
+// DRIVE_EN: K1 is the only thing that stops it.
+constexpr FaultMask CONTACTOR_FAULTS =
+    FAULT_KILL_SWITCH | FAULT_SETUP | FAULT_ESTOP | FAULT_DRIVER | FAULT_OVERCURRENT | FAULT_K1_WELDED;
 
-// Faults that a re-arm can never clear.
-constexpr FaultMask PERMANENT_FAULTS = FAULT_SETUP;
+// Faults that a re-arm can never clear. A reboot repeats the weld check.
+constexpr FaultMask PERMANENT_FAULTS = FAULT_SETUP | FAULT_K1_WELDED;
 
 class FaultLatch {
  public:

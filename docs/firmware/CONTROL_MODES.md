@@ -27,9 +27,12 @@ If the mode switch is already at Kid or Parent at power-on, nothing happens unti
 | Kill switch | Killed: drive enable and contactor cut at once | Kill switch to run, then the steps above |
 | Radio link lost (no packet for 200 ms, link quality under 40 %, or link flag down) | Locked: brakes to a stop in about 0.5 s | When the link is back, the steps above |
 | Link quality 40 to 70 % | Still drives, at half the speed cap | Automatic when the link improves |
-| Over-current, driver fault, tilt | Locked, drive enable cut at once (coast) | The steps above, once the cause is gone |
+| Over-current, driver fault | Locked, drive enable cut at once (coast), then the contactor opens: a shorted driver ignores its enable | The steps above, once the cause is gone |
+| Tilt | Locked, drive enable cut at once (coast) | The steps above, once the cause is gone |
+| No motor bus: the boot weld check is still draining the bus, or the contactor did not close | Locked, drive enable cut | The steps above, once the bus is up |
+| Contactor welded (bus still live at boot with the contactor open) | Locked, drive enable cut | Reboot only, after replacing the contactor |
 | E-stop pressed | Killed in hardware; the firmware also locks, cuts the drive enable and holds the contactor open | Release the E-stop, then the steps above |
-| Battery cutoff, battery sensor fault, input fault, current sensing lost | Locked, brakes to a stop | The steps above, once the cause is gone |
+| Battery cutoff, battery sensor fault, input fault, current sensing lost, box too hot | Locked, brakes to a stop | The steps above, once the cause is gone |
 | Setup failure | Locked, contactor open | Reboot only |
 
 See [FAULT_CODES.md](FAULT_CODES.md) for each fault.

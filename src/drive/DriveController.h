@@ -1,6 +1,7 @@
 // Turns the active mode's speed command into the four wheel outputs.
 //
-// For now every wheel gets the same ramped speed. Per-wheel output for
+// For now every wheel gets the same ramped speed, flipped per wheel by
+// cfg::WHEEL_REVERSED so a mirrored motor still drives the car forward. Per-wheel output for
 // traction control comes with the wheel-speed sensors.
 #pragma once
 

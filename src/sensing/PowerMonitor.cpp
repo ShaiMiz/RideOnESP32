@@ -32,6 +32,11 @@ bool readRegister(uint8_t addr, uint8_t reg, uint16_t& value) {
 
 uint8_t addressFor(int ch) { return ch < 4 ? i2c::ADS_DRIVE : i2c::ADS_AUX; }
 
+uint8_t inputFor(int ch) {
+  if (ch < 4) return (uint8_t)ch;  // FL, FR, RL, RR on A0-A3
+  return ch == PowerMonitor::STEER ? ads::STEER_IS : ads::MOTOR_BUS;
+}
+
 }  // namespace
 
 bool PowerMonitor::begin(bool driveOnly) {
@@ -51,7 +56,7 @@ bool PowerMonitor::begin(bool driveOnly) {
 }
 
 void PowerMonitor::startConversion(uint32_t nowMs) {
-  converting_ = writeRegister(addressFor(next_), ads1115::REG_CONFIG, ads1115::singleShotConfig(next_ % 4));
+  converting_ = writeRegister(addressFor(next_), ads1115::REG_CONFIG, ads1115::singleShotConfig(inputFor(next_)));
   convStartMs_ = nowMs;
   if (!converting_) next_ = (next_ + 1) % channelCount();  // skip it this round; it goes stale if it keeps failing
 }
@@ -66,8 +71,13 @@ bool PowerMonitor::pollConversion(uint32_t nowMs) {
   if (!readRegister(addr, ads1115::REG_CONVERSION, raw)) return true;
   float volts = ads1115::rawToVolts((int16_t)raw);
   if (volts < 0.0f) volts = 0.0f;
-  amps_[next_] = volts / cfg::IS_RESISTOR_OHMS * cfg::IS_RATIO;
-  faultFlag_[next_] = volts >= cfg::IS_FAULT_VOLTS;
+  if (next_ == BUS) {
+    busV_ = volts * cfg::BUS_DIVIDER;
+    busSampled_ = true;
+  } else {
+    amps_[next_] = volts / cfg::IS_SENSE_OHMS * cfg::IS_RATIO;
+    faultFlag_[next_] = volts >= cfg::IS_FAULT_VOLTS;
+  }
   lastSampleMs_[next_] = nowMs;
   return true;
 }
@@ -88,7 +98,7 @@ void PowerMonitor::update() {
 float PowerMonitor::driveAmps() const { return amps_[FL] + amps_[FR] + amps_[RL] + amps_[RR]; }
 
 bool PowerMonitor::anyDriverFault() const {
-  for (int i = 0; i < channelCount(); i++)
+  for (int i = 0; i < currentCount(); i++)
     if (faultFlag_[i]) return true;
   return false;
 }

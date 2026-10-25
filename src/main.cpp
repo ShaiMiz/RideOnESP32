@@ -9,7 +9,9 @@
 #include <esp_system.h>
 
 #include "ArmingCheck.h"
+#include "BoxTempCheck.h"
 #include "ChannelMap.h"
+#include "ContactorCheck.h"
 #include "Faults.h"
 #include "LinkMonitor.h"
 #include "ModeMachine.h"
@@ -24,6 +26,7 @@
 #include "safety/KillLines.h"
 #include "safety/SafetyManager.h"
 #include "safety/Watchdog.h"
+#include "sensing/BoxTemp.h"
 #include "sensing/Imu.h"
 #include "sensing/PowerMonitor.h"
 #include "telemetry/Log.h"
@@ -38,6 +41,10 @@ const LinkParams LINK = {cfg::LINK_TIMEOUT_MS, cfg::LQ_DEGRADED_BELOW, cfg::LQ_L
 const ArmingParams ARMING = {cfg::CH_CENTER, cfg::ARM_CENTER_TOLERANCE_US, cfg::PEDAL_RELEASED_FRACTION};
 const RampParams PARENT_RAMP = {cfg::ACCEL_PER_S, cfg::BRAKE_PER_S, cfg::STOPPED_EPSILON};
 const RampParams KID_RAMP = {cfg::KID_ACCEL_PER_S, cfg::BRAKE_PER_S, cfg::STOPPED_EPSILON};
+const ContactorParams CONTACTOR = {cfg::BUS_OPEN_MAX_FRACTION, cfg::BUS_CLOSED_MIN_FRACTION,
+                                   cfg::BUS_DISCHARGE_TIMEOUT_MS, cfg::BUS_CLOSE_TIME_MS};
+const BoxTempParams BOX_TEMP = {cfg::BOX_TEMP_LIMIT_C, cfg::BOX_TEMP_RECOVER_C, cfg::BOX_TEMP_HOLD_MS,
+                                cfg::BOX_TEMP_STALE_MS, cfg::BOX_TEMP_REQUIRED};
 
 KillLines lines;
 RadioInput radio;
@@ -47,7 +54,10 @@ DriveController drive;
 SteeringController steering;
 SafetyManager safety;
 Imu imu;
+BoxTemp boxTemp;
 Accessories accessories;
+ContactorCheck contactor;
+BoxTempCheck boxTempCheck;
 FaultLatch faults;
 ModeMachine modes;
 
@@ -82,7 +92,7 @@ void setup() {
   logx::begin(115200);
   logx::line("RideOnESP32 v3 boot, reset reason: %s", resetReasonName(esp_reset_reason()));
 
-  Wire.begin(pins::I2C_SDA, pins::I2C_SCL, 400000);
+  Wire.begin(pins::I2C_SDA, pins::I2C_SCL, cfg::I2C_HZ);
   Wire.setTimeOut(cfg::I2C_TIMEOUT_MS);
 
   bool ok = drive.begin();
@@ -91,7 +101,8 @@ void setup() {
   ok &= power.begin();
   if (!manual.begin()) logx::line("PCF8574 not answering: Kid mode refused");
   imu.begin();
-  accessories.begin();
+  boxTemp.begin();
+  if (!accessories.begin()) logx::line("PCA9685 not answering: box fans OFF, retrying every second");
 
   if (!ok) {
     faults.raise(FAULT_SETUP);
@@ -115,6 +126,13 @@ void loop() {
   manual.update();
   power.update();
   imu.update();
+  boxTemp.update(now);
+
+  float batteryV = power.batteryVolts();
+  bool readingsValid = power.busReadingValid(now) && batteryV >= cfg::BATTERY_SENSOR_MIN_V &&
+                       batteryV <= cfg::BATTERY_SENSOR_MAX_V;
+  contactor.update(readingsValid, power.busVolts(), batteryV, lines.contactor(), now, CONTACTOR);
+  boxTempCheck.update(boxTemp.hasReading(), boxTemp.celsius(), boxTemp.lastGoodMs(), now, BOX_TEMP);
 
   uint16_t throttleUs = radio.channel(ch::THROTTLE);
   uint16_t steeringUs = radio.channel(ch::STEERING);
@@ -140,6 +158,9 @@ void loop() {
                            &power,
                            DriveController::WHEELS,
                            true,
+                           true,
+                           &contactor,
+                           boxTempCheck.hot(),
                            imu.tilted(),
                            now};
   faults.update(safety.evaluate(signals));
@@ -160,7 +181,7 @@ void loop() {
     command = limitCommand(throttle, cfg::PARENT_CAP * linkCap, cfg::REVERSE_CAP);
   }
 
-  bool cutNow = safety.apply(mode, faults, drive.stopped(*ramp), lines);
+  bool cutNow = safety.apply(mode, faults, drive.stopped(*ramp), contactor.allowClose(), lines);
   if (cutNow) {
     drive.stopNow();
     steering.stopNow(lines);
@@ -174,8 +195,10 @@ void loop() {
   accessories.update(horn, drive.speed(), safety.battery() != BatteryState::Ok);
 
   if (logx::every(lastLogMs, 500)) {
-    logx::line("%s link=%s lq=%u bat=%.1fV I=%.1fA cmd=%.2f out=%.2f en=%d k=%d fault=%s", modeName(mode),
-               linkName(link), radio.linkQuality(), power.batteryVolts(), power.driveAmps(), command, drive.speed(),
-               lines.drive(), lines.contactor(), faultName(faults.latched()));
+    logx::line("%s link=%s lq=%u bat=%.1fV bus=%.1fV I=%.1fA cmd=%.2f out=%.2f en=%d k=%d box=%s%.0fC fan=%d fault=%s",
+               modeName(mode), linkName(link), radio.linkQuality(), power.batteryVolts(), power.busVolts(),
+               power.driveAmps(), command, drive.speed(), lines.drive(), lines.contactor(),
+               boxTempCheck.sensorLost() ? "?" : "", boxTemp.celsius(), accessories.fansOn(),
+               faultName(faults.latched()));
   }
 }

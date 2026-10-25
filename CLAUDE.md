@@ -20,7 +20,7 @@ Status: v3 has never driven a car. Only bench checks so far. Follow [docs/COMMIS
 
 ## Plans and reviews
 
-- Schematic v0.3 in KiCad: [docs/hardware/kicad/](docs/hardware/kicad/), with CONNECTORS.md, WIRE_LIST.md, BOM.md (matched to the 24 Oct order) and NETS.md. Generated: edit `gen/design.py` and `gen/wiring.py`, run `python3 docs/hardware/kicad/gen/generate.py`, then `docs/hardware/kicad/check.sh` (KiCad ERC + netlist check via Docker). The ESP32 nets come from pins.h, so a pin change means regenerating; CI fails if the committed files are stale. J1-J8 (car-facing) stay TBD until #17. The SVG draft v0.2 in [docs/hardware/schematic/](docs/hardware/schematic/) is superseded but kept.
+- Schematic v0.3 in KiCad: [docs/hardware/kicad/](docs/hardware/kicad/), with CONNECTORS.md, WIRE_LIST.md, BOM.md (matched to the 24 Oct order) and NETS.md. BOM.md is the one list of every part, tool and material (owned, ordered, to buy); add new shopping items to `gen/tables.py` (TOOLS, BUY_LINKS), not to separate shopping files. Generated: edit `gen/design.py` and `gen/wiring.py`, run `python3 docs/hardware/kicad/gen/generate.py`, then `docs/hardware/kicad/check.sh` (KiCad ERC + netlist check via Docker). The ESP32 nets come from pins.h, so a pin change means regenerating; CI fails if the committed files are stale. J1-J8 (car-facing) stay TBD until #17. The SVG draft v0.2 in [docs/hardware/schematic/](docs/hardware/schematic/) is superseded but kept.
 - 3D exploded view: [tools/exploded-view/](tools/exploded-view/) (React Three Fiber). Its parts and wiring come from BOM.csv, WIRE_LIST.csv and design.py via `npm run data`; placement is hand-set in `src/data/layout.js`. After a BOM, wire list or pin change, regenerate `src/data/project.json`, and place any new ref (`npm test` fails on unplaced parts).
 - v2 vs v3 hardware comparison: [docs/reviews/2026-10-v2-vs-v3-hardware.md](docs/reviews/2026-10-v2-vs-v3-hardware.md).
 - Safety-standards review: [docs/reviews/2026-10-safety-standards.md](docs/reviews/2026-10-safety-standards.md), EN 71-1 4.15 and EN 62115 (Annex J, remote-controlled ride-ons) against this design. Its 8 gaps are not yet filed as issues; Shai decides which to take on.
@@ -74,3 +74,9 @@ Left over from PR #49; they need real hardware and can't be checked in CI:
 - **E-stop sense polarity:** confirm the ESTOP fault (bit 9) reads the right way with the E-stop pressed and released.
 - **CUR_SENS unplug test:** unplug the ADS1115 (or its I2C lines) while running and confirm the CUR_SENS fault (bit 10) trips and brakes within about 250 ms.
 - Also still open: I2C bus recovery (#36), and a pedal shorted high reads as full pedal (waits on #16).
+
+From the firmware-vs-schematic fixes (contactor checks, fans, box temperature):
+
+- **Contactor checks:** the `K1_WELD` and `NO_BUS` gates in phase 3 need R5-R7 fitted.
+- **DS18B20 timing:** the 1-Wire code in `src/sensing/BoxTemp.cpp` is our own bit-banging and has not run on hardware yet. Confirm good readings (no `box=?`) before setting `BOX_TEMP_REQUIRED`.
+- **D2 TVS:** driver and over-current faults now open the contactor, maybe on a rolling car. Fit D2 once the battery voltage is known (#13), before phase 6.

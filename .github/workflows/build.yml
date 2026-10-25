@@ -63,6 +63,8 @@ jobs:
           node-version: "22"
           cache: npm
           cache-dependency-path: tools/exploded-view/package-lock.json
+      - name: project.json is generated from the current BOM, wire list and design.py
+        run: python3 scripts/build_data.py --check
       - run: npm ci
       - name: Every BOM ref is drawn and every wire joins two parts
         run: npm test

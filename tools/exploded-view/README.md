@@ -25,7 +25,7 @@ npm run data                          # from the working tree
 python3 scripts/build_data.py --git-ref origin/some-branch   # or from another branch
 ```
 
-The committed JSON was built from PR #52's branch (`claude/project-thread-fo5b2x`), which has the restructured BOM. Once #52 is on `main`, run `npm run data` again.
+CI runs `python3 scripts/build_data.py --check` and fails if the committed JSON is stale.
 
 ## What it does
 

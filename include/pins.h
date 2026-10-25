@@ -103,7 +103,7 @@ constexpr size_t MAP_SIZE = sizeof(MAP) / sizeof(MAP[0]);
 // I2C addresses
 namespace i2c {
 constexpr uint8_t ADS_DRIVE = 0x48;  // ADS1115 #1 (ADDR to GND): FL, FR, RL, RR current sense
-constexpr uint8_t ADS_AUX = 0x49;    // ADS1115 #2 (ADDR to VDD): steering current sense (A0), A1-A3 spare
+constexpr uint8_t ADS_AUX = 0x49;    // ADS1115 #2 (ADDR to VDD): steering current (A0), motor bus (A2); A1 kept for AS5600 OUT, A3 spare
 constexpr uint8_t PCF8574 = 0x20;    // shifter, horn, E-stop sense, seat switch
 constexpr uint8_t AS5600 = 0x36;     // steering angle
 constexpr uint8_t MPU6050 = 0x68;    // tilt and crash
@@ -121,6 +121,18 @@ constexpr uint8_t ESTOP_SENSE = 3;  // reads the E-stop state; the E-stop itself
 constexpr uint8_t SEAT = 4;         // optional seat switch
 constexpr uint8_t ALL[] = {SHIFT_FORWARD, SHIFT_REVERSE, HORN, ESTOP_SENSE, SEAT};  // P5-P7 spare
 }  // namespace pcf
+
+// ADS1115 inputs
+namespace ads {
+constexpr uint8_t STEER_IS = 0;   // on ADS_AUX
+constexpr uint8_t MOTOR_BUS = 2;  // on ADS_AUX: MOTOR_24V through 150k / 12k
+}  // namespace ads
+
+// PCA9685 channels
+namespace pca {
+constexpr uint8_t LIGHTS = 0;  // U29 IN1, lights low side
+constexpr uint8_t FANS = 1;    // U29 IN2, both box fans
+}  // namespace pca
 
 // ---- Build-time checks. A failure here names the rule; run
 // `pio test -e native -f test_pins` to see which pin breaks it.

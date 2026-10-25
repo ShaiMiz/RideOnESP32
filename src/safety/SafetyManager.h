@@ -2,15 +2,18 @@
 // conditions, and sets the kill lines for the current mode.
 //
 // Output rules:
-//   contactor  open while a CONTACTOR_FAULT is latched (kill switch, E-stop, setup)
 //   drive EN   LOW at once on a latched HARD_FAULT (motors coast);
 //              HIGH in Kid and Parent; in Locked, HIGH only while the car
 //              brakes to a stop, then LOW
+//   contactor  set after the enable; open while a CONTACTOR_FAULT is latched
+//              (kill switch, E-stop, setup, driver, over-current, weld) and
+//              until the boot weld check has passed
 #pragma once
 
 #include <stdint.h>
 
 #include "BatteryCheck.h"
+#include "ContactorCheck.h"
 #include "Faults.h"
 #include "LinkMonitor.h"
 #include "ModeMachine.h"
@@ -29,6 +32,9 @@ struct SafetySignals {
   const PowerMonitor* power;  // nullptr: no current sensing
   int wheelsSensed;           // how many drive channels to check (bench: 1)
   bool steerSensed;           // also check the steering driver's IS line
+  bool busSensed;             // also check the motor-bus reading is fresh
+  const rideon::ContactorCheck* contactor;  // nullptr: no contactor checks
+  bool boxHot;
   bool tilted;
   uint32_t nowMs;
 };
@@ -39,7 +45,9 @@ class SafetyManager {
   rideon::FaultMask evaluate(const SafetySignals& s);
 
   // Set the kill lines. Returns true if the drive must stop at once.
-  bool apply(rideon::Mode mode, const rideon::FaultLatch& faults, bool driveStopped, KillLines& lines);
+  // contactorAllowed: the boot weld check has passed.
+  bool apply(rideon::Mode mode, const rideon::FaultLatch& faults, bool driveStopped, bool contactorAllowed,
+             KillLines& lines);
 
   rideon::BatteryState battery() const { return battery_.state(); }
   bool batteryHigh() const { return battery_.highWarning(); }

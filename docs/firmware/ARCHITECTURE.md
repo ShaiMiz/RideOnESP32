@@ -7,7 +7,8 @@ The firmware has two layers. **`lib/rideon_core`** holds every safety and contro
 ```
  RadioInput ──► channels, link flag, packet age, LQ ──► LinkMonitor ──┐
  ManualInput ─► pedal, shifter, horn ───────────────────────────────┤
- PowerMonitor ► battery volts, 5 motor currents, driver flags ──────┤
+ PowerMonitor ► battery and bus volts, 5 currents, driver flags ────┤
+ ContactorCheck (bus vs battery), BoxTempCheck (DS18B20) ───────────┤
                                                                     ▼
                                          SafetyManager.evaluate ─► active faults
                                                                     ▼
@@ -36,6 +37,8 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 | `ChannelMap.h` | core | Channel numbers and stick and switch decoding |
 | `Ramp` | core | Accel and brake ramps, no reverse until stopped, caps |
 | `BatteryCheck` | core | Voltage bands with hold time and hysteresis |
+| `ContactorCheck` | core | Boot weld check and missing-bus check from the motor-bus voltage |
+| `BoxTempCheck`, `Ds18b20.h` | core | Box over-temperature with hysteresis; DS18B20 scratchpad CRC and decoding |
 | `Pid` | core | Steering loop (phase 5) |
 | `main.cpp` | src | Setup order, fixed-rate loop, command selection |
 | `safety/KillLines` | src | GPIO21, GPIO2, GPIO12 |
@@ -44,12 +47,14 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 | `input/RadioInput` | src | AlfredoCRSF on UART2, plus a tap that timestamps RC frames |
 | `input/ManualInput` | src | Pedal ADC and PCF8574 switches |
 | `drive/BTS7960Motor` | src | Signed speed to RPWM/LPWM (from v2.2) |
-| `drive/DriveController` | src | Four wheels on one ramp |
+| `drive/DriveController` | src | Four wheels on one ramp, each flipped by `WHEEL_REVERSED` |
 | `drive/SteeringController` | src | Stub: holds steering disabled until the AS5600 is fitted |
-| `sensing/PowerMonitor` | src | Battery volts; ADS1115 currents, one channel per tick |
+| `sensing/PowerMonitor` | src | Battery volts; ADS1115 currents and motor-bus volts, one channel per tick |
+| `sensing/BoxTemp` | src | DS18B20 on GPIO15, own 1-Wire timing, one small step per tick |
+| `accessories/Accessories` | src | Box fans full on through the PCA9685; lights and sound later |
 | `sensing/Imu`, `WheelSpeed` | src | Stubs |
 | `telemetry/Log` | src | Non-blocking serial lines |
-| `telemetry/CrsfTelemetry`, `Dash`, `accessories/Accessories` | src | Stubs |
+| `telemetry/CrsfTelemetry`, `Dash` | src | Stubs |
 
 ## Where things live
 

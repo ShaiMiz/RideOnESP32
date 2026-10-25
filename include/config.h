@@ -63,21 +63,59 @@ constexpr float BATTERY_RECOVER_V = 22.5f;     // hysteresis: must rest above th
 constexpr uint32_t BATTERY_CUTOFF_HOLD_MS = 2000;  // ignore sag shorter than this
 
 // ---- Current sensing (BTS7960 IS pin through ADS1115) ---------------------------
-constexpr float IS_RATIO = 8500.0f;        // load current / IS current, datasheet typical
-constexpr float IS_RESISTOR_OHMS = 1000.0f; // VERIFY: read the resistor on your IBT-2 boards
-constexpr float IS_FAULT_VOLTS = 3.2f;     // IS pinned at the 3.3 V clamp = driver fault flag (4-7 mA)
+constexpr float IS_RATIO = 8500.0f;  // load current / IS current, datasheet typical
+// VERIFY (#15): the resistor from each IS pin to GND on your IBT-2 boards.
+constexpr float IS_PIN_RESISTOR_OHMS = 1000.0f;
+// R_IS and L_IS are joined in each driver's control plug (WIRING.md), so the
+// board's two IS resistors sit in parallel: the sense line sees half of one.
+// Using the single value here would read half the real current.
+constexpr float IS_SENSE_OHMS = IS_PIN_RESISTOR_OHMS / 2.0f;
+// A BTS7960 flags a fault by sourcing its IS saturation current, 4-7 mA by the
+// datasheet. Into IS_SENSE_OHMS the smallest of that may stay well under the
+// 3.3 V clamp, so the fault level is 90 % of what 4 mA makes, capped just
+// under the clamp. With 1k boards that is 1.8 V.
+constexpr float IS_FAULT_MIN_A = 0.004f;
+constexpr float IS_CLAMP_VOLTS = 3.2f;
+constexpr float IS_FAULT_VOLTS =
+    IS_FAULT_MIN_A * IS_SENSE_OHMS * 0.9f < IS_CLAMP_VOLTS ? IS_FAULT_MIN_A * IS_SENSE_OHMS * 0.9f : IS_CLAMP_VOLTS;
 constexpr float MOTOR_CURRENT_LIMIT_A = 20.0f;
 constexpr float TOTAL_CURRENT_LIMIT_A = 35.0f;  // below the 40 A main fuse
 constexpr uint32_t OVERCURRENT_HOLD_MS = 300;   // allow start-up inrush
-// With a 1k IS resistor, about 27 A of normal load also reaches the 3.3 V clamp,
-// so a clamped IS line is only a driver fault once it stays there. A real fault
-// keeps the line pinned (the driver latches it), and the driver has already
-// switched itself off, so waiting costs nothing.
+// Normal load also crosses IS_FAULT_VOLTS above IS_FAULT_VOLTS / IS_SENSE_OHMS
+// * IS_RATIO (about 31 A with 1k boards), so a high IS line is only a driver
+// fault once it stays there. A real fault keeps the line pinned (the driver
+// latches it), and the driver has already switched itself off, so waiting
+// costs nothing.
 constexpr uint32_t DRIVER_FAULT_HOLD_MS = 300;
 constexpr uint32_t ADS_CONVERSION_TIMEOUT_MS = 20;  // one conversion takes about 1.2 ms at 860 SPS
-constexpr uint32_t CURRENT_SENSE_STALE_MS = 250;    // each channel normally refreshes every 50 ms
+constexpr uint32_t CURRENT_SENSE_STALE_MS = 250;    // each channel normally refreshes every 60 ms
+
+// ---- Motor bus and contactor (MOTOR_24V on ADS1115 #2 A2) -----------------------
+constexpr float BUS_DIVIDER = (150.0f + 12.0f) / 12.0f;  // 150k / 12k, as the battery divider
+constexpr float BUS_OPEN_MAX_FRACTION = 0.3f;    // K1 open and the caps drained: bus below 30 % of the battery
+constexpr float BUS_CLOSED_MIN_FRACTION = 0.8f;  // K1 closed: bus above 80 % of the battery
+// 2.2k bleed and 5 x 470 uF: a 5.2 s time constant, so a full bus falls under
+// 30 % in about 6.3 s. After a quick key-off/key-on the car waits that long.
+constexpr uint32_t BUS_DISCHARGE_TIMEOUT_MS = 10000;
+constexpr uint32_t BUS_CLOSE_TIME_MS = 300;  // K1 closes in tens of ms; the caps charge at once
+
+// ---- Box temperature (DS18B20 on GPIO15) and fans (PCA9685 channel 1) -------------
+constexpr float BOX_TEMP_LIMIT_C = 65.0f;    // VERIFY on the bench: well under the 85 C parts in the box
+constexpr float BOX_TEMP_RECOVER_C = 55.0f;  // must cool below this before HOT can clear
+constexpr uint32_t BOX_TEMP_HOLD_MS = 5000;
+constexpr uint32_t BOX_TEMP_STALE_MS = 5000;
+constexpr uint32_t BOX_TEMP_PERIOD_MS = 1000;  // one reading a second (a conversion takes 750 ms)
+constexpr bool BOX_TEMP_REQUIRED = false;      // set true once the DS18B20 is fitted: then a lost sensor is HOT
+constexpr uint32_t FAN_REFRESH_MS = 1000;      // fans are re-commanded on every second, in case the PCA9685 reset
+
+// ---- Wheel direction ---------------------------------------------------------------
+// true flips a wheel whose motor runs backwards for a positive command (it is
+// mounted mirrored, or its plug is wired the other way). Set once in phase 5,
+// one wheel at a time, wheels off the ground. Order: FL, FR, RL, RR.
+constexpr bool WHEEL_REVERSED[4] = {false, false, false, false};
 
 // ---- I2C -------------------------------------------------------------------------
+constexpr uint32_t I2C_HZ = 100000;      // the PCF8574 is rated for 100 kHz; the bus also runs out to the dash and steering
 constexpr uint16_t I2C_TIMEOUT_MS = 5;  // a stuck bus fails a transfer fast instead of stalling the loop
 
 }  // namespace cfg

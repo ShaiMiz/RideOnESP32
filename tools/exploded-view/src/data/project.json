@@ -7,7 +7,7 @@
    "pinout": "docs/hardware/PINOUT.md",
    "car": "docs/hardware/CAR.md"
   },
-  "gitRef": "origin/claude/project-thread-fo5b2x",
+  "gitRef": "working tree",
   "issuesUrl": "https://github.com/ShaiMiz/RideOnESP32/issues/"
  },
  "car": {

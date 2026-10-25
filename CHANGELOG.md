@@ -26,6 +26,7 @@ A fresh start as a PlatformIO project, built on the v2.2 motor class and the [co
 - `DRIVER` waits 300 ms like `OVERCUR`, so start-up inrush no longer trips it, and the steering board's IS line is checked too.
 - The `one_motor` bench firmware has the task watchdog.
 - RC frames are found with the same resync as AlfredoCRSF, so a stray byte no longer hides a real frame and trips `LINK`.
+- New 3D exploded view of the car and the electronics box (tools/exploded-view, React Three Fiber), generated from the BOM, the wire list and the schematic nets: realistic and blueprint styles, show/hide by part, info cards with upstream and downstream wiring, variant A/B swap, revision history, and GLB/glTF/PNG/PDF/JSON export.
 
 ## 2.2 (2026)
 

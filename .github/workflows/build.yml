@@ -47,3 +47,21 @@ jobs:
       - run: pip install platformio
       - name: Build ${{ matrix.env }}
         run: pio run -e ${{ matrix.env }}
+
+  exploded-view:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/exploded-view
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: tools/exploded-view/package-lock.json
+      - run: npm ci
+      - name: Every BOM ref is drawn and every wire joins two parts
+        run: npm test
+      - name: Build the 3D exploded view
+        run: npm run build

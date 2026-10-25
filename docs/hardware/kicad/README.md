@@ -10,7 +10,7 @@ The full wiring schematic of the v3 car in KiCad 9, with the tables that go with
 | `rideonesp32.kicad_pro` | The KiCad project (open with KiCad 9 or later) |
 | [CONNECTORS.md](CONNECTORS.md) | Every box-edge plug, pin by pin: net, gauge, colour, fuse, and what each pin meets inside the box and in the car |
 | [WIRE_LIST.md](WIRE_LIST.md) / `.csv` | All 227 wires: from, to, net, AWG, colour, protecting fuse, route; the rules and the colour code |
-| [BOM.md](BOM.md) / `.csv` | Every part, matched line by line to the 24 Oct AliExpress order, plus owned, to buy, TBD and stock |
+| [BOM.md](BOM.md) / `.csv` | The one BOM: every part, tool, material and spare, one numbered line per distinct part, with manufacturer / part number, status, order line and the 24 Oct order cost |
 | [NETS.md](NETS.md) | Every net and every pin on it |
 | [variant_b/](variant_b/) | Drive variant B (2 × MDD20A + 74LVC08 + 4 current sensors), a delta sheet that replaces sheet 6 (#32) |
 | [../../reviews/2026-10-v2-vs-v3-hardware.md](../../reviews/2026-10-v2-vs-v3-hardware.md) | What changed from the old v2 hardware, and why |

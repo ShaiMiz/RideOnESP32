@@ -19,6 +19,7 @@ A fresh start as a PlatformIO project, built on the v2.2 motor class and the [co
 - Docs: draft schematic v0.2, safety-standards review, audio plan, and a CLAUDE.md for Claude Code.
 - Bench firmwares `radio_check` (phase 2) and `one_motor` (phase 4).
 - Schematic v0.3 in KiCad 9 (docs/hardware/kicad): a one-page system wiring overview, net names, connector pinouts, a checked wire list with gauge, colour and fuse per wire, and a BOM matched to the 24 Oct order. Safety changes from v0.2: both E-stop NC blocks in the contactor coil, an enable pull-down at every driver, a protected pedal supply, fuses on the 12 V outputs. Plus a v2-vs-v3 hardware comparison.
+- One BOM for the project (docs/hardware/kicad/BOM.md and .csv): one numbered line per distinct part, with category, manufacturer / part number, status, order line and the cost of the 24 Oct order; also the tools, materials and spares. docs/hardware/BOM.md now points there.
 - The pioarduino platform for Arduino core 3.x. AlfredoCRSF is pinned to a commit. The MCP23017 libraries are dropped.
 - The v2 docs, sketches and PDFs moved to `archive/`.
 - New `ESTOP` fault: the E-stop sense input locks the car and holds the contactor open, so releasing the E-stop with the pedal held no longer restarts it.

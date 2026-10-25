@@ -17,7 +17,8 @@ export function ExportPanel({ onClose, three, partsRef, wiresRef, model, data, s
       say(`${what} saved (${kb(size)})`);
     } catch (e) {
       console.error(e);
-      say(`${what} failed: ${e.message || e}`);
+      if (e?.code === 'declined') say(`${what}: save cancelled`);
+      else say(`${what} failed: ${e?.message || e}`);
     } finally {
       setBusy(null);
     }

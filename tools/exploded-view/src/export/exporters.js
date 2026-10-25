@@ -4,8 +4,30 @@ import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { COLOUR_NAMES } from '../components/Wiring.jsx';
+import { zipOne } from './zip.js';
 
-export function download(blob, filename) {
+// Inside a claude.ai Artifact the page cannot start a download itself; the viewer's
+// `downloads` capability saves it after the viewer confirms. That accepts a fixed list of
+// extensions, so .glb/.gltf go inside a .zip there. Anywhere else, a plain link download.
+const SAVE_OK = /\.(png|jpe?g|json|pdf|zip|txt|csv|html|svg)$/i;
+
+async function viewerSaver() {
+  try {
+    return window.claude?.use ? await window.claude.use('downloads') : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function download(blob, filename) {
+  const saver = await viewerSaver();
+  if (saver) {
+    let name = filename;
+    let body = blob;
+    if (!SAVE_OK.test(name)) { body = await zipOne(name, blob); name = `${name}.zip`; }
+    await saver.save({ filename: name, data: body });
+    return;
+  }
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
@@ -38,9 +60,8 @@ export function exportGLTF(objects, { binary, filename, extras }) {
         const blob = binary
           ? new Blob([result], { type: 'model/gltf-binary' })
           : new Blob([JSON.stringify(result, null, 1)], { type: 'model/gltf+json' });
-        download(blob, filename);
         if (list[0]) delete list[0].userData.rideonesp32;
-        resolve(blob.size);
+        download(blob, filename).then(() => resolve(blob.size), reject);
       },
       reject,
       { binary, onlyVisible: true, trs: false, maxTextureSize: 1024 },
@@ -63,7 +84,7 @@ export function snapshot(three, scale = 2, type = 'image/png', quality) {
 export async function exportPNG(three, scale, filename) {
   const { url } = snapshot(three, scale);
   const blob = await (await fetch(url)).blob();
-  download(blob, filename);
+  await download(blob, filename);
   return blob.size;
 }
 
@@ -71,7 +92,7 @@ export async function exportPNG(three, scale, filename) {
 const ASCII = { 'µ': 'u', '≤': '<=', '≥': '>=', '−': '-', '–': '-', '—': '-', 'Ω': 'ohm', '×': 'x', '→': '->', '°': ' deg', '’': "'", '“': '"', '”': '"', '…': '...', '·': '-' };
 const pdfText = (s) => String(s ?? '').replace(/[µ≤≥−–—Ω×→°’“”…·]/g, (c) => ASCII[c]).replace(/[^\x20-\x7e\n]/g, '?');
 
-export function exportPDF({ three, model, data, state, revision, filename }) {
+export async function exportPDF({ three, model, data, state, revision, filename }) {
   const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
   const W = doc.internal.pageSize.getWidth();
   const Hh = doc.internal.pageSize.getHeight();
@@ -136,12 +157,12 @@ export function exportPDF({ three, model, data, state, revision, filename }) {
     doc.text(`${i} / ${pages}`, W - 20, Hh - 5);
   }
   const blob = doc.output('blob');
-  download(blob, filename);
+  await download(blob, filename);
   return blob.size;
 }
 
 // The parts as plain data: every primitive, the explosion vectors, the wiring and the state.
-export function exportJSON({ model, directions, state, revisions, data, filename }) {
+export async function exportJSON({ model, directions, state, revisions, data, filename }) {
   const out = {
     format: 'rideonesp32-exploded-view/1',
     exported: new Date().toISOString(),
@@ -154,6 +175,6 @@ export function exportJSON({ model, directions, state, revisions, data, filename
     revisions,
   };
   const blob = new Blob([JSON.stringify(out, null, 1)], { type: 'application/json' });
-  download(blob, filename);
+  await download(blob, filename);
   return blob.size;
 }

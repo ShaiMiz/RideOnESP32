@@ -58,6 +58,73 @@ EXTRAS = [
 ]
 
 
+# AliExpress searches sorted by most orders, for the parts still to buy (25 Oct 2026). The cloud session can't open
+# aliexpress.com, so these are searches for the exact item, not checked listings.
+def ae(terms):
+    return f"https://www.aliexpress.com/w/wholesale-{terms.replace(' ', '-')}.html?SortType=total_tranpro_desc"
+
+
+BUY_LINKS = {
+    "R7": ("2.2k, 3 W or more (5 W fine); a local shop has it too", ae("2.2k 3w resistor")),
+    "FAN1": ("8025, 24 V DC, 2-wire, ball bearing; + 2 finger guards and a dust filter", ae("8025 24v fan")),
+    "FAN2": ("As FAN1", ae("8025 24v fan")),
+    "U31": ("Stainless probe, 1 m cable, 3 wires", ae("ds18b20 waterproof probe")),
+    "U28": ("Blue Adafruit-layout board, address 0x40", ae("pca9685 16 channel")),
+    "U29": ("Logic-level (switches from 3.3 V): LR7843 or AOD4184 boards, not IRF520", ae("4 channel mosfet module lr7843")),
+    "H1": ("Buy 5-10 A3144 + 10 neodymium magnets 10 x 5 mm", ae("a3144 hall sensor") + " / " + ae("neodymium magnet 10x5mm")),
+    "H2": ("As H1", ae("a3144 hall sensor")),
+}
+
+EXTRA_LINKS = {
+    "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)": ae("22awg silicone wire 10 colors"),
+}
+
+# Tools and materials: not part of the car, but needed to build it. (item, qty, status, order line, value pick,
+# premium pick, link, note). Value and premium picks come from the 25 Oct shopping review.
+TOOLS = [
+    ("Wanptek WPS3010H 30 V 10 A bench supply", 1, D.ORDER, "Wanptek programmable bench supply", "", "", "",
+     "Phases 3-4 run on its current limit instead of the battery"),
+    ("UNI-T UT210E DC clamp meter", 1, D.ORDER, "UNI-T UT210E clamp meter", "", "", "", "Motor and coil current without cutting wires"),
+    ("Vapcell N40 18650 protected cell", 2, D.ORDER, "Vapcell 18650", "", "", "", "For the T-Lite radio"),
+    ("PL2303 USB-TTL adapter", 3, D.ORDER, "PL2303 USB-TTL 3 pcs", "", "", "", "Not needed (the ESP32 has USB); harmless spare"),
+    ("Jumper T-Lite V2 ELRS radio", 1, D.OWNED, "", "", "", "", "Parent transmitter"),
+    ("Solder wire Sn63/Pb37 0.8 mm, rosin core 2 % flux, 100 g", 1, D.BUY, "", "Generic 63/37 rosin core",
+     "Kester 44 or Alpha Fry 63/37 (buy locally: fakes are common on AliExpress)", ae("sn63pb37 solder wire 0.8mm"),
+     "Signals and the proto board. 63/37 melts at one point (183 °C), the easiest to use"),
+    ("Solder wire Sn63/Pb37 1.0-1.2 mm, rosin core, 100 g", 1, D.BUY, "", "Generic 63/37 rosin core", "Kester 44 or Alpha Fry (local)",
+     ae("sn63pb37 solder wire 1.0mm"), "10/12 AWG lugs, XT60s, motor tabs"),
+    ("Lead-free solder wire (instead of 63/37, if kids are near the bench)", 0, D.BUY, "", "Sn99.3/Cu0.7 rosin core",
+     "SAC305 (Sn96.5/Ag3/Cu0.5)", ae("sac305 solder wire"), "Optional; harder to use than 63/37"),
+    ("Flux paste, 10 cc syringe with plunger and needle", 1, D.BUY, "", "MECHANIC UV-223 or RMA-223",
+     "Amtech NC-559-V2-TF (often faked on AliExpress)", ae("mechanic uv-223 flux"),
+     "Flux paste, not solder paste: solder paste is for surface-mount boards and hot air"),
+    ("No-clean flux pen", 1, D.BUY, "", "Generic rosin flux pen", "Kester 951 flux pen", ae("no clean flux pen"), "Tinning wire ends"),
+    ("Desoldering braid 2.0 and 2.5 mm, 1.5 m", 2, D.BUY, "", "MECHANIC wick", "Goot Wick CP-2015 / CP-3015", ae("goot wick desoldering braid"), ""),
+    ("Desoldering pump", 1, D.BUY, "", "Generic aluminium pump", "Engineer SS-02", ae("desoldering pump aluminum"), ""),
+    ("Brass-wool tip cleaner with holder", 1, D.BUY, "", "Generic brass wool in a metal cup", "Hakko 599B (genuine sold locally)",
+     ae("brass wire tip cleaner holder"), "No water needed"),
+    ("Soldering tip tinner / refresher", 1, D.BUY, "", "MECHANIC tip refresher", "Hakko FS-100 or Goot BS-2", ae("soldering tip refresher"),
+     "Revives a blackened tip"),
+    ("Isopropyl alcohol 99 % + ESD-safe brush", 1, D.BUY, "", "Generic ESD brush; alcohol from a pharmacy", "Flux-remover spray (local)",
+     ae("esd anti static brush"), "Buy the alcohol locally: flammable, ships badly"),
+    ("Silicone soldering mat, about 45 x 30 cm", 1, D.BUY, "", "Generic heat-resistant mat with screw trays", "Kaisi silicone mat",
+     ae("silicone soldering mat"), ""),
+    ("Helping hands, weighted base, 4 flexible arms", 1, D.BUY, "", "Generic 4-arm with clips", "Same with magnifier and LED",
+     ae("helping hands soldering 4 arms"), ""),
+    ("Solder fume extractor", 1, D.BUY, "", "Small desk fan with carbon filter", "Larger extractor on an arm", ae("solder fume extractor"), ""),
+    ("Heat gun, dual temperature", 1, D.BUY, "", "Generic 2000 W", "Any brand with an adjustable dial", ae("heat gun 2000w"),
+     "For the heat shrink in the order; local hardware stores have them"),
+    ("Automatic wire stripper, 10-24 AWG", 1, D.BUY, "", "Generic self-adjusting stripper", "Knipex 12 62 180 (local)",
+     ae("automatic wire stripper"), ""),
+    ("Hex crimper for 6-50 mm² lugs", 1, D.BUY, "", "Generic hexagon lug crimper", "Hydraulic crimper (overkill here)",
+     ae("hex crimping tool 6-50mm2"), "For the 10 AWG ring lugs; the terminal kit's crimper is for small terminals"),
+    ("Soldering iron, 60 W or more, 3-5 mm chisel + conical tip", 1, D.BUY, "",
+     "SEQURE S60 or FNIRSI HS-02 (USB-C PD pen iron, ~100 W; needs a 65-100 W PD charger)",
+     "AIXUN T3A or SUGON T26D station (JBC C245-compatible tips)",
+     ae("fnirsi hs-02") + " / " + ae("aixun t3a"), "Skip if you already have one this strong: 10 AWG and XT60 need the power"),
+]
+
+
 def endpoint_net(ep, by_ref, syms):
     if ep in W.BUS:
         return W.BUS[ep], None
@@ -206,6 +273,12 @@ def write_connectors(out, parts, syms, rows):
     (out / "CONNECTORS.md").write_text("".join(txt))
 
 
+def links_md(links):
+    if not links:
+        return "-"
+    return ", ".join(f"[search]({u.strip()})" for u in links.split(" / "))
+
+
 def write_bom(out, parts, vb_parts):
     groups = defaultdict(list)
     for p in parts:
@@ -219,22 +292,31 @@ def write_bom(out, parts, vb_parts):
         issue = ", ".join(sorted({p.issue for p in ps if p.issue}))
         if issue:
             bits.append(f"Issue {issue}")
-        rows.append(dict(refs=" ".join(refs), qty=len(ps), part=part, loc=loc, src=src, line=line, note=". ".join(bits)))
+        if src == D.BUY and refs[0] in BUY_LINKS:
+            bits.append(f"Spec: {BUY_LINKS[refs[0]][0]}")
+        rows.append(dict(refs=" ".join(refs), qty=len(ps), part=part, loc=loc, src=src, line=line, note=". ".join(bits),
+                         link=BUY_LINKS.get(refs[0], ("", ""))[1] if src == D.BUY else ""))
     for ref, qty, part, loc, src, line, note in EXTRAS:
-        rows.append(dict(refs=ref, qty=qty, part=part, loc=loc, src=src, line=line, note=note))
+        rows.append(dict(refs=ref, qty=qty, part=part, loc=loc, src=src, line=line, note=note,
+                         link=EXTRA_LINKS.get(part, "") if src == D.BUY else ""))
     order = {D.ORDER: 0, D.OWNED: 1, D.BUY: 2, D.TBD: 3, D.STOCK: 4}
     rows.sort(key=lambda r: (order.get(r["src"], 9), r["refs"]))
     with open(out / "BOM.csv", "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["Refs", "Qty", "Part", "Where", "Status", "Order line (24 Oct)", "Note"])
+        w.writerow(["Refs", "Qty", "Part", "Where", "Status", "Order line (24 Oct)", "Note", "Value pick", "Premium pick", "Search"])
         for r in rows:
-            w.writerow([r["refs"], r["qty"], r["part"], r["loc"], r["src"], r["line"], r["note"]])
+            w.writerow([r["refs"], r["qty"], r["part"], r["loc"], r["src"], r["line"], r["note"], "", "", r["link"]])
+        for t in TOOLS:
+            w.writerow(["tool", t[1], t[0], "", t[2], t[3], t[7], t[4], t[5], t[6]])
     titles = {D.ORDER: "In the 24 Oct order", D.OWNED: "Already owned", D.BUY: "Still to buy",
               D.TBD: "Waiting on a decision or the car photos", D.STOCK: "Stock car parts (kept, not bought)"}
     txt = [HEAD, "# Bill of materials (v0.3)\n\n",
            "Generated from the schematic fields (Part, Source, Location) and matched line by line to the AliExpress order "
-           "of 24 Oct 2026 (shopping/2026-10-24-aliexpress-order.md). Variant A (4 + 1 IBT-2). Tools in the order (bench "
-           "supply, clamp meter, USB-TTL, 18650 cells) are not part of the car and are left out.\n\n",
+           "of 24 Oct 2026 (shopping/2026-10-24-aliexpress-order.md). Variant A (4 + 1 IBT-2). This is the one list for "
+           "the project: car parts first, then the tools and materials to build it, each split into ordered, owned and "
+           "still to buy.\n\n"
+           "Links for things still to buy are AliExpress searches sorted by most orders (the cloud session can't open "
+           "aliexpress.com listings); pick a top result that matches the spec.\n\n",
            "## Check when the order arrives\n\n",
            "- **470 µF capacitors (C111-C115):** the order line reads \"Electrolytic caps 10-25 V\". On a 24 V bus they must be "
            "**35 V or more** (50 V preferred). If the bag says 25 V, do not fit them; buy 470 µF 50 V low-ESR.\n",
@@ -247,9 +329,29 @@ def write_bom(out, parts, vb_parts):
         if not rs:
             continue
         txt.append(f"## {title}\n\n")
-        cols = ["Refs", "Qty", "Part", "Where", "Order line", "Note"] if src == D.ORDER else ["Refs", "Qty", "Part", "Where", "Note"]
-        txt.append(md_table(cols, [[r["refs"], r["qty"], r["part"], r["loc"]] + ([r["line"]] if src == D.ORDER else []) + [r["note"]]
-                                   for r in rs]))
+        if src == D.ORDER:
+            cols, body = ["Refs", "Qty", "Part", "Where", "Order line", "Note"], [
+                [r["refs"], r["qty"], r["part"], r["loc"], r["line"], r["note"]] for r in rs]
+        elif src == D.BUY:
+            cols, body = ["Refs", "Qty", "Part", "Where", "Note", "Search"], [
+                [r["refs"], r["qty"], r["part"], r["loc"], r["note"], links_md(r["link"])] for r in rs]
+        else:
+            cols, body = ["Refs", "Qty", "Part", "Where", "Note"], [[r["refs"], r["qty"], r["part"], r["loc"], r["note"]] for r in rs]
+        txt.append(md_table(cols, body))
+        txt.append("\n")
+    txt.append("## Tools and materials\n\n"
+               "Not part of the car, but needed to build it. For each thing still to buy: a value pick (best for the money) and a "
+               "premium pick. Qty 0 = optional.\n\n")
+    for src, title in ((D.ORDER, "In the 24 Oct order"), (D.OWNED, "Already owned"), (D.BUY, "Still to buy")):
+        ts = [t for t in TOOLS if t[2] == src]
+        txt.append(f"### {title}\n\n")
+        if src == D.BUY:
+            txt.append(md_table(["Qty", "Item", "Value pick", "Premium pick", "Note", "Search"],
+                                [[t[1], t[0], t[4], t[5] or "-", t[7], links_md(t[6])] for t in ts]))
+        elif src == D.ORDER:
+            txt.append(md_table(["Qty", "Item", "Order line", "Note"], [[t[1], t[0], t[3], t[7]] for t in ts]))
+        else:
+            txt.append(md_table(["Qty", "Item", "Note"], [[t[1], t[0], t[7]] for t in ts]))
         txt.append("\n")
     vb = defaultdict(list)
     for p in vb_parts:

@@ -2,7 +2,9 @@
 
 # Bill of materials (v0.3)
 
-Generated from the schematic fields (Part, Source, Location) and matched line by line to the AliExpress order of 24 Oct 2026 (shopping/2026-10-24-aliexpress-order.md). Variant A (4 + 1 IBT-2). Tools in the order (bench supply, clamp meter, USB-TTL, 18650 cells) are not part of the car and are left out.
+Generated from the schematic fields (Part, Source, Location) and matched line by line to the AliExpress order of 24 Oct 2026 (shopping/2026-10-24-aliexpress-order.md). Variant A (4 + 1 IBT-2). This is the one list for the project: car parts first, then the tools and materials to build it, each split into ordered, owned and still to buy.
+
+Links for things still to buy are AliExpress searches sorted by most orders (the cloud session can't open aliexpress.com listings); pick a top result that matches the spec.
 
 ## Check when the order arrives
 
@@ -70,39 +72,39 @@ Generated from the schematic fields (Part, Source, Location) and matched line by
 
 ## Still to buy
 
-| Refs | Qty | Part | Where | Note |
-|---|---|---|---|---|
-|  | 5 | 8-way 2.54 mm housing + crimp pins for each IBT-2 control header (or JST-XH adapter) | box | Holds the EN and IS jumpers and the EN pull-down; a dab of hot glue against vibration |
-|  | 4 | Deutsch DT (or clone) mating pairs: 4-way x2 (J9, J12), 6-way (J11), 8-way (J10), with seals | box edge |  |
-|  | 1 | 14-16 AWG wire, orange or red (key, F6 and 12 V branches) | box | 12 AWG from the order also works |
-|  | 1 | 20 AWG wire, 4-6 core cable for off-box harnesses (E-stop, sensors, dash) | harness |  |
-|  | 1 | 22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md) | box | Was in the cart review, not in the order |
-|  | 10 | Cable glands PG9 / PG13.5 | box |  |
-|  | 1 | Nylon M3 standoffs and a mounting plate | box |  |
-| A1 | 1 | Interface board: screw-terminal proto board ~70 x 90 mm + 3.5 mm terminals | box | Holds Q1, the sense networks, pull-ups and the battery divider |
-| FAN1 | 1 | 24 V 80 mm fan, finger guard, filter (intake) | box wall |  |
-| FAN2 | 1 | 24 V 80 mm fan, finger guard (exhaust) | box wall |  |
-| H1 | 1 | A3144 hall switch + magnet on the left wheel | car |  |
-| H2 | 1 | A3144 hall switch + magnet on the right wheel | car |  |
-| J10 | 1 | Sealed 8-way, Deutsch DT04-08PA / DT06-08SA (or clone) | box edge | Our own plug: halls, steering angle, seat |
-| J11 | 1 | Sealed 6-way, Deutsch DT04-6P / DT06-6S (or clone) | box edge | Our own plug: OLED and alert speaker |
-| J12 | 1 | 4-way, Deutsch DT04-4P / DT06-4S (or clone) | box edge | Our own plug; music path only, never shared with the ESP32 |
-| J9 | 1 | Sealed 4-way, Deutsch DT04-4P / DT06-4S (or DT-style clone) | box edge | Our own plug: E-stop on the dash |
-| LS1 | 1 | 3 in 4 Ω full-range speaker, car sounds | dash |  |
-| LS2 | 1 | 3 in full-range speaker (+ DDT-S30 tweeter via 10 µF film cap, AUDIO.md) | car |  |
-| LS3 | 1 | 3 in full-range speaker (+ DDT-S30 tweeter via 10 µF film cap, AUDIO.md) | car |  |
-| R7 | 1 | Resistor 2.2k, 3 W wirewound or metal oxide | box | Bleed: drains the driver caps with K1 open (5 s time constant), so the boot weld check can see a welded K1. 0.4 W with K1 closed |
-| SW5 | 1 | Seat switch, closes with a child seated (optional) | car |  |
-| TB1 | 1 | M6 brass stud or bus bar: the one ground star point | box | Battery −, every driver B−, rails and logic ground meet here and nowhere else |
-| TB2 | 1 | M6 stud or bus bar after K1 stud B | box |  |
-| U14 | 1 | IBT-2 (BTS7960) board, steering | box | VCC on 3.3 V so 3.3 V PWM reads as a clean HIGH. Never tie R_EN/L_EN to VCC |
-| U28 | 1 | PCA9685 16-channel PWM board | box | Accessory PWM; PWM2-15 spare |
-| U29 | 1 | 4-channel low-side MOSFET board, logic-level | box |  |
-| U3 | 1 | 24 to 5 V 5 A buck module | box | Accessories only: DFPlayer, USB, LED strips |
-| U30 | 1 | DFPlayer Mini + micro-SD card | box |  |
-| U31 | 1 | DS18B20 waterproof probe | box |  |
-| U32 | 1 | ZK-502T Bluetooth amp | box or dash | Cap the volume (EN 71-1 loudness, see the safety review) |
-| U4 | 1 | 24 to 12 V 10-20 A sealed buck | box | Lights and music amp |
+| Refs | Qty | Part | Where | Note | Search |
+|---|---|---|---|---|---|
+|  | 5 | 8-way 2.54 mm housing + crimp pins for each IBT-2 control header (or JST-XH adapter) | box | Holds the EN and IS jumpers and the EN pull-down; a dab of hot glue against vibration | - |
+|  | 4 | Deutsch DT (or clone) mating pairs: 4-way x2 (J9, J12), 6-way (J11), 8-way (J10), with seals | box edge |  | - |
+|  | 1 | 14-16 AWG wire, orange or red (key, F6 and 12 V branches) | box | 12 AWG from the order also works | - |
+|  | 1 | 20 AWG wire, 4-6 core cable for off-box harnesses (E-stop, sensors, dash) | harness |  | - |
+|  | 1 | 22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md) | box | Was in the cart review, not in the order | [search](https://www.aliexpress.com/w/wholesale-22awg-silicone-wire-10-colors.html?SortType=total_tranpro_desc) |
+|  | 10 | Cable glands PG9 / PG13.5 | box |  | - |
+|  | 1 | Nylon M3 standoffs and a mounting plate | box |  | - |
+| A1 | 1 | Interface board: screw-terminal proto board ~70 x 90 mm + 3.5 mm terminals | box | Holds Q1, the sense networks, pull-ups and the battery divider | - |
+| FAN1 | 1 | 24 V 80 mm fan, finger guard, filter (intake) | box wall | Spec: 8025, 24 V DC, 2-wire, ball bearing; + 2 finger guards and a dust filter | [search](https://www.aliexpress.com/w/wholesale-8025-24v-fan.html?SortType=total_tranpro_desc) |
+| FAN2 | 1 | 24 V 80 mm fan, finger guard (exhaust) | box wall | Spec: As FAN1 | [search](https://www.aliexpress.com/w/wholesale-8025-24v-fan.html?SortType=total_tranpro_desc) |
+| H1 | 1 | A3144 hall switch + magnet on the left wheel | car | Spec: Buy 5-10 A3144 + 10 neodymium magnets 10 x 5 mm | [search](https://www.aliexpress.com/w/wholesale-a3144-hall-sensor.html?SortType=total_tranpro_desc), [search](https://www.aliexpress.com/w/wholesale-neodymium-magnet-10x5mm.html?SortType=total_tranpro_desc) |
+| H2 | 1 | A3144 hall switch + magnet on the right wheel | car | Spec: As H1 | [search](https://www.aliexpress.com/w/wholesale-a3144-hall-sensor.html?SortType=total_tranpro_desc) |
+| J10 | 1 | Sealed 8-way, Deutsch DT04-08PA / DT06-08SA (or clone) | box edge | Our own plug: halls, steering angle, seat | - |
+| J11 | 1 | Sealed 6-way, Deutsch DT04-6P / DT06-6S (or clone) | box edge | Our own plug: OLED and alert speaker | - |
+| J12 | 1 | 4-way, Deutsch DT04-4P / DT06-4S (or clone) | box edge | Our own plug; music path only, never shared with the ESP32 | - |
+| J9 | 1 | Sealed 4-way, Deutsch DT04-4P / DT06-4S (or DT-style clone) | box edge | Our own plug: E-stop on the dash | - |
+| LS1 | 1 | 3 in 4 Ω full-range speaker, car sounds | dash |  | - |
+| LS2 | 1 | 3 in full-range speaker (+ DDT-S30 tweeter via 10 µF film cap, AUDIO.md) | car |  | - |
+| LS3 | 1 | 3 in full-range speaker (+ DDT-S30 tweeter via 10 µF film cap, AUDIO.md) | car |  | - |
+| R7 | 1 | Resistor 2.2k, 3 W wirewound or metal oxide | box | Bleed: drains the driver caps with K1 open (5 s time constant), so the boot weld check can see a welded K1. 0.4 W with K1 closed. Spec: 2.2k, 3 W or more (5 W fine); a local shop has it too | [search](https://www.aliexpress.com/w/wholesale-2.2k-3w-resistor.html?SortType=total_tranpro_desc) |
+| SW5 | 1 | Seat switch, closes with a child seated (optional) | car |  | - |
+| TB1 | 1 | M6 brass stud or bus bar: the one ground star point | box | Battery −, every driver B−, rails and logic ground meet here and nowhere else | - |
+| TB2 | 1 | M6 stud or bus bar after K1 stud B | box |  | - |
+| U14 | 1 | IBT-2 (BTS7960) board, steering | box | VCC on 3.3 V so 3.3 V PWM reads as a clean HIGH. Never tie R_EN/L_EN to VCC | - |
+| U28 | 1 | PCA9685 16-channel PWM board | box | Accessory PWM; PWM2-15 spare. Spec: Blue Adafruit-layout board, address 0x40 | [search](https://www.aliexpress.com/w/wholesale-pca9685-16-channel.html?SortType=total_tranpro_desc) |
+| U29 | 1 | 4-channel low-side MOSFET board, logic-level | box | Spec: Logic-level (switches from 3.3 V): LR7843 or AOD4184 boards, not IRF520 | [search](https://www.aliexpress.com/w/wholesale-4-channel-mosfet-module-lr7843.html?SortType=total_tranpro_desc) |
+| U3 | 1 | 24 to 5 V 5 A buck module | box | Accessories only: DFPlayer, USB, LED strips | - |
+| U30 | 1 | DFPlayer Mini + micro-SD card | box |  | - |
+| U31 | 1 | DS18B20 waterproof probe | box | Spec: Stainless probe, 1 m cable, 3 wires | [search](https://www.aliexpress.com/w/wholesale-ds18b20-waterproof-probe.html?SortType=total_tranpro_desc) |
+| U32 | 1 | ZK-502T Bluetooth amp | box or dash | Cap the volume (EN 71-1 loudness, see the safety review) | - |
+| U4 | 1 | 24 to 12 V 10-20 A sealed buck | box | Lights and music amp | - |
 
 ## Waiting on a decision or the car photos
 
@@ -134,6 +136,47 @@ Generated from the schematic fields (Part, Source, Location) and matched line by
 | SW2 | 1 | Stock shifter, forward contact (must be signal-only) | car | Issue #17 |
 | SW3 | 1 | Stock shifter, reverse contact (must be signal-only) | car | Issue #17 |
 | SW4 | 1 | Stock horn button | dash | Issue #17 |
+
+## Tools and materials
+
+Not part of the car, but needed to build it. For each thing still to buy: a value pick (best for the money) and a premium pick. Qty 0 = optional.
+
+### In the 24 Oct order
+
+| Qty | Item | Order line | Note |
+|---|---|---|---|
+| 1 | Wanptek WPS3010H 30 V 10 A bench supply | Wanptek programmable bench supply | Phases 3-4 run on its current limit instead of the battery |
+| 1 | UNI-T UT210E DC clamp meter | UNI-T UT210E clamp meter | Motor and coil current without cutting wires |
+| 2 | Vapcell N40 18650 protected cell | Vapcell 18650 | For the T-Lite radio |
+| 3 | PL2303 USB-TTL adapter | PL2303 USB-TTL 3 pcs | Not needed (the ESP32 has USB); harmless spare |
+
+### Already owned
+
+| Qty | Item | Note |
+|---|---|---|
+| 1 | Jumper T-Lite V2 ELRS radio | Parent transmitter |
+
+### Still to buy
+
+| Qty | Item | Value pick | Premium pick | Note | Search |
+|---|---|---|---|---|---|
+| 1 | Solder wire Sn63/Pb37 0.8 mm, rosin core 2 % flux, 100 g | Generic 63/37 rosin core | Kester 44 or Alpha Fry 63/37 (buy locally: fakes are common on AliExpress) | Signals and the proto board. 63/37 melts at one point (183 °C), the easiest to use | [search](https://www.aliexpress.com/w/wholesale-sn63pb37-solder-wire-0.8mm.html?SortType=total_tranpro_desc) |
+| 1 | Solder wire Sn63/Pb37 1.0-1.2 mm, rosin core, 100 g | Generic 63/37 rosin core | Kester 44 or Alpha Fry (local) | 10/12 AWG lugs, XT60s, motor tabs | [search](https://www.aliexpress.com/w/wholesale-sn63pb37-solder-wire-1.0mm.html?SortType=total_tranpro_desc) |
+| 0 | Lead-free solder wire (instead of 63/37, if kids are near the bench) | Sn99.3/Cu0.7 rosin core | SAC305 (Sn96.5/Ag3/Cu0.5) | Optional; harder to use than 63/37 | [search](https://www.aliexpress.com/w/wholesale-sac305-solder-wire.html?SortType=total_tranpro_desc) |
+| 1 | Flux paste, 10 cc syringe with plunger and needle | MECHANIC UV-223 or RMA-223 | Amtech NC-559-V2-TF (often faked on AliExpress) | Flux paste, not solder paste: solder paste is for surface-mount boards and hot air | [search](https://www.aliexpress.com/w/wholesale-mechanic-uv-223-flux.html?SortType=total_tranpro_desc) |
+| 1 | No-clean flux pen | Generic rosin flux pen | Kester 951 flux pen | Tinning wire ends | [search](https://www.aliexpress.com/w/wholesale-no-clean-flux-pen.html?SortType=total_tranpro_desc) |
+| 2 | Desoldering braid 2.0 and 2.5 mm, 1.5 m | MECHANIC wick | Goot Wick CP-2015 / CP-3015 |  | [search](https://www.aliexpress.com/w/wholesale-goot-wick-desoldering-braid.html?SortType=total_tranpro_desc) |
+| 1 | Desoldering pump | Generic aluminium pump | Engineer SS-02 |  | [search](https://www.aliexpress.com/w/wholesale-desoldering-pump-aluminum.html?SortType=total_tranpro_desc) |
+| 1 | Brass-wool tip cleaner with holder | Generic brass wool in a metal cup | Hakko 599B (genuine sold locally) | No water needed | [search](https://www.aliexpress.com/w/wholesale-brass-wire-tip-cleaner-holder.html?SortType=total_tranpro_desc) |
+| 1 | Soldering tip tinner / refresher | MECHANIC tip refresher | Hakko FS-100 or Goot BS-2 | Revives a blackened tip | [search](https://www.aliexpress.com/w/wholesale-soldering-tip-refresher.html?SortType=total_tranpro_desc) |
+| 1 | Isopropyl alcohol 99 % + ESD-safe brush | Generic ESD brush; alcohol from a pharmacy | Flux-remover spray (local) | Buy the alcohol locally: flammable, ships badly | [search](https://www.aliexpress.com/w/wholesale-esd-anti-static-brush.html?SortType=total_tranpro_desc) |
+| 1 | Silicone soldering mat, about 45 x 30 cm | Generic heat-resistant mat with screw trays | Kaisi silicone mat |  | [search](https://www.aliexpress.com/w/wholesale-silicone-soldering-mat.html?SortType=total_tranpro_desc) |
+| 1 | Helping hands, weighted base, 4 flexible arms | Generic 4-arm with clips | Same with magnifier and LED |  | [search](https://www.aliexpress.com/w/wholesale-helping-hands-soldering-4-arms.html?SortType=total_tranpro_desc) |
+| 1 | Solder fume extractor | Small desk fan with carbon filter | Larger extractor on an arm |  | [search](https://www.aliexpress.com/w/wholesale-solder-fume-extractor.html?SortType=total_tranpro_desc) |
+| 1 | Heat gun, dual temperature | Generic 2000 W | Any brand with an adjustable dial | For the heat shrink in the order; local hardware stores have them | [search](https://www.aliexpress.com/w/wholesale-heat-gun-2000w.html?SortType=total_tranpro_desc) |
+| 1 | Automatic wire stripper, 10-24 AWG | Generic self-adjusting stripper | Knipex 12 62 180 (local) |  | [search](https://www.aliexpress.com/w/wholesale-automatic-wire-stripper.html?SortType=total_tranpro_desc) |
+| 1 | Hex crimper for 6-50 mm² lugs | Generic hexagon lug crimper | Hydraulic crimper (overkill here) | For the 10 AWG ring lugs; the terminal kit's crimper is for small terminals | [search](https://www.aliexpress.com/w/wholesale-hex-crimping-tool-6-50mm2.html?SortType=total_tranpro_desc) |
+| 1 | Soldering iron, 60 W or more, 3-5 mm chisel + conical tip | SEQURE S60 or FNIRSI HS-02 (USB-C PD pen iron, ~100 W; needs a 65-100 W PD charger) | AIXUN T3A or SUGON T26D station (JBC C245-compatible tips) | Skip if you already have one this strong: 10 AWG and XT60 need the power | [search](https://www.aliexpress.com/w/wholesale-fnirsi-hs-02.html?SortType=total_tranpro_desc), [search](https://www.aliexpress.com/w/wholesale-aixun-t3a.html?SortType=total_tranpro_desc) |
 
 ## Variant B instead of the four drive IBT-2s
 

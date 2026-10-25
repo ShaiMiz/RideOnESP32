@@ -80,7 +80,7 @@ def net_class(net):
         return 22, "GY", "-"
     if net == "I2C_SDA":
         return 22, "GN", "-"
-    if net.startswith("IS_") or net in ("PEDAL", "PEDAL_IN", "PEDAL_VCC", "BATTERY_SENSE"):
+    if net.startswith("IS_") or net in ("PEDAL", "PEDAL_IN", "PEDAL_VCC", "BATTERY_SENSE", "BUS_SENSE"):
         return 22, "BN", "-"
     if net.startswith("SPK_"):
         return 18, "RD" if net.endswith("_P") else "BK", "amp output"
@@ -207,6 +207,9 @@ run("R102.2", "U22.A1", "box")
 run("R103.2", "U22.A2", "box")
 run("R104.2", "U22.A3", "box")
 run("R105.2", "U23.A0", "box")
+run("R5.2", "R6.1", "box", "BUS_SENSE from the R5 lead at TB2 to A1")
+run("R6.1", "U23.A2", "box")
+run("R7.2", "A1:GND", "box", "Bleed return", gauge=20)
 run("A1:3V3", "R22.1", "box", "On A1")
 run("R22.2", "J3.1", "box", "Pedal supply")
 run("J3.2", "R20.1", "box", "Pedal signal")
@@ -305,7 +308,8 @@ DIRECT = {
     **{f"F{n}.1": "Fuse block common bus (fed by F3.1)" for n in (4, 5, 6, 7, 8)},
     **{f"R11{i}.1": "10k soldered inside the driver's control plug, EN to GND" for i in range(1, 6)},
     **{f"R11{i}.2": "10k soldered inside the driver's control plug, EN to GND" for i in range(1, 6)},
-    "TB2.7": "Spare stud position (D2)", "TB2.8": "Spare stud position",
+    "TB2.7": "Spare stud position (D2)", "TB2.8": "Ring lug holding the R5 and R7 leads",
+    "R5.1": "Lead in a ring lug on TB2.8", "R7.1": "Lead in a ring lug on TB2.8",
     "U1.OUT-": "Joined to IN− inside the module", "U3.OUT-": "Joined to IN− inside the module",
     "U4.OUT-": "Joined to IN− inside the module", "U20.R14": "Joined to L14 on the board",
 }

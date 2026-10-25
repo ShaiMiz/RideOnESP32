@@ -19,6 +19,7 @@ A fresh start as a PlatformIO project, built on the v2.2 motor class and the [co
 - Docs: draft schematic v0.2, safety-standards review, audio plan, and a CLAUDE.md for Claude Code.
 - Bench firmwares `radio_check` (phase 2) and `one_motor` (phase 4).
 - Schematic v0.3 in KiCad 9 (docs/hardware/kicad): a one-page system wiring overview, net names, connector pinouts, a checked wire list with gauge, colour and fuse per wire, and a BOM matched to the 24 Oct order. Safety changes from v0.2: both E-stop NC blocks in the contactor coil, an enable pull-down at every driver, a protected pedal supply, fuses on the 12 V outputs. Plus a v2-vs-v3 hardware comparison.
+- One BOM for the project (docs/hardware/kicad/BOM.md and .csv): one numbered line per distinct part, with category, manufacturer / part number, status, order line and the cost of the 24 Oct order; also the tools, materials and spares. docs/hardware/BOM.md now points there.
 - The pioarduino platform for Arduino core 3.x. AlfredoCRSF is pinned to a commit. The MCP23017 libraries are dropped.
 - The v2 docs, sketches and PDFs moved to `archive/`.
 - New `ESTOP` fault: the E-stop sense input locks the car and holds the contactor open, so releasing the E-stop with the pedal held no longer restarts it.
@@ -26,6 +27,13 @@ A fresh start as a PlatformIO project, built on the v2.2 motor class and the [co
 - `DRIVER` waits 300 ms like `OVERCUR`, so start-up inrush no longer trips it, and the steering board's IS line is checked too.
 - The `one_motor` bench firmware has the task watchdog.
 - RC frames are found with the same resync as AlfredoCRSF, so a stray byte no longer hides a real frame and trips `LINK`.
+- Firmware matched to schematic v0.3:
+  - Current sense now uses half the per-pin IS resistor (`IS_PIN_RESISTOR_OHMS`), since R_IS and L_IS are joined. Before this, current read about half the real value, so the 20 A limit really sat near 40 A. The `DRIVER` level comes from the resistor (1.8 V with 1k boards) instead of a fixed 3.2 V.
+  - `DRIVER` and `OVERCUR` open the contactor, because a shorted driver MOSFET ignores its enable. The drive enable now drops before the contactor opens.
+  - The motor bus is read on ADS1115 #2 A2 (new R5-R7 in the schematic, with a bleed resistor). At boot the contactor stays open until the bus has drained; a bus still live after 10 s is the new permanent `K1_WELD` fault. A contactor held closed with no bus is the new `NO_BUS` fault.
+  - I2C runs at 100 kHz, the PCF8574's rating, instead of 400 kHz.
+  - The box fans run whenever the ESP32 runs (PCA9685 channel 1). The DS18B20 is read, and a box above 65 °C is the new `HOT` fault.
+  - `WHEEL_REVERSED` in `config.h` flips any wheel whose motor turns backwards.
 
 ## 2.2 (2026)
 

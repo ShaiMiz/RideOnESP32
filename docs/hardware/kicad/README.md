@@ -10,7 +10,7 @@ The full wiring schematic of the v3 car in KiCad 9, with the tables that go with
 | `rideonesp32.kicad_pro` | The KiCad project (open with KiCad 9 or later) |
 | [CONNECTORS.md](CONNECTORS.md) | Every box-edge plug, pin by pin: net, gauge, colour, fuse, and what each pin meets inside the box and in the car |
 | [WIRE_LIST.md](WIRE_LIST.md) / `.csv` | All 227 wires: from, to, net, AWG, colour, protecting fuse, route; the rules and the colour code |
-| [BOM.md](BOM.md) / `.csv` | Every part, matched line by line to the 24 Oct AliExpress order, plus owned, to buy, TBD and stock |
+| [BOM.md](BOM.md) / `.csv` | The one BOM: every part, tool, material and spare, one numbered line per distinct part, with manufacturer / part number, status, order line and the 24 Oct order cost |
 | [NETS.md](NETS.md) | Every net and every pin on it |
 | [variant_b/](variant_b/) | Drive variant B (2 × MDD20A + 74LVC08 + 4 current sensors), a delta sheet that replaces sheet 6 (#32) |
 | [../../reviews/2026-10-v2-vs-v3-hardware.md](../../reviews/2026-10-v2-vs-v3-hardware.md) | What changed from the old v2 hardware, and why |
@@ -22,7 +22,7 @@ The full wiring schematic of the v3 car in KiCad 9, with the tables that go with
 | 1 | Index | Sheet map, how to read it, the three safety layers, open items, revisions |
 | 2 | System wiring overview | Every assembly on one A2 page joined by real wires: battery to motors, the safety chain, rails, ESP32, drivers and the I2C chain. A drawing only (lines are bundles); the nets are on pages 3-9 |
 | 3 | Car harness and box edge | Everything outside the box: battery and F1, key, pedal, shifter, motors, E-stop, sensors, dash, speakers, and the plugs J1-J12 |
-| 4 | Power and safety chain | K1 contactor, coil chain (F3, E-stop, Q1), F2 key feed, fuse block F3-F8, ground star TB1, motor bus TB2, battery divider, D2 TVS |
+| 4 | Power and safety chain | K1 contactor, coil chain (F3, E-stop, Q1), F2 key feed, fuse block F3-F8, ground star TB1, motor bus TB2, battery divider, motor-bus sense and bleed (R5-R7), D2 TVS |
 | 5 | Low-voltage rails | U1 5V_LOGIC, U2 3V3_SENSE, U3 5V_ACC, U4 12V_ACC |
 | 6 | Drive, variant A | U10-U14 IBT-2, 470 µF each, enable pull-downs, IS sense networks |
 | 7 | Controller and inputs | ESP32 (pins from include/pins.h), receiver, pedal input, wheel-speed pull-ups, DS18B20, sound TX |

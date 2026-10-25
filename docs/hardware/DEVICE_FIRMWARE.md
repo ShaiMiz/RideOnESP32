@@ -123,7 +123,7 @@ The AS5600 holds its zero position, maximum position and configuration in regist
 | PCA9685 | Address 0x40 to 0x7F; PWM frequency | A0 to A5 solder pads; frequency by our firmware |
 | MPU-6050 | Address 0x68 or 0x69; range and filter | AD0 pin; the rest by firmware |
 | SSD1306 OLED | Address 0x3C or 0x3D | Resistor on the back of the module |
-| BTS7960 (IBT-2) | Nothing | Read its IS resistor value for `IS_RESISTOR_OHMS` in [include/config.h](../../include/config.h) |
+| BTS7960 (IBT-2) | Nothing | Read its IS resistor value for `IS_PIN_RESISTOR_OHMS` in [include/config.h](../../include/config.h) |
 | LM2596 bucks | Output voltage | Turn the trim pot with a meter on the output and no load connected. Set 5.0 V **before** connecting the ESP32 |
 | XH-M609 | Cut-off and reconnect voltage | Double-press the left button for the cut-off voltage. Long-press the right button for the reconnect offset. Short press = 0.1 V, long press = 1 V. Sellers' instructions vary, so check with a bench supply. The relay is rated 20 A (run it at 10 A or less), so it can't carry motor current. It could cut the accessory feed |
 | DFPlayer Mini | Sounds | microSD up to 32 GB, FAT32. Put files in a folder named `MP3` as `0001.mp3`, `0002.mp3`, and so on. 9600 baud serial; add a 1 kΩ resistor in its RX line to avoid hum |

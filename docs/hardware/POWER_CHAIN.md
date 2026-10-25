@@ -39,9 +39,17 @@ Do **not** feed 3.3 V into the ESP32's VIN pin, as the old docs suggested. VIN t
 | --- | --- | --- | --- |
 | Drive enable (R_EN + L_EN of all four drive boards) | GPIO21 | 10k at the drivers | Kill switch, hard fault, boot, reset, crash; also after braking to a stop in Locked |
 | Steering enable | GPIO2 | on-board, plus 10k | Every stop, and always in Kid mode |
-| Contactor hold | GPIO12 | 10k | Kill switch, setup failure, boot, reset, crash |
+| Contactor hold | GPIO12 | 10k | Kill switch, E-stop, driver fault, over-current, setup failure, boot, reset, crash; and at boot until the weld check passes |
 
 Run each enable as a short twisted pair with GND, star-routed from the ESP32.
+
+## Contactor feedback
+
+The ESP32 reads the motor bus (after the contactor) through a 150k / 12k divider on ADS1115 #2 A2, and a 2.2k 3 W bleed resistor drains the driver capacitors while the contactor is open (5 s time constant).
+
+- **Boot weld check:** the contactor stays open until the bus has drained below 30 % of the battery. Still above that after 10 s means the contactor is welded: fault `K1_WELD`, reboot only. A welded contactor would leave the drivers powered through an E-stop.
+- **Bus missing:** the contactor held closed for 300 ms with the bus under 80 % of the battery is fault `NO_BUS`. That also catches an E-stop press when its sense wire is broken.
+- **No precharge resistor.** One across the contactor would keep the bus live with the contactor open, which hides a weld and partly defeats the E-stop. The inrush into 5 x 470 µF at key-on is about 1 J; watch the contactor tips for pitting during commissioning.
 
 ## Bench test (phase 3)
 

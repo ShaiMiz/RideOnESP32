@@ -237,6 +237,12 @@ power = [
     R("R3", "150k", "BATT_DIV", "BATTERY_SENSE", note="2.2 V at 29.4 V"),
     R("R4", "12k", "BATTERY_SENSE", "GND"),
     C("C1", "100n", "BATTERY_SENSE", "GND"),
+    R("R5", "150k", "MOTOR_24V", "BUS_SENSE", loc="box, on TB2.8",
+      note="Motor-bus sense for the K1 checks; at the stud, so only the divided signal runs to A1"),
+    R("R6", "12k", "BUS_SENSE", "GND", note="2.2 V at 29.4 V, as the battery divider"),
+    C("C2", "100n", "BUS_SENSE", "GND"),
+    R("R7", "2.2k 3W", "MOTOR_24V", "GND", part="Resistor 2.2k, 3 W wirewound or metal oxide", loc="box, on TB2.8",
+      source=BUY, note="Bleed: drains the driver caps with K1 open (5 s time constant), so the boot weld check can see a welded K1. 0.4 W with K1 closed"),
     Part("TB1", M("Stud_Bus12"), "GND star", {str(i): "GND" for i in range(1, 13)}, "M6 brass stud or bus bar: the one ground star point",
          BUY, "box", "Battery −, every driver B−, rails and logic ground meet here and nowhere else"),
     Part("TB2", M("Stud_Bus"), "MOTOR_24V bus", {str(i): "MOTOR_24V" for i in range(1, 9)}, "M6 stud or bus bar after K1 stud B", BUY, "box"),
@@ -318,8 +324,8 @@ i2c = [
                                                      "ALRT": None, "A0": "IS_FL", "A1": "IS_FR", "A2": "IS_RL", "A3": "IS_RR"},
          "ADS1115 module", ORDER, "box", "Drive current sense"),
     Part("U23", M("ADS1115_Module"), "ADS1115 0x49", {"VDD": "3V3_SENSE", "GND": "GND", "SCL": "I2C_SCL", "SDA": "I2C_SDA", "ADDR": "3V3_SENSE",
-                                                     "ALRT": None, "A0": "IS_ST", "A1": None, "A2": None, "A3": None},
-         "ADS1115 module", ORDER, "box", "Steering current sense; A1-A3 spare (A1 reserved for AS5600 OUT)"),
+                                                     "ALRT": None, "A0": "IS_ST", "A1": None, "A2": "BUS_SENSE", "A3": None},
+         "ADS1115 module", ORDER, "box", "Steering current sense (A0), motor bus (A2); A1 reserved for AS5600 OUT, A3 spare"),
     Part("U24", M("PCF8574_Module"), "PCF8574 0x20", {"VCC": "3V3_SENSE", "GND": "GND", "SDA": "I2C_SDA", "SCL": "I2C_SCL", "INT": None,
                                                      "P0": "SHIFT_FORWARD", "P1": "SHIFT_REVERSE", "P2": "HORN", "P3": "ESTOP_SENSE",
                                                      "P4": "SEAT", "P5": None, "P6": None, "P7": None},
@@ -368,13 +374,15 @@ SHEETS = [
         ("Dash", ["U27", "LS1", "J11"]),
         ("Music", ["LS2", "LS3", "J12"]),
     ]),
-    dict(file="power", blurb='K1 contactor and its coil chain: key, E-stop (2 NC),\nQ1 hold MOSFET. F2 key feed, fuse block F3-F8,\nground star TB1, motor bus TB2, battery divider.', name="Power and safety chain", parts=power, comments=[
+    dict(file="power", blurb='K1 contactor and its coil chain: key, E-stop (2 NC),\nQ1 hold MOSFET. F2 key feed, fuse block F3-F8,\nground star TB1, motor bus TB2, battery divider,\nmotor-bus sense and bleed.', name="Power and safety chain", parts=power, comments=[
         "Layer 1, no software: key and E-stop in series with the K1 coil; either one opens K1 whatever the ESP32 does.",
         "Q1 lets the ESP32 open K1 but never close it. Reset, crash or brown-out opens it (R2 pull-down).",
-        "Rails come from the key side, before K1, so the ESP32 stays up after an E-stop and can report why."], columns=[
+        "Rails come from the key side, before K1, so the ESP32 stays up after an E-stop and can report why.",
+        "R5-R7: the ESP32 reads MOTOR_24V on U23 A2. At boot K1 stays open until R7 has drained the bus; still live = K1 welded."], columns=[
         ("Main path", ["K1", "TB2", "D2", "TB1"]),
         ("Coil chain", ["F2", "F3", "D1", "Q1", "R1", "R2", "NOTE:coil_chain"]),
         ("Fuse block (key side)", ["F4", "F5", "F6", "F7", "F8", "R3", "R4", "C1"]),
+        ("Motor bus sense", ["R5", "R6", "C2", "R7"]),
         ("Notes", ["NOTE:main_path", "NOTE:fuses", "#FLG01", "#FLG02", "#FLG03", "#FLG04", "#FLG05"]),
     ]),
     dict(file="rails", blurb='U1 LM2596 5V_LOGIC, U2 AMS1117 3V3_SENSE,\nU3 5V_ACC and U4 12V_ACC for accessories.', name="Low-voltage rails", parts=rails, comments=[

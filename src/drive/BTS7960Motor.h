@@ -12,13 +12,15 @@
 
 class BTS7960Motor {
  public:
-  BTS7960Motor(const char* name, uint8_t rpwmPin, uint8_t lpwmPin)
-      : name_(name), rpwm_(rpwmPin), lpwm_(lpwmPin) {}
+  // reversed: swap RPWM and LPWM, for a motor that turns backwards on a
+  // positive command (cfg::WHEEL_REVERSED).
+  BTS7960Motor(const char* name, uint8_t rpwmPin, uint8_t lpwmPin, bool reversed = false)
+      : name_(name), rpwm_(reversed ? lpwmPin : rpwmPin), lpwm_(reversed ? rpwmPin : lpwmPin) {}
 
   // Attaches both PWM pins and writes 0. Returns false if either fails.
   bool begin(uint32_t freqHz, uint8_t bits);
 
-  // -1 (full reverse) .. +1 (full forward).
+  // -1 (full reverse) .. +1 (full forward), car direction (after the reversal).
   void write(float speed);
 
   float output() const { return output_; }

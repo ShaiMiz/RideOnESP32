@@ -1,0 +1,8 @@
+# RideOnESP32 flash layout (4 MB). No OTA: the car has no Wi-Fi.
+# evlog holds the event log ring (lib/rideon_core LogRing, 8192 records);
+# coredump keeps the last crash for `pio run -t coredump-info`.
+# Name,    Type, SubType,  Offset,   Size
+nvs,       data, nvs,      0x9000,   0x6000
+factory,   app,  factory,  0x10000,  0x200000
+evlog,     data, 0x40,     0x210000, 0x40000
+coredump,  data, coredump, 0x250000, 0x10000

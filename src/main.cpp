@@ -216,7 +216,9 @@ void loop() {
   frame.boxC = (int8_t)(boxC > 127 ? 127 : boxC < -128 ? -128 : boxC);
   events::update({now, mode, link, radio.linkQuality(), safety.battery(), batteryV, power.driveAmps(), drive.speed(),
                   &faults, &safety.reports(), frame});
-  events::drain(2);
+  // Flash erases and NVS writes stall the CPU: only with the drivers off and the car stopped.
+  bool safeToStall = (mode == Mode::Locked || mode == Mode::Killed) && !lines.drive() && drive.stopped(*ramp);
+  events::drain(cfg::LOG_RECORDS_PER_TICK, safeToStall);
 
   if (logx::every(lastLogMs, 500)) {
     logx::line("%s link=%s lq=%u bat=%.1fV bus=%.1fV I=%.1fA cmd=%.2f out=%.2f en=%d k=%d box=%s%.0fC fan=%d fault=%s",

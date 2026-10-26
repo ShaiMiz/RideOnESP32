@@ -46,6 +46,15 @@ void FaultTable::newBoot() {
   for (int i = 0; i < count_; i++) rows_[i].status &= (uint8_t)~(DTC_FAILING_NOW | DTC_FAILED_THIS_BOOT);
 }
 
+void FaultTable::restore(const FaultRow* rows, int n) {
+  count_ = 0;
+  for (int i = 0; i < n && count_ < CAPACITY; i++) {
+    if (rows[i].faultBit >= 16 || rows[i].comp >= (uint8_t)Component::Count) continue;
+    rows_[count_++] = rows[i];
+  }
+  dirty_ = false;
+}
+
 void FaultTable::clear() {
   count_ = 0;
   dirty_ = true;

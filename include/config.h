@@ -118,4 +118,12 @@ constexpr bool WHEEL_REVERSED[4] = {false, false, false, false};
 constexpr uint32_t I2C_HZ = 100000;      // the PCF8574 is rated for 100 kHz; the bus also runs out to the dash and steering
 constexpr uint16_t I2C_TIMEOUT_MS = 5;  // a stuck bus fails a transfer fast instead of stalling the loop
 
+// ---- Event log (docs/firmware/LOG_EVENTS.md) ----------------------------------------
+// Flash sectors kept erased ahead of the log's write position: 8 x 128 records
+// can be written while driving before any erase is needed. Erasing stalls both
+// cores, so it only happens at boot and while the car is stopped with the
+// drivers off.
+constexpr uint32_t LOG_READY_SECTORS = 8;
+constexpr int LOG_RECORDS_PER_TICK = 2;  // records written to flash and serial per loop tick
+
 }  // namespace cfg

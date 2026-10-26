@@ -37,6 +37,7 @@ Passed: ____
 - [ ] With R5-R7 fitted (motor-bus sense and bleed), the log shows `bus=` near the battery voltage with the contactor closed and under 30 % within 10 s of it opening.
 - [ ] A 100 Ω 5 W resistor across the contactor studs (standing in for a weld) before key-on gives `K1_WELD`, and the contactor never closes.
 - [ ] Pulling the F3 coil fuse with the car armed gives `NO_BUS`.
+- [ ] Event log on flash ([LOG_EVENTS.md](firmware/LOG_EVENTS.md)): cut the ESP32's power 10 times, some while it is printing. Every boot prints `BOOT` with the boot number one higher, and `LOG_MOUNT` with `records=` never going down and `torn=` at most 1.
 
 Passed: ____
 

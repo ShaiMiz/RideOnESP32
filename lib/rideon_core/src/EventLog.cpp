@@ -17,7 +17,7 @@ const char* const COMPONENT_NAMES[] = {"-",     "FL",    "FR",  "RL",  "RR",  "S
 const char* const SYMPTOM_NAMES[] = {"-",       "OVER",    "UNDER",  "STALE",  "STUCK_HIGH", "RANGE",
                                      "NO_ANSWER", "LOST", "ACTIVE", "WAITING", "WELDED",     "MISSING"};
 const char* const EVENT_NAMES[] = {"BOOT",  "SETUP_FAIL", "FAULT",    "FAULT_GONE", "REARM",     "MODE",
-                                   "LINK",  "BATTERY",    "SNAPSHOT", "DROPPED",    "TABLE_FULL"};
+                                   "LINK",  "BATTERY",    "SNAPSHOT", "DROPPED",    "TABLE_FULL", "LOG_MOUNT", "CRASH_DUMP"};
 const char* const RESET_NAMES[] = {"POWER_ON", "SOFTWARE", "PANIC", "WATCHDOG", "BROWNOUT", "OTHER"};
 
 static_assert(sizeof(COMPONENT_NAMES) / sizeof(*COMPONENT_NAMES) == (size_t)Component::Count, "a name per component");
@@ -153,6 +153,14 @@ size_t formatRecord(const LogRecord& r, char* out, size_t outLen) {
       break;
     case Event::Dropped: add(snprintf(out + n, outLen - n, " n=%d", r.v[0])); break;
     case Event::TableFull: add(snprintf(out + n, outLen - n, " %s comp=%s", faultBitName(r.code), comp)); break;
+    case Event::LogMount:
+      add(snprintf(out + n, outLen - n, " records=%u torn=%u ready_sectors=%u%s", (unsigned)(uint16_t)r.v[0],
+                   (unsigned)(uint16_t)r.v[1], (unsigned)(uint16_t)r.v[2], r.code ? " formatted=1" : ""));
+      break;
+    case Event::CrashDump:
+      add(snprintf(out + n, outLen - n, " pc=0x%08lX",
+                   (unsigned long)(((uint32_t)(uint16_t)r.v[0] << 16) | (uint16_t)r.v[1])));
+      break;
     default: break;
   }
   add(snprintf(out + n, outLen - n, " mode=%s faults=0x%04X", modeName((Mode)r.mode), (unsigned)r.faults));

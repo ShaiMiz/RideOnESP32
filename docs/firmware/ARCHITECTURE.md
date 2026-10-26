@@ -42,6 +42,7 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 | `Pid` | core | Steering loop (phase 5) |
 | `EventLog`, `FaultReport.h` | core | 32-byte log records with CRC, the record queue, text format; which part a fault came from |
 | `FaultTable` | core | One row per fault and part: count, first and last seen, worst value, freeze frames |
+| `LogRing` | core | The log on flash: a ring of records over 4 KB sectors, erased ahead, torn records skipped |
 | `Recorder` | core | Turns changes (faults, re-arm, mode, link, battery) into records and fault-table rows |
 | `main.cpp` | src | Setup order, fixed-rate loop, command selection |
 | `safety/KillLines` | src | GPIO21, GPIO2, GPIO12 |
@@ -57,7 +58,7 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 | `accessories/Accessories` | src | Box fans full on through the PCA9685; lights and sound later |
 | `sensing/Imu`, `WheelSpeed` | src | Stubs |
 | `telemetry/Log` | src | Non-blocking serial lines |
-| `telemetry/EventSink` | src | Boot counter in NVS; owns the recorder, queue and fault table; prints records to serial |
+| `telemetry/EventSink` | src | Boot counter and fault table in NVS, the log in the `evlog` partition, crash dump check; prints records to serial |
 | `telemetry/CrsfTelemetry`, `Dash` | src | Stubs |
 
 ## Where things live

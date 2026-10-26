@@ -34,6 +34,7 @@ A fresh start as a PlatformIO project, built on the v2.2 motor class and the [co
   - I2C runs at 100 kHz, the PCF8574's rating, instead of 400 kHz.
   - The box fans run whenever the ESP32 runs (PCA9685 channel 1). The DS18B20 is read, and a box above 65 °C is the new `HOT` fault.
   - `WHEEL_REVERSED` in `config.h` flips any wheel whose motor turns backwards.
+- New 3D exploded view of the car and the electronics box (tools/exploded-view, React Three Fiber), generated from the BOM, the wire list and the schematic nets: realistic and blueprint styles, show/hide by part, info cards with upstream and downstream wiring, variant A/B swap, revision history, and GLB/glTF/PNG/PDF/JSON export.
 
 ## 2.2 (2026)
 

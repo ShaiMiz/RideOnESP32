@@ -19,6 +19,8 @@ jobs:
         run: python3 tools/check_pin_docs.py
       - name: LOG_EVENTS.md lists every log event, part and symptom the firmware prints
         run: python3 tools/check_log_events.py
+      - name: Every requirement in VERIFICATION.md has a test or gate, and every test runs
+        run: python3 tools/check_verification.py
       - name: KiCad schematic and tables are generated from the current design and pins.h
         run: |
           python3 docs/hardware/kicad/gen/generate.py
@@ -34,6 +36,26 @@ jobs:
       - run: pip install platformio
       - name: Safety logic and pin map unit tests
         run: pio test -e native
+
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y cppcheck
+          pip install gcovr
+      - name: Every test suite with -Werror, AddressSanitizer and UndefinedBehaviorSanitizer
+        run: tools/run_native_tests.sh
+      - name: Coverage floors (lib/rideon_core, safety files fully covered)
+        run: python3 tools/check_coverage.py
+      - name: Static analysis (cppcheck)
+        run: tools/run_cppcheck.sh
+      - name: Mutation check (the tests catch deliberate safety bugs)
+        run: python3 tools/mutation_check.py
 
   build:
     runs-on: ubuntu-latest

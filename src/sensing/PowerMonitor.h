@@ -20,6 +20,8 @@
 
 #include <stdint.h>
 
+#include "SafetyRules.h"
+
 class PowerMonitor {
  public:
   static constexpr int CURRENTS = 5;
@@ -44,6 +46,8 @@ class PowerMonitor {
 
   // True while channel `ch` (BUS included) has had a good reading within cfg::CURRENT_SENSE_STALE_MS.
   bool currentFresh(int ch, uint32_t nowMs) const;
+  // This loop's readings for the safety rules.
+  rideon::CurrentSense snapshot(uint32_t nowMs) const;
 
  private:
   int channelCount() const { return driveOnly_ ? 4 : CHANNELS; }

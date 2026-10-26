@@ -107,3 +107,16 @@ bool PowerMonitor::currentFresh(int ch, uint32_t nowMs) const {
   if (ch >= channelCount()) return false;
   return !readingStale(lastSampleMs_[ch], nowMs, cfg::CURRENT_SENSE_STALE_MS);
 }
+
+CurrentSense PowerMonitor::snapshot(uint32_t nowMs) const {
+  // cppcheck-suppress knownConditionTrueFalse ; the point is that they are equal
+  static_assert(CurrentSense::CURRENTS == CURRENTS && CurrentSense::BUS == BUS, "same channel numbers");
+  CurrentSense c = {};
+  for (int i = 0; i < CURRENTS; i++) {
+    c.amps[i] = amps_[i];
+    c.driverFault[i] = faultFlag_[i];
+  }
+  for (int i = 0; i < CHANNELS; i++) c.fresh[i] = currentFresh(i, nowMs);
+  c.driveAmps = driveAmps();
+  return c;
+}

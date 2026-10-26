@@ -15,12 +15,6 @@ bool DriveController::begin() {
   return ok;
 }
 
-void DriveController::update(float command, float dtS, const rideon::RampParams& ramp) {
-  float v = ramp_.step(command, dtS, ramp);
-  for (auto& m : motors_) m.write(v);
-}
-
-void DriveController::stopNow() {
-  ramp_.reset();
-  for (auto& m : motors_) m.write(0.0f);
+void DriveController::write(float speed) {
+  for (auto& m : motors_) m.write(speed);
 }

@@ -13,7 +13,7 @@
     "test": "node --test test/*.test.js"
   },
   "dependencies": {
-    "@react-three/drei": "^9.117.3",
+    "@react-three/drei": "^10.7.9",
     "@react-three/fiber": "^8.17.10",
     "jspdf": "^4.2.1",
     "jspdf-autotable": "^5.0.9",

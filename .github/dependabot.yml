@@ -1,0 +1,19 @@
+# Weekly update PRs for the 3D viewer's npm packages and the CI actions.
+# Security fixes come as their own PRs as soon as an alert opens.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /tools/exploded-view
+    schedule:
+      interval: weekly
+    groups:
+      exploded-view:
+        patterns: ["*"]
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]

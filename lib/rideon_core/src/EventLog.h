@@ -80,6 +80,8 @@ enum class Event : uint8_t {
   Snapshot,    // v0: battery volts x100, v1: drive amps x100, v2: output x100, v3: link quality %
   Dropped,     // v0: records dropped since the last Dropped record
   TableFull,   // a new fault row did not fit in the fault table
+  LogMount,    // code: 1 if the log area was formatted, v0: records found, v1: torn slots, v2: erased sectors ready
+  CrashDump,   // v0, v1: program counter of the crash, high and low 16 bits
   Count
 };
 

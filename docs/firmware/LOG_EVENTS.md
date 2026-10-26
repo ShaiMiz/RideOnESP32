@@ -1,6 +1,6 @@
 # Log events
 
-Every log record is one event: what happened, when, on which part and how bad. The car prints each record as one line on the USB serial port (115200 baud). Records and the fault table are defined in `lib/rideon_core/src/EventLog.h` and `FaultTable.h`; `tools/check_log_events.py` fails CI when this page and the code disagree.
+Every log record is one event: what happened, when, on which part and how bad. The car stores each record in its own flash area, where it survives power-off, and prints it as one line on the USB serial port (115200 baud). Records and the fault table are defined in `lib/rideon_core/src/EventLog.h` and `FaultTable.h`; `tools/check_log_events.py` fails CI when this page and the code disagree.
 
 Design and reasoning: [Logging, fault records and on-scene debugging](https://claude.ai/artifact/RovF9Ru6NaCksPPXNrguB5). For what each fault means and what to check, see [FAULT_CODES.md](FAULT_CODES.md).
 
@@ -12,7 +12,7 @@ Design and reasoning: [Logging, fault records and on-scene debugging](https://cl
 
 | Part | Meaning |
 | --- | --- |
-| `#4211` | Record number since boot (on flash it will never repeat) |
+| `#4211` | Record number. It never repeats: it carries on across boots |
 | `b42` | Boot number: goes up by one at every power-up or reset, kept in NVS |
 | `+123.456s` | Time since that boot. The car has no calendar clock, so boot number plus uptime is the timestamp |
 | `CRIT` | Severity, numbered as in RFC 5424 syslog |
@@ -37,7 +37,7 @@ A line is printed only when something changes, plus a `SNAPSHOT` after 60 s of q
 
 | Category | Events |
 | --- | --- |
-| `SYS` | `BOOT`, `SETUP_FAIL`, `SNAPSHOT`, `DROPPED`, `TABLE_FULL` |
+| `SYS` | `BOOT`, `SETUP_FAIL`, `SNAPSHOT`, `DROPPED`, `TABLE_FULL`, `LOG_MOUNT`, `CRASH_DUMP` |
 | `SAFETY` | `FAULT`, `FAULT_GONE`, `REARM` |
 | `MODE` | `MODE` |
 | `LINK` | `LINK` |
@@ -59,6 +59,8 @@ A line is printed only when something changes, plus a `SNAPSHOT` after 60 s of q
 | `SNAPSHOT` | INFO | `bat_V=`, `I_A=` total drive current, `out=` drive output -1..1, `lq=` | After 60 s with no other record |
 | `DROPPED` | WARN | `n=` | Records were dropped because the queue was full (least severe first) |
 | `TABLE_FULL` | WARN | fault code, `comp=` | A new fault and part did not fit in the fault table (24 rows) |
+| `LOG_MOUNT` | NOTICE, or WARN with torn slots | `records=` found on flash, `torn=` unreadable slots, `ready_sectors=` erased ahead, `formatted=1` if the log area was wiped | Every boot, after the log area is read. A torn slot is a record cut short by a power cut; one now and then is normal |
+| `CRASH_DUMP` | ERR | `pc=` where the crash happened | After a `PANIC` or `WATCHDOG` reset, when a crash dump is in flash. See Crash dumps below |
 
 Two conditions are normal at boot and are not logged as `FAULT` or counted: the radio link before it first comes up, and `NO_BUS` while the boot weld check waits for the bus to drain (`sym=WAITING`). The `LINK` record still shows the link coming up.
 
@@ -109,4 +111,27 @@ Besides the log, the car keeps one row per fault and part that has ever tripped,
 - how many times it tripped, and the worst value seen (highest, or lowest for `UNDER`);
 - a freeze frame of the first and of the latest trip: boot, time, mode, link quality, command, output, pedal, battery and bus volts, the five currents and the box temperature.
 
-Rows never clear themselves. Today the table lives in RAM and starts empty at each boot; the next step saves it, and the log, to flash, adds serial commands to read and clear it, and adds a 5 s crash recorder.
+Rows never clear themselves. The table is kept in NVS and loaded at boot; a change is saved the next time the car is stopped with the drivers off. If the power goes before that, the trip is still in the log.
+
+## Where it is stored
+
+| Where | What | Size |
+| --- | --- | --- |
+| `evlog` flash partition | The log: a ring of 32-byte records with CRCs | 256 KB, 8192 records; the oldest 128 go when it wraps |
+| NVS, namespace `evlog` | Boot counter (`boot`), fault table (`dtc`, layout version `dtcv`) | A few KB |
+| `coredump` flash partition | The ESP-IDF crash dump of the last panic | 64 KB |
+
+The flash layout is in `partitions.csv`. Erasing flash stalls both CPU cores for tens of ms, so the firmware erases only at boot and while the car is stopped with the drivers off. It keeps 8 sectors (1024 records) erased ahead, so it never needs to erase while driving (`LOG_READY_SECTORS` in `config.h`). Writing one record while driving is a single 32-byte flash write.
+
+The first boot after flashing this layout finds old bytes in the log area, wipes it (a few seconds, before the watchdog starts) and logs `LOG_MOUNT ... formatted=1`. Uploading new firmware with `pio run -t upload` keeps the log and the NVS; erasing the whole chip (`pio run -t erase`) clears both.
+
+## Crash dumps
+
+After a panic or a watchdog reset the ESP32 saves a crash dump in the `coredump` partition, and the next boot logs `CRASH_DUMP pc=...` with the crashing task's name on serial. To read the whole dump (backtrace and variables) with the board on USB:
+
+```sh
+pip install esp-coredump
+esp-coredump --port COMx info_corefile .pio/build/car/firmware.elf
+```
+
+The `.elf` must be from the same build that crashed.

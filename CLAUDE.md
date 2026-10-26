@@ -57,6 +57,7 @@ On Windows, if `pio` is not on PATH, use the PlatformIO terminal in Cursor or `%
 - **Pins:** `include/pins.h`, [docs/hardware/PINOUT.md](docs/hardware/PINOUT.md) and [docs/hardware/WIRING.md](docs/hardware/WIRING.md) change together in the same PR, and the KiCad schematic is regenerated. `include/pin_rules.h` static-asserts the rules (no GPIO used twice, no outputs on 34–39, analog on ADC1 only, strapping pins handled) and the CI `pins` job checks the docs match.
 - Faults latch until the parent re-arms from Locked; never add a fault that clears itself. Link loss is judged by the CRSF link state, never by channel values. Fault codes: [docs/firmware/FAULT_CODES.md](docs/firmware/FAULT_CODES.md).
 - Changing a `config.h` limit means re-running the commissioning gates that depend on it; say which in the PR.
+- Logging: a new fault, event, part or symptom needs its row in [docs/firmware/LOG_EVENTS.md](docs/firmware/LOG_EVENTS.md) (CI `pins` job runs `tools/check_log_events.py`). The loop only queues records; flash erases and NVS writes happen only with the car stopped and the drivers off. A change to `LogRecord` or `FaultRow` layout must bump `FaultTable::FORMAT` or start a new log format.
 - Firmware design: [docs/firmware/ARCHITECTURE.md](docs/firmware/ARCHITECTURE.md), modes: [CONTROL_MODES.md](docs/firmware/CONTROL_MODES.md), radio channels: [CHANNEL_MAP.md](docs/firmware/CHANNEL_MAP.md) and [radio/](radio/).
 - `archive/` is the old v2 Arduino code, reference only. Don't build on it.
 

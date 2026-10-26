@@ -54,6 +54,9 @@ struct FaultRow {
 class FaultTable {
  public:
   static constexpr int CAPACITY = 24;
+  // Bump when FaultRow or FreezeFrame changes, so a stored table in the old
+  // layout is dropped instead of misread.
+  static constexpr uint8_t FORMAT = 1;
 
   // A trip: a fault and part that was not active last loop now is. Returns
   // the row, or nullptr when a new row does not fit (the caller logs it).
@@ -67,6 +70,10 @@ class FaultTable {
   int size() const { return count_; }
   const FaultRow& at(int i) const { return rows_[i]; }
   const FaultRow* find(FaultMask fault, Component comp) const;
+  // The rows as stored, and loading them back after a reboot. Rows with a
+  // fault bit or part out of range are skipped.
+  const FaultRow* rows() const { return rows_; }
+  void restore(const FaultRow* rows, int n);
   // True when a row changed since the last call (it needs writing to flash).
   bool takeDirty();
 

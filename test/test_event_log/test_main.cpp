@@ -198,6 +198,29 @@ void test_table_full_refuses_new_rows() {
   TEST_ASSERT_NOT_NULL(t.trip({FAULT_LINK_LOST, Component::FL, Symptom::None, 0, 0}, f));  // existing row still counts
 }
 
+void test_table_restores_after_reboot() {
+  FaultTable t;
+  FreezeFrame f = {};
+  f.boot = 7;
+  t.trip({FAULT_OVERCURRENT, Component::RL, Symptom::OverLimit, 22.0f, 20.0f}, f);
+  t.trip({FAULT_DRIVER, Component::FR, Symptom::StuckHigh, 0, 0}, f);
+  FaultRow saved[FaultTable::CAPACITY];
+  memcpy(saved, t.rows(), sizeof(saved));
+  saved[1].comp = 200;  // a corrupt row is dropped, not trusted
+
+  FaultTable after;
+  after.restore(saved, t.size());
+  after.newBoot();
+  TEST_ASSERT_EQUAL(1, after.size());
+  const FaultRow* row = after.find(FAULT_OVERCURRENT, Component::RL);
+  TEST_ASSERT_NOT_NULL(row);
+  TEST_ASSERT_EQUAL_UINT16(1, row->count);
+  TEST_ASSERT_EQUAL_UINT16(7, row->first.boot);
+  TEST_ASSERT_FALSE(row->status & DTC_FAILING_NOW);
+  TEST_ASSERT_TRUE(row->status & DTC_CONFIRMED);
+  TEST_ASSERT_FALSE(after.takeDirty());
+}
+
 void test_recorder_boot_record() {
   RecordQueue q;
   Recorder r;
@@ -378,6 +401,7 @@ int main() {
   RUN_TEST(test_table_worst_battery_is_the_lowest);
   RUN_TEST(test_table_status_bits);
   RUN_TEST(test_table_full_refuses_new_rows);
+  RUN_TEST(test_table_restores_after_reboot);
   RUN_TEST(test_recorder_boot_record);
   RUN_TEST(test_recorder_trip_once_then_gone);
   RUN_TEST(test_recorder_soft_fault_is_err);

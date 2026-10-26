@@ -40,6 +40,9 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 | `ContactorCheck` | core | Boot weld check and missing-bus check from the motor-bus voltage |
 | `BoxTempCheck`, `Ds18b20.h` | core | Box over-temperature with hysteresis; DS18B20 scratchpad CRC and decoding |
 | `Pid` | core | Steering loop (phase 5) |
+| `EventLog`, `FaultReport.h` | core | 32-byte log records with CRC, the record queue, text format; which part a fault came from |
+| `FaultTable` | core | One row per fault and part: count, first and last seen, worst value, freeze frames |
+| `Recorder` | core | Turns changes (faults, re-arm, mode, link, battery) into records and fault-table rows |
 | `main.cpp` | src | Setup order, fixed-rate loop, command selection |
 | `safety/KillLines` | src | GPIO21, GPIO2, GPIO12 |
 | `safety/Watchdog` | src | Task watchdog on the loop, used by `car` and `one_motor` |
@@ -54,6 +57,7 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 | `accessories/Accessories` | src | Box fans full on through the PCA9685; lights and sound later |
 | `sensing/Imu`, `WheelSpeed` | src | Stubs |
 | `telemetry/Log` | src | Non-blocking serial lines |
+| `telemetry/EventSink` | src | Boot counter in NVS; owns the recorder, queue and fault table; prints records to serial |
 | `telemetry/CrsfTelemetry`, `Dash` | src | Stubs |
 
 ## Where things live
@@ -61,6 +65,7 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 - Pins: only `include/pins.h`.
 - Limits, rates, thresholds: only `include/config.h`.
 - Radio channels: `ChannelMap.h`, documented in [CHANNEL_MAP.md](CHANNEL_MAP.md).
+- Log events: `EventLog.h`, documented in [LOG_EVENTS.md](LOG_EVENTS.md).
 
 ## Build environments
 

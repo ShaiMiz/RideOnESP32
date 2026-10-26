@@ -21,4 +21,6 @@ Every fault **latches**. It stays set after its cause goes away, until the paren
 | `HOT` | Box above 65 °C for 5 s (DS18B20); clears only below 55 °C. Once `BOX_TEMP_REQUIRED` is set, also a lost sensor reading | Brake | Re-arm once cooled | Fans running (log `fan=1`)? Filter clogged? Driver heatsinks |
 | `SETUP` | A driver, PWM channel or ADS1115 failed to start at boot | Contactor open | Reboot only | Serial log at boot; I2C wiring |
 
-The serial log also prints the **reset reason** at every boot. `WATCHDOG`, `BROWNOUT` or `PANIC` means the ESP32 restarted unexpectedly. The pull-downs keep the car stopped through the restart, but find the cause before driving again.
+Each trip is also logged with the part it came from (`comp=FL`) and counted in the fault table; see [LOG_EVENTS.md](LOG_EVENTS.md).
+
+The serial log also prints the **reset reason** at every boot, in the `BOOT` record. `WATCHDOG`, `BROWNOUT` or `PANIC` means the ESP32 restarted unexpectedly. The pull-downs keep the car stopped through the restart, but find the cause before driving again.

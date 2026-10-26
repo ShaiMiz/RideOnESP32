@@ -24,6 +24,8 @@ void line(const char* fmt, ...) {
   Serial.write((const uint8_t*)buf, n);
 }
 
+bool hasRoom(int bytes) { return Serial.availableForWrite() >= bytes; }
+
 bool every(uint32_t& lastMs, uint32_t periodMs) {
   uint32_t now = millis();
   if (now - lastMs < periodMs) return false;

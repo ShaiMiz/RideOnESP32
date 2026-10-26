@@ -14,6 +14,8 @@ jobs:
           python-version: "3.12"
       - name: Pin map, PINOUT.md and WIRING.md agree
         run: python3 tools/check_pin_docs.py
+      - name: LOG_EVENTS.md lists every log event, part and symptom the firmware prints
+        run: python3 tools/check_log_events.py
       - name: KiCad schematic and tables are generated from the current design and pins.h
         run: |
           python3 docs/hardware/kicad/gen/generate.py

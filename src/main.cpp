@@ -29,6 +29,7 @@
 #include "sensing/BoxTemp.h"
 #include "sensing/Imu.h"
 #include "sensing/PowerMonitor.h"
+#include "telemetry/EventSink.h"
 #include "telemetry/Log.h"
 
 using namespace rideon;
@@ -64,17 +65,23 @@ ModeMachine modes;
 uint32_t nextTickUs = 0;
 uint32_t lastLogMs = 0;
 
-const char* resetReasonName(esp_reset_reason_t r) {
+ResetReason resetReason(esp_reset_reason_t r) {
   switch (r) {
-    case ESP_RST_POWERON: return "power-on";
-    case ESP_RST_SW: return "software";
-    case ESP_RST_PANIC: return "PANIC";
+    case ESP_RST_POWERON: return ResetReason::PowerOn;
+    case ESP_RST_SW: return ResetReason::Software;
+    case ESP_RST_PANIC: return ResetReason::Panic;
     case ESP_RST_INT_WDT:
     case ESP_RST_TASK_WDT:
-    case ESP_RST_WDT: return "WATCHDOG";
-    case ESP_RST_BROWNOUT: return "BROWNOUT";
-    default: return "other";
+    case ESP_RST_WDT: return ResetReason::Watchdog;
+    case ESP_RST_BROWNOUT: return ResetReason::Brownout;
+    default: return ResetReason::Other;
   }
+}
+
+// A part that failed to start: logged and counted with its name.
+bool started(bool ok, Component comp) {
+  if (!ok) events::setupFailed(comp);
+  return ok;
 }
 
 float kidSpeedCap(uint16_t us) {
@@ -90,15 +97,16 @@ float kidSpeedCap(uint16_t us) {
 void setup() {
   lines.begin();  // first: every kill line LOW
   logx::begin(115200);
-  logx::line("RideOnESP32 v3 boot, reset reason: %s", resetReasonName(esp_reset_reason()));
+  logx::line("RideOnESP32 v3 car firmware");
+  events::begin(resetReason(esp_reset_reason()));  // the BOOT record carries the reset reason
 
   Wire.begin(pins::I2C_SDA, pins::I2C_SCL, cfg::I2C_HZ);
   Wire.setTimeOut(cfg::I2C_TIMEOUT_MS);
 
-  bool ok = drive.begin();
-  ok &= steering.begin();
-  ok &= radio.begin();
-  ok &= power.begin();
+  bool ok = started(drive.begin(), Component::Wheels);
+  ok &= started(steering.begin(), Component::Steer);
+  ok &= started(radio.begin(), Component::Radio);
+  ok &= started(power.begin(), Component::Ads);
   if (!manual.begin()) logx::line("PCF8574 not answering: Kid mode refused");
   imu.begin();
   boxTemp.begin();
@@ -161,6 +169,8 @@ void loop() {
                            true,
                            &contactor,
                            boxTempCheck.hot(),
+                           boxTempCheck.sensorLost(),
+                           boxTemp.celsius(),
                            imu.tilted(),
                            now};
   faults.update(safety.evaluate(signals));
@@ -193,6 +203,20 @@ void loop() {
   bool horn = (mode == Mode::Kid && manual.horn()) ||
               (linkUsable && switchPosition(radio.channel(ch::HORN), CHANNELS) == 2);
   accessories.update(horn, drive.speed(), safety.battery() != BatteryState::Ok);
+
+  FreezeFrame frame = {};
+  frame.linkQuality = radio.linkQuality();
+  frame.command = scaled(command, 100.0f);
+  frame.output = scaled(drive.speed(), 100.0f);
+  frame.pedal = scaled(manual.pedal(), 100.0f);
+  frame.batteryV = scaled(batteryV, 100.0f);
+  frame.busV = scaled(power.busVolts(), 100.0f);
+  for (int i = 0; i < PowerMonitor::CURRENTS; i++) frame.amps[i] = scaled(power.amps(i), 100.0f);
+  int16_t boxC = boxTemp.hasReading() ? scaled(boxTemp.celsius(), 1.0f) : -128;
+  frame.boxC = (int8_t)(boxC > 127 ? 127 : boxC < -128 ? -128 : boxC);
+  events::update({now, mode, link, radio.linkQuality(), safety.battery(), batteryV, power.driveAmps(), drive.speed(),
+                  &faults, &safety.reports(), frame});
+  events::drain(2);
 
   if (logx::every(lastLogMs, 500)) {
     logx::line("%s link=%s lq=%u bat=%.1fV bus=%.1fV I=%.1fA cmd=%.2f out=%.2f en=%d k=%d box=%s%.0fC fan=%d fault=%s",

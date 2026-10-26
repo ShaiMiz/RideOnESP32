@@ -8,6 +8,8 @@ namespace logx {
 
 void begin(uint32_t baud);
 void line(const char* fmt, ...) __attribute__((format(printf, 1, 2)));
+// True when `bytes` more fit in the serial TX buffer right now.
+bool hasRoom(int bytes);
 // True at most once per `periodMs` for the given timer slot.
 bool every(uint32_t& lastMs, uint32_t periodMs);
 

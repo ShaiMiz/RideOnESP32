@@ -14,6 +14,7 @@
 
 #include "BatteryCheck.h"
 #include "ContactorCheck.h"
+#include "FaultReport.h"
 #include "Faults.h"
 #include "LinkMonitor.h"
 #include "ModeMachine.h"
@@ -35,14 +36,17 @@ struct SafetySignals {
   bool busSensed;             // also check the motor-bus reading is fresh
   const rideon::ContactorCheck* contactor;  // nullptr: no contactor checks
   bool boxHot;
+  bool boxSensorLost;  // HOT because the reading is lost, not because the box is hot
+  float boxCelsius;
   bool tilted;
   uint32_t nowMs;
 };
 
 class SafetyManager {
  public:
-  // Active fault conditions this loop.
+  // Active fault conditions this loop. reports() then says which part each came from.
   rideon::FaultMask evaluate(const SafetySignals& s);
+  const rideon::FaultReports& reports() const { return reports_; }
 
   // Set the kill lines. Returns true if the drive must stop at once.
   // contactorAllowed: the boot weld check has passed.
@@ -57,4 +61,5 @@ class SafetyManager {
   rideon::HoldTimer overcurrent_[5];
   rideon::HoldTimer driverFault_[5];
   rideon::HoldTimer totalOvercurrent_;
+  rideon::FaultReports reports_;
 };

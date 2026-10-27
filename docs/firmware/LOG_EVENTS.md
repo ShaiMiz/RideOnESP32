@@ -37,7 +37,7 @@ A line is printed only when something changes, plus a `SNAPSHOT` after 60 s of q
 
 | Category | Events |
 | --- | --- |
-| `SYS` | `BOOT`, `SETUP_FAIL`, `SNAPSHOT`, `DROPPED`, `TABLE_FULL`, `LOG_MOUNT`, `CRASH_DUMP` |
+| `SYS` | `BOOT`, `SETUP_FAIL`, `SNAPSHOT`, `DROPPED`, `TABLE_FULL`, `LOG_MOUNT`, `CRASH_DUMP`, `CRASH_SAVED`, `DTC_CLEARED` |
 | `SAFETY` | `FAULT`, `FAULT_GONE`, `REARM` |
 | `MODE` | `MODE` |
 | `LINK` | `LINK` |
@@ -61,6 +61,8 @@ A line is printed only when something changes, plus a `SNAPSHOT` after 60 s of q
 | `TABLE_FULL` | WARN | fault code, `comp=` | A new fault and part did not fit in the fault table (24 rows) |
 | `LOG_MOUNT` | NOTICE, or WARN with torn slots | `records=` found on flash, `torn=` unreadable slots, `ready_sectors=` erased ahead, `formatted=1` if the log area was wiped | Every boot, after the log area is read. A torn slot is a record cut short by a power cut; one now and then is normal |
 | `CRASH_DUMP` | ERR | `pc=` where the crash happened | After a `PANIC` or `WATCHDOG` reset, when a crash dump is in flash. See Crash dumps below |
+| `CRASH_SAVED` | WARN | `cause=FAULT` and the fault, or `cause=RESET` and the reset reason; `samples=`, `crash_boot=` the boot it happened in | The crash recorder's last 5 s were kept in NVS. See Crash recorder below |
+| `DTC_CLEARED` | NOTICE | `rows=` cleared | The fault table was cleared from the serial console (`clear dtc yes`) |
 
 Two conditions are normal at boot and are not logged as `FAULT` or counted: the radio link before it first comes up, and `NO_BUS` while the boot weld check waits for the bus to drain (`sym=WAITING`). The `LINK` record still shows the link coming up.
 
@@ -118,12 +120,40 @@ Rows never clear themselves. The table is kept in NVS and loaded at boot; a chan
 | Where | What | Size |
 | --- | --- | --- |
 | `evlog` flash partition | The log: a ring of 32-byte records with CRCs | 256 KB, 8192 records; the oldest 128 go when it wraps |
-| NVS, namespace `evlog` | Boot counter (`boot`), fault table (`dtc`, layout version `dtcv`) | A few KB |
+| NVS, namespace `evlog` | Boot counter (`boot`), fault table (`dtc`, layout version `dtcv`), crash recorder copy (`crash`, `crashv`) | A few KB |
+| RTC memory | The crash recorder's live 5 s; survives a panic or watchdog reset, not a power cut | 1.5 KB |
 | `coredump` flash partition | The ESP-IDF crash dump of the last panic | 64 KB |
 
 The flash layout is in `partitions.csv`. Erasing flash stalls both CPU cores for tens of ms, so the firmware erases only at boot and while the car is stopped with the drivers off. It keeps 8 sectors (1024 records) erased ahead, so it never needs to erase while driving (`LOG_READY_SECTORS` in `config.h`). Writing one record while driving is a single 32-byte flash write.
 
 The first boot after flashing this layout finds old bytes in the log area, wipes it (a few seconds, before the watchdog starts) and logs `LOG_MOUNT ... formatted=1`. Uploading new firmware with `pio run -t upload` keeps the log and the NVS; erasing the whole chip (`pio run -t erase`) clears both.
+
+## Crash recorder
+
+Like a car's event data recorder, the firmware keeps the last 5 s of driving: a freeze frame every 100 ms (mode, link quality, command, output, pedal, battery and bus volts, the five currents, box temperature), 50 in all. They live in RTC memory, which survives a panic or watchdog reset but not a power cut, and carry a CRC so a garbled copy is never trusted.
+
+The 5 s are copied to NVS, replacing the previous copy, and `CRASH_SAVED` is logged:
+
+- after a hard fault (the drive was cut) while driving. The trip itself is the last sample. The copy is written once the car is stopped with the drivers off. The kill switch is not a crash, and neither is the boot weld check waiting for the bus;
+- at the next boot after a `PANIC`, `WATCHDOG` or `BROWNOUT` reset, if the car was driving in those 5 s.
+
+A fault or reset while parked never replaces the copy, so the record of a real incident stays until a newer one. Read it with the `crash` console command.
+
+## Serial console
+
+Type a command in the serial monitor (115200 baud) and press Enter. Upper or lower case both work.
+
+| Command | Prints or does |
+| --- | --- |
+| `help` | The commands |
+| `status` | Boot number, uptime, mode, link, latched faults, battery and bus volts, current, output, log and fault-table size, whether a crash copy is kept |
+| `log [n]` | The newest `n` log records from flash, oldest first (default 50) |
+| `dtc` | The fault table: each row, then its first and last freeze frame |
+| `crash` | The kept crash recorder copy: what caused it, then the 50 samples, oldest first |
+| `clear dtc yes` | Clears the fault table and logs `DTC_CLEARED`. Only with the car Locked or Killed, stopped, drivers off. `clear dtc` alone says how |
+| `test watchdog` | Hangs the loop so the watchdog resets the ESP32 (commissioning phase 3). Only with the car Locked or Killed, stopped, drivers off |
+
+Nothing on the console can arm the car, drive it or change a limit. Long listings print a few lines per loop tick, only while the serial buffer has room, so they never slow the control loop; the 500 ms status line pauses while one prints. Typing a new command stops a listing.
 
 ## Crash dumps
 

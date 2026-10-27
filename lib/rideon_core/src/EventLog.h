@@ -82,6 +82,8 @@ enum class Event : uint8_t {
   TableFull,   // a new fault row did not fit in the fault table
   LogMount,    // code: 1 if the log area was formatted, v0: records found, v1: torn slots, v2: erased sectors ready
   CrashDump,   // v0, v1: program counter of the crash, high and low 16 bits
+  CrashSaved,  // code: CrashCause, v0: fault bit or ResetReason, v1: samples kept, v2: boot it happened in
+  DtcCleared,  // v0: fault-table rows cleared (from the serial console)
   Count
 };
 

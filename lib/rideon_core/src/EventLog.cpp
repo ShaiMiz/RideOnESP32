@@ -17,7 +17,8 @@ const char* const COMPONENT_NAMES[] = {"-",     "FL",    "FR",  "RL",  "RR",  "S
 const char* const SYMPTOM_NAMES[] = {"-",       "OVER",    "UNDER",  "STALE",  "STUCK_HIGH", "RANGE",
                                      "NO_ANSWER", "LOST", "ACTIVE", "WAITING", "WELDED",     "MISSING"};
 const char* const EVENT_NAMES[] = {"BOOT",  "SETUP_FAIL", "FAULT",    "FAULT_GONE", "REARM",     "MODE",
-                                   "LINK",  "BATTERY",    "SNAPSHOT", "DROPPED",    "TABLE_FULL", "LOG_MOUNT", "CRASH_DUMP"};
+                                   "LINK",  "BATTERY",    "SNAPSHOT", "DROPPED",    "TABLE_FULL", "LOG_MOUNT", "CRASH_DUMP",
+                                   "CRASH_SAVED", "DTC_CLEARED"};
 const char* const RESET_NAMES[] = {"POWER_ON", "SOFTWARE", "PANIC", "WATCHDOG", "BROWNOUT", "OTHER"};
 
 static_assert(sizeof(COMPONENT_NAMES) / sizeof(*COMPONENT_NAMES) == (size_t)Component::Count, "a name per component");
@@ -161,6 +162,14 @@ size_t formatRecord(const LogRecord& r, char* out, size_t outLen) {
       add(snprintf(out + n, outLen - n, " pc=0x%08lX",
                    (unsigned long)(((uint32_t)(uint16_t)r.v[0] << 16) | (uint16_t)r.v[1])));
       break;
+    case Event::CrashSaved:
+      if (r.code == 1)
+        add(snprintf(out + n, outLen - n, " cause=FAULT %s", faultBitName((uint8_t)r.v[0])));
+      else
+        add(snprintf(out + n, outLen - n, " cause=RESET %s", resetReasonName((ResetReason)r.v[0])));
+      add(snprintf(out + n, outLen - n, " samples=%d crash_boot=%u", r.v[1], (unsigned)(uint16_t)r.v[2]));
+      break;
+    case Event::DtcCleared: add(snprintf(out + n, outLen - n, " rows=%d", r.v[0])); break;
     default: break;
   }
   add(snprintf(out + n, outLen - n, " mode=%s faults=0x%04X", modeName((Mode)r.mode), (unsigned)r.faults));

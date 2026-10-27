@@ -1,6 +1,6 @@
 # Control modes
 
-The parent's radio always outranks the child, and anything unknown means stop. The rules are in `lib/rideon_core/src/ModeMachine.cpp` and tested in `test/test_mode_machine`.
+The parent's radio always outranks the child, and anything unknown means stop. The rules are in `lib/rideon_core/src/ModeMachine.cpp` and `Controller.cpp`, tested in `test/test_mode_machine` and `test/test_controller` ([VERIFICATION.md](../VERIFICATION.md)).
 
 | Mode | Who drives | Drive enable | Steering |
 | --- | --- | --- | --- |

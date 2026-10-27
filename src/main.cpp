@@ -1,30 +1,28 @@
 // RideOnESP32 v3 car firmware.
 //
 // setup() holds every kill line LOW until all outputs are zeroed, then the
-// loop runs at a fixed 100 Hz: read inputs, judge the link, evaluate faults,
-// decide the mode, compute the command, ramp, and set the kill lines.
-// See docs/firmware/ARCHITECTURE.md.
+// loop runs at a fixed 100 Hz: read the hardware, let rideon::Controller
+// decide (link, faults, mode, command, ramp, kill lines), and write its
+// outputs. Every decision is in the Controller so the PC tests cover it.
+// See docs/firmware/ARCHITECTURE.md and docs/VERIFICATION.md.
 #include <Arduino.h>
 #include <Wire.h>
 #include <esp_system.h>
 
-#include "ArmingCheck.h"
 #include "BoxTempCheck.h"
 #include "ChannelMap.h"
 #include "ContactorCheck.h"
+#include "Controller.h"
 #include "Faults.h"
-#include "LinkMonitor.h"
-#include "ModeMachine.h"
-#include "Ramp.h"
 #include "accessories/Accessories.h"
 #include "config.h"
+#include "control_config.h"
 #include "drive/DriveController.h"
 #include "drive/SteeringController.h"
 #include "input/ManualInput.h"
 #include "input/RadioInput.h"
 #include "pins.h"
 #include "safety/KillLines.h"
-#include "safety/SafetyManager.h"
 #include "safety/Watchdog.h"
 #include "sensing/BoxTemp.h"
 #include "sensing/Imu.h"
@@ -36,12 +34,6 @@ using namespace rideon;
 
 namespace {
 
-const ChannelLimits CHANNELS = {cfg::CH_MIN_VALID, cfg::CH_MAX_VALID,      cfg::CH_LOW,          cfg::CH_CENTER,
-                                cfg::CH_HIGH,      cfg::STICK_DEADBAND_US, cfg::SWITCH_LOW_BELOW, cfg::SWITCH_HIGH_ABOVE};
-const LinkParams LINK = {cfg::LINK_TIMEOUT_MS, cfg::LQ_DEGRADED_BELOW, cfg::LQ_LOST_BELOW};
-const ArmingParams ARMING = {cfg::CH_CENTER, cfg::ARM_CENTER_TOLERANCE_US, cfg::PEDAL_RELEASED_FRACTION};
-const RampParams PARENT_RAMP = {cfg::ACCEL_PER_S, cfg::BRAKE_PER_S, cfg::STOPPED_EPSILON};
-const RampParams KID_RAMP = {cfg::KID_ACCEL_PER_S, cfg::BRAKE_PER_S, cfg::STOPPED_EPSILON};
 const ContactorParams CONTACTOR = {cfg::BUS_OPEN_MAX_FRACTION, cfg::BUS_CLOSED_MIN_FRACTION,
                                    cfg::BUS_DISCHARGE_TIMEOUT_MS, cfg::BUS_CLOSE_TIME_MS};
 const BoxTempParams BOX_TEMP = {cfg::BOX_TEMP_LIMIT_C, cfg::BOX_TEMP_RECOVER_C, cfg::BOX_TEMP_HOLD_MS,
@@ -53,14 +45,12 @@ ManualInput manual;
 PowerMonitor power;
 DriveController drive;
 SteeringController steering;
-SafetyManager safety;
 Imu imu;
 BoxTemp boxTemp;
 Accessories accessories;
 ContactorCheck contactor;
 BoxTempCheck boxTempCheck;
-FaultLatch faults;
-ModeMachine modes;
+Controller control(cfg::carControl());
 
 uint32_t nextTickUs = 0;
 uint32_t lastLogMs = 0;
@@ -84,14 +74,6 @@ bool started(bool ok, Component comp) {
   return ok;
 }
 
-float kidSpeedCap(uint16_t us) {
-  switch (switchPosition(us, CHANNELS)) {
-    case 1: return cfg::KID_CAP_MID;
-    case 2: return cfg::KID_CAP_MAX;
-    default: return cfg::KID_CAP_MIN;  // low or invalid: slowest
-  }
-}
-
 }  // namespace
 
 void setup() {
@@ -113,7 +95,7 @@ void setup() {
   if (!accessories.begin()) logx::line("PCA9685 not answering: box fans OFF, retrying every second");
 
   if (!ok) {
-    faults.raise(FAULT_SETUP);
+    control.raise(FAULT_SETUP);
     logx::line("SETUP FAILED: car stays locked until reboot");
   }
 
@@ -141,90 +123,69 @@ void loop() {
                        batteryV <= cfg::BATTERY_SENSOR_MAX_V;
   contactor.update(readingsValid, power.busVolts(), batteryV, lines.contactor(), now, CONTACTOR);
   boxTempCheck.update(boxTemp.hasReading(), boxTemp.celsius(), boxTemp.lastGoodMs(), now, BOX_TEMP);
+  CurrentSense current = power.snapshot(now);
 
-  uint16_t throttleUs = radio.channel(ch::THROTTLE);
-  uint16_t steeringUs = radio.channel(ch::STEERING);
-  uint16_t killUs = radio.channel(ch::KILL);
-  LinkState link = evaluateLink(radio.linkInputs(now), LINK);
-  bool linkUsable = link != LinkState::Lost;
+  ControlInputs in = {};
+  in.link = radio.linkInputs(now);
+  in.throttleUs = radio.channel(ch::THROTTLE);
+  in.steeringUs = radio.channel(ch::STEERING);
+  in.killUs = radio.channel(ch::KILL);
+  in.modeUs = radio.channel(ch::MODE);
+  in.speedCapUs = radio.channel(ch::SPEED_CAP);
+  in.hornUs = radio.channel(ch::HORN);
+  in.manualOk = manual.ok();
+  in.estopPressed = manual.estopPressed();
+  in.pedal = manual.pedal();
+  in.direction = manual.direction();
+  in.kidHorn = manual.horn();
+  in.batteryVolts = batteryV;
+  in.current = &current;
+  in.contactorChecked = true;
+  in.busMissing = contactor.busMissing();
+  in.busWaiting = contactor.state() == ContactorState::WaitingForDischarge;
+  in.k1Welded = contactor.welded();
+  in.contactorAllowed = contactor.allowClose();
+  in.boxHot = boxTempCheck.hot();
+  in.boxSensorLost = boxTempCheck.sensorLost();
+  in.boxCelsius = boxTemp.celsius();
+  in.tilted = imu.tilted();
+  in.nowMs = now;
+  in.dtS = dtS;
+  ControlOutputs out = control.step(in);
 
-  // Channel values are trusted only while the link is up; they freeze when it drops.
-  int killPos = switchPosition(killUs, CHANNELS);
-  bool killSwitch = linkUsable && killPos != 2;  // only a clear "run" position allows driving
-  ModeRequest request =
-      linkUsable ? modeRequestFromSwitch(switchPosition(radio.channel(ch::MODE), CHANNELS)) : ModeRequest::Locked;
-  bool channelsValid = !linkUsable || (channelValid(throttleUs, CHANNELS) && channelValid(steeringUs, CHANNELS) &&
-                                       killPos >= 0);
-
-  SafetySignals signals = {link,
-                           killSwitch,
-                           channelsValid,
-                           manual.ok(),
-                           manual.ok() && manual.estopPressed(),
-                           request == ModeRequest::Kid,
-                           power.batteryVolts(),
-                           &power,
-                           DriveController::WHEELS,
-                           true,
-                           true,
-                           &contactor,
-                           boxTempCheck.hot(),
-                           boxTempCheck.sensorLost(),
-                           boxTemp.celsius(),
-                           imu.tilted(),
-                           now};
-  faults.update(safety.evaluate(signals));
-
-  bool arming = armingOk({throttleUs, steeringUs, manual.pedal()}, ARMING);
-  Mode mode = modes.update({killSwitch, request, arming}, faults);
-
-  float linkCap = link == LinkState::Degraded ? cfg::LQ_DEGRADED_CAP : 1.0f;
-  float throttle = stickFraction(throttleUs, CHANNELS);
-  float command = 0.0f;
-  const RampParams* ramp = &PARENT_RAMP;
-  if (mode == Mode::Kid) {
-    ramp = &KID_RAMP;
-    float cap = kidSpeedCap(radio.channel(ch::SPEED_CAP)) * linkCap;
-    bool parentBrake = throttle <= cfg::KID_BRAKE_OVERRIDE;
-    command = parentBrake ? 0.0f : limitCommand(manual.pedal() * manual.direction(), cap, cfg::REVERSE_CAP);
-  } else if (mode == Mode::Parent) {
-    command = limitCommand(throttle, cfg::PARENT_CAP * linkCap, cfg::REVERSE_CAP);
-  }
-
-  bool cutNow = safety.apply(mode, faults, drive.stopped(*ramp), contactor.allowClose(), lines);
-  if (cutNow) {
-    drive.stopNow();
+  // The enable first, so on a driver or over-current fault the drivers are
+  // already off when K1 opens.
+  lines.setDrive(out.lines.drive);
+  lines.setContactor(out.lines.contactor);
+  drive.write(out.speed);
+  if (out.lines.cut) {
     steering.stopNow(lines);
   } else {
-    drive.update(command, dtS, *ramp);
-    steering.update(stickFraction(steeringUs, CHANNELS), mode == Mode::Parent, dtS, lines);
+    steering.update(out.steering, out.mode == Mode::Parent, dtS, lines);
   }
-
-  bool horn = (mode == Mode::Kid && manual.horn()) ||
-              (linkUsable && switchPosition(radio.channel(ch::HORN), CHANNELS) == 2);
-  accessories.update(horn, drive.speed(), safety.battery() != BatteryState::Ok);
+  accessories.update(out.horn, out.speed, control.battery() != BatteryState::Ok);
 
   FreezeFrame frame = {};
   frame.linkQuality = radio.linkQuality();
-  frame.command = scaled(command, 100.0f);
-  frame.output = scaled(drive.speed(), 100.0f);
+  frame.command = scaled(out.command, 100.0f);
+  frame.output = scaled(out.speed, 100.0f);
   frame.pedal = scaled(manual.pedal(), 100.0f);
   frame.batteryV = scaled(batteryV, 100.0f);
   frame.busV = scaled(power.busVolts(), 100.0f);
   for (int i = 0; i < PowerMonitor::CURRENTS; i++) frame.amps[i] = scaled(power.amps(i), 100.0f);
   int16_t boxC = boxTemp.hasReading() ? scaled(boxTemp.celsius(), 1.0f) : -128;
   frame.boxC = (int8_t)(boxC > 127 ? 127 : boxC < -128 ? -128 : boxC);
-  events::update({now, mode, link, radio.linkQuality(), safety.battery(), batteryV, power.driveAmps(), drive.speed(),
-                  &faults, &safety.reports(), frame});
+  events::update({now, out.mode, out.link, radio.linkQuality(), control.battery(), batteryV, power.driveAmps(),
+                  out.speed, &control.faults(), &control.reports(), frame});
   // Flash erases and NVS writes stall the CPU: only with the drivers off and the car stopped.
-  bool safeToStall = (mode == Mode::Locked || mode == Mode::Killed) && !lines.drive() && drive.stopped(*ramp);
+  bool safeToStall = (out.mode == Mode::Locked || out.mode == Mode::Killed) && !lines.drive() && control.stopped();
   events::drain(cfg::LOG_RECORDS_PER_TICK, safeToStall);
 
   if (logx::every(lastLogMs, 500)) {
     logx::line("%s link=%s lq=%u bat=%.1fV bus=%.1fV I=%.1fA cmd=%.2f out=%.2f en=%d k=%d box=%s%.0fC fan=%d fault=%s",
-               modeName(mode), linkName(link), radio.linkQuality(), power.batteryVolts(), power.busVolts(),
-               power.driveAmps(), command, drive.speed(), lines.drive(), lines.contactor(),
+               modeName(out.mode), linkName(out.link), radio.linkQuality(), batteryV, power.busVolts(),
+               power.driveAmps(), out.command, out.speed, lines.drive(), lines.contactor(),
                boxTempCheck.sensorLost() ? "?" : "", boxTemp.celsius(), accessories.fansOn(),
-               faultName(faults.latched()));
+               faultName(control.faults().latched()));
   }
 }

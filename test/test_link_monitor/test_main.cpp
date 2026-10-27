@@ -4,6 +4,7 @@
 #include "ArmingCheck.h"
 #include "ChannelMap.h"
 #include "LinkMonitor.h"
+#include "ModeMachine.h"
 
 using namespace rideon;
 
@@ -25,6 +26,16 @@ void test_lost_within_200ms_even_if_flag_still_up() {
   // AlfredoCRSF keeps isLinkUp() true for 300 ms; packet age catches it sooner.
   TEST_ASSERT_EQUAL(LinkState::Ok, link(true, true, 1000, 100, 1200));
   TEST_ASSERT_EQUAL(LinkState::Lost, link(true, true, 1000, 100, 1201));
+}
+
+void test_names() {
+  // These names go into the log and onto the radio screen.
+  TEST_ASSERT_EQUAL_STRING("LOST", linkName(LinkState::Lost));
+  TEST_ASSERT_EQUAL_STRING("WEAK", linkName(LinkState::Degraded));
+  TEST_ASSERT_EQUAL_STRING("OK", linkName(LinkState::Ok));
+  TEST_ASSERT_EQUAL_STRING("?", linkName((LinkState)9));
+  TEST_ASSERT_EQUAL_STRING("KILLED", modeName(Mode::Killed));
+  TEST_ASSERT_EQUAL_STRING("?", modeName((Mode)9));
 }
 
 void test_lost_when_flag_down() { TEST_ASSERT_EQUAL(LinkState::Lost, link(false, true, 1000, 100, 1001)); }
@@ -83,5 +94,6 @@ int main() {
   RUN_TEST(test_stick_fraction);
   RUN_TEST(test_switch_positions);
   RUN_TEST(test_arming_check);
+  RUN_TEST(test_names);
   return UNITY_END();
 }

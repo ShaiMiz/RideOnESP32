@@ -52,7 +52,8 @@ On Windows, if `pio` is not on PATH, use the PlatformIO terminal in Cursor or `%
 
 ## Code layout and rules
 
-- `lib/rideon_core/` holds safety and control logic with no hardware calls. New logic goes here when it can, with a test in `test/test_<name>/`.
+- `lib/rideon_core/` holds safety and control logic with no hardware calls. New logic goes here when it can, with a test in `test/test_<name>/`. Every decision that can move or stop the car goes through `rideon::Controller`; `src/main.cpp` only reads hardware into it and writes its outputs.
+- Verification: [docs/VERIFICATION.md](docs/VERIFICATION.md). A new or changed safety rule gets its SR- row, a test naming the ID, and a mutant in `tools/mutation_check.py` if a one-line slip could break it. CI job `verify` runs sanitizers, coverage floors, cppcheck and the mutation check; locally `tools/run_native_tests.sh` (needs g++, Linux or WSL). Never lower a coverage floor or delete a mutant to get green.
 - `src/` is hardware glue; `src/bench/` holds the bench firmwares. `include/config.h` holds every limit and tunable; `include/pins.h` is the pin map.
 - **Pins:** `include/pins.h`, [docs/hardware/PINOUT.md](docs/hardware/PINOUT.md) and [docs/hardware/WIRING.md](docs/hardware/WIRING.md) change together in the same PR, and the KiCad schematic is regenerated. `include/pin_rules.h` static-asserts the rules (no GPIO used twice, no outputs on 34–39, analog on ADC1 only, strapping pins handled) and the CI `pins` job checks the docs match.
 - Faults latch until the parent re-arms from Locked; never add a fault that clears itself. Link loss is judged by the CRSF link state, never by channel values. Fault codes: [docs/firmware/FAULT_CODES.md](docs/firmware/FAULT_CODES.md).
@@ -63,7 +64,7 @@ On Windows, if `pio` is not on PATH, use the PlatformIO terminal in Cursor or `%
 
 ## Workflow
 
-- `main` is protected. Every change goes through a branch and a PR, with CI green (`pins`, `test`, and builds of `car`, `radio_check`, `one_motor`). Shai reviews and merges; don't merge yourself.
+- `main` is protected. Every change goes through a branch and a PR, with CI green (`pins`, `test`, `verify`, and builds of `car`, `radio_check`, `one_motor`). Shai reviews and merges; don't merge yourself.
 - Claude in Shai's claude.ai project also opens PRs here from the cloud, and chats aren't shared. The repo, PRs and issues are the shared record: `git pull` and check open PRs before starting, and write decisions into an issue or doc rather than leaving them only in chat.
 - Add a line to [CHANGELOG.md](CHANGELOG.md) for user-visible or safety-relevant changes.
 - Tracking lives in GitHub issues: phase parents #6 (phase 1) to #12 (phase 7), task issues under them, labelled `phase-N`, `safety`, `firmware`, `hardware`, `radio`, `waiting-on-car`. Reference the issue in the PR.

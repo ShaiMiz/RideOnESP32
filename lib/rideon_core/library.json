@@ -4,5 +4,5 @@
   "description": "Hardware-free safety and control logic for RideOnESP32. No Arduino calls, so it is unit-tested on the PC.",
   "frameworks": "*",
   "platforms": "*",
-  "build": { "flags": "-std=gnu++17" }
+  "build": { "flags": "-std=gnu++17 -Wall -Wextra -Werror -Werror=unused-variable -Werror=unused-but-set-variable -Werror=unused-function" }
 }

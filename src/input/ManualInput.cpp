@@ -37,7 +37,7 @@ void ManualInput::update() {
   }
   bool fwd = pressed(v, pcf::SHIFT_FORWARD);
   bool rev = pressed(v, pcf::SHIFT_REVERSE);
-  direction_ = (fwd && !rev) ? 1 : ((rev && !fwd) ? -1 : 0);  // both = wiring fault = neutral
+  direction_ = fwd == rev ? 0 : (fwd ? 1 : -1);  // both = wiring fault = neutral
   horn_ = pressed(v, pcf::HORN);
   estop_ = pressed(v, pcf::ESTOP_SENSE);
   seat_ = pressed(v, pcf::SEAT);

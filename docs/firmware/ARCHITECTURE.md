@@ -5,22 +5,23 @@ The firmware has two layers. **`lib/rideon_core`** holds every safety and contro
 ## One loop iteration (100 Hz)
 
 ```
- RadioInput ──► channels, link flag, packet age, LQ ──► LinkMonitor ──┐
- ManualInput ─► pedal, shifter, horn ───────────────────────────────┤
- PowerMonitor ► battery and bus volts, 5 currents, driver flags ────┤
- ContactorCheck (bus vs battery), BoxTempCheck (DS18B20) ───────────┤
-                                                                    ▼
-                                         SafetyManager.evaluate ─► active faults
-                                                                    ▼
-                                                       FaultLatch (latches them)
-                                                                    ▼
-             ArmingCheck (sticks centred, pedal up) ─► ModeMachine ─► Locked / Kid / Parent / Killed
-                                                                    ▼
-                                main.cpp: command from the mode, speed cap, reverse cap
-                                                                    ▼
-                SafetyManager.apply ─► KillLines (drive EN, steer EN, contactor)
-                                                                    ▼
-                          DriveController ─► Ramp ─► 4 × BTS7960Motor PWM
+ RadioInput ──► channels, link flag, packet age, LQ ─────────────┐
+ ManualInput ─► pedal, shifter, horn, E-stop sense ─────────────┤
+ PowerMonitor ► battery volts, CurrentSense snapshot ───────────┤  main.cpp fills
+ ContactorCheck (bus vs battery), BoxTempCheck (DS18B20), IMU ──┤  ControlInputs
+                                                                ▼
+ ┌──────────────── rideon::Controller::step() (lib/rideon_core) ────────────────┐
+ │ LinkMonitor ─► link state (channels trusted only while the link is up)       │
+ │ SafetyRules.evaluate ─► active faults, each with the part it came from       │
+ │ FaultLatch ─► latched faults                                                 │
+ │ ArmingCheck + ModeMachine ─► Locked / Kid / Parent / Killed                  │
+ │ command for the mode, speed cap, reverse cap, degraded-link cap              │
+ │ killLines ─► drive EN, contactor, cut                                        │
+ │ Ramp ─► speed (or zero at once on a cut)                                     │
+ └──────────────────────────────────────────────────────────────────────────────┘
+                                                                ▼  ControlOutputs
+ main.cpp ─► KillLines (drive EN first, then contactor) ─► DriveController (4 × BTS7960Motor)
+          ─► SteeringController, Accessories, events::update (log and fault table)
 ```
 
 Between ticks, `loop()` keeps draining the receiver's serial port so no frames are lost.
@@ -44,14 +45,15 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 | `FaultTable` | core | One row per fault and part: count, first and last seen, worst value, freeze frames |
 | `LogRing` | core | The log on flash: a ring of records over 4 KB sectors, erased ahead, torn records skipped |
 | `Recorder` | core | Turns changes (faults, re-arm, mode, link, battery) into records and fault-table rows |
-| `main.cpp` | src | Setup order, fixed-rate loop, command selection |
+| `SafetyRules` | core | Sensor readings to fault conditions, each naming its part; the kill-line rules |
+| `Controller` | core | One whole control tick: link, faults, mode, command, kill lines, ramp. Its config is `include/control_config.h`, shared with the tests |
+| `main.cpp` | src | Setup order, fixed-rate loop, hardware into `ControlInputs` and `ControlOutputs` back out |
 | `safety/KillLines` | src | GPIO21, GPIO2, GPIO12 |
 | `safety/Watchdog` | src | Task watchdog on the loop, used by `car` and `one_motor` |
-| `safety/SafetyManager` | src | Turns sensor readings into fault conditions; sets the kill lines |
 | `input/RadioInput` | src | AlfredoCRSF on UART2, plus a tap that timestamps RC frames |
 | `input/ManualInput` | src | Pedal ADC and PCF8574 switches |
 | `drive/BTS7960Motor` | src | Signed speed to RPWM/LPWM (from v2.2) |
-| `drive/DriveController` | src | Four wheels on one ramp, each flipped by `WHEEL_REVERSED` |
+| `drive/DriveController` | src | Writes the ramped speed to four wheels, each flipped by `WHEEL_REVERSED` |
 | `drive/SteeringController` | src | Stub: holds steering disabled until the AS5600 is fitted |
 | `sensing/PowerMonitor` | src | Battery volts; ADS1115 currents and motor-bus volts, one channel per tick |
 | `sensing/BoxTemp` | src | DS18B20 on GPIO15, own 1-Wire timing, one small step per tick |
@@ -75,11 +77,11 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 | `car` | `src/` except `src/bench/` | Phase 5 onward |
 | `radio_check` | `src/bench/radio_check.cpp` + RadioInput + KillLines | Phase 2 |
 | `one_motor` | `src/bench/one_motor.cpp` + one motor, radio, power, log, watchdog | Phase 4 |
-| `native` | `lib/rideon_core` + `test/` on the PC | Every change |
+| `native` | `lib/rideon_core` + `test/` on the PC | Every change; CI also runs them under sanitizers ([VERIFICATION.md](../VERIFICATION.md)) |
 
 ## Adding a feature
 
-1. Put any decision logic in `lib/rideon_core` with a unit test.
+1. Put any decision logic in `lib/rideon_core` with a unit test. If it can stop the car, route it through `Controller` and add its requirement to [VERIFICATION.md](../VERIFICATION.md).
 2. Keep the hardware module in `src/` thin.
 3. Add new pins to `pins.h` and new limits to `config.h`, nowhere else.
 4. If it can stop the car, give it a fault bit and a row in [FAULT_CODES.md](FAULT_CODES.md).

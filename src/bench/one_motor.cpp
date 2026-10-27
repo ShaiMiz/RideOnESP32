@@ -14,13 +14,14 @@
 #include <Wire.h>
 
 #include "ArmingCheck.h"
-#include "BatteryCheck.h"
 #include "ChannelMap.h"
 #include "Faults.h"
 #include "LinkMonitor.h"
 #include "ModeMachine.h"
 #include "Ramp.h"
+#include "SafetyRules.h"
 #include "config.h"
+#include "control_config.h"
 #include "drive/BTS7960Motor.h"
 #include "input/RadioInput.h"
 #include "pins.h"
@@ -37,9 +38,7 @@ const ChannelLimits CHANNELS = {cfg::CH_MIN_VALID, cfg::CH_MAX_VALID,      cfg::
 const LinkParams LINK = {cfg::LINK_TIMEOUT_MS, cfg::LQ_DEGRADED_BELOW, cfg::LQ_LOST_BELOW};
 const ArmingParams ARMING = {cfg::CH_CENTER, cfg::ARM_CENTER_TOLERANCE_US, 1.0f};  // no pedal on the bench
 const RampParams RAMP = {cfg::ACCEL_PER_S, cfg::BRAKE_PER_S, cfg::STOPPED_EPSILON};
-const BatteryParams BATTERY = {cfg::BATTERY_SENSOR_MIN_V, cfg::BATTERY_SENSOR_MAX_V, cfg::BATTERY_LOW_WARN_V,
-                               cfg::BATTERY_CUTOFF_V,     cfg::BATTERY_RECOVER_V,    cfg::BATTERY_HIGH_WARN_V,
-                               cfg::BATTERY_CUTOFF_HOLD_MS};
+const SafetyLimits LIMITS = cfg::carControl().safety;  // the car's limits
 
 KillLines lines;
 RadioInput radio;
@@ -48,9 +47,7 @@ BTS7960Motor motor("FL", pins::FL_RPWM, pins::FL_LPWM, cfg::WHEEL_REVERSED[0]);
 FaultLatch faults;
 ModeMachine modes;
 Ramp ramp;
-BatteryCheck battery;
-HoldTimer overcurrent;
-HoldTimer driverFault;
+SafetyRules rules;
 uint32_t nextTickMs = 0;
 uint32_t lastLogMs = 0;
 }  // namespace
@@ -85,33 +82,33 @@ void loop() {
       linkUsable ? modeRequestFromSwitch(switchPosition(radio.channel(ch::MODE), CHANNELS)) : ModeRequest::Locked;
   if (req == ModeRequest::Kid) req = ModeRequest::Locked;
 
-  FaultMask active = FAULT_NONE;
-  if (!linkUsable) active |= FAULT_LINK_LOST;
-  if (kill) active |= FAULT_KILL_SWITCH;
-  BatteryState bs = battery.update(power.batteryVolts(), now, BATTERY);
-  if (bs == BatteryState::SensorFault) active |= FAULT_BATTERY_SENSOR;
-  if (bs == BatteryState::Cutoff) active |= FAULT_BATTERY_LOW;
-  if (overcurrent.update(power.amps(PowerMonitor::FL) > cfg::MOTOR_CURRENT_LIMIT_A, now, cfg::OVERCURRENT_HOLD_MS))
-    active |= FAULT_OVERCURRENT;
-  if (!power.currentFresh(PowerMonitor::FL, now)) active |= FAULT_CURRENT_SENSE;
-  if (driverFault.update(power.driverFault(PowerMonitor::FL), now, cfg::DRIVER_FAULT_HOLD_MS)) active |= FAULT_DRIVER;
-  faults.update(active);
+  // No pedal, E-stop sense, bus sense, box sensor or IMU on the bench: one wheel's current only.
+  CurrentSense current = power.snapshot(now);
+  SafetyInputs in = {};
+  in.link = link;
+  in.killSwitch = kill;
+  in.radioChannelsValid = true;
+  in.manualOk = true;
+  in.batteryVolts = power.batteryVolts();
+  in.current = &current;
+  in.wheelsSensed = 1;
+  in.nowMs = now;
+  faults.update(rules.evaluate(in, LIMITS));
 
   bool arming = armingOk({thrUs, cfg::CH_CENTER, 0.0f}, ARMING);
   Mode mode = modes.update({kill, req, arming}, faults);
 
-  if (mode == Mode::Killed || faults.has(HARD_FAULTS)) {
-    lines.setDrive(false);
+  KillLineState kl = killLines(mode, faults, ramp.stopped(RAMP), true);  // no bus sense: no weld check
+  if (kl.cut) {
     ramp.reset();
-    motor.write(0.0f);
   } else {
     float cmd = mode == Mode::Parent ? limitCommand(stickFraction(thrUs, CHANNELS), 1.0f, cfg::REVERSE_CAP) : 0.0f;
-    motor.write(ramp.step(cmd, dtS, RAMP));
-    lines.setDrive(mode == Mode::Parent || !ramp.stopped(RAMP));
+    ramp.step(cmd, dtS, RAMP);
   }
-  // After the enable: on a driver or over-current fault the drivers are off
-  // before K1 opens. No bus sense on the bench, so no weld check here.
-  lines.setContactor(!faults.has(CONTACTOR_FAULTS));
+  // The enable before K1: on a driver or over-current fault the drivers are off before K1 opens.
+  lines.setDrive(kl.drive);
+  lines.setContactor(kl.contactor);
+  motor.write(ramp.value());
 
   if (logx::every(lastLogMs, 200)) {
     logx::line("%s link=%s out=%+.2f I=%.2fA bat=%.1fV en=%d fault=%s", modeName(mode), linkName(link),

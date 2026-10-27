@@ -61,7 +61,6 @@ class LogRing {
 
  private:
   static bool blank(const LogRecord& r);
-  uint32_t sectors() const { return slots_ / PER_SECTOR; }
   bool sectorErased(uint32_t s);
 
   FlashDevice* dev_ = nullptr;

@@ -1,94 +1,135 @@
-# Ride-on car safety standards vs our design
+# Ride-on car safety: what the law requires vs what we gate on
 
-17 Oct 2026. Car: Can-Am Maverick X3 24 V 4WD (kolbosima item 8419715), stock controller HY2005RX-24V/40A. Our design: SAFETY.md, POWER_CHAIN.md, COMMISSIONING.md, CONTROL_MODES.md, `include/config.h` on main, draft schematic v0.2, issues #1–#47.
+Version 2, 25 Oct 2026 (v1: 17 Oct). Car: Can-Am Maverick X3 24 V 4WD (kolbosima item 8419715), stock controller HY2005RX-24V/40A. Our design as of main `0f59bd9`: SAFETY.md, COMMISSIONING.md, CONTROL_MODES.md, FAULT_CODES.md, `include/config.h`, KiCad schematic v0.3, radio/ELRS_SETUP.md, issues #1–#47.
 
-**Verdict colours:** 🟢 above, 🔴 below or unverified, 🔵 same.
-
-**Confidence key:** ✔ = checked in a source listed at the bottom. ◐ = from general knowledge of these standards, not checked against the paid standard text; verify before relying on the exact number.
+**Marks:** 🔴 open mandatory item · 🟢 done or already better than the factory · 🔵 same as stock (we don't touch it) · ⚪ optional.
+**Confidence:** ✔ checked in a source listed at the bottom. ◐ general knowledge of the standard, not checked against the paid text.
 
 ## Short answer
 
-- **Yes, we can know.** Chinese factories don't publish their own test plans, but every car sold in Israel, the EU or the US has to pass a fixed set of public standards, tested once per model by a lab (SGS, Intertek, BV, TÜV), plus the factory's own per-unit checks. The test report for *our* model exists and the importer has it (see "How to find out for our exact car").
-- **Where we're above the factory:** loss-of-signal stop, parent override, latched faults, a hardware E-stop and contactor, per-motor current monitoring, battery cut-off, tilt cut-out (planned) and a staged commissioning plan. A stock car has a fuse, a 40 A controller and a cheap 2.4 GHz remote.
-- **Where we're the same:** everything mechanical and chemical (frame, seat, stability, plastics, battery), because we don't change it.
-- **Where we fall below (8 gaps):** the car rolls freely after a kill or when parked, speed is capped as a % of motor power and not in km/h, a single stalled motor has no hardware backstop below 40 A, the radio may exceed the legal 100 mW, plus audio loudness, the enclosure's fire rating, EMC, and no stall or heating test in commissioning. Details and fixes are in the "Gaps" section.
+1. **The bar.** Every ride-on sold in Israel, the EU or the US is type-tested once per model by a lab against **EN 71-1 / SI 562-1** (mechanics: speed, brakes, stability), **EN 62115** (electrics: stalled motor, short circuit, temperatures, remote control) and, for the US, **ASTM F963 §4.25** (battery-operated toys, including a stalled-motor fire test). Two real lab reports for Chinese ride-ons (below) show exactly which items get ticked. Nobody measures stopping distance, link-loss time, current accuracy or EMC on a ride-on, and nobody fits an E-stop or contactor.
+2. **What's mandatory for us.** 22 items. 11 are already met (🟢 or 🔵). **10 are open (🔴)**: speed in km/h, roll-away, a stalled motor with no backstop, the locked-wheel heat test, surface temperatures, the box's fire rating, switch ratings, sharp edges on our added parts, loudness, and nuisance tripping. The last one (M10) is half met: same battery, but its label (#13) is still unread, so the battery thresholds are a guess.
+3. **What we can stop gating on.** Of our current "before a child rides" gates, 4 go beyond any standard: current calibration against a meter, stopping distance, the contactor weld and bus checks, and the 0.5 s link-loss time. They become **non-gating** (do them when convenient; a failure disables that feature rather than holding the project), provided we add the per-motor fuses in fix C.
+4. **What to do first.** Read the battery label and key switch rating, set the km/h caps, add four per-motor fuses, then run the roll-away test and the locked-wheel test. That's all low-cost and covers every high-concern gap. The ranked list is at the end.
 
-## Which standards apply
+**Legal note ◐:** these laws bind whoever *sells* a toy. A parent rebuilding their own child's car isn't legally bound, and once the stock controller is out, the car's CE and SII approval no longer covers it. "Mandatory" below means "what every car on the shelf had to pass, so the bar we won't go below".
 
-| Market | Mandatory for a 24 V ride-on | Who tests |
-| --- | --- | --- |
-| **EU (CE)** | Toy Safety Directive 2009/48/EC via **EN 71-1** (mechanical, incl. ride-on clause 4.15) ✔, EN 71-2 (flammability), EN 71-3 (chemicals), **EN IEC 62115:2020+A11** (electric toys) ✔. Radio remote: RED 2014/53/EU (EN 300 328, EN 301 489) ◐. RoHS, REACH. | Type test by a lab; manufacturer signs the Declaration of Conformity |
-| **Israel** | **SI 562** (toy safety, based on EN 71: mechanical, flammability, heavy metals, phthalates) ✔, enforced on import by the Standards Institution (SII) lab ✔. Electric toys: SI 62115 (the Israeli adoption of IEC 62115) ◐. Radio remote: Ministry of Communications import approval ◐. | SII lab tests samples or accepts a foreign lab report; customs release needs SII approval |
-| **US** | **ASTM F963** (mandatory under CPSIA; covers battery-powered ride-ons) ✔, 16 CFR 1500 hazards, FCC Part 15 for the remote. Children's Product Certificate from a CPSC-accepted lab. | Third-party lab, every model |
-| **China (domestic sales)** | **CCC**: ride-on toys and electric toys, to GB 6675.1–.4 and **GB 19865** (= IEC 62115, applies to powered ride-ons) ✔ | Type test + post-certification sampling at the factory ✔ |
+## Which laws and standards apply
 
-All four boil down to the same two documents: **EN 71-1 / ISO 8124-1 (mechanics)** and **IEC 62115 (electrics)**. Export factories test to both once per model.
+| Market | Law | Standards a lab tests a 24 V ride-on to | Speed limit? | Remote-control rules? |
+| --- | --- | --- | --- | --- |
+| **Israel** | Standards Law; import needs SII approval ✔ | **SI 562 part 1** (mechanical, official since Nov 2022) ✔ + other SI 562 parts (flammability, chemicals) ✔. Electrics: EN/IEC 62115 report accepted ◐ | Yes, via SI 562-1 (built on EN 71-1) ◐ | Via EN 62115 Annex J ◐ |
+| **EU** | Toy Safety Directive 2009/48/EC; the new **Toy Safety Regulation (EU) 2025/2509** applies from 1 Aug 2030 (adds a digital product passport) ✔ | **EN 71-1** ✔, EN 71-2/-3, **EN IEC 62115:2020+A11** ✔; radio: RED (EN 300 328, 100 mW EIRP at 2.4 GHz) ◐ | **Yes**: 3–6 y ≤ 6 km/h, or ≤ 8.2 km/h with a two-position switch shipped in low; 6 y+ ≤ 16 km/h ✔ | **Yes**: Annex J. Stops by itself on leaving range; a mode without the remote needs an adult and a tool ✔ |
+| **US** | CPSIA (third-party test + Children's Product Certificate) ✔ | **ASTM F963-23** incl. §4.25 battery-operated toys, §8.17 stalled motor, §8.18 battery-powered ride-ons, §8.19 secondary batteries ✔ | **No**. CPSC asked ASTM in 2022 to consider one ✔ | No |
+| **China** (domestic) | CCC ✔ | GB 6675 + **GB 19865** (= IEC 62115) ✔ | As ISO 8124-1 ◐ | ◐ |
 
-## What the factory actually does
+## What factories really test
 
-1. **Type test, once per model** (and again on design changes or a retailer's yearly retest): the full EN 71 / EN 62115 / ASTM F963 test list below, run by a lab on a few samples. This is where speed, brakes, stability, stalled motors and short circuits are tested.
-2. **Per-unit production checks** ◐: incoming checks on batteries, chargers and controllers; a run test of each car on the line (forward, reverse, each speed, remote pairing, lights and sounds); visual and fastener checks.
-3. **Pre-shipment inspection** ◐: the buyer's inspector (QIMA, SGS, V-Trust) pulls samples by AQL, runs function, remote-range and speed checks, and checks labels, warnings and carton drop.
+Two published lab reports for Chinese battery ride-ons ✔ (Intertek 2021, a 12 V lead-acid ride-on; and a 2024 report for a ride-on car, both to ASTM F963):
 
-So the deep safety tests happen on paper, once. Nobody re-tests your individual car's stall behaviour.
+- **Ticked Pass:** flammability, sharp edges and points, projections, wheels and axles, stability and overload, sound-producing toys, max DC voltage, battery surface temperature, surface temperature after normal use and abuse, insulation temperature, **no fire risk with the motor stalled**, nuisance tripping of the fuse, switch ratings, battery and charger certification, **short-circuit protection of the main and motor wiring**, strain relief, labels and instructions, plus lead and phthalates.
+- **Not in either report:** stopping distance, top-speed figures (US has no limit), remote-control behaviour, EMC immunity, current accuracy, anything about an E-stop or contactor. Neither report records a measured value for the electrical tests, only Pass.
+- **Per unit on the line ◐:** a run test (forward, reverse, speeds, remote pairing) and visual checks. The deep tests happen once per model.
 
-## Test-by-test comparison
+So the factory's whole electrical safety case is: **24 V, a fuse, rated wiring and switches, a stalled motor doesn't start a fire, and nothing a child touches gets too hot.** That is the bar.
 
-| # | Requirement | Standard | Stock car (likely) | Our design | Verdict |
-| --- | --- | --- | --- | --- | --- |
-| 1 | **Max speed.** Age 3–6: ≤ 6 km/h, or ≤ 8.2 km/h if a two-position limiter can hold it to ≤ 6 km/h and ships in the low position. Age 6+: ≤ 16 km/h | EN 71-1 4.15.1.8, EN 62115 13.10 ✔ | 4.5 / 6 / 7.5 km/h by gear (listing) | Caps are % of motor power: Kid 30/60/100 %, **Parent 100 %**. No km/h figure anywhere | **🔴 Below until measured.** 100 % may match or beat the stock top speed |
-| 2 | **Brakes / roll-away.** Ride-ons with free-wheeling must brake; ≥ 30 kg must lock a brake; must not move > 5 cm on the brake test ramp. Motor braking counts if the car creeps ≤ 0.36 m/s on the ramp | EN 71-1 4.15.1.5, test 8.26.1 ✔ | Gearbox + controller shorts the motors when stopped ◐ | Locked mode brakes, then **drops drive enable, so the motors free-wheel**. Kill, E-stop, key-off and contactor-open all coast | **🔴 Below.** Car (42 kg + child) can roll on a slope once stopped or killed |
-| 3 | **Stability:** must not tip on the test slope with a child-mass load | EN 71-1 4.15.1.4, test 8.23.1 ✔ | Passed at type test | Unchanged; tilt cut-out planned (#40) | 🔵 Same, then 🟢 above |
-| 4 | **Static and dynamic strength** of seat and frame | EN 71-1 4.15.1.3 ✔ | Passed | Unchanged; our box must be bolted so it can't come loose | 🔵 Same |
-| 5 | **Max 24 V** supply, higher internal voltages only if inaccessible | EN 62115 13.1 ✔ | 24 V | Same battery | 🔵 Same |
-| 6 | **Locked-motor test:** wheels locked, run to steady state (30 s if a hold-to-run switch drives it); accessible parts stay under temperature limits; nothing catches fire | EN 62115 clause 9 ✔ | Fuse + 40 A controller limit | 40 A fuse; software over-current per motor 20 A / total 35 A for 300 ms; driver fault flag; box DS18B20 cut-out (#34); stall detection (#44) | **🟢 Above on detection, 🔴 below on backstop:** one stalled 24 V 555-size motor likely draws under 20 A, so software never trips and the 40 A fuse never blows. Not tested in commissioning |
-| 7 | **Short-circuit tests** across live parts, then temperature limits | EN 62115 clause 9 ✔ | Fuse | 40 A main fuse within 15 cm, a fuse per rail (F2–F8) | 🔵 Same or 🟢 above |
-| 8 | **Protective electronic circuits:** if safety relies on electronics, it must still be safe when that electronics fails ◐ | EN 62115 Annex D ✔ (title) | Simple | Hardware layer (fuse, key, E-stop, contactor, pull-downs) stays when the ESP32 fails | 🟢 Above for stopping; 🔴 same gap as #6 for overheating |
-| 9 | **Remote control for ride-ons:** car stops automatically on leaving range; a mode without the remote must need an adult and a tool | EN 62115 Annex J ✔ | Cheap 2.4 GHz remote, override and stop button | Link loss (200 ms, LQ < 40 %) brakes to a stop; no radio = no driving in any mode; parent brake overrides the pedal; kill switch; binding phrase + Model Match | **🟢 Above** |
-| 10 | **Battery:** rechargeables to IEC 62133 (NiMH, lithium; lead-acid is outside it) ◐; no leaking in any position; not removable without two actions or a tool | EN 62115 13.4, 15.5 ✔ | Stock pack | Same pack; under-voltage cut-off at 21 V with hysteresis; chemistry still unknown (#13) | 🔵 Same, 🟢 above on cut-off. If it turns out to be lithium, the pack's own BMS must stay |
-| 11 | **Charger:** toy-safe charger, marked "use only with" | EN 62115 7.2.3 ✔ | Stock charger | Unchanged, as long as the charge port stays wired straight to the battery | 🔵 Same |
-| 12 | **Wiring:** protected against sharp edges, strain relief, screw connections hold | EN 62115 clauses 14, 16 ✔ | Basic | Glands, ferrules, locking connectors, 10/12/14 AWG | 🟢 Above |
-| 13 | **Heat and fire:** insulating parts near live connections pass glow-wire / needle-flame tests ◐ | EN 62115 clause 18, Annex B ✔ | Flame-rated controller case ◐ | Plain ABS box (BOM) | **🔴 Below** unless the box is flame-retardant (UL94 V-0) or metal |
-| 14 | **EMC immunity** (e.g. IEC 61000-4-3 radiated fields) | EN 62115 refs ✔, EMC Directive | Type-tested | Untested; motor noise resets are an open risk (#35) | **🔴 Unverified** |
-| 15 | **Radio power:** 2.4 GHz licence-free limit 100 mW EIRP (EU EN 300 328; Israel follows the same limit ◐) | RED / MoC ◐ | ~1–10 mW remote | ELRS can run 250 mW+ | **🔴 Below if left at max.** Set ≤ 100 mW (#21, #37) |
-| 16 | **Loudness:** continuous toy sound about 85 dB(A) max ◐ | EN 71-1 4.20 ◐ | Small speaker | Planned 2 × 50 W BT amp (#47) + DFPlayer (#46) | **🔴 Below if uncapped** |
-| 17 | **LEDs:** optical radiation limits | EN 62115 Annex E ✔ | Small LEDs | LED strips through PCA9685 (#45) | 🔵 Same, if ordinary strips |
-| 18 | **Warnings and manual:** adult supervision, no public roads, protective gear, max weight | EN 62115 7.5, EN 71-1 7.10.3 ✔ | Labels + manual | SAFETY.md rules (helmet, parent holds radio) | 🔵 Same; keep the stock labels on the car |
-| 19 | **Chemicals / flammability of plastics** | EN 71-2/-3, SI 562 ✔ | Tested | Unchanged | 🔵 Same |
+## Mandatory items
 
-## Gaps, with suggested fixes
+"Factory tests it" means it appears as a tested clause in the standard or in the lab reports above.
 
-1. **Roll-away after stop, kill or E-stop (row 2).** Add a parking brake that works without power: an automotive relay per motor pair whose *normally-closed* contacts short the motor terminals when the contactor is open (classic dynamic brake), or check that the gearbox alone holds. Gate test: car + 35 kg sandbag on a 10° slope, killed, must not move more than 5 cm. Add to phase 3/5.
-2. **Speed in km/h (row 1).** In phase 6 measure the top speed at 100 % and set `KID_CAP_*` so Kid-high is ≤ 6 km/h (or ≤ 8.2 km/h with the switch defaulting low) and decide a Parent cap. Later, use the wheel halls (#41) to enforce km/h directly.
-3. **Single stalled motor (row 6).** Add a hardware backstop per motor: a 15–20 A blade fuse or PTC in each motor lead, sized after reading the motor label (#14). In firmware, an I²t (heat-over-time) limit per motor rather than only the 20 A threshold, which ties into #44.
-4. **Stall and heat test (rows 6, 7).** Add to phase 4/5: lock one wheel, hold full throttle 30 s, then until something trips; record motor, driver, wire and box-surface temperatures. This is the factory's clause 9 test.
-5. **Radio power (row 15).** Set the ELRS TX max power to 100 mW and use the LBT (EU) regulatory build. Range on a playground is far less than 100 mW covers; #37 confirms it.
-6. **Enclosure fire rating (row 13).** Buy a UL94 V-0 or metal box, or line the board area with a metal plate.
-7. **Audio loudness (row 16).** Cap the amp's volume in hardware (a fixed resistor or a gain jumper) to keep about 85 dB(A) at the driver's ear.
-8. **EMC (row 14).** Already #35; add a gate: full-load reversals and radio keyed next to the box with no resets or false readings in the log.
+| # | Item | Required by | Factory tests it | Our status | Fix: how | Complexity | Concern |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| M1 | **Top speed** ≤ 6 km/h (or ≤ 8.2 km/h with a low/high switch shipped in low) for ages 3–6; ≤ 16 km/h for 6 y+ | EN 71-1 4.15.1.8, EN 62115 13.10 ✔, SI 562-1 ◐ | EU/IL: yes. US: no | 🔴 Caps are % of motor power; Kid high and Parent are 100 % | **Code + test:** measure km/h at each cap in phase 6 (phone GPS or 10 m and a stopwatch), then set `KID_CAP_*` and `PARENT_CAP` in config.h. The speed applies in Parent mode too | Low | High |
+| M2 | **Roll-away:** a ride-on of 30 kg or more must hold on the brake test ramp (≤ 5 cm), or creep ≤ 0.36 m/s with motor braking | EN 71-1 4.15.1.5, test 8.26.1 ✔ | EU/IL: yes | 🔴 Locked drops drive enable after stopping; kill, E-stop and key-off coast. Untested | **Test first:** car (and later + 35 kg sandbag) on a 10° slope, everything off. If the gearbox holds, done. If not: **code** keeps the low-side brake on while parked in Locked (contactor closed), and **parts**: 4 × 24 V 40 A SPDT automotive relays that short each motor when the contactor is open (the classic Power Wheels brake) | Low test; Medium fix | High |
+| M3 | **Stalled motor:** a locked wheel must not overheat wiring or start a fire | EN 62115 cl. 9 ✔, ASTM 4.25.10.2 / 8.17 ✔ | Yes, every report | 🔴 One stalled motor likely draws < 20 A: software doesn't trip (20 A limit) and the 40 A main fuse never blows | **Parts:** a 15–20 A blade fuse in each motor lead (4 inline holders; size from the motor label, #14). **Code (optional):** an I²t heat-over-time limit per motor, with #44 | Low | High |
+| M4 | **Short circuit** in main or motor wiring is cleared by a fuse | ASTM 4.25.10.7 ✔, EN 62115 cl. 9 ✔ | Yes | 🟢 40 A fuse within 15 cm; a fuse per rail. M3's motor fuses also protect the 12–14 AWG motor leads | Part of M3 | — | — |
+| M5 | **Locked-wheel and heating test** as the lab runs it: hold full throttle on a locked wheel, record temperatures | EN 62115 cl. 9 ✔, ASTM 8.17 ✔ | Yes | 🔴 Not in COMMISSIONING.md | **Test:** add to phase 5: lock one wheel, full throttle 30 s, then until a fuse or fault trips; touch-check motor, driver, wiring and box | Low | High |
+| M6 | **Accessible surfaces** stay under the temperature limits after normal use and abuse | EN 62115 Table 1 ✔, ASTM 4.25.7–4.25.8 ✔ | Yes | 🔴 Box and heatsinks not measured. `HOT` cut-out at 65 °C inside the box exists (PR #52) | **Test:** after 20 min of hard driving, and after M5, a hand on the box and any surface a child can reach is comfortable (about ≤ 50 °C; an IR thermometer helps) | Low | Medium |
+| M7 | **Fire:** insulating parts that hold live connections resist heat and flame | EN 62115 cl. 18 ✔ (glow-wire ◐), ASTM switch rating ✔ | Yes | 🔴 Plain ABS box | **Parts:** a UL94 V-0 (flame-retardant) box, or a metal plate under the drivers, contactor and fuse block | Low | Medium |
+| M8 | **Switches rated** for the current they switch | ASTM 4.25.10.4 ✔, EN 62115 ◐ | Yes | 🔴 Key switch rating unknown (#19) | **Read the rating.** If under about 10 A, the key drives a 30 A relay instead | Low | Medium |
+| M9 | **Max 24 V nominal** | EN 62115 13.1 ✔, ASTM 4.25.2 ✔ | Yes | 🔵 Same battery | — | — | — |
+| M10 | **Battery and charger** certified; no leaking in any position; cells protected | EN 62115 13.4, 15.5 ✔, ASTM 4.25.10.6, 4.25.11 ✔ | Yes | 🔵 Same pack and charger. 🔴 Chemistry unknown (#13), so the cut-off thresholds are a guess | **Read the label.** If lithium, keep its BMS. Charge port stays wired straight to the battery | Low | High if lithium |
+| M11 | **Remote control (Annex J):** stops by itself when out of range | EN 62115 Annex J ✔ | EU/IL | 🟢 No packet for 200 ms or LQ < 40 % brakes to a stop; tested in phases 2 and 4 | Done. Only "it stops" is mandatory; the 0.5 s figure is ours | — | — |
+| M12 | **Remote control (Annex J):** a mode without the remote needs an adult and a tool | EN 62115 Annex J ✔ | EU/IL | 🟢 No mode drives without the radio | Done | — | — |
+| M13 | **Radio power** ≤ 100 mW EIRP at 2.4 GHz | RED / EN 300 328, Israel MoC ◐ | Radio type test | 🟢 ELRS_SETUP.md: dynamic power, max 100 mW (v1 of this report wrongly listed it open) | Done | — | — |
+| M14 | **Electronic protection fails safe:** if a protection relies on electronics, a fault in that electronics must still leave the toy safe | EN 62115 Annex D ✔ (title), detail ◐ | Yes | 🟢 Watchdog, pull-downs, key and E-stop in hardware; a crash opens the contactor (phase 3 gate) | Done once phase 3 passes | — | — |
+| M15 | **Stability** on the test slope with a child-mass load | EN 71-1 4.15.1.4 ✔, ASTM 4.15 ✔ | Yes | 🔵 Unchanged (our box is low under the seat) | — | — | — |
+| M16 | **Strength** of seat and frame | EN 71-1 4.15.1.3 ✔ | Yes | 🔵 Unchanged | — | — | — |
+| M17 | **Sharp edges, points, projections, pinch points** | EN 71-1, ASTM 4.7–4.9, 4.18 ✔ | Yes, every report | 🔴 Not checked on our added parts (box, E-stop mount, brackets, steering motor) | **Checklist** in phase 5: no exposed screw tips, cut metal or zip-tie ends where a child sits or reaches; fan guards on | Low | Medium |
+| M18 | **Loudness** of sound-producing toys | ASTM 4.5 ✔, EN 71-1 4.20 (about 85 dB(A)) ◐ | Yes | 🔴 2 × 50 W amp and DFPlayer planned (#46, #47); BOM line says "cap the volume" | **Code:** cap the DFPlayer volume. **Parts/setting:** a fixed gain resistor on the amp. **Test:** phone SPL meter at the driver's ear | Low | Low (only once audio is fitted) |
+| M19 | **Wiring:** insulation rated for its temperature, strain relief | ASTM 4.25.10.1, 4.25.10.8 ✔, EN 62115 cl. 14 ✔ | Yes | 🟢 Silicone wire, glands, ferrules, locking connectors | — | — | — |
+| M20 | **Nuisance tripping:** fuses and cut-outs don't trip in normal use | ASTM 4.25.10.3 ✔ | Yes | 🔴 Untested until the car drives (300 ms over-current hold, fuse sizes) | **Test:** phase 6, full-load starts uphill with a sandbag; no `OVERCUR` and no blown fuse | Low | Low |
+| M21 | **Labels and instructions:** adult supervision, no public roads, helmet, max weight | EN 62115 7.5, EN 71-1 7.10.3 ✔, ASTM 5, 6 ✔ | Yes | 🔵 Stock labels stay. SAFETY.md has the rules | Add one label on our box: "24 V, adult service only" | Low | Low |
+| M22 | **Chemicals, plastics flammability** | EN 71-2/-3, SI 562, ASTM 4.2–4.3 ✔ | Yes | 🔵 Unchanged | — | — | — |
 
-Gaps 1–4 are safety items; 5–8 are compliance and comfort.
+## Optional items: beyond what any factory does
 
-## How to find out for our exact car
+| # | Item | Why it's optional | Status | Recommendation |
+| --- | --- | --- | --- | --- |
+| O1 | E-stop and contactor in the coil chain | No standard asks for either; the stock car has an on/off switch | 🟢 Designed, parts ordered | Keep: it's our M14 backbone. Phase 3 gate stays |
+| O2 | Contactor weld check (`K1_WELD`), `NO_BUS`, bus sense and bleed | Stock has no contactor, so nothing to weld | 🟢 Code done (PR #52) | **Non-gating.** Test when convenient; if it misbehaves, turn it off rather than block the car |
+| O3 | Current calibration against a clamp meter | Stock uses a fixed fuse; nobody calibrates | Open (#15, #29) | **Non-gating once M3's motor fuses are in.** Until then it's our only stall protection, so it gates |
+| O4 | Stopping distance measured at each cap | EN 71-1 tests a parked hold (M2), not stopping distance | Phase 6 gate | **Non-gating, but do it:** it costs 10 minutes in the same session as M1 |
+| O5 | Link loss stops within 0.5 s | Annex J only says it must stop | Phases 2, 4, 6 | Keep the test (it's free), drop the 0.5 s pass/fail number. "Stops" is the gate |
+| O6 | Latched faults; no restart while the pedal is held | Beyond the standard ◐ | 🟢 Done | Keep; costs nothing |
+| O7 | Box over-temperature cut-out (`HOT`), fans | Stock has none; M6 is the mandatory part | 🟢 Code done | Keep, non-gating |
+| O8 | Battery under-voltage cut-off | Lead-acid has no requirement; lithium has its BMS | 🟢 Done | Keep |
+| O9 | EMC: motor noise resets or misreads (#35) | Not in the ride-on reports. Our design fails safe: a reset stops the car | Open | **Non-gating:** a 5-minute full-load reversal test, and only fix if resets happen |
+| O10 | Tilt and crash cut-out (#40) | No standard | Open | Phase 7 feature |
+| O11 | I²C single point of failure (#36) | No standard; a lost bus already faults to a stop (`CUR_SENS`, `INPUT`) | Open | Later |
+| O12 | Range test and packet-rate tuning (#37) | Annex J only needs the stop (M11) | Open | Do it, but non-gating |
+| O13 | Per-wheel motor fault detection (#44) | No standard; M3 covers the fire risk | Open | Phase 7 |
+| O14 | Wheel-speed km/h limit with halls (#41) | M1 is met by a fixed cap | Open | Later |
+| O15 | Regen spike TVS (D2) | Protects our drivers, not the child | TBD | After the battery label |
 
-- Look on the car, box and manual for the **CE mark**, a lab report number, and the **SII import sticker** (Israeli standard mark with the importer's name). Photograph them; that can join the phase 1 photo list.
-- Ask Kolbo Sima (the importer) for the **test report** for item 8419715 (EN 71-1 / EN 62115, often by SGS, BV or Intertek). Israeli importers need it for SII customs release, so it exists.
-- With the report, we can fill in the stock car's measured values (top speed, ramp result, stall temperatures) and replace the "likely" column above with facts.
+## How to approach each open mandatory item
 
-## A note on certification
+| Fix | Covers | Code | New parts | Redesign / test |
+| --- | --- | --- | --- | --- |
+| **A. Read two labels** | M10, M8 | Set `BATTERY_*` | A 30 A relay only if the key switch is under about 10 A | — |
+| **B. km/h caps** | M1 | Set `KID_CAP_MIN/MID/MAX` and `PARENT_CAP` from measured speeds; keep Kid low as the power-on default | — | Phase 6 measurement. **Your call:** the child's age decides 6 or 8.2 km/h |
+| **C. Per-motor fuses** | M3, M4, and makes O3 non-gating | Optional I²t later | 4 inline blade fuse holders (12 AWG) + 15 A and 20 A blades. Add to BOM via gen/tables.py | One fuse in each motor lead at the box edge; schematic gets F11–F14 |
+| **D. Roll-away** | M2 | If the test fails: hold the low-side brake while parked in Locked | Only if it still fails with the car off: 4 × 24 V 40 A SPDT automotive relays (coil from MOTOR_24V; NC shorts the motor) | Test on a 10° slope first; the stock gearbox may already hold |
+| **E. Heat tests** | M5, M6, M20 | — | IR thermometer (optional) | New phase 5 and phase 6 gate lines |
+| **F. Box fire rating** | M7 | — | UL94 V-0 box, or a 1–2 mm aluminium plate | Box choice in the BOM |
+| **G. Edges and labels** | M17, M21 | — | One printed label | Phase 5 checklist line |
+| **H. Loudness** | M18 | DFPlayer volume cap | Gain resistor on the amp | Only when audio goes in (#46, #47) |
 
-Once the stock controller is replaced, the car no longer matches what was tested, so its CE/SII approval no longer covers it. That's fine for a private build, but it's why gaps 1–4 matter: nobody else has tested this version, and the commissioning gates are our type test.
+## Priority order for the open safety items
+
+Ranked by concern first, then by how easy the fix is.
+
+| Rank | Item | Concern | Complexity | Why here |
+| --- | --- | --- | --- | --- |
+| 1 | **A. Battery and key switch labels** (#13, #19) | High | Very low | Two photos. Unblocks battery thresholds, TVS and the key relay decision |
+| 2 | **C. Per-motor fuses** | High | Low | The stalled-motor fire test is in every lab report; a few blade fuses fix it in hardware and remove a calibration gate. Add to the next order |
+| 3 | **B. km/h caps** | High | Low | The legal limit for the age group; just numbers in config.h after one measurement session |
+| 4 | **E. Locked-wheel and heat test** | High | Low | Proves C and M6. No parts |
+| 5 | **D. Roll-away test** (fix only if it fails) | High | Low test, Medium fix | A 42 kg car with a child rolling away is the worst outcome on a slope |
+| 6 | **F. Box fire rating** | Medium | Low | Swap one BOM line before the box is bought |
+| 7 | **G. Edges, pinch points and label** | Medium | Low | A walk-round checklist in phase 5 |
+| 8 | **M20 nuisance tripping** | Low | Low | Falls out of the phase 6 drive |
+| 9 | **H. Loudness cap** | Low | Low | Only once audio is fitted |
+
+## What changes in our gates if you agree
+
+- **SAFETY.md "Before a child rides":** add M1 speed, M2 roll-away, M5 locked-wheel test; drop "within 0.5 s" (keep "stops"); mark current-vs-meter and stopping distance as recommended once the motor fuses are fitted.
+- **COMMISSIONING.md:** phase 5 gets the locked-wheel, surface-temperature and edges checks; phase 6 gets speed per cap and the slope hold; the K1 weld and bus gates move to "recommended".
+- **BOM:** per-motor fuses, a V-0 box, and the relays only if D fails.
 
 ## Sources
 
-- [EN 71-1:2014 text (ride-on clause 4.15.1)](https://law.resource.org/pub/eu/toys/en.71.1.2014.html)
+- [EN 71-1:2014 text (ride-on clause 4.15.1: speed, brakes, stability)](https://law.resource.org/pub/eu/toys/en.71.1.2014.html)
+- [BS EN IEC 62115:2020+A11 preview (Annex J rationale, 13.1, clause 9)](https://webstore.ansi.org/preview-pages/bsi/preview_30420288.pdf)
+- [IEC 62115 ed. 2.1 contents (Annex D, Annex J)](https://assets.vde-verlag.de/iec-normen/preview-pdf/info_iec62115%7Bed2.1%7Den.pdf)
 - [TÜV Rheinland: EN IEC 62115:2020 changes](https://tuv.com/content-media-files/master-content/rs/Attachments\2286_Customer%20Information%202021-04_EN%20IEC%2062115%20Version%202020.pdf)
-- [BS EN IEC 62115:2020+A11 preview (Annex J, 13.1, clause 9 rationale)](https://webstore.ansi.org/preview-pages/bsi/preview_30420288.pdf)
-- [IEC 62115 ed. 2.1 table of contents (VDE preview)](https://assets.vde-verlag.de/iec-normen/preview-pdf/info_iec62115%7Bed2.1%7Den.pdf)
 - [SGS: EU harmonizes EN IEC 62115](https://www.sgs.com/en-hk/news/2021/06/20210607-sgs-eu-harmonizes-en-iec-62115-for-electric-toys)
-- [CPSC letter to ASTM on ride-on speed limits (2022)](https://www.cpsc.gov/s3fs-public/11-2-22-Letter-to-ASTM-Ride-on-Toys.pdf)
-- [CPSC: Power Wheels recall, overheating and failure to stop](https://www.cpsc.gov/Recalls/1999/CPSC-Fisher-Price-Announce-Recall-to-Repair-Power-Wheels-Ride-On-Battery-Powered-Vehicles) (10 million cars, ~150 fires, 71 reports of cars not stopping: the two failure modes our design targets)
-- [Intertek: CCC rules for toys and children's vehicles](https://www.intertek.com/consumer/insight-bulletins/revision-of-ccc-rules-for-toys-and-childrens-vehicles/)
+- [Eurofins: EU Toy Safety Regulation 2025/2509](https://www.eurofins.com/toys-hardlines/resources/articles/a-quick-overview-of-the-new-eu-toy-safety-regulation-eu-20252509/)
+- [SII: SI 562 part 1, official standard page](https://www.sii.org.il/lobby/standardization/standard-page?id=1954)
 - [SII: children's toys testing](https://www.sii.org.il/en/children-toys/)
-- [ComplianceGate: US toy standards](https://compliancegate.com/toy-safety-standards-united-states)
-- [TradeAider: ride-on stability and brake testing](https://www.tradeaiders.com/ru/ride-on-toys-testing-safety-stability-braking-performance-guide.html)
+- [ASTM F963-23 contents (4.25, 8.17, 8.18, 8.19)](https://www.boutique.afnor.org/en-gb/standard/astm-f96323/standard-consumer-safety-specification-for-toy-safety/am116367/366222)
+- [Intertek test report, 12 V ride-on, ASTM F963-17 (2021)](https://www.bedbathandbeyond.com/downloads/pdf/1434854534_dcd93045-dcfb-335a-9950-f9e241a63450.pdf)
+- [Test report, children's ride-on car, ASTM F963-23 (2024)](https://www.bedbathandbeyond.com/downloads/pdf/1488871438_a25dcd5b-8cdb-38f1-bc81-e2ea709c4ab0.pdf)
+- [CPSC letter to ASTM on ride-on speed limits (2022)](https://www.cpsc.gov/s3fs-public/11-2-22-Letter-to-ASTM-Ride-on-Toys.pdf)
+- [CPSC: Power Wheels recall (overheating, failure to stop)](https://www.cpsc.gov/Recalls/1999/CPSC-Fisher-Price-Announce-Recall-to-Repair-Power-Wheels-Ride-On-Battery-Powered-Vehicles)
+- [Intertek: CCC rules for toys and children's vehicles](https://www.intertek.com/consumer/insight-bulletins/revision-of-ccc-rules-for-toys-and-childrens-vehicles/)

@@ -86,10 +86,10 @@ uint16_t crc16(const uint8_t* data, size_t len) {
 
 void seal(LogRecord& r, uint32_t seq) {
   r.seq = seq;
-  r.crc = crc16((const uint8_t*)&r, offsetof(LogRecord, crc));
+  r.crc = crc16(reinterpret_cast<const uint8_t*>(&r), offsetof(LogRecord, crc));
 }
 
-bool intact(const LogRecord& r) { return r.crc == crc16((const uint8_t*)&r, offsetof(LogRecord, crc)); }
+bool intact(const LogRecord& r) { return r.crc == crc16(reinterpret_cast<const uint8_t*>(&r), offsetof(LogRecord, crc)); }
 
 uint8_t faultBit(FaultMask f) {
   for (uint8_t i = 0; i < 16; i++)

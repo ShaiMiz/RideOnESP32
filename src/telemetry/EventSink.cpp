@@ -47,6 +47,44 @@ PartitionFlash flash;
 LogRing ring;
 uint32_t serialSeq = 0;  // used only when the flash log is not available
 
+// The crash recorder's ring lives in RTC memory, which keeps its contents
+// through a panic or watchdog reset (not through a power cut). CrashRing
+// checks itself, so garbage after a power-on is never trusted.
+RTC_NOINIT_ATTR CrashRing crashRing;
+CrashRecorder crashRecorder;
+SavedCrash savedCrash;     // the copy in NVS, mirrored in RAM for the console
+bool haveSavedCrash = false;
+SavedCrash pendingCrash;   // frozen on a hard fault, saved once the car is stopped
+bool crashPending = false;
+
+void loadCrash(Preferences& prefs) {
+  if (prefs.getUChar("crashv", 0) != FaultTable::FORMAT) return;
+  haveSavedCrash = prefs.getBytes("crash", &savedCrash, sizeof(savedCrash)) == sizeof(savedCrash) &&
+                   savedCrash.count <= CrashRing::SAMPLES;
+}
+
+// Writes NVS: only at boot or with the car stopped and the drivers off.
+void storeCrash(const SavedCrash& c) {
+  Preferences prefs;
+  bool ok = prefs.begin("evlog", false);
+  ok = ok && prefs.putBytes("crash", &c, sizeof(c)) == sizeof(c);
+  ok = ok && prefs.putUChar("crashv", FaultTable::FORMAT) == 1;
+  prefs.end();
+  if (!ok) {
+    logx::line("crash recorder copy NOT saved to NVS");
+    return;
+  }
+  savedCrash = c;
+  haveSavedCrash = true;
+  LogRecord r = makeRecord(Event::CrashSaved, Severity::Warn, recorder.boot(), millis(), (uint8_t)Mode::Locked,
+                           FAULT_NONE);
+  r.code = c.cause;
+  r.v[0] = c.code;
+  r.v[1] = c.count;
+  r.v[2] = (int16_t)c.boot;
+  queue.push(r);
+}
+
 void loadFaultTable(Preferences& prefs) {
   static FaultRow rows[FaultTable::CAPACITY];
   if (prefs.getUChar("dtcv", 0) != FaultTable::FORMAT) return;  // none yet, or an old layout
@@ -112,6 +150,7 @@ void begin(ResetReason reason) {
     boot = (uint16_t)(prefs.getUShort("boot", 0) + 1);
     prefs.putUShort("boot", boot);
     loadFaultTable(prefs);
+    loadCrash(prefs);
     prefs.end();
   } else {
     logx::line("NVS not available: boot number unknown (0), fault table not loaded");
@@ -120,15 +159,28 @@ void begin(ResetReason reason) {
   recorder.begin(boot, reason, millis(), queue);
   mountFlashLog();
   logCrashDump(reason);
+  SavedCrash c;
+  if (crashRecorder.begin(crashRing, boot, reason, c)) storeCrash(c);
 }
 
 void setupFailed(Component comp) { recorder.setupFailed(comp, millis(), queue, table); }
 
-void update(const RecorderInputs& in) { recorder.update(in, queue, table); }
+void update(const RecorderInputs& in) {
+  recorder.update(in, queue, table);
+  FreezeFrame f = in.frame;
+  f.boot = recorder.boot();
+  f.tMs = in.nowMs;
+  f.mode = (uint8_t)in.mode;
+  if (crashRecorder.update(crashRing, f, *in.reports, pendingCrash)) crashPending = true;
+}
 
 void drain(int maxRecords, bool safeToStall) {
   if (safeToStall) {
-    if (ring.mounted() && ring.room() < cfg::LOG_READY_SECTORS * LogRing::PER_SECTOR) {
+    if (crashPending) {
+      watchdog::feed();
+      storeCrash(pendingCrash);
+      crashPending = false;
+    } else if (ring.mounted() && ring.room() < cfg::LOG_READY_SECTORS * LogRing::PER_SECTOR) {
       watchdog::feed();  // one sector erase: tens of ms, the car is stopped
       ring.maintain(cfg::LOG_READY_SECTORS);
     } else if (table.takeDirty()) {
@@ -154,6 +206,21 @@ void drain(int maxRecords, bool safeToStall) {
     logx::line("%s", line);
   }
 }
+
+int clearFaultTable() {
+  int rows = table.size();
+  table.clear();
+  watchdog::feed();
+  saveFaultTable();
+  table.takeDirty();
+  LogRecord r = makeRecord(Event::DtcCleared, Severity::Notice, recorder.boot(), millis(), (uint8_t)Mode::Locked,
+                           FAULT_NONE);
+  r.v[0] = (int16_t)rows;
+  queue.push(r);
+  return rows;
+}
+
+const SavedCrash* lastCrash() { return haveSavedCrash ? &savedCrash : nullptr; }
 
 const FaultTable& faultTable() { return table; }
 LogRing& flashLog() { return ring; }

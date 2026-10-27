@@ -44,6 +44,8 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 | `EventLog`, `FaultReport.h` | core | 32-byte log records with CRC, the record queue, text format; which part a fault came from |
 | `FaultTable` | core | One row per fault and part: count, first and last seen, worst value, freeze frames |
 | `LogRing` | core | The log on flash: a ring of records over 4 KB sectors, erased ahead, torn records skipped |
+| `CrashRing` | core | The last 5 s of freeze frames (100 ms apart) in RTC memory, and `CrashRecorder`, which keeps a copy after a hard fault or an unexpected reset while driving |
+| `Console` | core | Serial console commands, line reader and the text of fault rows and freeze frames |
 | `Recorder` | core | Turns changes (faults, re-arm, mode, link, battery) into records and fault-table rows |
 | `SafetyRules` | core | Sensor readings to fault conditions, each naming its part; the kill-line rules |
 | `Controller` | core | One whole control tick: link, faults, mode, command, kill lines, ramp. Its config is `include/control_config.h`, shared with the tests |
@@ -60,7 +62,8 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 | `accessories/Accessories` | src | Box fans full on through the PCA9685; lights and sound later |
 | `sensing/Imu`, `WheelSpeed` | src | Stubs |
 | `telemetry/Log` | src | Non-blocking serial lines |
-| `telemetry/EventSink` | src | Boot counter and fault table in NVS, the log in the `evlog` partition, crash dump check; prints records to serial |
+| `telemetry/EventSink` | src | Boot counter and fault table in NVS, the log in the `evlog` partition, crash dump check, crash recorder ring and its saved copy in NVS; prints records to serial |
+| `telemetry/SerialConsole` | src | The read-only serial console (`help`, `status`, `log`, `dtc`, `crash`), paced so it never blocks the loop |
 | `telemetry/CrsfTelemetry`, `Dash` | src | Stubs |
 
 ## Where things live

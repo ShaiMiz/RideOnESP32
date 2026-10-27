@@ -35,6 +35,31 @@ Set the receiver's failsafe to **No Pulses** (ELRS default). On link loss the re
 
 In the model's setup page, turn on start-up switch warnings for SA (run) and SB (Locked). The radio then complains at power-on if the car would not start in a safe state.
 
-## Telemetry (later)
+## Telemetry
 
-After the CRSF telemetry module is written, discover sensors in the model's telemetry page. Add voice alerts for battery voltage, link quality below 70 %, and mode changes.
+The car sends these back through the receiver (CRSF telemetry, firmware `CrsfTelemetry`). The telemetry ratio in the ELRS settings must not be Off ([ELRS_SETUP.md](ELRS_SETUP.md)).
+
+| EdgeTX sensor | What it is | Rate |
+| --- | --- | --- |
+| `RxBt` | Battery voltage at the box, 0.1 V | 4 per second |
+| `Curr` | Drive current, the sum of the four wheel motors, 0.1 A | 4 per second |
+| `Capa` | Charge used since power-on, mAh | 4 per second |
+| `Bat%` | Always 0 until the battery chemistry is known (#13) | |
+| `FM` | Mode and the first latched fault, e.g. `PARENT`, `LOCKED ESTOP`, `KILLED LINK+` (`+` = more than one fault) | Once a second, and at once on a change |
+| `RQly`, `RSSI` | Link quality and signal, from the receiver itself | |
+
+Fault names are the ones in [FAULT_CODES.md](../docs/firmware/FAULT_CODES.md). The serial console's `dtc` gives the details.
+
+### Setup
+
+1. Power the car and the radio. In the model's **Telemetry** page, choose **Discover new sensors**. `RxBt`, `Curr`, `Capa`, `Bat%` and `FM` appear within a few seconds. Stop discovery.
+2. Put `RxBt`, `Curr` and `FM` on a telemetry screen, so the mode and fault are visible at a glance.
+3. Alarms in **Logical switches** and **Special functions**:
+   - **Low battery:** `L1: a<x RxBt <threshold>`, then `SF: L1 → Play value RxBt` every 10 s. The threshold waits on the battery chemistry (#13). Set it at `BATTERY_LOW_WARN_V` in `config.h` (22.0 V for now), so the radio warns together with the car and before the cutoff at `BATTERY_CUTOFF_V`.
+   - **Weak link:** `L2: a<x RQly 70`, then a special function that plays a "signal low" sound. 70 % matches `LQ_DEGRADED_BELOW`, below which the firmware halves the speed cap.
+   - **Telemetry lost:** EdgeTX warns by itself when the sensors stop. On this car that means the link is gone and the car is braking.
+4. Voice for faults: EdgeTX logical switches can't compare text, so `FM` is shown, not spoken. A spoken fault alert comes with the Lua tools script ([edgetx/README.md](edgetx/README.md)).
+
+### Check
+
+With the car on the bench, wheels off the ground: `FM` reads `LOCKED`; switch to Parent and it reads `PARENT` within a second; press the E-stop and it reads `LOCKED ESTOP` (or `KILLED ...` with the kill switch) at once. `RxBt` matches a multimeter on the battery to within 0.3 V.

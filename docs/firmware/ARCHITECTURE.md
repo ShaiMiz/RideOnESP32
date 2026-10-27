@@ -45,6 +45,7 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 | `FaultTable` | core | One row per fault and part: count, first and last seen, worst value, freeze frames |
 | `LogRing` | core | The log on flash: a ring of records over 4 KB sectors, erased ahead, torn records skipped |
 | `CrashRing` | core | The last 5 s of freeze frames (100 ms apart) in RTC memory, and `CrashRecorder`, which keeps a copy after a hard fault or an unexpected reset while driving |
+| `CrsfTelemetry` | core | Telemetry frames for the radio (battery sensor, status text) and when to send them: at most 5 frames/s, status first and on every change |
 | `Console` | core | Serial console commands, line reader and the text of fault rows and freeze frames |
 | `Recorder` | core | Turns changes (faults, re-arm, mode, link, battery) into records and fault-table rows |
 | `SafetyRules` | core | Sensor readings to fault conditions, each naming its part; the kill-line rules |
@@ -64,7 +65,8 @@ Between ticks, `loop()` keeps draining the receiver's serial port so no frames a
 | `telemetry/Log` | src | Non-blocking serial lines |
 | `telemetry/EventSink` | src | Boot counter and fault table in NVS, the log in the `evlog` partition, crash dump check, crash recorder ring and its saved copy in NVS; prints records to serial |
 | `telemetry/SerialConsole` | src | The read-only serial console (`help`, `status`, `log`, `dtc`, `crash`), paced so it never blocks the loop |
-| `telemetry/CrsfTelemetry`, `Dash` | src | Stubs |
+| `telemetry/RadioTelemetry` | src | Writes the telemetry frames to the receiver when the UART has room |
+| `telemetry/Dash` | src | Stub |
 
 ## Where things live
 

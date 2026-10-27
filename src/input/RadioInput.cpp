@@ -31,3 +31,8 @@ uint8_t RadioInput::linkQuality() const { return crsf_.getLinkStatistics()->upli
 rideon::LinkInputs RadioInput::linkInputs(uint32_t nowMs) const {
   return {linkUp(), anyPacket(), lastPacketMs(), linkQuality(), nowMs};
 }
+
+bool RadioInput::sendFrame(const uint8_t* buf, uint8_t len) {
+  if (Serial2.availableForWrite() < (int)len) return false;
+  return Serial2.write(buf, len) == len;
+}

@@ -27,6 +27,10 @@ class RadioInput {
   uint8_t linkQuality() const;
   rideon::LinkInputs linkInputs(uint32_t nowMs) const;
 
+  // Writes a whole telemetry frame if the UART has room for it now, so it
+  // never waits. Returns false, writing nothing, when it does not fit.
+  bool sendFrame(const uint8_t* buf, uint8_t len);
+
   AlfredoCRSF& crsf() { return crsf_; }
 
  private:

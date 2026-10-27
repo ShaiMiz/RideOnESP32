@@ -8,7 +8,7 @@ constexpr uint32_t CHUNK = 16;  // records read per flash access at mount
 }  // namespace
 
 bool LogRing::blank(const LogRecord& r) {
-  const uint8_t* p = (const uint8_t*)&r;
+  const uint8_t* p = reinterpret_cast<const uint8_t*>(&r);
   for (uint32_t i = 0; i < REC; i++)
     if (p[i] != 0xFF) return false;
   return true;

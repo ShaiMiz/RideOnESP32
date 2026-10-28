@@ -8,7 +8,7 @@ All of these must be true and written down in [docs/COMMISSIONING.md](docs/COMMI
 
 - [ ] Phases 1 to 6 have passed their gates, in order.
 - [ ] The key switch and the E-stop cut motor power with the ESP32 unplugged.
-- [ ] Turning the radio off stops the car within 0.5 s, measured, at the highest speed cap.
+- [ ] Turning the radio off brings the motor output to zero within 0.75 s, measured, at the highest speed cap (200 ms to call the link lost, then 0.5 s of braking from full; Shai, 28 Oct 2026).
 - [ ] A fault that clears on its own does not restart the motors while the pedal or stick is held.
 - [ ] The battery chemistry is known and `include/config.h` battery thresholds match it.
 - [ ] The current-sense resistor on the IBT-2 boards has been read and `IS_PIN_RESISTOR_OHMS` matches it (the firmware halves it, because R_IS and L_IS are joined).

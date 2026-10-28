@@ -7983,8 +7983,8 @@
    "gpio": "1",
    "signal": "TX0",
    "dir": "—",
-   "connects": "USB serial",
-   "why": "Kept free: flashing and logs."
+   "connects": "USB serial; Bluetooth log module U33 RXD through 1k",
+   "why": "Kept free for flashing and logs. The listen-only Bluetooth module only hears it (BLUETOOTH.md)."
   },
   "R4": {
    "gpio": "3",

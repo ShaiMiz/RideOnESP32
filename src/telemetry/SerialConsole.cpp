@@ -16,6 +16,9 @@ namespace {
 constexpr int READ_PER_TICK = 32;   // typed characters handled per tick
 constexpr int LINES_PER_TICK = 3;   // at 115200 baud, about 70 lines a second fit
 constexpr int LINE_ROOM = 200;      // a line is printed only when this much fits
+// A report asked for with the horn goes to the BLE module, which passes on
+// only about 2 KB/s and drops what it can't hold: one line per 100 ms.
+constexpr uint32_t SLOW_LINE_MS = 100;
 
 enum class Job : uint8_t { None, Help, Log, Dtc, Crash };
 
@@ -33,6 +36,8 @@ struct Queued {
 Queued queue[3];
 int queued = 0;
 int queueNext = 0;
+bool slow = false;          // pace for the Bluetooth module
+uint32_t lastLineMs = 0;
 
 const char* const HELP[] = {
     "commands:",
@@ -197,17 +202,24 @@ void update(const Status& s) {
   for (int i = 0; i < READ_PER_TICK && Serial.available() > 0; i++) {
     if (reader.feed((char)Serial.read())) {
       job = Job::None;  // a new command stops a listing
+      slow = false;
       clearQueue();
       run(parseCommand(reader.line()), s);
     }
   }
   if (reportTrigger.update(s.hornHeld, s.parked, millis())) {
     job = Job::None;
+    slow = true;
     report(s);
   }
+  if (job == Job::None) slow = false;
   char line[LINE_ROOM];
   for (int i = 0; i < LINES_PER_TICK && job != Job::None; i++) {
     if (!logx::hasRoom(LINE_ROOM)) break;
+    if (slow) {
+      if ((uint32_t)(millis() - lastLineMs) < SLOW_LINE_MS) break;
+      lastLineMs = millis();
+    }
     if (!jobLine(index, line, sizeof(line))) {
       next();
       continue;

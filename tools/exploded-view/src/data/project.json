@@ -495,24 +495,24 @@
     "U33"
    ],
    "qty": "1",
-   "part": "HC-06 Bluetooth serial module",
-   "model": "Generic HC-06 (CSR BC417 class)",
+   "part": "HM-10 BLE serial module (iPhone and Android)",
+   "model": "DSD TECH HM-10 (TI CC2541), or a CC2541 clone",
    "category": "Module",
    "where": "box",
    "status": "To buy",
-   "note": "Listen-only log to a phone: hears TX0 (the USB serial log). TXD stays unconnected, so nothing can reach the ESP32. Set to 115200 with the bt_setup bench firmware first. Spec: HC-06 slave, 4 pins (VCC GND TXD RXD) on a carrier with a 3.3 V regulator, 3.6-6 V in. Android only (Bluetooth Classic)",
+   "note": "Listen-only log to a phone: hears TX0 (the USB serial log). TXD stays unconnected, so nothing can reach the ESP32. Set to 115200 with the bt_setup bench firmware first. Spec: HM-10 BLE 4.0 (CC2541) on a 6-pin breakout with a 3.3 V regulator, 3.6-6 V in. BLE works with iPhone and Android. DSD TECH is the genuine one; clones (MLT-BT05, CC41-A) also work with bt_setup",
    "fields": {
     "Line": "18",
     "Category": "Module",
     "Refs": "U33",
     "Qty": "1",
-    "Description": "HC-06 Bluetooth serial module",
-    "Manufacturer / part number": "Generic HC-06 (CSR BC417 class)",
+    "Description": "HM-10 BLE serial module (iPhone and Android)",
+    "Manufacturer / part number": "DSD TECH HM-10 (TI CC2541), or a CC2541 clone",
     "Where": "box",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "https://www.aliexpress.com/w/wholesale-hc-06-bluetooth-module.html?SortType=total_tranpro_desc",
-    "Notes": "Listen-only log to a phone: hears TX0 (the USB serial log). TXD stays unconnected, so nothing can reach the ESP32. Set to 115200 with the bt_setup bench firmware first. Spec: HC-06 slave, 4 pins (VCC GND TXD RXD) on a carrier with a 3.3 V regulator, 3.6-6 V in. Android only (Bluetooth Classic)"
+    "Link": "https://www.aliexpress.com/w/wholesale-hm-10-ble-cc2541-module.html?SortType=total_tranpro_desc",
+    "Notes": "Listen-only log to a phone: hears TX0 (the USB serial log). TXD stays unconnected, so nothing can reach the ESP32. Set to 115200 with the bt_setup bench firmware first. Spec: HM-10 BLE 4.0 (CC2541) on a 6-pin breakout with a 3.3 V regulator, 3.6-6 V in. BLE works with iPhone and Android. DSD TECH is the genuine one; clones (MLT-BT05, CC41-A) also work with bt_setup"
    },
    "kind": "part",
    "issues": []
@@ -9714,8 +9714,8 @@
   },
   "U33": {
    "ref": "U33",
-   "value": "HC-06",
-   "part": "HC-06 Bluetooth serial module",
+   "value": "HM-10",
+   "part": "HM-10 BLE serial module (iPhone and Android)",
    "source": "To buy",
    "where": "box",
    "note": "Listen-only log to a phone: hears TX0 (the USB serial log). TXD stays unconnected, so nothing can reach the ESP32. Set to 115200 with the bt_setup bench firmware first",
@@ -9725,7 +9725,9 @@
     "VCC": "5V_LOGIC",
     "GND": "GND",
     "RXD": "BT_RXD",
-    "TXD": null
+    "TXD": null,
+    "STATE": null,
+    "BRK": null
    }
   },
   "R25": {

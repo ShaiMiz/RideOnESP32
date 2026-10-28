@@ -75,6 +75,11 @@ MUTANTS = [
     ("SR-12", "ContactorCheck.cpp", "state_ = ContactorState::Welded;", "state_ = ContactorState::Ready;",
      ["test_contactor"]),
     ("SR-19", "BatteryCheck.cpp", "volts < p.sensorMinV", "volts < 0.0f", SAFETY + ["test_faults"]),
+    ("SR-30", "CrashRing.cpp", "unexpected && ring.intact() && drove(ring)", "unexpected && drove(ring)",
+     ["test_crash_console"]),
+    ("SR-30", "CrashRing.cpp", "if (!fresh || !drove(ring)) return false;", "if (!fresh) return false;",
+     ["test_crash_console"]),
+    ("SR-30", "CrashRing.cpp", "r.fault != FAULT_KILL_SWITCH && ", "", ["test_crash_console"]),
 ]
 
 

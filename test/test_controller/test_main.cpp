@@ -695,7 +695,6 @@ void test_invariants_hold_under_random_input() {
   // The run must actually exercise both driving and cutting, or it proves little.
   char counts[64];
   snprintf(counts, sizeof counts, "driving %d ticks, cut %d ticks", drivingTicks, cutTicks);
-  printf("%s\n", counts);
   TEST_ASSERT_TRUE_MESSAGE(drivingTicks > 50000 && cutTicks > 10000, counts);
 }
 

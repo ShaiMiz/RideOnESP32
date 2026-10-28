@@ -29,6 +29,8 @@
 #include "sensing/PowerMonitor.h"
 #include "telemetry/EventSink.h"
 #include "telemetry/Log.h"
+#include "telemetry/RadioTelemetry.h"
+#include "telemetry/SerialConsole.h"
 
 using namespace rideon;
 
@@ -41,6 +43,7 @@ const BoxTempParams BOX_TEMP = {cfg::BOX_TEMP_LIMIT_C, cfg::BOX_TEMP_RECOVER_C, 
 
 KillLines lines;
 RadioInput radio;
+RadioTelemetry radioTelemetry;
 ManualInput manual;
 PowerMonitor power;
 DriveController drive;
@@ -180,8 +183,12 @@ void loop() {
   // Flash erases and NVS writes stall the CPU: only with the drivers off and the car stopped.
   bool safeToStall = (out.mode == Mode::Locked || out.mode == Mode::Killed) && !lines.drive() && control.stopped();
   events::drain(cfg::LOG_RECORDS_PER_TICK, safeToStall);
+  console::update({out.mode, out.link, radio.linkQuality(), control.faults().latched(), batteryV, power.busVolts(),
+                   power.driveAmps(), out.speed, safeToStall});
+  radioTelemetry.update(radio, {now, radio.linkUp(), out.mode, control.faults().latched(), batteryV,
+                                power.driveAmps()});
 
-  if (logx::every(lastLogMs, 500)) {
+  if (!console::busy() && logx::every(lastLogMs, 500)) {
     logx::line("%s link=%s lq=%u bat=%.1fV bus=%.1fV I=%.1fA cmd=%.2f out=%.2f en=%d k=%d box=%s%.0fC fan=%d fault=%s",
                modeName(out.mode), linkName(out.link), radio.linkQuality(), batteryV, power.busVolts(),
                power.driveAmps(), out.command, out.speed, lines.drive(), lines.contactor(),

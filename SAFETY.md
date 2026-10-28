@@ -30,7 +30,7 @@ All of these must be true and written down in [docs/COMMISSIONING.md](docs/COMMI
 - Never let a fault clear itself. Faults stay latched until the parent re-arms from Locked.
 - Never remove the 10k pull-downs on GPIO21, GPIO2 and GPIO12.
 - Never flash firmware with the car's wheels on the ground.
-- Never turn on the ESP32's Wi-Fi or Bluetooth, or the receiver's Wi-Fi, while driving.
+- Never turn on the ESP32's Wi-Fi or Bluetooth, or the receiver's Wi-Fi, while driving. The Bluetooth log module ([BLUETOOTH.md](docs/hardware/BLUETOOTH.md)) is a separate board that only listens: its TXD stays unconnected, so it can never send anything to the ESP32.
 - Never change `config.h` limits without re-running the gate tests that depend on them.
 
 ## If something goes wrong

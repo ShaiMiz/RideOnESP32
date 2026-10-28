@@ -150,6 +150,7 @@ Type a command in the serial monitor (115200 baud) and press Enter. Upper or low
 | `log [n]` | The newest `n` log records from flash, oldest first (default 50) |
 | `dtc` | The fault table: each row, then its first and last freeze frame |
 | `crash` | The kept crash recorder copy: what caused it, then the 50 samples, oldest first |
+| `report` | `status`, `dtc`, `crash` and `log 50`, one after the other. Also printed when the horn is held 3 s with the car Locked or Killed and stopped, for the listen-only Bluetooth module ([BLUETOOTH.md](../hardware/BLUETOOTH.md)), which can't type |
 | `clear dtc yes` | Clears the fault table and logs `DTC_CLEARED`. Only with the car Locked or Killed, stopped, drivers off. `clear dtc` alone says how |
 | `test watchdog` | Hangs the loop so the watchdog resets the ESP32 (commissioning phase 3). Only with the car Locked or Killed, stopped, drivers off |
 

@@ -39,6 +39,7 @@ Passed: ____
 - [ ] Pulling the F3 coil fuse with the car armed gives `NO_BUS`.
 - [ ] Event log on flash ([LOG_EVENTS.md](firmware/LOG_EVENTS.md)): cut the ESP32's power 10 times, some while it is printing. Every boot prints `BOOT` with the boot number one higher, and `LOG_MOUNT` with `records=` never going down and `torn=` at most 1.
 - [ ] Watchdog: with the contactor held and the car Locked, type `test watchdog` in the serial monitor. The contactor opens, the ESP32 restarts, and the next boot prints `BOOT reset=WATCHDOG`. `log 20` shows the records from before the restart.
+- [ ] Bluetooth log ([hardware/BLUETOOTH.md](hardware/BLUETOOTH.md)), if fitted: `bt_setup` ended with `done`; U33 TXD is not connected (check with a meter: no continuity from TXD to any ESP32 pin). A paired Android phone shows the live log. With the car Locked, holding the horn 3 s prints the report on the phone; holding it while Parent mode is armed and the wheels turn prints nothing.
 
 Passed: ____
 

@@ -80,6 +80,7 @@ MUTANTS = [
     ("SR-30", "CrashRing.cpp", "if (!fresh || !drove(ring)) return false;", "if (!fresh) return false;",
      ["test_crash_console"]),
     ("SR-30", "CrashRing.cpp", "r.fault != FAULT_KILL_SWITCH && ", "", ["test_crash_console"]),
+    ("SR-31", "Console.cpp", "  if (!parked) {", "  if (false) {", ["test_crash_console"]),
 ]
 
 

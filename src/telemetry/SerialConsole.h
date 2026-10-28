@@ -5,9 +5,14 @@
 //   log [n]           the newest n log records from flash, oldest first (default 50)
 //   dtc               the fault table, with both freeze frames of each row
 //   crash             the crash recorder's last kept copy: 5 s before a crash or hard fault
+//   report            status, dtc, crash and log 50 in one go
 //   clear dtc yes     clear the fault table (car Locked or Killed and stopped)
 //   test watchdog     hang the loop so the watchdog resets the ESP32 (commissioning,
 //                     car Locked or Killed and stopped)
+//
+// The listen-only Bluetooth module (docs/hardware/BLUETOOTH.md) hears the
+// same output but cannot type, so holding the horn for 3 s with the car
+// parked prints the report too.
 //
 // Nothing here can arm, drive or change a limit. Output is paced: a few
 // lines per tick, only while the serial buffer has room, so a long listing
@@ -33,6 +38,8 @@ struct Status {
   float driveAmps;
   float output;
   bool safeToStall;  // Locked or Killed, drivers off, stopped
+  bool hornHeld;     // the kid's horn button or the radio's horn switch
+  bool parked;       // Locked or Killed and stopped
 };
 
 // Call once per tick: reads typed characters, runs a finished command, and

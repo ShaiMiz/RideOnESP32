@@ -153,6 +153,7 @@ const io = [
 io.forEach(([u, p], i) => put(u, { kind: 'module', params: p, assembly: 'box.io', pos: inBox(-0.085 + (i % 3) * 0.07, 0.06, -0.06 + Math.floor(i / 3) * 0.06), tier: 5 }));
 put('U31', { kind: 'probe', assembly: 'box.io', pos: inBox(0.07, 0.06, 0.07), tier: 5 });
 put('U30', { kind: 'module', params: { w: 0.021, d: 0.021, pcb: 'pcbBlack', header: 8, chips: [[0.008, 0.008]] }, assembly: 'box.sound', pos: inBox(-0.085, 0.06, 0.07), tier: 5 });
+put('U33', { kind: 'module', params: { w: 0.027, d: 0.016, pcb: 'pcbBlue', header: 4, chips: [[0.012, 0.01]] }, assembly: 'box.sound', pos: inBox(0.035, 0.06, 0.07), tier: 5 });
 put('U32', { kind: 'module', params: { w: 0.06, d: 0.04, pcb: 'pcbGreen', header: 0, chips: [[0.01, 0.01], [0.012, 0.012]], extra: [] }, assembly: 'box.sound', pos: inBox(-0.015, 0.06, 0.07), tier: 5 });
 
 // ---- dash ----
@@ -245,8 +246,8 @@ move('U2', inC(0.0, 0.012, 0.045));
 move('U20', inC(0.055, 0.024, 0));
 move('U21', inC(0.065, 0.024, 0.048));
 
-// tier 5: I2C modules, sound player and temperature probe
-['U22', 'U23', 'U24', 'U26', 'U28', 'U30', 'U31'].forEach((u, i) => move(u, inC(-0.055 + (i % 3) * 0.055, 0.04, -0.04 + Math.floor(i / 3) * 0.04)));
+// tier 5: I2C modules, sound player, temperature probe and Bluetooth log module
+['U22', 'U23', 'U24', 'U26', 'U28', 'U30', 'U31', 'U33'].forEach((u, i) => move(u, inC(-0.055 + (i % 3) * 0.055, 0.04, -0.04 + Math.floor(i / 3) * 0.04)));
 
 // accessory box: 12 V buck, its two fuses, the music amp and the MOSFET board
 const acc = (id, pos, explode) => move(id, pos, { assembly: 'acc', tier: null, explode });

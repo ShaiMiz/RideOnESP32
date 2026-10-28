@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        env: [car, radio_check, one_motor]
+        env: [car, radio_check, one_motor, bt_setup]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7

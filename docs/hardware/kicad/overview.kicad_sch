@@ -330,7 +330,7 @@
 (text "amp" (exclude_from_sim no) (at 289.2 216.5 0) (effects (font (size 0.9 0.9)) (justify right)) (uuid "247f3e23-647e-5476-914c-fd1c79528df7"))
 (rectangle (start 330 330) (end 364 340) (stroke (width 0.25) (type solid) (color 120 0 0 1)) (fill (type color) (color 255 255 225 1)) (uuid "f63420b6-66ea-5c81-88ce-7cedb101a8c1"))
 (text "U33 Bluetooth log" (exclude_from_sim no) (at 331.2 331 0) (effects (font (size 1.4 1.4) (bold yes)) (justify left top)) (uuid "fe00f6fd-2932-5344-8ade-611cf83662e1"))
-(text "HC-06, listen-only" (exclude_from_sim no) (at 331.2 333.4 0) (effects (font (size 1.0 1.0)) (justify left top)) (uuid "6be59ae3-b701-5e80-b148-2053d8ebc787"))
+(text "HM-10 BLE, listen-only" (exclude_from_sim no) (at 331.2 333.4 0) (effects (font (size 1.0 1.0)) (justify left top)) (uuid "6be59ae3-b701-5e80-b148-2053d8ebc787"))
 (text "in" (exclude_from_sim no) (at 330.8 335 0) (effects (font (size 0.9 0.9)) (justify left)) (uuid "a0ec6c9c-5668-5212-a073-cfd5a7fad83a"))
 (rectangle (start 330 346) (end 364 358) (stroke (width 0.25) (type solid) (color 120 0 0 1)) (fill (type color) (color 255 255 225 1)) (uuid "b9387ef2-3660-5a3d-b1b3-7351e845b3a4"))
 (text "U32 music amp" (exclude_from_sim no) (at 331.2 347 0) (effects (font (size 1.4 1.4) (bold yes)) (justify left top)) (uuid "8b3947ef-0e56-5e62-9c8d-e28730724daf"))

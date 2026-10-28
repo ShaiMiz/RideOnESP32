@@ -200,7 +200,7 @@ def build():
     d.block("FAN", 330, 282, 34, 9, "FAN1/2 24 V", "box fans", "box", [("+", "L", 4), ("-", "R", 4)])
     d.block("U30", 330, 316, 34, 10, "U30 DFPlayer", "car sounds", "box", [("in", "L", 3), ("pwr", "L", 7), ("spk", "B", 17)])
     d.block("F9", 268, 208, 22, 10, "F9 / F10", "3 A lights, 10 A amp", "box", [("in", "L", 5.5), ("lights", "R", 6), ("amp", "R", 8.5)])
-    d.block("U33", 330, 330, 34, 10, "U33 Bluetooth log", "HC-06, listen-only", "box", [("in", "L", 5)])
+    d.block("U33", 330, 330, 34, 10, "U33 Bluetooth log", "HM-10 BLE, listen-only", "box", [("in", "L", 5)])
     d.block("U32", 330, 346, 34, 12, "U32 music amp", "ZK-502T, its own Bluetooth", "box", [("in", "L", 6), ("out", "B", 10)])
 
     # ---------------------------------------------------------------- power path

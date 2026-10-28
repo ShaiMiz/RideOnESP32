@@ -62,8 +62,9 @@ MODULES = {
     "DFPlayer_Mini": dict(ref="U", descr="DFPlayer Mini MP3 module with 3 W speaker amp (pin numbers are the module's)", left=[
         ("1", "VCC", PI), ("7", "GND", PI), ("2", "RX", I), ("3", "TX", O)],
         right=[("6", "SPK_1", P), ("8", "SPK_2", P), ("16", "BUSY", O)]),
-    "HC06_BT_Serial": dict(ref="U", descr="HC-06 class Bluetooth serial module (SPP slave), listen-only here: TXD not connected",
-                           left=[("VCC", "VCC", PI), ("GND", "GND", PI)], right=[("RXD", "RXD", I), ("TXD", "TXD", O)]),
+    "HM10_BLE_Serial": dict(ref="U", descr="HM-10 (CC2541) Bluetooth Low Energy serial module on a 6-pin breakout, listen-only here: TXD not connected",
+                            left=[("VCC", "VCC", PI), ("GND", "GND", PI), ("BRK", "BRK", I)],
+                            right=[("RXD", "RXD", I), ("TXD", "TXD", O), ("STATE", "STATE", O)]),
     "BT_Amp_ZK502T": dict(ref="U", descr="ZK-502T 2 x 50 W Bluetooth amplifier board (Bluetooth on this board only)",
                           left=[("VIN+", "VIN+", PI), ("VIN-", "VIN-", PI)],
                           right=[("L+", "L+", P), ("L-", "L-", P), ("R+", "R+", P), ("R-", "R-", P)]),
@@ -315,8 +316,9 @@ controller = [
          "DS18B20 waterproof probe", BUY, "box, on the hottest driver heatsink"),
     R("R28", "1k", "SOUND_TX", "DF_RX", note="DFPlayer RX series resistor"),
     R("R29", "1k", "LOG_TX", "BT_RXD", note="Bluetooth RXD series resistor: a dead module can't hold down the USB serial line"),
-    Part("U33", M("HC06_BT_Serial"), "HC-06", {"VCC": "5V_LOGIC", "GND": "GND", "RXD": "BT_RXD", "TXD": None},
-         "HC-06 Bluetooth serial module", BUY, "box",
+    Part("U33", M("HM10_BLE_Serial"), "HM-10", {"VCC": "5V_LOGIC", "GND": "GND", "RXD": "BT_RXD", "TXD": None,
+                                                "STATE": None, "BRK": None},
+         "HM-10 BLE serial module (iPhone and Android)", BUY, "box",
          "Listen-only log to a phone: hears TX0 (the USB serial log). TXD stays unconnected, so nothing can reach the ESP32. Set to 115200 with the bt_setup bench firmware first"),
 ]
 

@@ -173,6 +173,7 @@ void test_parse_commands() {
   TEST_ASSERT_EQUAL(Command::Status, parseCommand("  STATUS ").cmd);
   TEST_ASSERT_EQUAL(Command::Dtc, parseCommand("dtc").cmd);
   TEST_ASSERT_EQUAL(Command::Crash, parseCommand("Crash").cmd);
+  TEST_ASSERT_EQUAL(Command::Report, parseCommand("report").cmd);
   ParsedCommand log = parseCommand("log");
   TEST_ASSERT_EQUAL(Command::Log, log.cmd);
   TEST_ASSERT_EQUAL_UINT32(LOG_DEFAULT_COUNT, log.arg);
@@ -187,7 +188,7 @@ void test_parse_commands() {
 
 void test_parse_rejects_anything_else() {
   const char* bad[] = {"log 0", "log x", "log 5 6", "clear dtc no", "clear dtc yes now", "clear", "status now",
-                       "arm", "drive", "dtc 1", "test", "test watchdog now", "helpme"};
+                       "arm", "drive", "dtc 1", "test", "test watchdog now", "helpme", "report all"};
   for (const char* b : bad) TEST_ASSERT_EQUAL_MESSAGE(Command::Unknown, parseCommand(b).cmd, b);
 }
 
@@ -259,6 +260,39 @@ void test_freeze_frame_text() {
   TEST_ASSERT_NOT_NULL(strstr(out, "box=?"));
 }
 
+// SR-31
+void test_report_trigger_fires_once_after_a_parked_hold() {
+  ReportTrigger r;
+  TEST_ASSERT_FALSE(r.update(true, true, 1000));
+  TEST_ASSERT_FALSE(r.update(true, true, 3999));
+  TEST_ASSERT_TRUE(r.update(true, true, 4000));
+  // Held on: no second report until released and held again.
+  TEST_ASSERT_FALSE(r.update(true, true, 9000));
+  TEST_ASSERT_FALSE(r.update(false, true, 9010));
+  TEST_ASSERT_FALSE(r.update(true, true, 9020));
+  TEST_ASSERT_TRUE(r.update(true, true, 12020));
+}
+
+// SR-31
+void test_report_trigger_needs_the_car_parked_and_a_steady_hold() {
+  ReportTrigger r;
+  // Short taps never add up.
+  for (uint32_t t = 0; t < 10000; t += 1000) {
+    TEST_ASSERT_FALSE(r.update(true, true, t));
+    TEST_ASSERT_FALSE(r.update(false, true, t + 500));
+  }
+  // Honking while driving, then stopping with the horn still held: no report.
+  TEST_ASSERT_FALSE(r.update(true, false, 20000));
+  TEST_ASSERT_FALSE(r.update(true, true, 20010));
+  TEST_ASSERT_FALSE(r.update(true, true, 30000));
+  // Armed or moving during the hold cancels it.
+  TEST_ASSERT_FALSE(r.update(false, true, 30010));
+  TEST_ASSERT_FALSE(r.update(true, true, 31000));
+  TEST_ASSERT_FALSE(r.update(true, false, 33000));
+  TEST_ASSERT_FALSE(r.update(true, true, 34500));
+  TEST_ASSERT_FALSE(r.update(true, true, 40000));
+}
+
 int main() {
   UNITY_BEGIN();
   RUN_TEST(test_garbage_ring_is_not_intact);
@@ -279,5 +313,7 @@ int main() {
   RUN_TEST(test_fault_list);
   RUN_TEST(test_fault_row_text);
   RUN_TEST(test_freeze_frame_text);
+  RUN_TEST(test_report_trigger_fires_once_after_a_parked_hold);
+  RUN_TEST(test_report_trigger_needs_the_car_parked_and_a_steady_hold);
   return UNITY_END();
 }

@@ -42,7 +42,9 @@ def wire_esp32(part, sym, gpio_names):
             part.pins[p.number] = "GND"
         elif p.name == "VIN":
             part.pins[p.number] = "5V_LOGIC"
-        elif p.name in ("EN", "3V3") or p.name.startswith(("TX0", "RX0")):
+        elif p.name.startswith("TX0"):
+            part.pins[p.number] = "LOG_TX"  # the USB serial log, also heard by the Bluetooth module U33
+        elif p.name in ("EN", "3V3") or p.name.startswith("RX0"):
             part.pins[p.number] = None
         elif m:
             part.pins[p.number] = gpio_names.get(int(m[1]))

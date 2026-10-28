@@ -9,12 +9,13 @@ Every net in the schematic with its default wire gauge, colour and protecting fu
 | `12V_ACC` | 14 | OG | F6 10 A (24 V side) | accessories rails | F10.1, F9.1, U4.OUT+ |
 | `3V3_SENSE` | 22 | VT | U2 current limit | controller drive harness i2c_io rails | D101.1, D102.1, D103.1, D104.1, D105.1, D20.1, J10.5, J11.1, R22.1, R23.1, R24.1, R25.1, R26.1, R27.1, U10.7, U11.7, U12.7, U13.7, U14.7, U2.VOUT, U22.VDD, U23.ADDR, U23.VDD, U24.VCC, U25.VCC, U26.VCC, U27.VCC, U28.VCC, U31.VDD |
 | `5V_ACC` | 20 | RD | U3 current limit, F5 | accessories rails | U3.OUT+, U30.1 |
-| `5V_LOGIC` | 22 | RD | F4 2 A (24 V side) | controller harness rails | H1.1, H2.1, J10.1, U1.OUT+, U2.VIN, U20.L15, U21.5V |
+| `5V_LOGIC` | 22 | RD | F4 2 A (24 V side) | controller harness rails | H1.1, H2.1, J10.1, U1.OUT+, U2.VIN, U20.L15, U21.5V, U33.VCC |
 | `AMP_12V` | 16 | OG | F10 10 A | accessories | F10.2, U32.VIN+ |
 | `BATTERY_SENSE` | 22 | BN | - | controller power | C1.1, R3.2, R4.1, U20.L3 |
 | `BATT_DIV` | 22 | OG | F8 1 A | power | F8.2, R3.1 |
 | `BATT_FUSED` | 10 | RD | F1 40 A | harness power | F1.2, F2.1, J1.1, K1.A |
 | `BATT_RAW` | 10 | RD | none: keep ≤ 15 cm, battery + to F1 | harness | BT1.1, F1.1 |
+| `BT_RXD` | 22 | WH | - | controller | R29.2, U33.RXD |
 | `BUS_SENSE` | 22 | BN | - | i2c_io power | C2.1, R5.2, R6.1, U23.A2 |
 | `COIL_24V` | 20 | OG | F3 1 A | harness power | D1.1, J9.2, K1.C+, S2.22 |
 | `COIL_FEED` | 20 | OG | F3 1 A | harness power | F3.2, J9.1, S2.11 |
@@ -37,7 +38,7 @@ Every net in the schematic with its default wire gauge, colour and protecting fu
 | `FR_M_NEG` | 12 | BK | F1 40 A + driver current limit | drive harness | C202.2, J6.4, M2.2, U11.M- |
 | `FR_M_POS` | 12 | RD | F1 40 A + driver current limit | drive harness | C202.1, J6.3, M2.1, U11.M+ |
 | `FR_RPWM` | 22 | BU | - | controller drive | U11.1, U20.L10 |
-| `GND` | 22 | BK | - | accessories controller drive harness i2c_io power rails | BT1.2, C1.2, C101.2, C102.2, C103.2, C104.2, C105.2, C111.2, C112.2, C113.2, C114.2, C115.2, C2.2, C20.2, C21.2, C22.2, D2.2, H1.2, H2.2, J1.2, J10.2, J11.2, J3.3, J4.3, J8.4, J9.4, PED1.GND, Q1.S, R111.2, R112.2, R113.2, R114.2, R115.2, R2.2, R21.2, R4.2, R6.2, R7.2, S2.34, SW2.2, SW3.2, SW4.2, SW5.2, TB1.1, TB1.10, TB1.11, TB1.12, TB1.2, TB1.3, TB1.4, TB1.5, TB1.6, TB1.7, TB1.8, TB1.9, U1.IN-, U1.OUT-, U10.8, U10.B-, U11.8, U11.B-, U12.8, U12.B-, U13.8, U13.B-, U14.8, U14.B-, U2.GND, U20.L14, U20.R14, U21.GND, U22.ADDR, U22.GND, U23.GND, U24.GND, U25.DIR, U25.GND, U26.AD0, U26.GND, U27.GND, U28.GND, U28.OE, U29.GND, U29.PGND, U3.IN-, U3.OUT-, U30.7, U31.GND, U32.VIN-, U4.IN-, U4.OUT- |
+| `GND` | 22 | BK | - | accessories controller drive harness i2c_io power rails | BT1.2, C1.2, C101.2, C102.2, C103.2, C104.2, C105.2, C111.2, C112.2, C113.2, C114.2, C115.2, C2.2, C20.2, C21.2, C22.2, D2.2, H1.2, H2.2, J1.2, J10.2, J11.2, J3.3, J4.3, J8.4, J9.4, PED1.GND, Q1.S, R111.2, R112.2, R113.2, R114.2, R115.2, R2.2, R21.2, R4.2, R6.2, R7.2, S2.34, SW2.2, SW3.2, SW4.2, SW5.2, TB1.1, TB1.10, TB1.11, TB1.12, TB1.2, TB1.3, TB1.4, TB1.5, TB1.6, TB1.7, TB1.8, TB1.9, U1.IN-, U1.OUT-, U10.8, U10.B-, U11.8, U11.B-, U12.8, U12.B-, U13.8, U13.B-, U14.8, U14.B-, U2.GND, U20.L14, U20.R14, U21.GND, U22.ADDR, U22.GND, U23.GND, U24.GND, U25.DIR, U25.GND, U26.AD0, U26.GND, U27.GND, U28.GND, U28.OE, U29.GND, U29.PGND, U3.IN-, U3.OUT-, U30.7, U31.GND, U32.VIN-, U33.GND, U4.IN-, U4.OUT- |
 | `HORN` | 22 | WH | - | harness i2c_io | J8.3, SW4.1, U24.P2 |
 | `I2C_SCL` | 22 | GY | - | controller harness i2c_io | J10.6, J11.3, R25.2, U20.R2, U22.SCL, U23.SCL, U24.SCL, U25.SCL, U26.SCL, U27.SCL, U28.SCL |
 | `I2C_SDA` | 22 | GN | - | controller harness i2c_io | J10.7, J11.4, R26.2, U20.R1, U22.SDA, U23.SDA, U24.SDA, U25.SDA, U26.SDA, U27.SDA, U28.SDA |
@@ -56,6 +57,7 @@ Every net in the schematic with its default wire gauge, colour and protecting fu
 | `LIGHTS_12V` | 20 | OG | F9 3 A | accessories harness | F9.2, J8.1, LP1.1 |
 | `LIGHTS_PWM` | 22 | BU | - | accessories i2c_io | U28.PWM0, U29.IN1 |
 | `LIGHTS_SW` | 20 | BK/WH | F9 3 A | accessories harness | J8.2, LP1.2, U29.OUT1 |
+| `LOG_TX` | 22 | WH | - | controller | R29.1, U20.R3 |
 | `MOTOR_24V` | 10 | RD/YE | F1 40 A (after K1) | drive power | C111.1, C112.1, C113.1, C114.1, C115.1, D2.1, K1.B, R5.1, R7.1, TB2.1, TB2.2, TB2.3, TB2.4, TB2.5, TB2.6, TB2.7, TB2.8, U10.B+, U11.B+, U12.B+, U13.B+, U14.B+ |
 | `ONEWIRE_TEMP` | 22 | WH | - | controller | R27.2, U20.R13, U31.DQ |
 | `PEDAL` | 22 | BN | - | controller | C20.1, D20.2, R20.2, U20.L2 |

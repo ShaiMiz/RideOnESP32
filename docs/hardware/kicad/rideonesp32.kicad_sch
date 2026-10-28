@@ -46,7 +46,7 @@
   (property "Sheetfile" "controller.kicad_sch" (at 116.84 84.5 0) (effects (font (size 1.27 1.27)) (justify left top)))
   (instances (project "rideonesp32" (path "/e0e78d72-bf5c-51da-8e0f-d8642949b63b" (page "7"))))
 )
-(text "ESP32 (nets from include/pins.h), ELRS receiver,\npedal input protection, wheel-speed pull-ups,\nDS18B20, DFPlayer serial." (exclude_from_sim no) (at 119.38 66.04 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "da9544d7-f71c-5bfb-912d-0b48d1330fa8"))
+(text "ESP32 (nets from include/pins.h), ELRS receiver,\npedal input protection, wheel-speed pull-ups,\nDS18B20, DFPlayer serial, listen-only Bluetooth log." (exclude_from_sim no) (at 119.38 66.04 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "da9544d7-f71c-5bfb-912d-0b48d1330fa8"))
 (sheet (at 213.36 63.5) (size 81.28 20.32) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
   (stroke (width 0.1524) (type solid)) (fill (color 0 0 0 0.0000)) (uuid "06fd6ea6-9bed-536b-b6c3-e4f31f1ef18d")
   (property "Sheetname" "8 I2C bus and switch inputs" (at 213.36 62.8 0) (effects (font (size 1.27 1.27)) (justify left bottom)))

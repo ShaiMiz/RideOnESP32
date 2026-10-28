@@ -184,7 +184,8 @@ void loop() {
   bool safeToStall = (out.mode == Mode::Locked || out.mode == Mode::Killed) && !lines.drive() && control.stopped();
   events::drain(cfg::LOG_RECORDS_PER_TICK, safeToStall);
   console::update({out.mode, out.link, radio.linkQuality(), control.faults().latched(), batteryV, power.busVolts(),
-                   power.driveAmps(), out.speed, safeToStall});
+                   power.driveAmps(), out.speed, safeToStall, manual.horn() || out.horn,
+                   (out.mode == Mode::Locked || out.mode == Mode::Killed) && control.stopped()});
   radioTelemetry.update(radio, {now, radio.linkUp(), out.mode, control.faults().latched(), batteryV,
                                 power.driveAmps()});
 

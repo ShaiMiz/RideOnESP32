@@ -38,7 +38,7 @@ The board is an ESP32-WROOM-32D with a USB-C port and a USB-to-serial chip (usua
 
 **Flashing:**
 1. **Safety first:** turn the car's key off, so the contactor is open and the drivers have no power. The kill-line pull-downs keep the drivers off while the ESP32 resets, but don't rely on that while flashing.
-2. `pio run -e <env> -t upload`, where `<env>` is `radio_check`, `one_motor` or `car`.
+2. `pio run -e <env> -t upload`, where `<env>` is `radio_check`, `one_motor`, `bt_setup` or `car`.
 3. If the upload stalls at `Connecting....`, hold the board's BOOT button until it starts writing.
 4. `pio device monitor` shows the serial log at 115200 baud. Check the boot line's reset reason.
 

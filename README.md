@@ -11,7 +11,7 @@ An ESP32 controller for a 24 V ride-on car, driven by a parent's ExpressLRS radi
 - **Car:** Can-Am Maverick X3 24 V, 4WD (four drive motors) with a steering motor.
 - **Controller:** ESP32-WROOM-32D, 30-pin, on an MRD068A screw-terminal breakout.
 - **Drivers:** five BTS7960 (IBT-2) boards, one per wheel plus one for steering.
-- **Radio:** Jumper T-Lite V2 (EdgeTX, ELRS 2.4 GHz) and a Jumper AION RX Mini receiver on CRSF. There is no phone app, Wi-Fi or Bluetooth.
+- **Radio:** Jumper T-Lite V2 (EdgeTX, ELRS 2.4 GHz) and a Jumper AION RX Mini receiver on CRSF. There is no phone app, and the ESP32's Wi-Fi and Bluetooth stay off. A separate listen-only Bluetooth module lets a phone read the serial log ([BLUETOOTH.md](docs/hardware/BLUETOOTH.md)).
 - **Power:** 40 A main fuse, key switch, red E-stop and a contactor that cut motor power in hardware, whatever the ESP32 does.
 
 Details: [docs/hardware/](docs/hardware/). How to update the firmware on each device: [DEVICE_FIRMWARE.md](docs/hardware/DEVICE_FIRMWARE.md). The full reasoning lives in the [hardware plan](https://claude.ai/code/artifact/17bcaa28-e72d-40de-8aa5-4d734f5fe4ad).
@@ -34,8 +34,9 @@ The parent always outranks the child: pulling the stick back in Kid mode brakes 
 | Safety core (modes, arming, fault latch, link loss, ramps, battery) | Written and unit-tested on the PC |
 | `radio_check` bench firmware (phase 2) | Complete |
 | `one_motor` bench firmware (phase 4) | Complete, not yet bench-tested |
+| `bt_setup` bench firmware (sets up the Bluetooth log module) | Complete, not yet bench-tested |
 | `car` firmware: drive, power monitoring, kill lines | Written, not yet bench-tested |
-| Steering, IMU, wheel speed, radio telemetry, OLED, lights and sound | Stubs |
+| Steering, IMU, wheel speed, OLED, lights and sound | Stubs |
 
 ## Build
 
@@ -46,6 +47,7 @@ pio test -e native        # safety logic and pin map tests, on the PC
 python3 tools/check_pin_docs.py  # pins.h, PINOUT.md and WIRING.md agree
 pio run -e radio_check    # phase 2 bench firmware
 pio run -e one_motor      # phase 4 bench firmware
+pio run -e bt_setup       # one-time Bluetooth log module setup
 pio run -e car            # the car firmware
 pio run -e car -t upload  # flash over USB
 pio device monitor        # serial log, 115200 baud

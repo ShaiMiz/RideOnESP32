@@ -177,7 +177,7 @@ def build():
     d.block("U2", 222, 92, 34, 10, "U2 AMS1117 3.3 V", "3V3_SENSE", "box", [("in", "R", 6.5), ("out", "L", 6.5)])
     d.block("U20", 268, 100, 40, 78, "U20 ESP32", "pins from pins.h", "box",
             [("VIN/GND", "L", 8), ("SCL/SDA", "B", 10), ("RX/TX", "B", 30), ("analog", "L", 30), ("GPIO12", "L", 40),
-             ("FL", "R", 10), ("FR", "R", 25), ("RL", "R", 40), ("RR", "R", 55), ("ST", "R", 70)])
+             ("FL", "R", 10), ("FR", "R", 25), ("RL", "R", 40), ("RR", "R", 55), ("ST", "R", 70), ("TX0", "R", 76)])
     d.block("U21", 268, 190, 40, 12, "U21 ELRS receiver", "CRSF, antenna outside", "box", [("5V", "L", 6), ("UART", "T", 30)])
     d.block("A1", 196, 172, 62, 50, "A1 interface board", "Q1, IS RC + clamps, pedal and hall inputs, divider, buses", "box",
             [("Q1 drain", "L", 8), ("divider", "T", 8), ("5V in", "T", 50), ("3V3 in", "T", 58), ("GND", "B", 56),
@@ -200,7 +200,8 @@ def build():
     d.block("FAN", 330, 282, 34, 9, "FAN1/2 24 V", "box fans", "box", [("+", "L", 4), ("-", "R", 4)])
     d.block("U30", 330, 316, 34, 10, "U30 DFPlayer", "car sounds", "box", [("in", "L", 3), ("pwr", "L", 7), ("spk", "B", 17)])
     d.block("F9", 268, 208, 22, 10, "F9 / F10", "3 A lights, 10 A amp", "box", [("in", "L", 5.5), ("lights", "R", 6), ("amp", "R", 8.5)])
-    d.block("U32", 330, 346, 34, 12, "U32 music amp", "ZK-502T, Bluetooth here only", "box", [("in", "L", 6), ("out", "B", 10)])
+    d.block("U33", 330, 330, 34, 10, "U33 Bluetooth log", "HC-06, listen-only", "box", [("in", "L", 5)])
+    d.block("U32", 330, 346, 34, 12, "U32 music amp", "ZK-502T, its own Bluetooth", "box", [("in", "L", 6), ("out", "B", 10)])
 
     # ---------------------------------------------------------------- power path
     d.wire("BT1.+", "F1.a", "bat", label="W001 10 AWG")
@@ -290,6 +291,7 @@ def build():
         d.wire(f"{j}.i{pin}", (156, y), "sig", dot_b=True)
     d.wire("I4.PWM", "U29.in", "pwm", via=[(None, 352), (326, 352), (326, 302)], label="PWM")
     d.wire("A1.to ESP32", "U30.in", "sig", via=[(266, 182), (266, 319)], label="SOUND_TX")
+    d.wire("U20.TX0", "U33.in", "sig", via=[(314, 176), (314, 335)], label="TX0 log →")
     d.wire("U30.spk", "J11.i5", "spk", via=[(347, 362), (172, 362), (172, 300)], label="alert speaker")
     d.wire("U32.out", "J12.i1", "spk", via=[(340, 368), (174, 368), (174, 323.6)], label="music L/R")
 

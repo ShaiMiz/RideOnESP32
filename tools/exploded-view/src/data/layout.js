@@ -109,6 +109,10 @@ put('D2', { kind: 'tvs', assembly: 'box.power', pos: inBox(0.03, 0, -0.07), tier
   put(`C11${i + 1}`, { kind: 'electrolytic', assembly: 'box.drive', pos: inBox(x - 0.01, 0.004, 0.085), tier: 1 });
   put(`R11${i + 1}`, { kind: 'resistor', assembly: 'box.drive', pos: inBox(x + 0.01, 0.004, 0.085), tier: 1 });
 });
+// F11-F14: a fuse in each drive motor's + lead, between its driver and the motor plug (both variants)
+['F11', 'F12', 'F13', 'F14'].forEach((f, i) => {
+  put(f, { kind: 'inlineFuse', params: { m: FUSE[15] }, assembly: 'box.fuses', pos: inBox(-0.1 + i * 0.05, 0.004, 0.012), tier: 2 });
+});
 put('U41', { kind: 'mdd20a', assembly: 'box.drive', pos: inBox(-0.075, 0.004, 0.04), tier: 1 });
 put('U42', { kind: 'mdd20a', assembly: 'box.drive', pos: inBox(0.02, 0.004, 0.04), tier: 1 });
 put('C41', { kind: 'electrolytic', assembly: 'box.drive', pos: inBox(-0.075, 0.004, 0.085), tier: 1 });
@@ -236,6 +240,8 @@ Object.keys(FB_SLOTS).forEach((f, i) => move(f, inC(-0.073 + i * 0.0132, 0.012, 
 move('U1', inC(0.05, 0.004, -0.045));
 move('U3', inC(0.05, 0.004, -0.015));
 move('F2', inC(-0.06, 0.004, 0.035));
+// F11-F14 stand on end by the motor plugs on the front wall, one per drive motor
+['F11', 'F12', 'F13', 'F14'].forEach((f, i) => move(f, inC(0.078, 0.03, -0.045 + i * 0.03)));
 
 // tiers 3 and 4: interface board, ESP32 and receiver side by side
 export const A1_C = { pos: inC(-0.04, 0.012, 0), size: A1.size };

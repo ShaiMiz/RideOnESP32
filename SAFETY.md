@@ -8,7 +8,7 @@ All of these must be true and written down in [docs/COMMISSIONING.md](docs/COMMI
 
 - [ ] Phases 1 to 6 have passed their gates, in order.
 - [ ] The key switch and the E-stop cut motor power with the ESP32 unplugged.
-- [ ] Turning the radio off stops the car within 0.5 s, measured, at the highest speed cap.
+- [ ] Turning the radio off brings the motor output to zero within 0.75 s, measured, at the highest speed cap (200 ms to call the link lost, then 0.5 s of braking from full; Shai, 28 Oct 2026).
 - [ ] A fault that clears on its own does not restart the motors while the pedal or stick is held.
 - [ ] The battery chemistry is known and `include/config.h` battery thresholds match it.
 - [ ] The current-sense resistor on the IBT-2 boards has been read and `IS_PIN_RESISTOR_OHMS` matches it (the firmware halves it, because R_IS and L_IS are joined).
@@ -30,7 +30,7 @@ All of these must be true and written down in [docs/COMMISSIONING.md](docs/COMMI
 - Never let a fault clear itself. Faults stay latched until the parent re-arms from Locked.
 - Never remove the 10k pull-downs on GPIO21, GPIO2 and GPIO12.
 - Never flash firmware with the car's wheels on the ground.
-- Never turn on the ESP32's Wi-Fi or Bluetooth, or the receiver's Wi-Fi, while driving.
+- Never turn on the ESP32's Wi-Fi or Bluetooth, or the receiver's Wi-Fi, while driving. The Bluetooth log module ([BLUETOOTH.md](docs/hardware/BLUETOOTH.md)) is a separate board that only listens: its TXD stays unconnected, so it can never send anything to the ESP32.
 - Never change `config.h` limits without re-running the gate tests that depend on them.
 
 ## If something goes wrong

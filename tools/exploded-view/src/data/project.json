@@ -492,6 +492,34 @@
   {
    "line": "18",
    "refs": [
+    "U33"
+   ],
+   "qty": "1",
+   "part": "HM-10 BLE serial module (iPhone and Android)",
+   "model": "DSD TECH HM-10 (TI CC2541), or a CC2541 clone",
+   "category": "Module",
+   "where": "box",
+   "status": "To buy",
+   "note": "Listen-only log to a phone: hears TX0 (the USB serial log). TXD stays unconnected, so nothing can reach the ESP32. Set to 115200 with the bt_setup bench firmware first. Spec: HM-10 BLE 4.0 (CC2541) on a 6-pin breakout with a 3.3 V regulator, 3.6-6 V in. BLE works with iPhone and Android. DSD TECH is the genuine one; clones (MLT-BT05, CC41-A) also work with bt_setup",
+   "fields": {
+    "Line": "18",
+    "Category": "Module",
+    "Refs": "U33",
+    "Qty": "1",
+    "Description": "HM-10 BLE serial module (iPhone and Android)",
+    "Manufacturer / part number": "DSD TECH HM-10 (TI CC2541), or a CC2541 clone",
+    "Where": "box",
+    "Status": "To buy",
+    "Supplier": "AliExpress",
+    "Link": "https://www.aliexpress.com/w/wholesale-hm-10-ble-cc2541-module.html?SortType=total_tranpro_desc",
+    "Notes": "Listen-only log to a phone: hears TX0 (the USB serial log). TXD stays unconnected, so nothing can reach the ESP32. Set to 115200 with the bt_setup bench firmware first. Spec: HM-10 BLE 4.0 (CC2541) on a 6-pin breakout with a 3.3 V regulator, 3.6-6 V in. BLE works with iPhone and Android. DSD TECH is the genuine one; clones (MLT-BT05, CC41-A) also work with bt_setup"
+   },
+   "kind": "part",
+   "issues": []
+  },
+  {
+   "line": "19",
+   "refs": [
     "H1",
     "H2"
    ],
@@ -503,7 +531,7 @@
    "status": "To buy",
    "note": "Spec: Buy 5-10 A3144 + 10 neodymium magnets 10 x 5 mm",
    "fields": {
-    "Line": "18",
+    "Line": "19",
     "Category": "Sensor",
     "Refs": "H1 H2",
     "Qty": "2",
@@ -519,7 +547,7 @@
    "issues": []
   },
   {
-   "line": "19",
+   "line": "20",
    "refs": [
     "SW5"
    ],
@@ -531,7 +559,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "19",
+    "Line": "20",
     "Category": "Sensor",
     "Refs": "SW5",
     "Qty": "1",
@@ -544,7 +572,7 @@
    "issues": []
   },
   {
-   "line": "20",
+   "line": "21",
    "refs": [
     "F1"
    ],
@@ -556,7 +584,7 @@
    "status": "Ordered 24 Oct",
    "note": "Unfused wire before F1 must stay under 15 cm. If the stock harness already has a 40 A fuse this close, that fuse is F1",
    "fields": {
-    "Line": "20",
+    "Line": "21",
     "Category": "Power",
     "Refs": "F1",
     "Qty": "1",
@@ -572,7 +600,7 @@
    "issues": []
   },
   {
-   "line": "21",
+   "line": "22",
    "refs": [
     "F2"
    ],
@@ -584,7 +612,7 @@
    "status": "Ordered 24 Oct",
    "note": "Feeds the key; protects the key wiring",
    "fields": {
-    "Line": "21",
+    "Line": "22",
     "Category": "Power",
     "Refs": "F2",
     "Qty": "1",
@@ -600,7 +628,7 @@
    "issues": []
   },
   {
-   "line": "22",
+   "line": "23",
    "refs": [
     "F3",
     "F7",
@@ -614,7 +642,7 @@
    "status": "Ordered 24 Oct",
    "note": "F3: K1 coil chain; F7: Box fans; F8: Battery divider wire (0.5 A in v0.2; 1 A is in the order)",
    "fields": {
-    "Line": "22",
+    "Line": "23",
     "Category": "Power",
     "Refs": "F3 F7 F8",
     "Qty": "3",
@@ -630,7 +658,7 @@
    "issues": []
   },
   {
-   "line": "23",
+   "line": "24",
    "refs": [
     "F4"
    ],
@@ -642,7 +670,7 @@
    "status": "Ordered 24 Oct",
    "note": "5V_LOGIC buck input",
    "fields": {
-    "Line": "23",
+    "Line": "24",
     "Category": "Power",
     "Refs": "F4",
     "Qty": "1",
@@ -658,7 +686,7 @@
    "issues": []
   },
   {
-   "line": "24",
+   "line": "25",
    "refs": [
     "F5"
    ],
@@ -670,7 +698,7 @@
    "status": "Ordered 24 Oct",
    "note": "5V_ACC buck input",
    "fields": {
-    "Line": "24",
+    "Line": "25",
     "Category": "Power",
     "Refs": "F5",
     "Qty": "1",
@@ -686,7 +714,7 @@
    "issues": []
   },
   {
-   "line": "25",
+   "line": "26",
    "refs": [
     "F6"
    ],
@@ -698,7 +726,7 @@
    "status": "Ordered 24 Oct",
    "note": "12V_ACC buck input",
    "fields": {
-    "Line": "25",
+    "Line": "26",
     "Category": "Power",
     "Refs": "F6",
     "Qty": "1",
@@ -714,7 +742,7 @@
    "issues": []
   },
   {
-   "line": "26",
+   "line": "27",
    "refs": [
     "F9"
    ],
@@ -726,7 +754,7 @@
    "status": "Ordered 24 Oct",
    "note": "Lights branch of the 10-20 A buck",
    "fields": {
-    "Line": "26",
+    "Line": "27",
     "Category": "Power",
     "Refs": "F9",
     "Qty": "1",
@@ -742,7 +770,7 @@
    "issues": []
   },
   {
-   "line": "27",
+   "line": "28",
    "refs": [
     "F10"
    ],
@@ -754,7 +782,7 @@
    "status": "Ordered 24 Oct",
    "note": "Music amp branch",
    "fields": {
-    "Line": "27",
+    "Line": "28",
     "Category": "Power",
     "Refs": "F10",
     "Qty": "1",
@@ -770,7 +798,7 @@
    "issues": []
   },
   {
-   "line": "28",
+   "line": "29",
    "refs": [
     "FB1"
    ],
@@ -782,7 +810,7 @@
    "status": "Ordered 24 Oct",
    "note": "",
    "fields": {
-    "Line": "28",
+    "Line": "29",
     "Category": "Power",
     "Refs": "FB1",
     "Qty": "1",
@@ -797,7 +825,7 @@
    "issues": []
   },
   {
-   "line": "29",
+   "line": "30",
    "refs": [
     "K1"
    ],
@@ -809,7 +837,7 @@
    "status": "Ordered 24 Oct",
    "note": "Measure its coil current on the bench; if over 0.6 A make F3 2 A",
    "fields": {
-    "Line": "29",
+    "Line": "30",
     "Category": "Power",
     "Refs": "K1",
     "Qty": "1",
@@ -825,7 +853,7 @@
    "issues": []
   },
   {
-   "line": "30",
+   "line": "31",
    "refs": [
     "S2"
    ],
@@ -837,7 +865,7 @@
    "status": "Ordered 24 Oct",
    "note": "Both NC blocks in series with the K1 coil (a welded NC block still leaves one that opens). NO3 reads the state",
    "fields": {
-    "Line": "30",
+    "Line": "31",
     "Category": "Power",
     "Refs": "S2",
     "Qty": "1",
@@ -853,7 +881,7 @@
    "issues": []
   },
   {
-   "line": "31",
+   "line": "32",
    "refs": [
     "TB1"
    ],
@@ -865,7 +893,7 @@
    "status": "To buy",
    "note": "Battery −, every driver B−, rails and logic ground meet here and nowhere else",
    "fields": {
-    "Line": "31",
+    "Line": "32",
     "Category": "Power",
     "Refs": "TB1",
     "Qty": "1",
@@ -879,7 +907,7 @@
    "issues": []
   },
   {
-   "line": "32",
+   "line": "33",
    "refs": [
     "TB2"
    ],
@@ -891,7 +919,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "32",
+    "Line": "33",
     "Category": "Power",
     "Refs": "TB2",
     "Qty": "1",
@@ -904,7 +932,7 @@
    "issues": []
   },
   {
-   "line": "33",
+   "line": "34",
    "refs": [
     "D1"
    ],
@@ -916,7 +944,7 @@
    "status": "Ordered 24 Oct",
    "note": "A plain diode slows K1 opening a little; a 1N4007 + 24 V zener in series opens faster (optional)",
    "fields": {
-    "Line": "33",
+    "Line": "34",
     "Category": "Discrete",
     "Refs": "D1",
     "Qty": "1",
@@ -932,7 +960,7 @@
    "issues": []
   },
   {
-   "line": "34",
+   "line": "35",
    "refs": [
     "D20",
     "D101",
@@ -949,7 +977,7 @@
    "status": "Ordered 24 Oct",
    "note": "D20: pedal clamp to 3.3 V; D101-D105: IS clamp to 3.3 V. Clamps the 4-7 mA fault current so the ADS1115 input stays ≤ 3.6 V",
    "fields": {
-    "Line": "34",
+    "Line": "35",
     "Category": "Discrete",
     "Refs": "D20 D101 D102 D103 D104 D105",
     "Qty": "6",
@@ -965,7 +993,7 @@
    "issues": []
   },
   {
-   "line": "35",
+   "line": "36",
    "refs": [
     "Q1"
    ],
@@ -977,7 +1005,7 @@
    "status": "Ordered 24 Oct",
    "note": "The ESP32 can open K1 but never close it against the key or E-stop",
    "fields": {
-    "Line": "35",
+    "Line": "36",
     "Category": "Discrete",
     "Refs": "Q1",
     "Qty": "1",
@@ -993,7 +1021,7 @@
    "issues": []
   },
   {
-   "line": "36",
+   "line": "37",
    "refs": [
     "D2"
    ],
@@ -1005,7 +1033,7 @@
    "status": "TBD",
    "note": "not fitted yet. Clamps the regen spike when K1 opens on a rolling car. Fit once the battery voltage is known. Issue #13",
    "fields": {
-    "Line": "36",
+    "Line": "37",
     "Category": "Discrete",
     "Refs": "D2",
     "Qty": "1",
@@ -1021,7 +1049,7 @@
    ]
   },
   {
-   "line": "37",
+   "line": "38",
    "refs": [
     "C1",
     "C2",
@@ -1042,7 +1070,7 @@
    "status": "Ordered 24 Oct",
    "note": "C201-C204: across the motor terminals. Noise suppression; solder right on the motor tabs; C205: across the motor terminals",
    "fields": {
-    "Line": "37",
+    "Line": "38",
     "Category": "Passive",
     "Refs": "C1 C2 C20 C21 C22 C201 C202 C203 C204 C205",
     "Qty": "10",
@@ -1058,7 +1086,7 @@
    "issues": []
   },
   {
-   "line": "38",
+   "line": "39",
    "refs": [
     "C101",
     "C102",
@@ -1074,7 +1102,7 @@
    "status": "Ordered 24 Oct",
    "note": "IS filter",
    "fields": {
-    "Line": "38",
+    "Line": "39",
     "Category": "Passive",
     "Refs": "C101 C102 C103 C104 C105",
     "Qty": "5",
@@ -1090,7 +1118,7 @@
    "issues": []
   },
   {
-   "line": "39",
+   "line": "40",
    "refs": [
     "C111",
     "C112",
@@ -1106,7 +1134,7 @@
    "status": "Ordered 24 Oct",
    "note": "CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'",
    "fields": {
-    "Line": "39",
+    "Line": "40",
     "Category": "Passive",
     "Refs": "C111 C112 C113 C114 C115",
     "Qty": "5",
@@ -1122,7 +1150,7 @@
    "issues": []
   },
   {
-   "line": "40",
+   "line": "41",
    "refs": [
     "R1",
     "R22"
@@ -1135,7 +1163,7 @@
    "status": "Ordered 24 Oct",
    "note": "R1: Gate resistor; R22: Pedal supply; a shorted pedal cable can't pull down 3V3_SENSE",
    "fields": {
-    "Line": "40",
+    "Line": "41",
     "Category": "Passive",
     "Refs": "R1 R22",
     "Qty": "2",
@@ -1151,7 +1179,7 @@
    "issues": []
   },
   {
-   "line": "41",
+   "line": "42",
    "refs": [
     "R2",
     "R20",
@@ -1171,7 +1199,7 @@
    "status": "Ordered 24 Oct",
    "note": "R2: Holds K1 open and strapping pin GPIO12 LOW at boot. Never a pull-up; R20: Series protection; R23: GPIO34 has no internal pull-up; R24: GPIO35 has no internal pull-up; R111-R115: Pull-down at each board, so a broken enable wire still leaves that board off",
    "fields": {
-    "Line": "41",
+    "Line": "42",
     "Category": "Passive",
     "Refs": "R2 R20 R23 R24 R111 R112 R113 R114 R115",
     "Qty": "9",
@@ -1187,7 +1215,7 @@
    "issues": []
   },
   {
-   "line": "42",
+   "line": "43",
    "refs": [
     "R3",
     "R5"
@@ -1200,7 +1228,7 @@
    "status": "Ordered 24 Oct",
    "note": "R3: 2.2 V at 29.4 V; R5: Motor-bus sense for the K1 checks; at the stud, so only the divided signal runs to A1",
    "fields": {
-    "Line": "42",
+    "Line": "43",
     "Category": "Passive",
     "Refs": "R3 R5",
     "Qty": "2",
@@ -1216,7 +1244,7 @@
    "issues": []
   },
   {
-   "line": "43",
+   "line": "44",
    "refs": [
     "R4",
     "R6"
@@ -1229,7 +1257,7 @@
    "status": "Ordered 24 Oct",
    "note": "R6: 2.2 V at 29.4 V, as the battery divider",
    "fields": {
-    "Line": "43",
+    "Line": "44",
     "Category": "Passive",
     "Refs": "R4 R6",
     "Qty": "2",
@@ -1245,7 +1273,7 @@
    "issues": []
   },
   {
-   "line": "44",
+   "line": "45",
    "refs": [
     "R21"
    ],
@@ -1257,7 +1285,7 @@
    "status": "Ordered 24 Oct",
    "note": "Unplugged pedal reads 0 (released)",
    "fields": {
-    "Line": "44",
+    "Line": "45",
     "Category": "Passive",
     "Refs": "R21",
     "Qty": "1",
@@ -1273,7 +1301,7 @@
    "issues": []
   },
   {
-   "line": "45",
+   "line": "46",
    "refs": [
     "R25",
     "R26",
@@ -1292,7 +1320,7 @@
    "status": "Ordered 24 Oct",
    "note": "R25: not fitted yet. Fit only if the module pull-ups in parallel measure above 4.7k. Seven modules with their own 10k/4.7k already give ~1-2k; R26: not fitted yet. As R25; R27: 1-Wire pull-up; also keeps strapping pin GPIO15 HIGH; R101-R105: IS series resistor",
    "fields": {
-    "Line": "45",
+    "Line": "46",
     "Category": "Passive",
     "Refs": "R25 R26 R27 R101 R102 R103 R104 R105",
     "Qty": "8",
@@ -1308,35 +1336,36 @@
    "issues": []
   },
   {
-   "line": "46",
+   "line": "47",
    "refs": [
-    "R28"
+    "R28",
+    "R29"
    ],
-   "qty": "1",
+   "qty": "2",
    "part": "Resistor 1k, metal film 1 %, 0.25 W",
    "model": "Generic metal film",
    "category": "Passive",
    "where": "A1",
    "status": "Ordered 24 Oct",
-   "note": "DFPlayer RX series resistor",
+   "note": "R28: DFPlayer RX series resistor; R29: Bluetooth RXD series resistor: a dead module can't hold down the USB serial line",
    "fields": {
-    "Line": "46",
+    "Line": "47",
     "Category": "Passive",
-    "Refs": "R28",
-    "Qty": "1",
+    "Refs": "R28 R29",
+    "Qty": "2",
     "Description": "Resistor 1k, metal film 1 %, 0.25 W",
     "Manufacturer / part number": "Generic metal film",
     "Where": "A1",
     "Status": "Ordered 24 Oct",
     "Order line": "O13, O26",
     "Supplier": "AliExpress, 24 Oct order",
-    "Notes": "DFPlayer RX series resistor"
+    "Notes": "R28: DFPlayer RX series resistor; R29: Bluetooth RXD series resistor: a dead module can't hold down the USB serial line"
    },
    "kind": "part",
    "issues": []
   },
   {
-   "line": "47",
+   "line": "48",
    "refs": [
     "R7"
    ],
@@ -1348,7 +1377,7 @@
    "status": "To buy",
    "note": "Bleed: drains the driver caps with K1 open (5 s time constant), so the boot weld check can see a welded K1. 0.4 W with K1 closed. Spec: 2.2k, 3 W or more (5 W fine); a local shop has it too",
    "fields": {
-    "Line": "47",
+    "Line": "48",
     "Category": "Passive",
     "Refs": "R7",
     "Qty": "1",
@@ -1364,7 +1393,7 @@
    "issues": []
   },
   {
-   "line": "48",
+   "line": "49",
    "refs": [
     "J9",
     "J12"
@@ -1377,7 +1406,7 @@
    "status": "To buy",
    "note": "J9: Our own plug: E-stop on the dash; J12: Our own plug; music path only, never shared with the ESP32",
    "fields": {
-    "Line": "48",
+    "Line": "49",
     "Category": "Connector",
     "Refs": "J9 J12",
     "Qty": "2",
@@ -1391,7 +1420,7 @@
    "issues": []
   },
   {
-   "line": "49",
+   "line": "50",
    "refs": [
     "J10"
    ],
@@ -1403,7 +1432,7 @@
    "status": "To buy",
    "note": "Our own plug: halls, steering angle, seat",
    "fields": {
-    "Line": "49",
+    "Line": "50",
     "Category": "Connector",
     "Refs": "J10",
     "Qty": "1",
@@ -1417,7 +1446,7 @@
    "issues": []
   },
   {
-   "line": "50",
+   "line": "51",
    "refs": [
     "J11"
    ],
@@ -1429,7 +1458,7 @@
    "status": "To buy",
    "note": "Our own plug: OLED and alert speaker",
    "fields": {
-    "Line": "50",
+    "Line": "51",
     "Category": "Connector",
     "Refs": "J11",
     "Qty": "1",
@@ -1443,7 +1472,7 @@
    "issues": []
   },
   {
-   "line": "51",
+   "line": "52",
    "refs": [
     "J1"
    ],
@@ -1455,7 +1484,7 @@
    "status": "TBD",
    "note": "Issue #17",
    "fields": {
-    "Line": "51",
+    "Line": "52",
     "Category": "Connector",
     "Refs": "J1",
     "Qty": "1",
@@ -1471,7 +1500,7 @@
    ]
   },
   {
-   "line": "52",
+   "line": "53",
    "refs": [
     "J2"
    ],
@@ -1483,7 +1512,7 @@
    "status": "TBD",
    "note": "Issue #17",
    "fields": {
-    "Line": "52",
+    "Line": "53",
     "Category": "Connector",
     "Refs": "J2",
     "Qty": "1",
@@ -1499,7 +1528,7 @@
    ]
   },
   {
-   "line": "53",
+   "line": "54",
    "refs": [
     "J3"
    ],
@@ -1511,7 +1540,7 @@
    "status": "TBD",
    "note": "Issue #17",
    "fields": {
-    "Line": "53",
+    "Line": "54",
     "Category": "Connector",
     "Refs": "J3",
     "Qty": "1",
@@ -1527,7 +1556,7 @@
    ]
   },
   {
-   "line": "54",
+   "line": "55",
    "refs": [
     "J4"
    ],
@@ -1539,7 +1568,7 @@
    "status": "TBD",
    "note": "Issue #17",
    "fields": {
-    "Line": "54",
+    "Line": "55",
     "Category": "Connector",
     "Refs": "J4",
     "Qty": "1",
@@ -1555,7 +1584,7 @@
    ]
   },
   {
-   "line": "55",
+   "line": "56",
    "refs": [
     "J5"
    ],
@@ -1567,7 +1596,7 @@
    "status": "TBD",
    "note": "Issue #17",
    "fields": {
-    "Line": "55",
+    "Line": "56",
     "Category": "Connector",
     "Refs": "J5",
     "Qty": "1",
@@ -1583,7 +1612,7 @@
    ]
   },
   {
-   "line": "56",
+   "line": "57",
    "refs": [
     "J6"
    ],
@@ -1595,7 +1624,7 @@
    "status": "TBD",
    "note": "Issue #17, #33",
    "fields": {
-    "Line": "56",
+    "Line": "57",
     "Category": "Connector",
     "Refs": "J6",
     "Qty": "1",
@@ -1612,7 +1641,7 @@
    ]
   },
   {
-   "line": "57",
+   "line": "58",
    "refs": [
     "J7"
    ],
@@ -1624,7 +1653,7 @@
    "status": "TBD",
    "note": "Issue #17, #33",
    "fields": {
-    "Line": "57",
+    "Line": "58",
     "Category": "Connector",
     "Refs": "J7",
     "Qty": "1",
@@ -1641,7 +1670,7 @@
    ]
   },
   {
-   "line": "58",
+   "line": "59",
    "refs": [
     "J8"
    ],
@@ -1653,7 +1682,7 @@
    "status": "TBD",
    "note": "Issue #17",
    "fields": {
-    "Line": "58",
+    "Line": "59",
     "Category": "Connector",
     "Refs": "J8",
     "Qty": "1",
@@ -1669,7 +1698,7 @@
    ]
   },
   {
-   "line": "59",
+   "line": "60",
    "refs": [
     "FAN1",
     "FAN2"
@@ -1682,7 +1711,7 @@
    "status": "To buy",
    "note": "FAN1: intake, with a dust filter; FAN2: exhaust. Spec: 8025, 24 V DC, 2-wire, ball bearing; + 2 finger guards and a dust filter",
    "fields": {
-    "Line": "59",
+    "Line": "60",
     "Category": "Cooling",
     "Refs": "FAN1 FAN2",
     "Qty": "2",
@@ -1698,7 +1727,7 @@
    "issues": []
   },
   {
-   "line": "60",
+   "line": "61",
    "refs": [
     "LS1"
    ],
@@ -1710,7 +1739,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "60",
+    "Line": "61",
     "Category": "Audio",
     "Refs": "LS1",
     "Qty": "1",
@@ -1723,7 +1752,7 @@
    "issues": []
   },
   {
-   "line": "61",
+   "line": "62",
    "refs": [
     "LS2",
     "LS3"
@@ -1736,7 +1765,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "61",
+    "Line": "62",
     "Category": "Audio",
     "Refs": "LS2 LS3",
     "Qty": "2",
@@ -1749,7 +1778,7 @@
    "issues": []
   },
   {
-   "line": "62",
+   "line": "63",
    "refs": [],
    "qty": "1",
    "part": "MRD068A screw-terminal adapter for the ESP32",
@@ -1759,7 +1788,7 @@
    "status": "Owned",
    "note": "",
    "fields": {
-    "Line": "62",
+    "Line": "63",
     "Category": "Wiring",
     "Qty": "1",
     "Description": "MRD068A screw-terminal adapter for the ESP32",
@@ -1772,7 +1801,7 @@
    "issues": []
   },
   {
-   "line": "63",
+   "line": "64",
    "refs": [],
    "qty": "1",
    "part": "10 AWG wire, red + black, 10 m",
@@ -1782,7 +1811,7 @@
    "status": "Ordered 24 Oct",
    "note": "Battery, contactor, driver B+/B−",
    "fields": {
-    "Line": "63",
+    "Line": "64",
     "Category": "Wiring",
     "Qty": "1",
     "Description": "10 AWG wire, red + black, 10 m",
@@ -1797,7 +1826,7 @@
    "issues": []
   },
   {
-   "line": "64",
+   "line": "65",
    "refs": [],
    "qty": "1",
    "part": "12 AWG wire, red + black, 10 m",
@@ -1807,7 +1836,7 @@
    "status": "Ordered 24 Oct",
    "note": "Driver to motor plugs",
    "fields": {
-    "Line": "64",
+    "Line": "65",
     "Category": "Wiring",
     "Qty": "1",
     "Description": "12 AWG wire, red + black, 10 m",
@@ -1822,7 +1851,7 @@
    "issues": []
   },
   {
-   "line": "65",
+   "line": "66",
    "refs": [],
    "qty": "1",
    "part": "Heat shrink assortment (also the colour bands)",
@@ -1832,7 +1861,7 @@
    "status": "Ordered 24 Oct",
    "note": "",
    "fields": {
-    "Line": "65",
+    "Line": "66",
     "Category": "Wiring",
     "Qty": "1",
     "Description": "Heat shrink assortment (also the colour bands)",
@@ -1846,7 +1875,7 @@
    "issues": []
   },
   {
-   "line": "66",
+   "line": "67",
    "refs": [],
    "qty": "1",
    "part": "Ring lugs (M6/M8 for 10 AWG), pre-insulated terminals, ferrules",
@@ -1856,7 +1885,7 @@
    "status": "Ordered 24 Oct",
    "note": "",
    "fields": {
-    "Line": "66",
+    "Line": "67",
     "Category": "Wiring",
     "Qty": "1",
     "Description": "Ring lugs (M6/M8 for 10 AWG), pre-insulated terminals, ferrules",
@@ -1870,7 +1899,7 @@
    "issues": []
   },
   {
-   "line": "67",
+   "line": "68",
    "refs": [
     "A1"
    ],
@@ -1882,7 +1911,7 @@
    "status": "To buy",
    "note": "Holds Q1, the sense networks, pull-ups and the battery divider",
    "fields": {
-    "Line": "67",
+    "Line": "68",
     "Category": "Wiring",
     "Refs": "A1",
     "Qty": "1",
@@ -1896,7 +1925,7 @@
    "issues": []
   },
   {
-   "line": "68",
+   "line": "69",
    "refs": [],
    "qty": "1",
    "part": "14-16 AWG wire, orange or red (key, F6 and 12 V branches)",
@@ -1906,7 +1935,7 @@
    "status": "To buy",
    "note": "12 AWG from the order also works",
    "fields": {
-    "Line": "68",
+    "Line": "69",
     "Category": "Wiring",
     "Qty": "1",
     "Description": "14-16 AWG wire, orange or red (key, F6 and 12 V branches)",
@@ -1919,7 +1948,7 @@
    "issues": []
   },
   {
-   "line": "69",
+   "line": "70",
    "refs": [],
    "qty": "1",
    "part": "20 AWG 4-6 core cable for off-box harnesses (E-stop, sensors, dash)",
@@ -1929,7 +1958,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "69",
+    "Line": "70",
     "Category": "Wiring",
     "Qty": "1",
     "Description": "20 AWG 4-6 core cable for off-box harnesses (E-stop, sensors, dash)",
@@ -1941,7 +1970,7 @@
    "issues": []
   },
   {
-   "line": "70",
+   "line": "71",
    "refs": [],
    "qty": "1",
    "part": "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)",
@@ -1951,7 +1980,7 @@
    "status": "To buy",
    "note": "Was in the cart review, not in the order",
    "fields": {
-    "Line": "70",
+    "Line": "71",
     "Category": "Wiring",
     "Qty": "1",
     "Description": "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)",
@@ -1966,7 +1995,7 @@
    "issues": []
   },
   {
-   "line": "71",
+   "line": "72",
    "refs": [],
    "qty": "5",
    "part": "8-way 2.54 mm housing + crimp pins for each IBT-2 control header (or JST-XH adapter)",
@@ -1976,7 +2005,7 @@
    "status": "To buy",
    "note": "Holds the EN and IS jumpers and the EN pull-down; a dab of hot glue against vibration",
    "fields": {
-    "Line": "71",
+    "Line": "72",
     "Category": "Wiring",
     "Qty": "5",
     "Description": "8-way 2.54 mm housing + crimp pins for each IBT-2 control header (or JST-XH adapter)",
@@ -1989,7 +2018,7 @@
    "issues": []
   },
   {
-   "line": "72",
+   "line": "73",
    "refs": [],
    "qty": "10",
    "part": "Cable glands PG9 / PG13.5",
@@ -1999,7 +2028,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "72",
+    "Line": "73",
     "Category": "Wiring",
     "Qty": "10",
     "Description": "Cable glands PG9 / PG13.5",
@@ -2011,7 +2040,7 @@
    "issues": []
   },
   {
-   "line": "73",
+   "line": "74",
    "refs": [],
    "qty": "4",
    "part": "Deutsch DT mating pairs with seals: 4-way x2 (J9, J12), 6-way (J11), 8-way (J10)",
@@ -2021,7 +2050,7 @@
    "status": "To buy",
    "note": "Mates for J9-J12",
    "fields": {
-    "Line": "73",
+    "Line": "74",
     "Category": "Wiring",
     "Qty": "4",
     "Description": "Deutsch DT mating pairs with seals: 4-way x2 (J9, J12), 6-way (J11), 8-way (J10)",
@@ -2034,7 +2063,7 @@
    "issues": []
   },
   {
-   "line": "74",
+   "line": "75",
    "refs": [],
    "qty": "1",
    "part": "Nylon M3 standoffs and a mounting plate",
@@ -2044,7 +2073,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "74",
+    "Line": "75",
     "Category": "Wiring",
     "Qty": "1",
     "Description": "Nylon M3 standoffs and a mounting plate",
@@ -2056,7 +2085,7 @@
    "issues": []
   },
   {
-   "line": "75",
+   "line": "76",
    "refs": [],
    "qty": "1",
    "part": "Box: flame-retardant (UL94 V-0) ABS or metal, ~250 x 200 x 100 mm, IP54",
@@ -2066,7 +2095,7 @@
    "status": "TBD",
    "note": "Size waits on #18; V-0 is gap 13 of the safety review",
    "fields": {
-    "Line": "75",
+    "Line": "76",
     "Category": "Wiring",
     "Qty": "1",
     "Description": "Box: flame-retardant (UL94 V-0) ABS or metal, ~250 x 200 x 100 mm, IP54",
@@ -2081,7 +2110,7 @@
    ]
   },
   {
-   "line": "76",
+   "line": "77",
    "refs": [
     "BT1"
    ],
@@ -2093,7 +2122,7 @@
    "status": "Stock car",
    "note": "BTS7960 locks out above 27.5 V; check the charger voltage. Issue #13",
    "fields": {
-    "Line": "76",
+    "Line": "77",
     "Category": "Stock car",
     "Refs": "BT1",
     "Qty": "1",
@@ -2110,7 +2139,7 @@
    ]
   },
   {
-   "line": "77",
+   "line": "78",
    "refs": [
     "M1",
     "M2",
@@ -2125,7 +2154,7 @@
    "status": "Stock car",
    "note": "Issue #14",
    "fields": {
-    "Line": "77",
+    "Line": "78",
     "Category": "Stock car",
     "Refs": "M1 M2 M3 M4",
     "Qty": "4",
@@ -2142,7 +2171,7 @@
    ]
   },
   {
-   "line": "78",
+   "line": "79",
    "refs": [
     "M5"
    ],
@@ -2154,7 +2183,7 @@
    "status": "Stock car",
    "note": "Issue #14",
    "fields": {
-    "Line": "78",
+    "Line": "79",
     "Category": "Stock car",
     "Refs": "M5",
     "Qty": "1",
@@ -2171,7 +2200,7 @@
    ]
   },
   {
-   "line": "79",
+   "line": "80",
    "refs": [
     "PED1"
    ],
@@ -2183,7 +2212,7 @@
    "status": "Stock car",
    "note": "Issue #16",
    "fields": {
-    "Line": "79",
+    "Line": "80",
     "Category": "Stock car",
     "Refs": "PED1",
     "Qty": "1",
@@ -2200,7 +2229,7 @@
    ]
   },
   {
-   "line": "80",
+   "line": "81",
    "refs": [
     "SW1"
    ],
@@ -2212,7 +2241,7 @@
    "status": "Stock car",
    "note": "Issue #17",
    "fields": {
-    "Line": "80",
+    "Line": "81",
     "Category": "Stock car",
     "Refs": "SW1",
     "Qty": "1",
@@ -2229,7 +2258,7 @@
    ]
   },
   {
-   "line": "81",
+   "line": "82",
    "refs": [
     "SW2"
    ],
@@ -2241,7 +2270,7 @@
    "status": "Stock car",
    "note": "Issue #17",
    "fields": {
-    "Line": "81",
+    "Line": "82",
     "Category": "Stock car",
     "Refs": "SW2",
     "Qty": "1",
@@ -2258,7 +2287,7 @@
    ]
   },
   {
-   "line": "82",
+   "line": "83",
    "refs": [
     "SW3"
    ],
@@ -2270,7 +2299,7 @@
    "status": "Stock car",
    "note": "Issue #17",
    "fields": {
-    "Line": "82",
+    "Line": "83",
     "Category": "Stock car",
     "Refs": "SW3",
     "Qty": "1",
@@ -2287,7 +2316,7 @@
    ]
   },
   {
-   "line": "83",
+   "line": "84",
    "refs": [
     "SW4"
    ],
@@ -2299,7 +2328,7 @@
    "status": "Stock car",
    "note": "Issue #17",
    "fields": {
-    "Line": "83",
+    "Line": "84",
     "Category": "Stock car",
     "Refs": "SW4",
     "Qty": "1",
@@ -2316,7 +2345,7 @@
    ]
   },
   {
-   "line": "84",
+   "line": "85",
    "refs": [],
    "qty": "1",
    "part": "10 AWG red wire, 5 m",
@@ -2326,7 +2355,7 @@
    "status": "Owned",
    "note": "Adds to the 24 Oct wire",
    "fields": {
-    "Line": "84",
+    "Line": "85",
     "Category": "Spare",
     "Qty": "1",
     "Description": "10 AWG red wire, 5 m",
@@ -2340,7 +2369,7 @@
    "issues": []
   },
   {
-   "line": "85",
+   "line": "86",
    "refs": [],
    "qty": "4",
    "part": "555 24 V motors (loose)",
@@ -2350,7 +2379,7 @@
    "status": "Owned",
    "note": "Spares, if they match the car's motors (#14)",
    "fields": {
-    "Line": "85",
+    "Line": "86",
     "Category": "Spare",
     "Qty": "4",
     "Description": "555 24 V motors (loose)",
@@ -2366,7 +2395,7 @@
    ]
   },
   {
-   "line": "86",
+   "line": "87",
    "refs": [],
    "qty": "1",
    "part": "BMP280 pressure sensor module",
@@ -2376,7 +2405,7 @@
    "status": "Owned",
    "note": "Not used",
    "fields": {
-    "Line": "86",
+    "Line": "87",
     "Category": "Spare",
     "Qty": "1",
     "Description": "BMP280 pressure sensor module",
@@ -2390,7 +2419,7 @@
    "issues": []
   },
   {
-   "line": "87",
+   "line": "88",
    "refs": [],
    "qty": "2",
    "part": "DDT-S30 tweeters",
@@ -2400,7 +2429,7 @@
    "status": "Owned",
    "note": "Music path, each via a 10 µF film cap (AUDIO.md)",
    "fields": {
-    "Line": "87",
+    "Line": "88",
     "Category": "Spare",
     "Qty": "2",
     "Description": "DDT-S30 tweeters",
@@ -2414,7 +2443,7 @@
    "issues": []
   },
   {
-   "line": "88",
+   "line": "89",
    "refs": [],
    "qty": "1",
    "part": "ESP32-WROOM-32D 30-pin DevKit, USB-C (second board)",
@@ -2424,7 +2453,7 @@
    "status": "Owned",
    "note": "Bench firmwares and a spare",
    "fields": {
-    "Line": "88",
+    "Line": "89",
     "Category": "Spare",
     "Qty": "1",
     "Description": "ESP32-WROOM-32D 30-pin DevKit, USB-C (second board)",
@@ -2438,7 +2467,7 @@
    "issues": []
   },
   {
-   "line": "89",
+   "line": "90",
    "refs": [],
    "qty": "1",
    "part": "HC-12 433 MHz radio module",
@@ -2448,7 +2477,7 @@
    "status": "Owned",
    "note": "Not used: the radio link is ELRS only",
    "fields": {
-    "Line": "89",
+    "Line": "90",
     "Category": "Spare",
     "Qty": "1",
     "Description": "HC-12 433 MHz radio module",
@@ -2462,7 +2491,7 @@
    "issues": []
   },
   {
-   "line": "90",
+   "line": "91",
    "refs": [],
    "qty": "1",
    "part": "HY2005RX-24V/40A stock controller (spare)",
@@ -2472,7 +2501,7 @@
    "status": "Owned",
    "note": "Plan B: puts the car back to stock",
    "fields": {
-    "Line": "90",
+    "Line": "91",
     "Category": "Spare",
     "Qty": "1",
     "Description": "HY2005RX-24V/40A stock controller (spare)",
@@ -2486,7 +2515,7 @@
    "issues": []
   },
   {
-   "line": "91",
+   "line": "92",
    "refs": [],
    "qty": "1",
    "part": "LM2596 buck module (extra)",
@@ -2496,7 +2525,7 @@
    "status": "Owned",
    "note": "Spare for U1",
    "fields": {
-    "Line": "91",
+    "Line": "92",
     "Category": "Spare",
     "Qty": "1",
     "Description": "LM2596 buck module (extra)",
@@ -2510,7 +2539,7 @@
    "issues": []
   },
   {
-   "line": "92",
+   "line": "93",
    "refs": [],
    "qty": "1",
    "part": "Ride-on key switch",
@@ -2520,7 +2549,7 @@
    "status": "Owned",
    "note": "Spare; could replace SW1 if the stock switch is too weak (#17)",
    "fields": {
-    "Line": "92",
+    "Line": "93",
     "Category": "Spare",
     "Qty": "1",
     "Description": "Ride-on key switch",
@@ -2536,7 +2565,7 @@
    ]
   },
   {
-   "line": "93",
+   "line": "94",
    "refs": [],
    "qty": "5",
    "part": "XT60 pairs",
@@ -2546,7 +2575,7 @@
    "status": "Owned",
    "note": "Fallback plugs for J5-J7",
    "fields": {
-    "Line": "93",
+    "Line": "94",
     "Category": "Spare",
     "Qty": "5",
     "Description": "XT60 pairs",
@@ -2560,7 +2589,7 @@
    "issues": []
   },
   {
-   "line": "94",
+   "line": "95",
    "refs": [],
    "qty": "1",
    "part": "ELRS radio transmitter",
@@ -2570,7 +2599,7 @@
    "status": "Owned",
    "note": "Parent transmitter",
    "fields": {
-    "Line": "94",
+    "Line": "95",
     "Category": "Tool",
     "Qty": "1",
     "Description": "ELRS radio transmitter",
@@ -2584,7 +2613,7 @@
    "issues": []
   },
   {
-   "line": "95",
+   "line": "96",
    "refs": [],
    "qty": "2",
    "part": "18650 protected cell",
@@ -2594,7 +2623,7 @@
    "status": "Ordered 24 Oct",
    "note": "For the T-Lite radio",
    "fields": {
-    "Line": "95",
+    "Line": "96",
     "Category": "Tool",
     "Qty": "2",
     "Description": "18650 protected cell",
@@ -2609,7 +2638,7 @@
    "issues": []
   },
   {
-   "line": "96",
+   "line": "97",
    "refs": [],
    "qty": "1",
    "part": "DC clamp meter",
@@ -2619,7 +2648,7 @@
    "status": "Ordered 24 Oct",
    "note": "Motor and coil current without cutting wires",
    "fields": {
-    "Line": "96",
+    "Line": "97",
     "Category": "Tool",
     "Qty": "1",
     "Description": "DC clamp meter",
@@ -2634,7 +2663,7 @@
    "issues": []
   },
   {
-   "line": "97",
+   "line": "98",
    "refs": [],
    "qty": "1",
    "part": "Programmable bench supply, 30 V 10 A",
@@ -2644,7 +2673,7 @@
    "status": "Ordered 24 Oct",
    "note": "Phases 3-4 run on its current limit instead of the battery",
    "fields": {
-    "Line": "97",
+    "Line": "98",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Programmable bench supply, 30 V 10 A",
@@ -2659,7 +2688,7 @@
    "issues": []
   },
   {
-   "line": "98",
+   "line": "99",
    "refs": [],
    "qty": "3",
    "part": "USB-TTL adapter",
@@ -2669,7 +2698,7 @@
    "status": "Ordered 24 Oct",
    "note": "Not needed (the ESP32 has USB); harmless spare",
    "fields": {
-    "Line": "98",
+    "Line": "99",
     "Category": "Tool",
     "Qty": "3",
     "Description": "USB-TTL adapter",
@@ -2684,7 +2713,7 @@
    "issues": []
   },
   {
-   "line": "99",
+   "line": "100",
    "refs": [],
    "qty": "1",
    "part": "Automatic wire stripper, 10-24 AWG",
@@ -2694,7 +2723,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "99",
+    "Line": "100",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Automatic wire stripper, 10-24 AWG",
@@ -2709,7 +2738,7 @@
    "issues": []
   },
   {
-   "line": "100",
+   "line": "101",
    "refs": [],
    "qty": "1",
    "part": "Brass-wool tip cleaner with holder",
@@ -2719,7 +2748,7 @@
    "status": "To buy",
    "note": "No water needed",
    "fields": {
-    "Line": "100",
+    "Line": "101",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Brass-wool tip cleaner with holder",
@@ -2735,7 +2764,7 @@
    "issues": []
   },
   {
-   "line": "101",
+   "line": "102",
    "refs": [],
    "qty": "1",
    "part": "Desoldering pump",
@@ -2745,7 +2774,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "101",
+    "Line": "102",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Desoldering pump",
@@ -2760,7 +2789,7 @@
    "issues": []
   },
   {
-   "line": "102",
+   "line": "103",
    "refs": [],
    "qty": "1",
    "part": "Heat gun, dual temperature",
@@ -2770,7 +2799,7 @@
    "status": "To buy",
    "note": "For the heat shrink in the order; local hardware stores have them",
    "fields": {
-    "Line": "102",
+    "Line": "103",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Heat gun, dual temperature",
@@ -2786,7 +2815,7 @@
    "issues": []
   },
   {
-   "line": "103",
+   "line": "104",
    "refs": [],
    "qty": "1",
    "part": "Helping hands, weighted base, 4 flexible arms",
@@ -2796,7 +2825,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "103",
+    "Line": "104",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Helping hands, weighted base, 4 flexible arms",
@@ -2811,7 +2840,7 @@
    "issues": []
   },
   {
-   "line": "104",
+   "line": "105",
    "refs": [],
    "qty": "1",
    "part": "Hex crimper for 6-50 mm² lugs",
@@ -2821,7 +2850,7 @@
    "status": "To buy",
    "note": "For the 10 AWG ring lugs; the terminal kit's crimper is for small terminals",
    "fields": {
-    "Line": "104",
+    "Line": "105",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Hex crimper for 6-50 mm² lugs",
@@ -2837,7 +2866,7 @@
    "issues": []
   },
   {
-   "line": "105",
+   "line": "106",
    "refs": [],
    "qty": "1",
    "part": "Silicone soldering mat, about 45 x 30 cm",
@@ -2847,7 +2876,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "105",
+    "Line": "106",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Silicone soldering mat, about 45 x 30 cm",
@@ -2862,7 +2891,7 @@
    "issues": []
   },
   {
-   "line": "106",
+   "line": "107",
    "refs": [],
    "qty": "1",
    "part": "Solder fume extractor",
@@ -2872,7 +2901,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "106",
+    "Line": "107",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Solder fume extractor",
@@ -2887,7 +2916,7 @@
    "issues": []
   },
   {
-   "line": "107",
+   "line": "108",
    "refs": [],
    "qty": "1",
    "part": "Soldering iron, 60 W or more, 3-5 mm chisel + conical tip",
@@ -2897,7 +2926,7 @@
    "status": "To buy",
    "note": "Skip if you already have one this strong: 10 AWG and XT60 need the power",
    "fields": {
-    "Line": "107",
+    "Line": "108",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Soldering iron, 60 W or more, 3-5 mm chisel + conical tip",
@@ -2913,7 +2942,7 @@
    "issues": []
   },
   {
-   "line": "108",
+   "line": "109",
    "refs": [],
    "qty": "2",
    "part": "Desoldering braid 2.0 and 2.5 mm, 1.5 m",
@@ -2923,7 +2952,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "108",
+    "Line": "109",
     "Category": "Consumable",
     "Qty": "2",
     "Description": "Desoldering braid 2.0 and 2.5 mm, 1.5 m",
@@ -2938,7 +2967,7 @@
    "issues": []
   },
   {
-   "line": "109",
+   "line": "110",
    "refs": [],
    "qty": "1",
    "part": "Flux paste, 10 cc syringe with plunger and needle",
@@ -2948,7 +2977,7 @@
    "status": "To buy",
    "note": "Flux paste, not solder paste: solder paste is for surface-mount boards and hot air",
    "fields": {
-    "Line": "109",
+    "Line": "110",
     "Category": "Consumable",
     "Qty": "1",
     "Description": "Flux paste, 10 cc syringe with plunger and needle",
@@ -2964,7 +2993,7 @@
    "issues": []
   },
   {
-   "line": "110",
+   "line": "111",
    "refs": [],
    "qty": "1",
    "part": "Isopropyl alcohol 99 % + ESD-safe brush",
@@ -2974,7 +3003,7 @@
    "status": "To buy",
    "note": "Buy the alcohol locally: flammable, ships badly",
    "fields": {
-    "Line": "110",
+    "Line": "111",
     "Category": "Consumable",
     "Qty": "1",
     "Description": "Isopropyl alcohol 99 % + ESD-safe brush",
@@ -2990,7 +3019,7 @@
    "issues": []
   },
   {
-   "line": "111",
+   "line": "112",
    "refs": [],
    "qty": "0",
    "part": "Lead-free solder wire (instead of 63/37, if kids are near the bench)",
@@ -3000,7 +3029,7 @@
    "status": "To buy",
    "note": "Optional; harder to use than 63/37",
    "fields": {
-    "Line": "111",
+    "Line": "112",
     "Category": "Consumable",
     "Qty": "0",
     "Description": "Lead-free solder wire (instead of 63/37, if kids are near the bench)",
@@ -3016,7 +3045,7 @@
    "issues": []
   },
   {
-   "line": "112",
+   "line": "113",
    "refs": [],
    "qty": "1",
    "part": "No-clean flux pen",
@@ -3026,7 +3055,7 @@
    "status": "To buy",
    "note": "Tinning wire ends",
    "fields": {
-    "Line": "112",
+    "Line": "113",
     "Category": "Consumable",
     "Qty": "1",
     "Description": "No-clean flux pen",
@@ -3042,7 +3071,7 @@
    "issues": []
   },
   {
-   "line": "113",
+   "line": "114",
    "refs": [],
    "qty": "1",
    "part": "Solder wire Sn63/Pb37 0.8 mm, rosin core 2 % flux, 100 g",
@@ -3052,7 +3081,7 @@
    "status": "To buy",
    "note": "Signals and the proto board. 63/37 melts at one point (183 °C), the easiest to use",
    "fields": {
-    "Line": "113",
+    "Line": "114",
     "Category": "Consumable",
     "Qty": "1",
     "Description": "Solder wire Sn63/Pb37 0.8 mm, rosin core 2 % flux, 100 g",
@@ -3068,7 +3097,7 @@
    "issues": []
   },
   {
-   "line": "114",
+   "line": "115",
    "refs": [],
    "qty": "1",
    "part": "Solder wire Sn63/Pb37 1.0-1.2 mm, rosin core, 100 g",
@@ -3078,7 +3107,7 @@
    "status": "To buy",
    "note": "10/12 AWG lugs, XT60s, motor tabs",
    "fields": {
-    "Line": "114",
+    "Line": "115",
     "Category": "Consumable",
     "Qty": "1",
     "Description": "Solder wire Sn63/Pb37 1.0-1.2 mm, rosin core, 100 g",
@@ -3094,7 +3123,7 @@
    "issues": []
   },
   {
-   "line": "115",
+   "line": "116",
    "refs": [],
    "qty": "1",
    "part": "Soldering tip tinner / refresher",
@@ -3104,7 +3133,7 @@
    "status": "To buy",
    "note": "Revives a blackened tip",
    "fields": {
-    "Line": "115",
+    "Line": "116",
     "Category": "Consumable",
     "Qty": "1",
     "Description": "Soldering tip tinner / refresher",
@@ -3231,515 +3260,525 @@
    "bomLine": "17",
    "bomIndex": 16
   },
+  "U33": {
+   "ref": "U33",
+   "bomLine": "18",
+   "bomIndex": 17
+  },
   "H1": {
    "ref": "H1",
-   "bomLine": "18",
-   "bomIndex": 17
-  },
-  "H2": {
-   "ref": "H2",
-   "bomLine": "18",
-   "bomIndex": 17
-  },
-  "SW5": {
-   "ref": "SW5",
    "bomLine": "19",
    "bomIndex": 18
   },
-  "F1": {
-   "ref": "F1",
+  "H2": {
+   "ref": "H2",
+   "bomLine": "19",
+   "bomIndex": 18
+  },
+  "SW5": {
+   "ref": "SW5",
    "bomLine": "20",
    "bomIndex": 19
   },
-  "F2": {
-   "ref": "F2",
+  "F1": {
+   "ref": "F1",
    "bomLine": "21",
    "bomIndex": 20
   },
+  "F2": {
+   "ref": "F2",
+   "bomLine": "22",
+   "bomIndex": 21
+  },
   "F3": {
    "ref": "F3",
-   "bomLine": "22",
-   "bomIndex": 21
-  },
-  "F7": {
-   "ref": "F7",
-   "bomLine": "22",
-   "bomIndex": 21
-  },
-  "F8": {
-   "ref": "F8",
-   "bomLine": "22",
-   "bomIndex": 21
-  },
-  "F4": {
-   "ref": "F4",
    "bomLine": "23",
    "bomIndex": 22
   },
-  "F5": {
-   "ref": "F5",
+  "F7": {
+   "ref": "F7",
+   "bomLine": "23",
+   "bomIndex": 22
+  },
+  "F8": {
+   "ref": "F8",
+   "bomLine": "23",
+   "bomIndex": 22
+  },
+  "F4": {
+   "ref": "F4",
    "bomLine": "24",
    "bomIndex": 23
   },
-  "F6": {
-   "ref": "F6",
+  "F5": {
+   "ref": "F5",
    "bomLine": "25",
    "bomIndex": 24
   },
-  "F9": {
-   "ref": "F9",
+  "F6": {
+   "ref": "F6",
    "bomLine": "26",
    "bomIndex": 25
   },
-  "F10": {
-   "ref": "F10",
+  "F9": {
+   "ref": "F9",
    "bomLine": "27",
    "bomIndex": 26
   },
-  "FB1": {
-   "ref": "FB1",
+  "F10": {
+   "ref": "F10",
    "bomLine": "28",
    "bomIndex": 27
   },
-  "K1": {
-   "ref": "K1",
+  "FB1": {
+   "ref": "FB1",
    "bomLine": "29",
    "bomIndex": 28
   },
-  "S2": {
-   "ref": "S2",
+  "K1": {
+   "ref": "K1",
    "bomLine": "30",
    "bomIndex": 29
   },
-  "TB1": {
-   "ref": "TB1",
+  "S2": {
+   "ref": "S2",
    "bomLine": "31",
    "bomIndex": 30
   },
-  "TB2": {
-   "ref": "TB2",
+  "TB1": {
+   "ref": "TB1",
    "bomLine": "32",
    "bomIndex": 31
   },
-  "D1": {
-   "ref": "D1",
+  "TB2": {
+   "ref": "TB2",
    "bomLine": "33",
    "bomIndex": 32
   },
+  "D1": {
+   "ref": "D1",
+   "bomLine": "34",
+   "bomIndex": 33
+  },
   "D20": {
    "ref": "D20",
-   "bomLine": "34",
-   "bomIndex": 33
-  },
-  "D101": {
-   "ref": "D101",
-   "bomLine": "34",
-   "bomIndex": 33
-  },
-  "D102": {
-   "ref": "D102",
-   "bomLine": "34",
-   "bomIndex": 33
-  },
-  "D103": {
-   "ref": "D103",
-   "bomLine": "34",
-   "bomIndex": 33
-  },
-  "D104": {
-   "ref": "D104",
-   "bomLine": "34",
-   "bomIndex": 33
-  },
-  "D105": {
-   "ref": "D105",
-   "bomLine": "34",
-   "bomIndex": 33
-  },
-  "Q1": {
-   "ref": "Q1",
    "bomLine": "35",
    "bomIndex": 34
   },
-  "D2": {
-   "ref": "D2",
+  "D101": {
+   "ref": "D101",
+   "bomLine": "35",
+   "bomIndex": 34
+  },
+  "D102": {
+   "ref": "D102",
+   "bomLine": "35",
+   "bomIndex": 34
+  },
+  "D103": {
+   "ref": "D103",
+   "bomLine": "35",
+   "bomIndex": 34
+  },
+  "D104": {
+   "ref": "D104",
+   "bomLine": "35",
+   "bomIndex": 34
+  },
+  "D105": {
+   "ref": "D105",
+   "bomLine": "35",
+   "bomIndex": 34
+  },
+  "Q1": {
+   "ref": "Q1",
    "bomLine": "36",
    "bomIndex": 35
   },
-  "C1": {
-   "ref": "C1",
+  "D2": {
+   "ref": "D2",
    "bomLine": "37",
    "bomIndex": 36
+  },
+  "C1": {
+   "ref": "C1",
+   "bomLine": "38",
+   "bomIndex": 37
   },
   "C2": {
    "ref": "C2",
-   "bomLine": "37",
-   "bomIndex": 36
+   "bomLine": "38",
+   "bomIndex": 37
   },
   "C20": {
    "ref": "C20",
-   "bomLine": "37",
-   "bomIndex": 36
+   "bomLine": "38",
+   "bomIndex": 37
   },
   "C21": {
    "ref": "C21",
-   "bomLine": "37",
-   "bomIndex": 36
+   "bomLine": "38",
+   "bomIndex": 37
   },
   "C22": {
    "ref": "C22",
-   "bomLine": "37",
-   "bomIndex": 36
+   "bomLine": "38",
+   "bomIndex": 37
   },
   "C201": {
    "ref": "C201",
-   "bomLine": "37",
-   "bomIndex": 36
+   "bomLine": "38",
+   "bomIndex": 37
   },
   "C202": {
    "ref": "C202",
-   "bomLine": "37",
-   "bomIndex": 36
+   "bomLine": "38",
+   "bomIndex": 37
   },
   "C203": {
    "ref": "C203",
-   "bomLine": "37",
-   "bomIndex": 36
+   "bomLine": "38",
+   "bomIndex": 37
   },
   "C204": {
    "ref": "C204",
-   "bomLine": "37",
-   "bomIndex": 36
+   "bomLine": "38",
+   "bomIndex": 37
   },
   "C205": {
    "ref": "C205",
-   "bomLine": "37",
-   "bomIndex": 36
+   "bomLine": "38",
+   "bomIndex": 37
   },
   "C101": {
    "ref": "C101",
-   "bomLine": "38",
-   "bomIndex": 37
+   "bomLine": "39",
+   "bomIndex": 38
   },
   "C102": {
    "ref": "C102",
-   "bomLine": "38",
-   "bomIndex": 37
+   "bomLine": "39",
+   "bomIndex": 38
   },
   "C103": {
    "ref": "C103",
-   "bomLine": "38",
-   "bomIndex": 37
+   "bomLine": "39",
+   "bomIndex": 38
   },
   "C104": {
    "ref": "C104",
-   "bomLine": "38",
-   "bomIndex": 37
+   "bomLine": "39",
+   "bomIndex": 38
   },
   "C105": {
    "ref": "C105",
-   "bomLine": "38",
-   "bomIndex": 37
+   "bomLine": "39",
+   "bomIndex": 38
   },
   "C111": {
    "ref": "C111",
-   "bomLine": "39",
-   "bomIndex": 38
+   "bomLine": "40",
+   "bomIndex": 39
   },
   "C112": {
    "ref": "C112",
-   "bomLine": "39",
-   "bomIndex": 38
+   "bomLine": "40",
+   "bomIndex": 39
   },
   "C113": {
    "ref": "C113",
-   "bomLine": "39",
-   "bomIndex": 38
+   "bomLine": "40",
+   "bomIndex": 39
   },
   "C114": {
    "ref": "C114",
-   "bomLine": "39",
-   "bomIndex": 38
+   "bomLine": "40",
+   "bomIndex": 39
   },
   "C115": {
    "ref": "C115",
-   "bomLine": "39",
-   "bomIndex": 38
+   "bomLine": "40",
+   "bomIndex": 39
   },
   "R1": {
    "ref": "R1",
-   "bomLine": "40",
-   "bomIndex": 39
+   "bomLine": "41",
+   "bomIndex": 40
   },
   "R22": {
    "ref": "R22",
-   "bomLine": "40",
-   "bomIndex": 39
+   "bomLine": "41",
+   "bomIndex": 40
   },
   "R2": {
    "ref": "R2",
-   "bomLine": "41",
-   "bomIndex": 40
+   "bomLine": "42",
+   "bomIndex": 41
   },
   "R20": {
    "ref": "R20",
-   "bomLine": "41",
-   "bomIndex": 40
+   "bomLine": "42",
+   "bomIndex": 41
   },
   "R23": {
    "ref": "R23",
-   "bomLine": "41",
-   "bomIndex": 40
+   "bomLine": "42",
+   "bomIndex": 41
   },
   "R24": {
    "ref": "R24",
-   "bomLine": "41",
-   "bomIndex": 40
+   "bomLine": "42",
+   "bomIndex": 41
   },
   "R111": {
    "ref": "R111",
-   "bomLine": "41",
-   "bomIndex": 40
+   "bomLine": "42",
+   "bomIndex": 41
   },
   "R112": {
    "ref": "R112",
-   "bomLine": "41",
-   "bomIndex": 40
+   "bomLine": "42",
+   "bomIndex": 41
   },
   "R113": {
    "ref": "R113",
-   "bomLine": "41",
-   "bomIndex": 40
+   "bomLine": "42",
+   "bomIndex": 41
   },
   "R114": {
    "ref": "R114",
-   "bomLine": "41",
-   "bomIndex": 40
+   "bomLine": "42",
+   "bomIndex": 41
   },
   "R115": {
    "ref": "R115",
-   "bomLine": "41",
-   "bomIndex": 40
+   "bomLine": "42",
+   "bomIndex": 41
   },
   "R3": {
    "ref": "R3",
-   "bomLine": "42",
-   "bomIndex": 41
+   "bomLine": "43",
+   "bomIndex": 42
   },
   "R5": {
    "ref": "R5",
-   "bomLine": "42",
-   "bomIndex": 41
+   "bomLine": "43",
+   "bomIndex": 42
   },
   "R4": {
    "ref": "R4",
-   "bomLine": "43",
-   "bomIndex": 42
-  },
-  "R6": {
-   "ref": "R6",
-   "bomLine": "43",
-   "bomIndex": 42
-  },
-  "R21": {
-   "ref": "R21",
    "bomLine": "44",
    "bomIndex": 43
   },
+  "R6": {
+   "ref": "R6",
+   "bomLine": "44",
+   "bomIndex": 43
+  },
+  "R21": {
+   "ref": "R21",
+   "bomLine": "45",
+   "bomIndex": 44
+  },
   "R25": {
    "ref": "R25",
-   "bomLine": "45",
-   "bomIndex": 44
-  },
-  "R26": {
-   "ref": "R26",
-   "bomLine": "45",
-   "bomIndex": 44
-  },
-  "R27": {
-   "ref": "R27",
-   "bomLine": "45",
-   "bomIndex": 44
-  },
-  "R101": {
-   "ref": "R101",
-   "bomLine": "45",
-   "bomIndex": 44
-  },
-  "R102": {
-   "ref": "R102",
-   "bomLine": "45",
-   "bomIndex": 44
-  },
-  "R103": {
-   "ref": "R103",
-   "bomLine": "45",
-   "bomIndex": 44
-  },
-  "R104": {
-   "ref": "R104",
-   "bomLine": "45",
-   "bomIndex": 44
-  },
-  "R105": {
-   "ref": "R105",
-   "bomLine": "45",
-   "bomIndex": 44
-  },
-  "R28": {
-   "ref": "R28",
    "bomLine": "46",
    "bomIndex": 45
   },
-  "R7": {
-   "ref": "R7",
+  "R26": {
+   "ref": "R26",
+   "bomLine": "46",
+   "bomIndex": 45
+  },
+  "R27": {
+   "ref": "R27",
+   "bomLine": "46",
+   "bomIndex": 45
+  },
+  "R101": {
+   "ref": "R101",
+   "bomLine": "46",
+   "bomIndex": 45
+  },
+  "R102": {
+   "ref": "R102",
+   "bomLine": "46",
+   "bomIndex": 45
+  },
+  "R103": {
+   "ref": "R103",
+   "bomLine": "46",
+   "bomIndex": 45
+  },
+  "R104": {
+   "ref": "R104",
+   "bomLine": "46",
+   "bomIndex": 45
+  },
+  "R105": {
+   "ref": "R105",
+   "bomLine": "46",
+   "bomIndex": 45
+  },
+  "R28": {
+   "ref": "R28",
    "bomLine": "47",
    "bomIndex": 46
   },
+  "R29": {
+   "ref": "R29",
+   "bomLine": "47",
+   "bomIndex": 46
+  },
+  "R7": {
+   "ref": "R7",
+   "bomLine": "48",
+   "bomIndex": 47
+  },
   "J9": {
    "ref": "J9",
-   "bomLine": "48",
-   "bomIndex": 47
-  },
-  "J12": {
-   "ref": "J12",
-   "bomLine": "48",
-   "bomIndex": 47
-  },
-  "J10": {
-   "ref": "J10",
    "bomLine": "49",
    "bomIndex": 48
   },
-  "J11": {
-   "ref": "J11",
+  "J12": {
+   "ref": "J12",
+   "bomLine": "49",
+   "bomIndex": 48
+  },
+  "J10": {
+   "ref": "J10",
    "bomLine": "50",
    "bomIndex": 49
   },
-  "J1": {
-   "ref": "J1",
+  "J11": {
+   "ref": "J11",
    "bomLine": "51",
    "bomIndex": 50
   },
-  "J2": {
-   "ref": "J2",
+  "J1": {
+   "ref": "J1",
    "bomLine": "52",
    "bomIndex": 51
   },
-  "J3": {
-   "ref": "J3",
+  "J2": {
+   "ref": "J2",
    "bomLine": "53",
    "bomIndex": 52
   },
-  "J4": {
-   "ref": "J4",
+  "J3": {
+   "ref": "J3",
    "bomLine": "54",
    "bomIndex": 53
   },
-  "J5": {
-   "ref": "J5",
+  "J4": {
+   "ref": "J4",
    "bomLine": "55",
    "bomIndex": 54
   },
-  "J6": {
-   "ref": "J6",
+  "J5": {
+   "ref": "J5",
    "bomLine": "56",
    "bomIndex": 55
   },
-  "J7": {
-   "ref": "J7",
+  "J6": {
+   "ref": "J6",
    "bomLine": "57",
    "bomIndex": 56
   },
-  "J8": {
-   "ref": "J8",
+  "J7": {
+   "ref": "J7",
    "bomLine": "58",
    "bomIndex": 57
   },
+  "J8": {
+   "ref": "J8",
+   "bomLine": "59",
+   "bomIndex": 58
+  },
   "FAN1": {
    "ref": "FAN1",
-   "bomLine": "59",
-   "bomIndex": 58
-  },
-  "FAN2": {
-   "ref": "FAN2",
-   "bomLine": "59",
-   "bomIndex": 58
-  },
-  "LS1": {
-   "ref": "LS1",
    "bomLine": "60",
    "bomIndex": 59
   },
-  "LS2": {
-   "ref": "LS2",
+  "FAN2": {
+   "ref": "FAN2",
+   "bomLine": "60",
+   "bomIndex": 59
+  },
+  "LS1": {
+   "ref": "LS1",
    "bomLine": "61",
    "bomIndex": 60
+  },
+  "LS2": {
+   "ref": "LS2",
+   "bomLine": "62",
+   "bomIndex": 61
   },
   "LS3": {
    "ref": "LS3",
-   "bomLine": "61",
-   "bomIndex": 60
+   "bomLine": "62",
+   "bomIndex": 61
   },
   "A1": {
    "ref": "A1",
-   "bomLine": "67",
-   "bomIndex": 66
+   "bomLine": "68",
+   "bomIndex": 67
   },
   "BT1": {
    "ref": "BT1",
-   "bomLine": "76",
-   "bomIndex": 75
+   "bomLine": "77",
+   "bomIndex": 76
   },
   "M1": {
    "ref": "M1",
-   "bomLine": "77",
-   "bomIndex": 76
-  },
-  "M2": {
-   "ref": "M2",
-   "bomLine": "77",
-   "bomIndex": 76
-  },
-  "M3": {
-   "ref": "M3",
-   "bomLine": "77",
-   "bomIndex": 76
-  },
-  "M4": {
-   "ref": "M4",
-   "bomLine": "77",
-   "bomIndex": 76
-  },
-  "M5": {
-   "ref": "M5",
    "bomLine": "78",
    "bomIndex": 77
   },
-  "PED1": {
-   "ref": "PED1",
+  "M2": {
+   "ref": "M2",
+   "bomLine": "78",
+   "bomIndex": 77
+  },
+  "M3": {
+   "ref": "M3",
+   "bomLine": "78",
+   "bomIndex": 77
+  },
+  "M4": {
+   "ref": "M4",
+   "bomLine": "78",
+   "bomIndex": 77
+  },
+  "M5": {
+   "ref": "M5",
    "bomLine": "79",
    "bomIndex": 78
   },
-  "SW1": {
-   "ref": "SW1",
+  "PED1": {
+   "ref": "PED1",
    "bomLine": "80",
    "bomIndex": 79
   },
-  "SW2": {
-   "ref": "SW2",
+  "SW1": {
+   "ref": "SW1",
    "bomLine": "81",
    "bomIndex": 80
   },
-  "SW3": {
-   "ref": "SW3",
+  "SW2": {
+   "ref": "SW2",
    "bomLine": "82",
    "bomIndex": 81
   },
-  "SW4": {
-   "ref": "SW4",
+  "SW3": {
+   "ref": "SW3",
    "bomLine": "83",
    "bomIndex": 82
+  },
+  "SW4": {
+   "ref": "SW4",
+   "bomLine": "84",
+   "bomIndex": 83
   }
  },
  "wires": [
@@ -5940,6 +5979,74 @@
    "id": "W130",
    "from": {
     "ref": "U20",
+    "pin": "R3"
+   },
+   "to": {
+    "ref": "R29",
+    "pin": "1"
+   },
+   "net": "LOG_TX",
+   "awg": "22",
+   "colour": "WH",
+   "protectedBy": "-",
+   "route": "box",
+   "note": "LOG_TX (TX0) to A1"
+  },
+  {
+   "id": "W131",
+   "from": {
+    "ref": "R29",
+    "pin": "2"
+   },
+   "to": {
+    "ref": "U33",
+    "pin": "RXD"
+   },
+   "net": "BT_RXD",
+   "awg": "22",
+   "colour": "WH",
+   "protectedBy": "-",
+   "route": "box",
+   "note": "BT_RXD. U33 TXD stays unconnected: listen-only"
+  },
+  {
+   "id": "W132",
+   "from": {
+    "ref": "A1",
+    "pin": "5V"
+   },
+   "to": {
+    "ref": "U33",
+    "pin": "VCC"
+   },
+   "net": "5V_LOGIC",
+   "awg": "22",
+   "colour": "RD",
+   "protectedBy": "F4 2 A (24 V side)",
+   "route": "box",
+   "note": "Bluetooth module VCC"
+  },
+  {
+   "id": "W133",
+   "from": {
+    "ref": "U33",
+    "pin": "GND"
+   },
+   "to": {
+    "ref": "A1",
+    "pin": "GND"
+   },
+   "net": "GND",
+   "awg": "22",
+   "colour": "BK",
+   "protectedBy": "-",
+   "route": "box",
+   "note": ""
+  },
+  {
+   "id": "W134",
+   "from": {
+    "ref": "U20",
     "pin": "R10"
    },
    "to": {
@@ -5954,7 +6061,7 @@
    "note": "CRSF: receiver TX → ESP32 RX"
   },
   {
-   "id": "W131",
+   "id": "W135",
    "from": {
     "ref": "U20",
     "pin": "R9"
@@ -5971,7 +6078,7 @@
    "note": "CRSF: ESP32 TX → receiver RX"
   },
   {
-   "id": "W132",
+   "id": "W136",
    "from": {
     "ref": "R1",
     "pin": "2"
@@ -5988,7 +6095,7 @@
    "note": "On A1 (listed because Q1 is a TO-220 on flying leads if not on the board)"
   },
   {
-   "id": "W133",
+   "id": "W137",
    "from": {
     "ref": "R101",
     "pin": "2"
@@ -6005,7 +6112,7 @@
    "note": ""
   },
   {
-   "id": "W134",
+   "id": "W138",
    "from": {
     "ref": "R102",
     "pin": "2"
@@ -6022,7 +6129,7 @@
    "note": ""
   },
   {
-   "id": "W135",
+   "id": "W139",
    "from": {
     "ref": "R103",
     "pin": "2"
@@ -6039,7 +6146,7 @@
    "note": ""
   },
   {
-   "id": "W136",
+   "id": "W140",
    "from": {
     "ref": "R104",
     "pin": "2"
@@ -6056,7 +6163,7 @@
    "note": ""
   },
   {
-   "id": "W137",
+   "id": "W141",
    "from": {
     "ref": "R105",
     "pin": "2"
@@ -6073,7 +6180,7 @@
    "note": ""
   },
   {
-   "id": "W138",
+   "id": "W142",
    "from": {
     "ref": "R5",
     "pin": "2"
@@ -6090,7 +6197,7 @@
    "note": "BUS_SENSE from the R5 lead at TB2 to A1"
   },
   {
-   "id": "W139",
+   "id": "W143",
    "from": {
     "ref": "R6",
     "pin": "1"
@@ -6107,7 +6214,7 @@
    "note": ""
   },
   {
-   "id": "W140",
+   "id": "W144",
    "from": {
     "ref": "R7",
     "pin": "2"
@@ -6124,7 +6231,7 @@
    "note": "Bleed return"
   },
   {
-   "id": "W141",
+   "id": "W145",
    "from": {
     "ref": "A1",
     "pin": "3V3"
@@ -6141,7 +6248,7 @@
    "note": "On A1"
   },
   {
-   "id": "W142",
+   "id": "W146",
    "from": {
     "ref": "R22",
     "pin": "2"
@@ -6158,7 +6265,7 @@
    "note": "Pedal supply"
   },
   {
-   "id": "W143",
+   "id": "W147",
    "from": {
     "ref": "J3",
     "pin": "2"
@@ -6175,7 +6282,7 @@
    "note": "Pedal signal"
   },
   {
-   "id": "W144",
+   "id": "W148",
    "from": {
     "ref": "J3",
     "pin": "3"
@@ -6192,7 +6299,7 @@
    "note": ""
   },
   {
-   "id": "W145",
+   "id": "W149",
    "from": {
     "ref": "J3",
     "pin": "1"
@@ -6209,7 +6316,7 @@
    "note": ""
   },
   {
-   "id": "W146",
+   "id": "W150",
    "from": {
     "ref": "J3",
     "pin": "2"
@@ -6226,7 +6333,7 @@
    "note": ""
   },
   {
-   "id": "W147",
+   "id": "W151",
    "from": {
     "ref": "J3",
     "pin": "3"
@@ -6243,7 +6350,7 @@
    "note": ""
   },
   {
-   "id": "W148",
+   "id": "W152",
    "from": {
     "ref": "U31",
     "pin": "DQ"
@@ -6260,7 +6367,7 @@
    "note": "DS18B20 yellow"
   },
   {
-   "id": "W149",
+   "id": "W153",
    "from": {
     "ref": "U31",
     "pin": "VDD"
@@ -6277,7 +6384,7 @@
    "note": "DS18B20 red"
   },
   {
-   "id": "W150",
+   "id": "W154",
    "from": {
     "ref": "U31",
     "pin": "GND"
@@ -6294,7 +6401,7 @@
    "note": "DS18B20 black"
   },
   {
-   "id": "W151",
+   "id": "W155",
    "from": {
     "ref": "U20",
     "pin": "R2"
@@ -6311,7 +6418,7 @@
    "note": "I2C bus start; keep SCL and SDA beside GND"
   },
   {
-   "id": "W152",
+   "id": "W156",
    "from": {
     "ref": "U20",
     "pin": "R1"
@@ -6328,7 +6435,7 @@
    "note": ""
   },
   {
-   "id": "W153",
+   "id": "W157",
    "from": {
     "ref": "A1",
     "pin": "3V3"
@@ -6345,7 +6452,7 @@
    "note": ""
   },
   {
-   "id": "W154",
+   "id": "W158",
    "from": {
     "ref": "A1",
     "pin": "GND"
@@ -6362,81 +6469,13 @@
    "note": ""
   },
   {
-   "id": "W155",
-   "from": {
-    "ref": "U22",
-    "pin": "SCL"
-   },
-   "to": {
-    "ref": "U23",
-    "pin": "SCL"
-   },
-   "net": "I2C_SCL",
-   "awg": "22",
-   "colour": "GY",
-   "protectedBy": "-",
-   "route": "box",
-   "note": "I2C chain"
-  },
-  {
-   "id": "W156",
-   "from": {
-    "ref": "U22",
-    "pin": "SDA"
-   },
-   "to": {
-    "ref": "U23",
-    "pin": "SDA"
-   },
-   "net": "I2C_SDA",
-   "awg": "22",
-   "colour": "GN",
-   "protectedBy": "-",
-   "route": "box",
-   "note": "I2C chain"
-  },
-  {
-   "id": "W157",
-   "from": {
-    "ref": "U22",
-    "pin": "VDD"
-   },
-   "to": {
-    "ref": "U23",
-    "pin": "VDD"
-   },
-   "net": "3V3_SENSE",
-   "awg": "22",
-   "colour": "VT",
-   "protectedBy": "U2 current limit",
-   "route": "box",
-   "note": "I2C chain"
-  },
-  {
-   "id": "W158",
-   "from": {
-    "ref": "U22",
-    "pin": "GND"
-   },
-   "to": {
-    "ref": "U23",
-    "pin": "GND"
-   },
-   "net": "GND",
-   "awg": "22",
-   "colour": "BK",
-   "protectedBy": "-",
-   "route": "box",
-   "note": "I2C chain"
-  },
-  {
    "id": "W159",
    "from": {
-    "ref": "U23",
+    "ref": "U22",
     "pin": "SCL"
    },
    "to": {
-    "ref": "U24",
+    "ref": "U23",
     "pin": "SCL"
    },
    "net": "I2C_SCL",
@@ -6449,6 +6488,74 @@
   {
    "id": "W160",
    "from": {
+    "ref": "U22",
+    "pin": "SDA"
+   },
+   "to": {
+    "ref": "U23",
+    "pin": "SDA"
+   },
+   "net": "I2C_SDA",
+   "awg": "22",
+   "colour": "GN",
+   "protectedBy": "-",
+   "route": "box",
+   "note": "I2C chain"
+  },
+  {
+   "id": "W161",
+   "from": {
+    "ref": "U22",
+    "pin": "VDD"
+   },
+   "to": {
+    "ref": "U23",
+    "pin": "VDD"
+   },
+   "net": "3V3_SENSE",
+   "awg": "22",
+   "colour": "VT",
+   "protectedBy": "U2 current limit",
+   "route": "box",
+   "note": "I2C chain"
+  },
+  {
+   "id": "W162",
+   "from": {
+    "ref": "U22",
+    "pin": "GND"
+   },
+   "to": {
+    "ref": "U23",
+    "pin": "GND"
+   },
+   "net": "GND",
+   "awg": "22",
+   "colour": "BK",
+   "protectedBy": "-",
+   "route": "box",
+   "note": "I2C chain"
+  },
+  {
+   "id": "W163",
+   "from": {
+    "ref": "U23",
+    "pin": "SCL"
+   },
+   "to": {
+    "ref": "U24",
+    "pin": "SCL"
+   },
+   "net": "I2C_SCL",
+   "awg": "22",
+   "colour": "GY",
+   "protectedBy": "-",
+   "route": "box",
+   "note": "I2C chain"
+  },
+  {
+   "id": "W164",
+   "from": {
     "ref": "U23",
     "pin": "SDA"
    },
@@ -6464,7 +6571,7 @@
    "note": "I2C chain"
   },
   {
-   "id": "W161",
+   "id": "W165",
    "from": {
     "ref": "U23",
     "pin": "VDD"
@@ -6481,7 +6588,7 @@
    "note": "I2C chain"
   },
   {
-   "id": "W162",
+   "id": "W166",
    "from": {
     "ref": "U23",
     "pin": "GND"
@@ -6498,81 +6605,13 @@
    "note": "I2C chain"
   },
   {
-   "id": "W163",
-   "from": {
-    "ref": "U24",
-    "pin": "SCL"
-   },
-   "to": {
-    "ref": "U26",
-    "pin": "SCL"
-   },
-   "net": "I2C_SCL",
-   "awg": "22",
-   "colour": "GY",
-   "protectedBy": "-",
-   "route": "box",
-   "note": "I2C chain"
-  },
-  {
-   "id": "W164",
-   "from": {
-    "ref": "U24",
-    "pin": "SDA"
-   },
-   "to": {
-    "ref": "U26",
-    "pin": "SDA"
-   },
-   "net": "I2C_SDA",
-   "awg": "22",
-   "colour": "GN",
-   "protectedBy": "-",
-   "route": "box",
-   "note": "I2C chain"
-  },
-  {
-   "id": "W165",
-   "from": {
-    "ref": "U24",
-    "pin": "VCC"
-   },
-   "to": {
-    "ref": "U26",
-    "pin": "VCC"
-   },
-   "net": "3V3_SENSE",
-   "awg": "22",
-   "colour": "VT",
-   "protectedBy": "U2 current limit",
-   "route": "box",
-   "note": "I2C chain"
-  },
-  {
-   "id": "W166",
-   "from": {
-    "ref": "U24",
-    "pin": "GND"
-   },
-   "to": {
-    "ref": "U26",
-    "pin": "GND"
-   },
-   "net": "GND",
-   "awg": "22",
-   "colour": "BK",
-   "protectedBy": "-",
-   "route": "box",
-   "note": "I2C chain"
-  },
-  {
    "id": "W167",
    "from": {
-    "ref": "U26",
+    "ref": "U24",
     "pin": "SCL"
    },
    "to": {
-    "ref": "U28",
+    "ref": "U26",
     "pin": "SCL"
    },
    "net": "I2C_SCL",
@@ -6585,6 +6624,74 @@
   {
    "id": "W168",
    "from": {
+    "ref": "U24",
+    "pin": "SDA"
+   },
+   "to": {
+    "ref": "U26",
+    "pin": "SDA"
+   },
+   "net": "I2C_SDA",
+   "awg": "22",
+   "colour": "GN",
+   "protectedBy": "-",
+   "route": "box",
+   "note": "I2C chain"
+  },
+  {
+   "id": "W169",
+   "from": {
+    "ref": "U24",
+    "pin": "VCC"
+   },
+   "to": {
+    "ref": "U26",
+    "pin": "VCC"
+   },
+   "net": "3V3_SENSE",
+   "awg": "22",
+   "colour": "VT",
+   "protectedBy": "U2 current limit",
+   "route": "box",
+   "note": "I2C chain"
+  },
+  {
+   "id": "W170",
+   "from": {
+    "ref": "U24",
+    "pin": "GND"
+   },
+   "to": {
+    "ref": "U26",
+    "pin": "GND"
+   },
+   "net": "GND",
+   "awg": "22",
+   "colour": "BK",
+   "protectedBy": "-",
+   "route": "box",
+   "note": "I2C chain"
+  },
+  {
+   "id": "W171",
+   "from": {
+    "ref": "U26",
+    "pin": "SCL"
+   },
+   "to": {
+    "ref": "U28",
+    "pin": "SCL"
+   },
+   "net": "I2C_SCL",
+   "awg": "22",
+   "colour": "GY",
+   "protectedBy": "-",
+   "route": "box",
+   "note": "I2C chain"
+  },
+  {
+   "id": "W172",
+   "from": {
     "ref": "U26",
     "pin": "SDA"
    },
@@ -6600,7 +6707,7 @@
    "note": "I2C chain"
   },
   {
-   "id": "W169",
+   "id": "W173",
    "from": {
     "ref": "U26",
     "pin": "VCC"
@@ -6617,7 +6724,7 @@
    "note": "I2C chain"
   },
   {
-   "id": "W170",
+   "id": "W174",
    "from": {
     "ref": "U26",
     "pin": "GND"
@@ -6634,7 +6741,7 @@
    "note": "I2C chain"
   },
   {
-   "id": "W171",
+   "id": "W175",
    "from": {
     "ref": "U22",
     "pin": "ADDR"
@@ -6651,7 +6758,7 @@
    "note": "Address 0x48"
   },
   {
-   "id": "W172",
+   "id": "W176",
    "from": {
     "ref": "U23",
     "pin": "ADDR"
@@ -6668,7 +6775,7 @@
    "note": "Address 0x49"
   },
   {
-   "id": "W173",
+   "id": "W177",
    "from": {
     "ref": "U26",
     "pin": "AD0"
@@ -6685,7 +6792,7 @@
    "note": "Address 0x68"
   },
   {
-   "id": "W174",
+   "id": "W178",
    "from": {
     "ref": "U28",
     "pin": "OE"
@@ -6702,7 +6809,7 @@
    "note": "Outputs always enabled"
   },
   {
-   "id": "W175",
+   "id": "W179",
    "from": {
     "ref": "U28",
     "pin": "SCL"
@@ -6719,7 +6826,7 @@
    "note": "Off-box I2C branch: steering column"
   },
   {
-   "id": "W176",
+   "id": "W180",
    "from": {
     "ref": "U28",
     "pin": "SDA"
@@ -6736,7 +6843,7 @@
    "note": ""
   },
   {
-   "id": "W177",
+   "id": "W181",
    "from": {
     "ref": "A1",
     "pin": "3V3"
@@ -6753,7 +6860,7 @@
    "note": ""
   },
   {
-   "id": "W178",
+   "id": "W182",
    "from": {
     "ref": "A1",
     "pin": "GND"
@@ -6770,7 +6877,7 @@
    "note": ""
   },
   {
-   "id": "W179",
+   "id": "W183",
    "from": {
     "ref": "U28",
     "pin": "SCL"
@@ -6787,7 +6894,7 @@
    "note": "Off-box I2C branch: dash"
   },
   {
-   "id": "W180",
+   "id": "W184",
    "from": {
     "ref": "U28",
     "pin": "SDA"
@@ -6804,7 +6911,7 @@
    "note": ""
   },
   {
-   "id": "W181",
+   "id": "W185",
    "from": {
     "ref": "A1",
     "pin": "3V3"
@@ -6821,7 +6928,7 @@
    "note": ""
   },
   {
-   "id": "W182",
+   "id": "W186",
    "from": {
     "ref": "A1",
     "pin": "GND"
@@ -6838,7 +6945,7 @@
    "note": ""
   },
   {
-   "id": "W183",
+   "id": "W187",
    "from": {
     "ref": "U28",
     "pin": "PWM0"
@@ -6855,7 +6962,7 @@
    "note": "Lights PWM"
   },
   {
-   "id": "W184",
+   "id": "W188",
    "from": {
     "ref": "U28",
     "pin": "PWM1"
@@ -6872,7 +6979,7 @@
    "note": "Fan PWM"
   },
   {
-   "id": "W185",
+   "id": "W189",
    "from": {
     "ref": "U29",
     "pin": "GND"
@@ -6889,7 +6996,7 @@
    "note": ""
   },
   {
-   "id": "W186",
+   "id": "W190",
    "from": {
     "ref": "J4",
     "pin": "1"
@@ -6906,7 +7013,7 @@
    "note": ""
   },
   {
-   "id": "W187",
+   "id": "W191",
    "from": {
     "ref": "J4",
     "pin": "2"
@@ -6923,7 +7030,7 @@
    "note": ""
   },
   {
-   "id": "W188",
+   "id": "W192",
    "from": {
     "ref": "J4",
     "pin": "3"
@@ -6940,7 +7047,7 @@
    "note": ""
   },
   {
-   "id": "W189",
+   "id": "W193",
    "from": {
     "ref": "J4",
     "pin": "1"
@@ -6957,7 +7064,7 @@
    "note": ""
   },
   {
-   "id": "W190",
+   "id": "W194",
    "from": {
     "ref": "SW2",
     "pin": "2"
@@ -6974,7 +7081,7 @@
    "note": ""
   },
   {
-   "id": "W191",
+   "id": "W195",
    "from": {
     "ref": "J4",
     "pin": "2"
@@ -6991,7 +7098,7 @@
    "note": ""
   },
   {
-   "id": "W192",
+   "id": "W196",
    "from": {
     "ref": "SW3",
     "pin": "2"
@@ -7008,7 +7115,7 @@
    "note": ""
   },
   {
-   "id": "W193",
+   "id": "W197",
    "from": {
     "ref": "J8",
     "pin": "3"
@@ -7025,7 +7132,7 @@
    "note": "Horn button"
   },
   {
-   "id": "W194",
+   "id": "W198",
    "from": {
     "ref": "J8",
     "pin": "4"
@@ -7042,7 +7149,7 @@
    "note": ""
   },
   {
-   "id": "W195",
+   "id": "W199",
    "from": {
     "ref": "J8",
     "pin": "3"
@@ -7059,7 +7166,7 @@
    "note": ""
   },
   {
-   "id": "W196",
+   "id": "W200",
    "from": {
     "ref": "SW4",
     "pin": "2"
@@ -7076,7 +7183,7 @@
    "note": ""
   },
   {
-   "id": "W197",
+   "id": "W201",
    "from": {
     "ref": "J8",
     "pin": "1"
@@ -7093,7 +7200,7 @@
    "note": "Lights (voltage TBD)"
   },
   {
-   "id": "W198",
+   "id": "W202",
    "from": {
     "ref": "LP1",
     "pin": "2"
@@ -7110,7 +7217,7 @@
    "note": ""
   },
   {
-   "id": "W199",
+   "id": "W203",
    "from": {
     "ref": "J10",
     "pin": "8"
@@ -7127,7 +7234,7 @@
    "note": "Seat switch"
   },
   {
-   "id": "W200",
+   "id": "W204",
    "from": {
     "ref": "J10",
     "pin": "3"
@@ -7144,7 +7251,7 @@
    "note": "WHEEL_SPEED_L to A1"
   },
   {
-   "id": "W201",
+   "id": "W205",
    "from": {
     "ref": "J10",
     "pin": "4"
@@ -7161,7 +7268,7 @@
    "note": "WHEEL_SPEED_R to A1"
   },
   {
-   "id": "W202",
+   "id": "W206",
    "from": {
     "ref": "J10",
     "pin": "1"
@@ -7178,7 +7285,7 @@
    "note": "Split to both wheels"
   },
   {
-   "id": "W203",
+   "id": "W207",
    "from": {
     "ref": "J10",
     "pin": "1"
@@ -7195,7 +7302,7 @@
    "note": ""
   },
   {
-   "id": "W204",
+   "id": "W208",
    "from": {
     "ref": "J10",
     "pin": "2"
@@ -7212,7 +7319,7 @@
    "note": ""
   },
   {
-   "id": "W205",
+   "id": "W209",
    "from": {
     "ref": "J10",
     "pin": "2"
@@ -7229,7 +7336,7 @@
    "note": ""
   },
   {
-   "id": "W206",
+   "id": "W210",
    "from": {
     "ref": "J10",
     "pin": "3"
@@ -7246,7 +7353,7 @@
    "note": ""
   },
   {
-   "id": "W207",
+   "id": "W211",
    "from": {
     "ref": "J10",
     "pin": "4"
@@ -7263,7 +7370,7 @@
    "note": ""
   },
   {
-   "id": "W208",
+   "id": "W212",
    "from": {
     "ref": "J10",
     "pin": "5"
@@ -7280,7 +7387,7 @@
    "note": "AS5600: ≤ 30 cm of I2C, twisted with GND"
   },
   {
-   "id": "W209",
+   "id": "W213",
    "from": {
     "ref": "J10",
     "pin": "2"
@@ -7297,7 +7404,7 @@
    "note": ""
   },
   {
-   "id": "W210",
+   "id": "W214",
    "from": {
     "ref": "J10",
     "pin": "6"
@@ -7314,7 +7421,7 @@
    "note": ""
   },
   {
-   "id": "W211",
+   "id": "W215",
    "from": {
     "ref": "J10",
     "pin": "7"
@@ -7331,7 +7438,7 @@
    "note": ""
   },
   {
-   "id": "W212",
+   "id": "W216",
    "from": {
     "ref": "U25",
     "pin": "DIR"
@@ -7348,7 +7455,7 @@
    "note": "Jumper on the sensor board"
   },
   {
-   "id": "W213",
+   "id": "W217",
    "from": {
     "ref": "J10",
     "pin": "8"
@@ -7365,7 +7472,7 @@
    "note": ""
   },
   {
-   "id": "W214",
+   "id": "W218",
    "from": {
     "ref": "SW5",
     "pin": "2"
@@ -7382,7 +7489,7 @@
    "note": ""
   },
   {
-   "id": "W215",
+   "id": "W219",
    "from": {
     "ref": "J11",
     "pin": "1"
@@ -7399,7 +7506,7 @@
    "note": ""
   },
   {
-   "id": "W216",
+   "id": "W220",
    "from": {
     "ref": "J11",
     "pin": "2"
@@ -7416,7 +7523,7 @@
    "note": ""
   },
   {
-   "id": "W217",
+   "id": "W221",
    "from": {
     "ref": "J11",
     "pin": "3"
@@ -7433,7 +7540,7 @@
    "note": ""
   },
   {
-   "id": "W218",
+   "id": "W222",
    "from": {
     "ref": "J11",
     "pin": "4"
@@ -7450,7 +7557,7 @@
    "note": ""
   },
   {
-   "id": "W219",
+   "id": "W223",
    "from": {
     "ref": "U30",
     "pin": "6"
@@ -7467,7 +7574,7 @@
    "note": ""
   },
   {
-   "id": "W220",
+   "id": "W224",
    "from": {
     "ref": "U30",
     "pin": "8"
@@ -7484,7 +7591,7 @@
    "note": ""
   },
   {
-   "id": "W221",
+   "id": "W225",
    "from": {
     "ref": "J11",
     "pin": "5"
@@ -7501,7 +7608,7 @@
    "note": ""
   },
   {
-   "id": "W222",
+   "id": "W226",
    "from": {
     "ref": "J11",
     "pin": "6"
@@ -7518,7 +7625,7 @@
    "note": ""
   },
   {
-   "id": "W223",
+   "id": "W227",
    "from": {
     "ref": "U32",
     "pin": "L+"
@@ -7535,7 +7642,7 @@
    "note": ""
   },
   {
-   "id": "W224",
+   "id": "W228",
    "from": {
     "ref": "U32",
     "pin": "L-"
@@ -7552,7 +7659,7 @@
    "note": ""
   },
   {
-   "id": "W225",
+   "id": "W229",
    "from": {
     "ref": "U32",
     "pin": "R+"
@@ -7569,7 +7676,7 @@
    "note": ""
   },
   {
-   "id": "W226",
+   "id": "W230",
    "from": {
     "ref": "U32",
     "pin": "R-"
@@ -7586,7 +7693,7 @@
    "note": ""
   },
   {
-   "id": "W227",
+   "id": "W231",
    "from": {
     "ref": "J12",
     "pin": "1"
@@ -7603,7 +7710,7 @@
    "note": ""
   },
   {
-   "id": "W228",
+   "id": "W232",
    "from": {
     "ref": "J12",
     "pin": "2"
@@ -7620,7 +7727,7 @@
    "note": ""
   },
   {
-   "id": "W229",
+   "id": "W233",
    "from": {
     "ref": "J12",
     "pin": "3"
@@ -7637,7 +7744,7 @@
    "note": ""
   },
   {
-   "id": "W230",
+   "id": "W234",
    "from": {
     "ref": "J12",
     "pin": "4"
@@ -7876,8 +7983,8 @@
    "gpio": "1",
    "signal": "TX0",
    "dir": "—",
-   "connects": "USB serial",
-   "why": "Kept free: flashing and logs."
+   "connects": "USB serial; Bluetooth log module U33 RXD through 1k",
+   "why": "Kept free for flashing and logs. The listen-only Bluetooth module only hears it (BLUETOOTH.md)."
   },
   "R4": {
    "gpio": "3",
@@ -9589,6 +9696,38 @@
    "pins": {
     "1": "SOUND_TX",
     "2": "DF_RX"
+   }
+  },
+  "R29": {
+   "ref": "R29",
+   "value": "1k",
+   "part": "Resistor 1k, metal film 1 %, 0.25 W",
+   "source": "Ordered 24 Oct",
+   "where": "A1",
+   "note": "Bluetooth RXD series resistor: a dead module can't hold down the USB serial line",
+   "issue": "",
+   "sheet": "Controller and inputs",
+   "pins": {
+    "1": "LOG_TX",
+    "2": "BT_RXD"
+   }
+  },
+  "U33": {
+   "ref": "U33",
+   "value": "HM-10",
+   "part": "HM-10 BLE serial module (iPhone and Android)",
+   "source": "To buy",
+   "where": "box",
+   "note": "Listen-only log to a phone: hears TX0 (the USB serial log). TXD stays unconnected, so nothing can reach the ESP32. Set to 115200 with the bt_setup bench firmware first",
+   "issue": "",
+   "sheet": "Controller and inputs",
+   "pins": {
+    "VCC": "5V_LOGIC",
+    "GND": "GND",
+    "RXD": "BT_RXD",
+    "TXD": null,
+    "STATE": null,
+    "BRK": null
    }
   },
   "R25": {

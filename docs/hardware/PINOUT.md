@@ -47,7 +47,7 @@ Header pins are counted from the top (antenna end), with the USB connector at th
 | L15 | — | VIN | — | 5V_LOGIC rail (LM2596) | 5 V in, not 3.3 V. |
 | R1 | 23 | `I2C_SDA` | I2C | All I2C devices, 4.7k pull-up to 3.3 V | The Arduino default SDA is GPIO21, which DRIVE_EN uses. Set with `Wire.begin(23, 22)`. |
 | R2 | 22 | `I2C_SCL` | I2C | All I2C devices, 4.7k pull-up to 3.3 V | Arduino default SCL. |
-| R3 | 1 | TX0 | — | USB serial | Kept free: flashing and logs. |
+| R3 | 1 | TX0 | — | USB serial; Bluetooth log module U33 RXD through 1k | Kept free for flashing and logs. The listen-only Bluetooth module only hears it ([BLUETOOTH.md](BLUETOOTH.md)). |
 | R4 | 3 | RX0 | — | USB serial | Kept free: flashing and logs. |
 | R5 | 21 | `DRIVE_EN` | out, kill line | R_EN + L_EN of all four drive IBT-2s, 10k pull-down | Plain I/O, quiet at boot. The most important pin on the board, so it gets a pin with no boot role at all. |
 | R6 | 19 | `STEER_LPWM` | out, PWM | Steering IBT-2 LPWM (left) | Plain I/O. |

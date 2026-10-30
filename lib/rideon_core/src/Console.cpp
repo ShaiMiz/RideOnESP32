@@ -45,6 +45,7 @@ ParsedCommand parseCommand(const char* line) {
   if (!strcmp(w1, "status") && !w2[0]) return {Command::Status, 0};
   if (!strcmp(w1, "dtc") && !w2[0]) return {Command::Dtc, 0};
   if (!strcmp(w1, "crash") && !w2[0]) return {Command::Crash, 0};
+  if (!strcmp(w1, "report") && !w2[0]) return {Command::Report, 0};
   if (!strcmp(w1, "log") && !w3[0]) {
     if (!w2[0]) return {Command::Log, LOG_DEFAULT_COUNT};
     char* end = nullptr;
@@ -119,6 +120,28 @@ size_t formatFreezeFrame(const FreezeFrame& f, char* out, size_t outLen) {
                            f.pedal / 100.0, f.batteryV / 100.0, f.busV / 100.0, f.amps[0] / 100.0,
                            f.amps[1] / 100.0, f.amps[2] / 100.0, f.amps[3] / 100.0, f.amps[4] / 100.0, box),
                   outLen);
+}
+
+bool ReportTrigger::update(bool hornHeld, bool parked, uint32_t nowMs) {
+  if (!hornHeld) {
+    holding_ = false;
+    blocked_ = false;
+    return false;
+  }
+  if (blocked_) return false;  // this press already fired, or was not parked: wait for release
+  if (!parked) {
+    holding_ = false;
+    blocked_ = true;
+    return false;
+  }
+  if (!holding_) {
+    holding_ = true;
+    startMs_ = nowMs;
+  }
+  if ((uint32_t)(nowMs - startMs_) < HOLD_MS) return false;
+  holding_ = false;
+  blocked_ = true;
+  return true;
 }
 
 }  // namespace rideon

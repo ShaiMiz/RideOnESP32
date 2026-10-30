@@ -39,6 +39,7 @@ Passed: ____
 - [ ] Pulling the F3 coil fuse with the car armed gives `NO_BUS`.
 - [ ] Event log on flash ([LOG_EVENTS.md](firmware/LOG_EVENTS.md)): cut the ESP32's power 10 times, some while it is printing. Every boot prints `BOOT` with the boot number one higher, and `LOG_MOUNT` with `records=` never going down and `torn=` at most 1.
 - [ ] Watchdog: with the contactor held and the car Locked, type `test watchdog` in the serial monitor. The contactor opens, the ESP32 restarts, and the next boot prints `BOOT reset=WATCHDOG`. `log 20` shows the records from before the restart.
+- [ ] Bluetooth log ([hardware/BLUETOOTH.md](hardware/BLUETOOTH.md)), if fitted: `bt_setup` ended with `done`; U33 TXD is not connected (check with a meter: no continuity from TXD to any ESP32 pin). An iPhone and an Android phone each connect to `RideOn` and show the live log. With the car Locked, holding the horn 3 s prints the whole report on the phone, ending with the last log record; holding it while Parent mode is armed and the wheels turn prints nothing.
 
 Passed: ____
 
@@ -49,7 +50,7 @@ Passed: ____
 
 **Gate:**
 - [ ] Pulling the receiver plug while the motor runs stops it.
-- [ ] Turning the radio off while the motor runs stops it within 0.5 s.
+- [ ] Turning the radio off while the motor runs at full output brings the output to zero within 0.75 s.
 - [ ] After any fault, holding the throttle never restarts the motor. It restarts only after the mode switch goes through Locked with the stick centred.
 - [ ] The kill switch stops the motor and opens the contactor.
 - [ ] The logged current agrees with a clamp meter at three loads (free spin, light brake, heavy brake). If it reads about half or double, `IS_PIN_RESISTOR_OHMS` is wrong (the firmware halves it for the joined IS pins).

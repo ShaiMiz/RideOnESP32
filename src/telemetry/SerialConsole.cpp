@@ -16,13 +16,28 @@ namespace {
 constexpr int READ_PER_TICK = 32;   // typed characters handled per tick
 constexpr int LINES_PER_TICK = 3;   // at 115200 baud, about 70 lines a second fit
 constexpr int LINE_ROOM = 200;      // a line is printed only when this much fits
+// A report asked for with the horn goes to the BLE module, which passes on
+// only about 2 KB/s and drops what it can't hold: one line per 100 ms.
+constexpr uint32_t SLOW_LINE_MS = 100;
 
 enum class Job : uint8_t { None, Help, Log, Dtc, Crash };
 
 LineReader reader;
+ReportTrigger reportTrigger;
 Job job = Job::None;
 uint32_t index = 0;  // next line of the job
 uint32_t total = 0;  // log: records to print
+
+// A report runs these jobs one after the other.
+struct Queued {
+  Job job;
+  uint32_t lines;
+};
+Queued queue[3];
+int queued = 0;
+int queueNext = 0;
+bool slow = false;          // pace for the Bluetooth module
+uint32_t lastLineMs = 0;
 
 const char* const HELP[] = {
     "commands:",
@@ -30,6 +45,7 @@ const char* const HELP[] = {
     "  log [n]           newest n log records, oldest first (default 50)",
     "  dtc               fault table, with first and last freeze frame of each row",
     "  crash             crash recorder: 5 s before the last crash or hard fault while driving",
+    "  report            status, dtc, crash and log 50 in one go (also: hold the horn 3 s with the car parked)",
     "  clear dtc yes     clear the fault table (car Locked or Killed and stopped)",
     "  test watchdog     hang the loop so the watchdog resets the ESP32 (car Locked or Killed and stopped)",
 };
@@ -101,22 +117,51 @@ void start(Job j, uint32_t lines = 0) {
   total = lines;
 }
 
+// The current job is done: start the next queued one, if any.
+void next() {
+  job = Job::None;
+  if (queueNext < queued) {
+    start(queue[queueNext].job, queue[queueNext].lines);
+    queueNext++;
+  }
+}
+
+void clearQueue() {
+  queued = 0;
+  queueNext = 0;
+}
+
+void printStatus(const Status& s) {
+  char faults[96];
+  faultList(s.latched, faults, sizeof(faults));
+  logx::line("boot=%u up=%lus mode=%s link=%s lq=%u faults=%s", (unsigned)events::bootNumber(),
+             (unsigned long)(millis() / 1000), modeName(s.mode), linkName(s.link), (unsigned)s.linkQuality, faults);
+  logx::line("bat=%.2fV bus=%.2fV I=%.2fA out=%.2f", s.batteryV, s.busV, s.driveAmps, s.output);
+  LogRing& ring = events::flashLog();
+  logx::line("log: %s records=%lu next=#%lu room=%lu, fault table rows=%d, crash kept=%s",
+             ring.mounted() ? "flash" : "serial only", (unsigned long)ring.count(), (unsigned long)ring.nextSeq(),
+             (unsigned long)ring.room(), events::faultTable().size(), events::lastCrash() ? "yes" : "no");
+}
+
+// Status now, then the fault table, the crash and the newest log records.
+void report(const Status& s) {
+  logx::line("==== report ====");
+  printStatus(s);
+  clearQueue();
+  queue[queued++] = {Job::Dtc, 0};
+  queue[queued++] = {Job::Crash, 0};
+  LogRing& ring = events::flashLog();
+  uint32_t n = ring.mounted() ? (LOG_DEFAULT_COUNT < ring.count() ? LOG_DEFAULT_COUNT : ring.count()) : 0;
+  if (n > 0) queue[queued++] = {Job::Log, n};
+  next();
+}
+
 void run(const ParsedCommand& p, const Status& s) {
   switch (p.cmd) {
     case Command::None: return;
     case Command::Help: start(Job::Help); return;
-    case Command::Status: {
-      char faults[96];
-      faultList(s.latched, faults, sizeof(faults));
-      logx::line("boot=%u up=%lus mode=%s link=%s lq=%u faults=%s", (unsigned)events::bootNumber(),
-                 (unsigned long)(millis() / 1000), modeName(s.mode), linkName(s.link), (unsigned)s.linkQuality, faults);
-      logx::line("bat=%.2fV bus=%.2fV I=%.2fA out=%.2f", s.batteryV, s.busV, s.driveAmps, s.output);
-      LogRing& ring = events::flashLog();
-      logx::line("log: %s records=%lu next=#%lu room=%lu, fault table rows=%d, crash kept=%s",
-                 ring.mounted() ? "flash" : "serial only", (unsigned long)ring.count(), (unsigned long)ring.nextSeq(),
-                 (unsigned long)ring.room(), events::faultTable().size(), events::lastCrash() ? "yes" : "no");
-      return;
-    }
+    case Command::Status: printStatus(s); return;
+    case Command::Report: report(s); return;
     case Command::Log: {
       LogRing& ring = events::flashLog();
       if (!ring.mounted()) {
@@ -157,15 +202,27 @@ void update(const Status& s) {
   for (int i = 0; i < READ_PER_TICK && Serial.available() > 0; i++) {
     if (reader.feed((char)Serial.read())) {
       job = Job::None;  // a new command stops a listing
+      slow = false;
+      clearQueue();
       run(parseCommand(reader.line()), s);
     }
   }
+  if (reportTrigger.update(s.hornHeld, s.parked, millis())) {
+    job = Job::None;
+    slow = true;
+    report(s);
+  }
+  if (job == Job::None) slow = false;
   char line[LINE_ROOM];
   for (int i = 0; i < LINES_PER_TICK && job != Job::None; i++) {
     if (!logx::hasRoom(LINE_ROOM)) break;
+    if (slow) {
+      if ((uint32_t)(millis() - lastLineMs) < SLOW_LINE_MS) break;
+      lastLineMs = millis();
+    }
     if (!jobLine(index, line, sizeof(line))) {
-      job = Job::None;
-      break;
+      next();
+      continue;
     }
     logx::line("%s", line);
     index++;

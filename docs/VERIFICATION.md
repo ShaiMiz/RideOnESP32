@@ -67,7 +67,7 @@ Every safety requirement has an ID. Each row names the tests that verify it (`su
 | SR-23 | The pin map follows the ESP32's rules: no GPIO used twice, kill lines quiet at boot, outputs not on input-only pins, analog on ADC1 | `test_pins/test_no_gpio_used_twice`, `test_pins/test_kill_lines_quiet_at_boot`, `test_pins/test_outputs_can_drive`, `test_pins/test_analog_on_adc1`, `test_pins/test_strapping_pins_match` | |
 | SR-24 | The key and the E-stop cut motor power with the ESP32 unplugged | | Phase 3, Phase 5 |
 | SR-25 | An ESP32 reset, crash or hang opens the contactor and drops the enables (pull-downs, watchdog) | `test_pins/test_kill_lines_quiet_at_boot` | Phase 3 |
-| SR-26 | Turning the radio off stops the car within 0.5 s, measured at the highest speed cap | | Phase 4, Phase 6 |
+| SR-26 | Turning the radio off brings the motor output to zero within 0.75 s, measured at the highest speed cap | `test_controller/test_link_loss_at_full_speed_brakes_to_zero_within_budget` | Phase 4, Phase 6 |
 | SR-27 | The logged current agrees with a meter | | Phase 4 |
 | SR-28 | Stopping distance measured at each speed cap with the child's weight | | Phase 6 |
 | SR-30 | The crash recorder keeps the last 5 s of driving after a hard fault or an unexpected reset; a garbled copy is never trusted, and a fault or reset while parked, the kill switch or the boot weld wait never replaces a kept copy | `test_crash_console/test_watchdog_reset_while_driving_keeps_the_ring`, `test_crash_console/test_hard_fault_while_driving_freezes_with_the_trip_last`, `test_crash_console/test_corrupted_ring_is_caught`, `test_crash_console/test_reset_while_parked_or_with_a_corrupt_ring_keeps_nothing`, `test_crash_console/test_kill_switch_weld_wait_and_soft_faults_do_not_freeze`, `test_crash_console/test_hard_fault_while_parked_does_not_freeze` | Phase 5 |
@@ -76,7 +76,9 @@ Every safety requirement has an ID. Each row names the tests that verify it (`su
 
 ## Link-loss stop time
 
-SAFETY.md asks for the car to stop within **0.5 s** of the radio going off. With today's `config.h` the firmware alone needs up to about **0.72 s** at full speed: up to `LINK_TIMEOUT_MS` (200 ms) to call the link lost, then `1 / BRAKE_PER_S` (0.5 s) to brake from full output to zero, plus up to two 10 ms ticks. `test_link_loss_at_full_speed_brakes_to_zero_within_budget` checks that budget, not 0.5 s. At the Kid caps the brake is shorter (0.6 cap: about 0.5 s total). Whether the requirement is "output zero" or "wheels stopped", and which to change (a shorter timeout, a firmer link-loss brake, or the requirement), is Shai's call; until then the phase 4 and 6 gates measure it on the car.
+SAFETY.md asks for the motor output to reach zero within **0.75 s** of the radio going off. The firmware needs up to about **0.72 s** at full speed: up to `LINK_TIMEOUT_MS` (200 ms) to call the link lost, then `1 / BRAKE_PER_S` (0.5 s) to brake from full output to zero, plus up to two 10 ms ticks. At the Kid caps it is shorter (0.6 cap: about 0.5 s). `test_link_loss_at_full_speed_brakes_to_zero_within_budget` checks both the budget and the 0.75 s, so a `config.h` change that breaks it fails CI.
+
+Until 28 Oct 2026 the requirement was 0.5 s, which the firmware never met. Shai chose to change the requirement rather than brake harder: a firmer stop is rougher on the child, and a shorter timeout would trip on normal radio dropouts. The requirement is on the output; the car rolls a little further after that, which the phase 4 and 6 gates measure.
 
 ## Adding or changing a requirement
 

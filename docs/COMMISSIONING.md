@@ -50,7 +50,7 @@ Passed: ____
 
 **Gate:**
 - [ ] Pulling the receiver plug while the motor runs stops it.
-- [ ] Turning the radio off while the motor runs stops it within 0.5 s.
+- [ ] Turning the radio off while the motor runs at full output brings the output to zero within 0.75 s.
 - [ ] After any fault, holding the throttle never restarts the motor. It restarts only after the mode switch goes through Locked with the stick centred.
 - [ ] The kill switch stops the motor and opens the contactor.
 - [ ] The logged current agrees with a clamp meter at three loads (free spin, light brake, heavy brake). If it reads about half or double, `IS_PIN_RESISTOR_OHMS` is wrong (the firmware halves it for the joined IS pins).

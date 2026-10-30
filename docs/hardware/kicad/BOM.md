@@ -50,7 +50,7 @@ This is the one list for the project: every part of the car, and every tool and 
 | 19 | Sensor | H1 H2 | 2 | A3144 hall switch + magnet | Allegro A3144 (or clone) | car | To buy | - | [search](https://www.aliexpress.com/w/wholesale-a3144-hall-sensor.html?SortType=total_tranpro_desc), [search](https://www.aliexpress.com/w/wholesale-neodymium-magnet-10x5mm.html?SortType=total_tranpro_desc) | Spec: Buy 5-10 A3144 + 10 neodymium magnets 10 x 5 mm |
 | 20 | Sensor | SW5 | 1 | Seat switch, closes with a child seated (optional) | Generic | car | To buy | - | - |  |
 | 21 | Power | F1 | 1 | ANL fuse holder + 40 A ANL fuse | Generic ANL | car | Ordered 24 Oct | O16 | - | Unfused wire before F1 must stay under 15 cm. If the stock harness already has a 40 A fuse this close, that fuse is F1 |
-| 22 | Power | F2 | 1 | Inline blade fuse holder (12 AWG) + 15 A blade | Generic ATO/ATC blade | box | Ordered 24 Oct | O19, O25 | - | Feeds the key; protects the key wiring |
+| 22 | Power | F2 F11 F12 F13 F14 | 5 | Inline blade fuse holder (12 AWG) + 15 A blade | Generic ATO/ATC blade | box | Ordered 24 Oct 1, To buy 4 | O19, O25 | [search](https://www.aliexpress.com/w/wholesale-inline-blade-fuse-holder-12awg.html?SortType=total_tranpro_desc) | F2: Feeds the key; protects the key wiring; F11-F14: Stalled-motor backstop (safety review M3): one stalled motor draws under the 20 A software limit and the 40 A main fuse. 15 A is a placeholder: set it from the motor label (#14), above the running current, below the stall current. Spec: Inline ATO/ATC blade fuse holder for 12 AWG, with cover; plus 15 A and 20 A blades (size from #14) |
 | 23 | Power | F3 F7 F8 | 3 | Blade fuse 1 A in the fuse block | Generic ATO/ATC blade | box | Ordered 24 Oct | O25 | - | F3: K1 coil chain; F7: Box fans; F8: Battery divider wire (0.5 A in v0.2; 1 A is in the order) |
 | 24 | Power | F4 | 1 | Blade fuse 2 A in the fuse block | Generic ATO/ATC blade | box | Ordered 24 Oct | O25 | - | 5V_LOGIC buck input |
 | 25 | Power | F5 | 1 | Blade fuse 3 A in the fuse block | Generic ATO/ATC blade | box | Ordered 24 Oct | O25 | - | 5V_ACC buck input |
@@ -104,7 +104,7 @@ This is the one list for the project: every part of the car, and every tool and 
 | 73 | Wiring | - | 10 | Cable glands PG9 / PG13.5 | Generic nylon | box | To buy | - | - |  |
 | 74 | Wiring | - | 4 | Deutsch DT mating pairs with seals: 4-way x2 (J9, J12), 6-way (J11), 8-way (J10) | TE Deutsch DT (or clone) | box edge | To buy | - | - | Mates for J9-J12 |
 | 75 | Wiring | - | 1 | Nylon M3 standoffs and a mounting plate | Generic | box | To buy | - | - |  |
-| 76 | Wiring | - | 1 | Box: flame-retardant (UL94 V-0) ABS or metal, ~250 x 200 x 100 mm, IP54 | TBD | box | TBD | - | - | Size waits on #18; V-0 is gap 13 of the safety review |
+| 76 | Wiring | - | 1 | Box: flame-retardant (UL94 V-0) ABS or metal, ~250 x 200 x 100 mm, IP54 | TBD | box | TBD | - | - | Size waits on #18; V-0 or metal is item M7 of the safety review (EN 62115 fire test) |
 | 77 | Stock car | BT1 | 1 | Stock 24 V battery; voltage, Ah, chemistry TBD | Stock car (Kolbo 8419715) | car | Stock car | - | - | BTS7960 locks out above 27.5 V; check the charger voltage. Issue #13 |
 | 78 | Stock car | M1 M2 M3 M4 | 4 | Stock drive motor (label TBD) | Stock car (Kolbo 8419715) | car | Stock car | - | - | Issue #14 |
 | 79 | Stock car | M5 | 1 | Stock steering motor (label TBD) | Stock car (Kolbo 8419715) | car | Stock car | - | - | Issue #14 |

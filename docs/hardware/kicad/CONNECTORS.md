@@ -45,9 +45,9 @@ Mate of the stock pedal plug. Status: TBD (#17).
 
 | Pin | Net | AWG | Colour | Protected by | Box side | Car side |
 |---|---|---|---|---|---|---|
-| 1 | `PEDAL_VCC` | 22 | BN | - | R22.2 (W146) | PED1.V+ (W149) |
-| 2 | `PEDAL_IN` | 22 | BN | - | R20.1 (W147) | PED1.SIG (W150) |
-| 3 | `GND` | 22 | BK | - | A1:GND (W148) | PED1.GND (W151) |
+| 1 | `PEDAL_VCC` | 22 | BN | - | R22.2 (W150) | PED1.V+ (W153) |
+| 2 | `PEDAL_IN` | 22 | BN | - | R20.1 (W151) | PED1.SIG (W154) |
+| 3 | `GND` | 22 | BK | - | A1:GND (W152) | PED1.GND (W155) |
 
 ## J4 SHIFTER
 
@@ -55,9 +55,9 @@ Mate of the stock shifter plug. Status: TBD (#17).
 
 | Pin | Net | AWG | Colour | Protected by | Box side | Car side |
 |---|---|---|---|---|---|---|
-| 1 | `SHIFT_FORWARD` | 22 | WH | - | U24.P0 (W190) | SW2.1 (W193) |
-| 2 | `SHIFT_REVERSE` | 22 | WH | - | U24.P1 (W191) | SW3.1 (W195) |
-| 3 | `GND` | 22 | BK | - | A1:GND (W192) | SW2.2 (W194), SW3.2 (W196) |
+| 1 | `SHIFT_FORWARD` | 22 | WH | - | U24.P0 (W194) | SW2.1 (W197) |
+| 2 | `SHIFT_REVERSE` | 22 | WH | - | U24.P1 (W195) | SW3.1 (W199) |
+| 3 | `GND` | 22 | BK | - | A1:GND (W196) | SW2.2 (W198), SW3.2 (W200) |
 
 ## J5 STEER MOTOR
 
@@ -65,8 +65,8 @@ Mate of the stock steering-motor plug (fallback: XT60, owned). Status: TBD (#17)
 
 | Pin | Net | AWG | Colour | Protected by | Box side | Car side |
 |---|---|---|---|---|---|---|
-| 1 | `STEER_M_POS` | 12 | RD | F1 40 A + driver current limit | U14.M+ (W111) | M5.1 (W121) |
-| 2 | `STEER_M_NEG` | 12 | BK | F1 40 A + driver current limit | U14.M- (W112) | M5.2 (W122) |
+| 1 | `STEER_M_POS` | 12 | RD | F1 40 A | U14.M+ (W115) | M5.1 (W125) |
+| 2 | `STEER_M_NEG` | 12 | BK | F1 40 A + driver current limit | U14.M- (W116) | M5.2 (W126) |
 
 ## J6 FRONT MOTORS
 
@@ -74,10 +74,10 @@ Mate of the stock front-motor plug(s); if the harness pairs the motors, a revers
 
 | Pin | Net | AWG | Colour | Protected by | Box side | Car side |
 |---|---|---|---|---|---|---|
-| 1 | `FL_M_POS` | 12 | RD | F1 40 A + driver current limit | U10.M+ (W080) | M1.1 (W113) |
-| 2 | `FL_M_NEG` | 12 | BK | F1 40 A + driver current limit | U10.M- (W081) | M1.2 (W114) |
-| 3 | `FR_M_POS` | 12 | RD | F1 40 A + driver current limit | U11.M+ (W087) | M2.1 (W115) |
-| 4 | `FR_M_NEG` | 12 | BK | F1 40 A + driver current limit | U11.M- (W088) | M2.2 (W116) |
+| 1 | `FL_M_POS` | 12 | RD | F11-F14 15 A (one per motor) | F11.2 (W081) | M1.1 (W117) |
+| 2 | `FL_M_NEG` | 12 | BK | F1 40 A + driver current limit | U10.M- (W082) | M1.2 (W118) |
+| 3 | `FR_M_POS` | 12 | RD | F11-F14 15 A (one per motor) | F12.2 (W089) | M2.1 (W119) |
+| 4 | `FR_M_NEG` | 12 | BK | F1 40 A + driver current limit | U11.M- (W090) | M2.2 (W120) |
 
 ## J7 REAR MOTORS
 
@@ -85,10 +85,10 @@ Mate of the stock rear-motor plug(s); splitter as J6 (fallback: 2 x XT60). Statu
 
 | Pin | Net | AWG | Colour | Protected by | Box side | Car side |
 |---|---|---|---|---|---|---|
-| 1 | `RL_M_POS` | 12 | RD | F1 40 A + driver current limit | U12.M+ (W094) | M3.1 (W117) |
-| 2 | `RL_M_NEG` | 12 | BK | F1 40 A + driver current limit | U12.M- (W095) | M3.2 (W118) |
-| 3 | `RR_M_POS` | 12 | RD | F1 40 A + driver current limit | U13.M+ (W101) | M4.1 (W119) |
-| 4 | `RR_M_NEG` | 12 | BK | F1 40 A + driver current limit | U13.M- (W102) | M4.2 (W120) |
+| 1 | `RL_M_POS` | 12 | RD | F11-F14 15 A (one per motor) | F13.2 (W097) | M3.1 (W121) |
+| 2 | `RL_M_NEG` | 12 | BK | F1 40 A + driver current limit | U12.M- (W098) | M3.2 (W122) |
+| 3 | `RR_M_POS` | 12 | RD | F11-F14 15 A (one per motor) | F14.2 (W105) | M4.1 (W123) |
+| 4 | `RR_M_NEG` | 12 | BK | F1 40 A + driver current limit | U13.M- (W106) | M4.2 (W124) |
 
 ## J8 ACCESSORIES
 
@@ -96,10 +96,10 @@ Mate of the stock lights/horn plug (pin use TBD from photos). Status: TBD (#17).
 
 | Pin | Net | AWG | Colour | Protected by | Box side | Car side |
 |---|---|---|---|---|---|---|
-| 1 | `LIGHTS_12V` | 20 | OG | F9 3 A | F9.2 (W061) | LP1.1 (W201) |
-| 2 | `LIGHTS_SW` | 20 | BK/WH | F9 3 A | U29.OUT1 (W062) | LP1.2 (W202) |
-| 3 | `HORN` | 22 | WH | - | U24.P2 (W197) | SW4.1 (W199) |
-| 4 | `GND` | 22 | BK | - | A1:GND (W198) | SW4.2 (W200) |
+| 1 | `LIGHTS_12V` | 20 | OG | F9 3 A | F9.2 (W061) | LP1.1 (W205) |
+| 2 | `LIGHTS_SW` | 20 | BK/WH | F9 3 A | U29.OUT1 (W062) | LP1.2 (W206) |
+| 3 | `HORN` | 22 | WH | - | U24.P2 (W201) | SW4.1 (W203) |
+| 4 | `GND` | 22 | BK | - | A1:GND (W202) | SW4.2 (W204) |
 
 ## J9 E-STOP
 
@@ -118,14 +118,14 @@ Sealed 8-way, Deutsch DT04-08PA / DT06-08SA (or clone). Status: To buy. Our own 
 
 | Pin | Net | AWG | Colour | Protected by | Box side | Car side |
 |---|---|---|---|---|---|---|
-| 1 | `5V_LOGIC` | 20 | RD | F4 2 A (24 V side) | A1:5V (W051) | H1.1 (W206), H2.1 (W207) |
-| 2 | `GND` | 20 | BK | - | A1:GND (W182) | H1.2 (W208), H2.2 (W209), U25.GND (W213), SW5.2 (W218) |
-| 3 | `WHEEL_SPEED_L` | 20 | WH | - | R23.2 (W204) | H1.3 (W210) |
-| 4 | `WHEEL_SPEED_R` | 20 | WH | - | R24.2 (W205) | H2.3 (W211) |
-| 5 | `3V3_SENSE` | 20 | VT | U2 current limit | A1:3V3 (W181) | U25.VCC (W212) |
-| 6 | `I2C_SCL` | 20 | GY | - | U28.SCL (W179) | U25.SCL (W214) |
-| 7 | `I2C_SDA` | 20 | GN | - | U28.SDA (W180) | U25.SDA (W215) |
-| 8 | `SEAT` | 20 | WH | - | U24.P4 (W203) | SW5.1 (W217) |
+| 1 | `5V_LOGIC` | 20 | RD | F4 2 A (24 V side) | A1:5V (W051) | H1.1 (W210), H2.1 (W211) |
+| 2 | `GND` | 20 | BK | - | A1:GND (W186) | H1.2 (W212), H2.2 (W213), U25.GND (W217), SW5.2 (W222) |
+| 3 | `WHEEL_SPEED_L` | 20 | WH | - | R23.2 (W208) | H1.3 (W214) |
+| 4 | `WHEEL_SPEED_R` | 20 | WH | - | R24.2 (W209) | H2.3 (W215) |
+| 5 | `3V3_SENSE` | 20 | VT | U2 current limit | A1:3V3 (W185) | U25.VCC (W216) |
+| 6 | `I2C_SCL` | 20 | GY | - | U28.SCL (W183) | U25.SCL (W218) |
+| 7 | `I2C_SDA` | 20 | GN | - | U28.SDA (W184) | U25.SDA (W219) |
+| 8 | `SEAT` | 20 | WH | - | U24.P4 (W207) | SW5.1 (W221) |
 
 ## J11 DASH
 
@@ -133,12 +133,12 @@ Sealed 6-way, Deutsch DT04-6P / DT06-6S (or clone). Status: To buy. Our own plug
 
 | Pin | Net | AWG | Colour | Protected by | Box side | Car side |
 |---|---|---|---|---|---|---|
-| 1 | `3V3_SENSE` | 20 | VT | U2 current limit | A1:3V3 (W185) | U27.VCC (W219) |
-| 2 | `GND` | 20 | BK | - | A1:GND (W186) | U27.GND (W220) |
-| 3 | `I2C_SCL` | 20 | GY | - | U28.SCL (W183) | U27.SCL (W221) |
-| 4 | `I2C_SDA` | 20 | GN | - | U28.SDA (W184) | U27.SDA (W222) |
-| 5 | `SPK_ALERT_P` | 18 | RD | amp output | U30.6 (W223) | LS1.1 (W225) |
-| 6 | `SPK_ALERT_N` | 18 | BK | amp output | U30.8 (W224) | LS1.2 (W226) |
+| 1 | `3V3_SENSE` | 20 | VT | U2 current limit | A1:3V3 (W189) | U27.VCC (W223) |
+| 2 | `GND` | 20 | BK | - | A1:GND (W190) | U27.GND (W224) |
+| 3 | `I2C_SCL` | 20 | GY | - | U28.SCL (W187) | U27.SCL (W225) |
+| 4 | `I2C_SDA` | 20 | GN | - | U28.SDA (W188) | U27.SDA (W226) |
+| 5 | `SPK_ALERT_P` | 18 | RD | amp output | U30.6 (W227) | LS1.1 (W229) |
+| 6 | `SPK_ALERT_N` | 18 | BK | amp output | U30.8 (W228) | LS1.2 (W230) |
 
 ## J12 MUSIC
 
@@ -146,8 +146,8 @@ Sealed 6-way, Deutsch DT04-6P / DT06-6S (or clone). Status: To buy. Our own plug
 
 | Pin | Net | AWG | Colour | Protected by | Box side | Car side |
 |---|---|---|---|---|---|---|
-| 1 | `SPK_L_P` | 18 | RD | amp output | U32.L+ (W227) | LS2.1 (W231) |
-| 2 | `SPK_L_N` | 18 | BK | amp output | U32.L- (W228) | LS2.2 (W232) |
-| 3 | `SPK_R_P` | 18 | RD | amp output | U32.R+ (W229) | LS3.1 (W233) |
-| 4 | `SPK_R_N` | 18 | BK | amp output | U32.R- (W230) | LS3.2 (W234) |
+| 1 | `SPK_L_P` | 18 | RD | amp output | U32.L+ (W231) | LS2.1 (W235) |
+| 2 | `SPK_L_N` | 18 | BK | amp output | U32.L- (W232) | LS2.2 (W236) |
+| 3 | `SPK_R_P` | 18 | RD | amp output | U32.R+ (W233) | LS3.1 (W237) |
+| 4 | `SPK_R_N` | 18 | BK | amp output | U32.R- (W234) | LS3.2 (W238) |
 

@@ -134,7 +134,7 @@ EXTRAS = [
     ("", 1, "Ring lugs (M6/M8 for 10 AWG), pre-insulated terminals, ferrules", "Generic", "box", D.ORDER, ["rings", "termkit"], ""),
     ("", 1, "Heat shrink assortment (also the colour bands)", "Generic", "box", D.ORDER, ["shrink"], ""),
     ("", 1, "Box: flame-retardant (UL94 V-0) ABS or metal, ~250 x 200 x 100 mm, IP54", "TBD", "box", D.TBD, [],
-     "Size waits on #18; V-0 is gap 13 of the safety review"),
+     "Size waits on #18; V-0 or metal is item M7 of the safety review (EN 62115 fire test)"),
     ("", 10, "Cable glands PG9 / PG13.5", "Generic nylon", "box", D.BUY, [], ""),
     ("", 1, "Nylon M3 standoffs and a mounting plate", "Generic", "box", D.BUY, [], ""),
 ]
@@ -168,6 +168,8 @@ BUY_LINKS = {
     "U33": ("HM-10 BLE 4.0 (CC2541) on a 6-pin breakout with a 3.3 V regulator, 3.6-6 V in. BLE works with iPhone and Android. DSD TECH is the genuine one; clones (MLT-BT05, CC41-A) also work with bt_setup", ae("hm-10 ble cc2541 module")),
     "U28": ("Blue Adafruit-layout board, address 0x40", ae("pca9685 16 channel")),
     "U29": ("Logic-level (switches from 3.3 V): LR7843 or AOD4184 boards, not IRF520", ae("4 channel mosfet module lr7843")),
+    "F11": ("Inline ATO/ATC blade fuse holder for 12 AWG, with cover; plus 15 A and 20 A blades (size from #14)",
+            ae("inline blade fuse holder 12awg")),
     "H1": ("Buy 5-10 A3144 + 10 neodymium magnets 10 x 5 mm", ae("a3144 hall sensor") + " / " + ae("neodymium magnet 10x5mm")),
 }
 

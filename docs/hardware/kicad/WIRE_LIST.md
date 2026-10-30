@@ -39,7 +39,7 @@ Lengths are not given yet: they wait on the box and under-seat measurements (#18
 | W001 | BT1.1 | F1.1 | `BATT_RAW` | 10 | RD | none: keep ≤ 15 cm, battery + to F1 | Ring lug on battery +; ≤ 15 cm, unfused |
 | W002 | F1.2 | J1.1 | `BATT_FUSED` | 10 | RD | F1 40 A | Or the stock battery lead if it already has a 40 A fuse this close |
 
-## Inside the box (180 wires)
+## Inside the box (184 wires)
 
 | Wire | From | To | Net | AWG | Colour | Protected by | Note |
 |---|---|---|---|---|---|---|---|
@@ -112,117 +112,121 @@ Lengths are not given yet: they wait on the box and under-seat measurements (#18
 | W077 | U10.5 | R101.1 | `IS_FL_RAW` | 22 | BN | - | IS to A1 |
 | W078 | A1:3V3 (interface board bus) | U10.7 | `3V3_SENSE` | 22 | VT | U2 current limit | Logic VCC |
 | W079 | A1:GND (interface board bus) | U10.8 | `GND` | 22 | BK | - | Signal reference; B− is the power ground |
-| W080 | U10.M+ | J6.1 | `FL_M_POS` | 12 | RD | F1 40 A + driver current limit |  |
-| W081 | U10.M- | J6.2 | `FL_M_NEG` | 12 | BK | F1 40 A + driver current limit |  |
-| W082 | U11.3 | U11.4 | `DRIVE_EN` | 22 | YE | - | Jumper in the plug: R_EN = L_EN; the 10k pull-down sits in the plug too |
-| W083 | U11.5 | U11.6 | `IS_FR_RAW` | 22 | BN | - | Jumper in the plug: R_IS = L_IS |
-| W084 | U11.5 | R102.1 | `IS_FR_RAW` | 22 | BN | - | IS to A1 |
-| W085 | A1:3V3 (interface board bus) | U11.7 | `3V3_SENSE` | 22 | VT | U2 current limit | Logic VCC |
-| W086 | A1:GND (interface board bus) | U11.8 | `GND` | 22 | BK | - | Signal reference; B− is the power ground |
-| W087 | U11.M+ | J6.3 | `FR_M_POS` | 12 | RD | F1 40 A + driver current limit |  |
-| W088 | U11.M- | J6.4 | `FR_M_NEG` | 12 | BK | F1 40 A + driver current limit |  |
-| W089 | U12.3 | U12.4 | `DRIVE_EN` | 22 | YE | - | Jumper in the plug: R_EN = L_EN; the 10k pull-down sits in the plug too |
-| W090 | U12.5 | U12.6 | `IS_RL_RAW` | 22 | BN | - | Jumper in the plug: R_IS = L_IS |
-| W091 | U12.5 | R103.1 | `IS_RL_RAW` | 22 | BN | - | IS to A1 |
-| W092 | A1:3V3 (interface board bus) | U12.7 | `3V3_SENSE` | 22 | VT | U2 current limit | Logic VCC |
-| W093 | A1:GND (interface board bus) | U12.8 | `GND` | 22 | BK | - | Signal reference; B− is the power ground |
-| W094 | U12.M+ | J7.1 | `RL_M_POS` | 12 | RD | F1 40 A + driver current limit |  |
-| W095 | U12.M- | J7.2 | `RL_M_NEG` | 12 | BK | F1 40 A + driver current limit |  |
-| W096 | U13.3 | U13.4 | `DRIVE_EN` | 22 | YE | - | Jumper in the plug: R_EN = L_EN; the 10k pull-down sits in the plug too |
-| W097 | U13.5 | U13.6 | `IS_RR_RAW` | 22 | BN | - | Jumper in the plug: R_IS = L_IS |
-| W098 | U13.5 | R104.1 | `IS_RR_RAW` | 22 | BN | - | IS to A1 |
-| W099 | A1:3V3 (interface board bus) | U13.7 | `3V3_SENSE` | 22 | VT | U2 current limit | Logic VCC |
-| W100 | A1:GND (interface board bus) | U13.8 | `GND` | 22 | BK | - | Signal reference; B− is the power ground |
-| W101 | U13.M+ | J7.3 | `RR_M_POS` | 12 | RD | F1 40 A + driver current limit |  |
-| W102 | U13.M- | J7.4 | `RR_M_NEG` | 12 | BK | F1 40 A + driver current limit |  |
-| W103 | U20.R7 | U14.1 | `STEER_RPWM` | 22 | BU | - | Control cable: twist PWM and EN with GND |
-| W104 | U20.R6 | U14.2 | `STEER_LPWM` | 22 | BU | - |  |
-| W105 | U20.R12 | U14.3 | `STEER_EN` | 22 | YE | - | STEER_EN |
-| W106 | U14.3 | U14.4 | `STEER_EN` | 22 | YE | - | Jumper in the plug: R_EN = L_EN; the 10k pull-down sits in the plug too |
-| W107 | U14.5 | U14.6 | `IS_ST_RAW` | 22 | BN | - | Jumper in the plug: R_IS = L_IS |
-| W108 | U14.5 | R105.1 | `IS_ST_RAW` | 22 | BN | - | IS to A1 |
-| W109 | A1:3V3 (interface board bus) | U14.7 | `3V3_SENSE` | 22 | VT | U2 current limit | Logic VCC |
-| W110 | A1:GND (interface board bus) | U14.8 | `GND` | 22 | BK | - | Signal reference; B− is the power ground |
-| W111 | U14.M+ | J5.1 | `STEER_M_POS` | 12 | RD | F1 40 A + driver current limit |  |
-| W112 | U14.M- | J5.2 | `STEER_M_NEG` | 12 | BK | F1 40 A + driver current limit |  |
-| W123 | U20.L2 | R20.2 | `PEDAL` | 22 | BN | - | PEDAL to A1 |
-| W124 | U20.L3 | R3.2 | `BATTERY_SENSE` | 22 | BN | - | BATTERY_SENSE to A1 |
-| W125 | U20.L4 | R23.2 | `WHEEL_SPEED_L` | 22 | WH | - | WHEEL_SPEED_L to A1 |
-| W126 | U20.L5 | R24.2 | `WHEEL_SPEED_R` | 22 | WH | - | WHEEL_SPEED_R to A1 |
-| W127 | U20.R13 | R27.2 | `ONEWIRE_TEMP` | 22 | WH | - | ONEWIRE_TEMP to A1 |
-| W128 | U20.R8 | R28.1 | `SOUND_TX` | 22 | WH | - | SOUND_TX to A1 |
-| W129 | R28.2 | U30.2 | `DF_RX` | 22 | WH | - | DF_RX |
-| W130 | U20.R3 | R29.1 | `LOG_TX` | 22 | WH | - | LOG_TX (TX0) to A1 |
-| W131 | R29.2 | U33.RXD | `BT_RXD` | 22 | WH | - | BT_RXD. U33 TXD stays unconnected: listen-only |
-| W132 | A1:5V (interface board bus) | U33.VCC | `5V_LOGIC` | 22 | RD | F4 2 A (24 V side) | Bluetooth module VCC |
-| W133 | U33.GND | A1:GND (interface board bus) | `GND` | 22 | BK | - |  |
-| W134 | U20.R10 | U21.TX | `CRSF_RX` | 22 | WH | - | CRSF: receiver TX → ESP32 RX |
-| W135 | U20.R9 | U21.RX | `CRSF_TX` | 22 | WH | - | CRSF: ESP32 TX → receiver RX |
-| W136 | R1.2 | Q1.G | `Q1_GATE` | 22 | WH | - | On A1 (listed because Q1 is a TO-220 on flying leads if not on the board) |
-| W137 | R101.2 | U22.A0 | `IS_FL` | 22 | BN | - |  |
-| W138 | R102.2 | U22.A1 | `IS_FR` | 22 | BN | - |  |
-| W139 | R103.2 | U22.A2 | `IS_RL` | 22 | BN | - |  |
-| W140 | R104.2 | U22.A3 | `IS_RR` | 22 | BN | - |  |
-| W141 | R105.2 | U23.A0 | `IS_ST` | 22 | BN | - |  |
-| W142 | R5.2 | R6.1 | `BUS_SENSE` | 22 | BN | - | BUS_SENSE from the R5 lead at TB2 to A1 |
-| W143 | R6.1 | U23.A2 | `BUS_SENSE` | 22 | BN | - |  |
-| W144 | R7.2 | A1:GND (interface board bus) | `GND` | 20 | BK | - | Bleed return |
-| W145 | A1:3V3 (interface board bus) | R22.1 | `3V3_SENSE` | 22 | VT | U2 current limit | On A1 |
-| W146 | R22.2 | J3.1 | `PEDAL_VCC` | 22 | BN | - | Pedal supply |
-| W147 | J3.2 | R20.1 | `PEDAL_IN` | 22 | BN | - | Pedal signal |
-| W148 | J3.3 | A1:GND (interface board bus) | `GND` | 22 | BK | - |  |
-| W152 | U31.DQ | R27.2 | `ONEWIRE_TEMP` | 22 | WH | - | DS18B20 yellow |
-| W153 | U31.VDD | A1:3V3 (interface board bus) | `3V3_SENSE` | 22 | VT | U2 current limit | DS18B20 red |
-| W154 | U31.GND | A1:GND (interface board bus) | `GND` | 22 | BK | - | DS18B20 black |
-| W155 | U20.R2 | U22.SCL | `I2C_SCL` | 22 | GY | - | I2C bus start; keep SCL and SDA beside GND |
-| W156 | U20.R1 | U22.SDA | `I2C_SDA` | 22 | GN | - |  |
-| W157 | A1:3V3 (interface board bus) | U22.VDD | `3V3_SENSE` | 22 | VT | U2 current limit |  |
-| W158 | A1:GND (interface board bus) | U22.GND | `GND` | 22 | BK | - |  |
-| W159 | U22.SCL | U23.SCL | `I2C_SCL` | 22 | GY | - | I2C chain |
-| W160 | U22.SDA | U23.SDA | `I2C_SDA` | 22 | GN | - | I2C chain |
-| W161 | U22.VDD | U23.VDD | `3V3_SENSE` | 22 | VT | U2 current limit | I2C chain |
-| W162 | U22.GND | U23.GND | `GND` | 22 | BK | - | I2C chain |
-| W163 | U23.SCL | U24.SCL | `I2C_SCL` | 22 | GY | - | I2C chain |
-| W164 | U23.SDA | U24.SDA | `I2C_SDA` | 22 | GN | - | I2C chain |
-| W165 | U23.VDD | U24.VCC | `3V3_SENSE` | 22 | VT | U2 current limit | I2C chain |
-| W166 | U23.GND | U24.GND | `GND` | 22 | BK | - | I2C chain |
-| W167 | U24.SCL | U26.SCL | `I2C_SCL` | 22 | GY | - | I2C chain |
-| W168 | U24.SDA | U26.SDA | `I2C_SDA` | 22 | GN | - | I2C chain |
-| W169 | U24.VCC | U26.VCC | `3V3_SENSE` | 22 | VT | U2 current limit | I2C chain |
-| W170 | U24.GND | U26.GND | `GND` | 22 | BK | - | I2C chain |
-| W171 | U26.SCL | U28.SCL | `I2C_SCL` | 22 | GY | - | I2C chain |
-| W172 | U26.SDA | U28.SDA | `I2C_SDA` | 22 | GN | - | I2C chain |
-| W173 | U26.VCC | U28.VCC | `3V3_SENSE` | 22 | VT | U2 current limit | I2C chain |
-| W174 | U26.GND | U28.GND | `GND` | 22 | BK | - | I2C chain |
-| W175 | U22.ADDR | U22.GND | `GND` | 22 | BK | - | Address 0x48 |
-| W176 | U23.ADDR | U23.VDD | `3V3_SENSE` | 22 | VT | U2 current limit | Address 0x49 |
-| W177 | U26.AD0 | U26.GND | `GND` | 22 | BK | - | Address 0x68 |
-| W178 | U28.OE | U28.GND | `GND` | 22 | BK | - | Outputs always enabled |
-| W179 | U28.SCL | J10.6 | `I2C_SCL` | 20 | GY | - | Off-box I2C branch: steering column |
-| W180 | U28.SDA | J10.7 | `I2C_SDA` | 20 | GN | - |  |
-| W181 | A1:3V3 (interface board bus) | J10.5 | `3V3_SENSE` | 20 | VT | U2 current limit |  |
-| W182 | A1:GND (interface board bus) | J10.2 | `GND` | 20 | BK | - |  |
-| W183 | U28.SCL | J11.3 | `I2C_SCL` | 20 | GY | - | Off-box I2C branch: dash |
-| W184 | U28.SDA | J11.4 | `I2C_SDA` | 20 | GN | - |  |
-| W185 | A1:3V3 (interface board bus) | J11.1 | `3V3_SENSE` | 20 | VT | U2 current limit |  |
-| W186 | A1:GND (interface board bus) | J11.2 | `GND` | 20 | BK | - |  |
-| W187 | U28.PWM0 | U29.IN1 | `LIGHTS_PWM` | 22 | BU | - | Lights PWM |
-| W188 | U28.PWM1 | U29.IN2 | `FAN_PWM` | 22 | BU | - | Fan PWM |
-| W189 | U29.GND | A1:GND (interface board bus) | `GND` | 22 | BK | - |  |
-| W190 | J4.1 | U24.P0 | `SHIFT_FORWARD` | 22 | WH | - |  |
-| W191 | J4.2 | U24.P1 | `SHIFT_REVERSE` | 22 | WH | - |  |
-| W192 | J4.3 | A1:GND (interface board bus) | `GND` | 22 | BK | - |  |
-| W197 | J8.3 | U24.P2 | `HORN` | 22 | WH | - | Horn button |
-| W198 | J8.4 | A1:GND (interface board bus) | `GND` | 22 | BK | - |  |
-| W203 | J10.8 | U24.P4 | `SEAT` | 20 | WH | - | Seat switch |
-| W204 | J10.3 | R23.2 | `WHEEL_SPEED_L` | 20 | WH | - | WHEEL_SPEED_L to A1 |
-| W205 | J10.4 | R24.2 | `WHEEL_SPEED_R` | 20 | WH | - | WHEEL_SPEED_R to A1 |
-| W223 | U30.6 | J11.5 | `SPK_ALERT_P` | 18 | RD | amp output |  |
-| W224 | U30.8 | J11.6 | `SPK_ALERT_N` | 18 | BK | amp output |  |
-| W227 | U32.L+ | J12.1 | `SPK_L_P` | 18 | RD | amp output |  |
-| W228 | U32.L- | J12.2 | `SPK_L_N` | 18 | BK | amp output |  |
-| W229 | U32.R+ | J12.3 | `SPK_R_P` | 18 | RD | amp output |  |
-| W230 | U32.R- | J12.4 | `SPK_R_N` | 18 | BK | amp output |  |
+| W080 | U10.M+ | F11.1 | `FL_DRV_POS` | 12 | RD | F1 40 A + driver current limit | Motor + to its inline fuse |
+| W081 | F11.2 | J6.1 | `FL_M_POS` | 12 | RD | F11-F14 15 A (one per motor) |  |
+| W082 | U10.M- | J6.2 | `FL_M_NEG` | 12 | BK | F1 40 A + driver current limit |  |
+| W083 | U11.3 | U11.4 | `DRIVE_EN` | 22 | YE | - | Jumper in the plug: R_EN = L_EN; the 10k pull-down sits in the plug too |
+| W084 | U11.5 | U11.6 | `IS_FR_RAW` | 22 | BN | - | Jumper in the plug: R_IS = L_IS |
+| W085 | U11.5 | R102.1 | `IS_FR_RAW` | 22 | BN | - | IS to A1 |
+| W086 | A1:3V3 (interface board bus) | U11.7 | `3V3_SENSE` | 22 | VT | U2 current limit | Logic VCC |
+| W087 | A1:GND (interface board bus) | U11.8 | `GND` | 22 | BK | - | Signal reference; B− is the power ground |
+| W088 | U11.M+ | F12.1 | `FR_DRV_POS` | 12 | RD | F1 40 A + driver current limit | Motor + to its inline fuse |
+| W089 | F12.2 | J6.3 | `FR_M_POS` | 12 | RD | F11-F14 15 A (one per motor) |  |
+| W090 | U11.M- | J6.4 | `FR_M_NEG` | 12 | BK | F1 40 A + driver current limit |  |
+| W091 | U12.3 | U12.4 | `DRIVE_EN` | 22 | YE | - | Jumper in the plug: R_EN = L_EN; the 10k pull-down sits in the plug too |
+| W092 | U12.5 | U12.6 | `IS_RL_RAW` | 22 | BN | - | Jumper in the plug: R_IS = L_IS |
+| W093 | U12.5 | R103.1 | `IS_RL_RAW` | 22 | BN | - | IS to A1 |
+| W094 | A1:3V3 (interface board bus) | U12.7 | `3V3_SENSE` | 22 | VT | U2 current limit | Logic VCC |
+| W095 | A1:GND (interface board bus) | U12.8 | `GND` | 22 | BK | - | Signal reference; B− is the power ground |
+| W096 | U12.M+ | F13.1 | `RL_DRV_POS` | 12 | RD | F1 40 A + driver current limit | Motor + to its inline fuse |
+| W097 | F13.2 | J7.1 | `RL_M_POS` | 12 | RD | F11-F14 15 A (one per motor) |  |
+| W098 | U12.M- | J7.2 | `RL_M_NEG` | 12 | BK | F1 40 A + driver current limit |  |
+| W099 | U13.3 | U13.4 | `DRIVE_EN` | 22 | YE | - | Jumper in the plug: R_EN = L_EN; the 10k pull-down sits in the plug too |
+| W100 | U13.5 | U13.6 | `IS_RR_RAW` | 22 | BN | - | Jumper in the plug: R_IS = L_IS |
+| W101 | U13.5 | R104.1 | `IS_RR_RAW` | 22 | BN | - | IS to A1 |
+| W102 | A1:3V3 (interface board bus) | U13.7 | `3V3_SENSE` | 22 | VT | U2 current limit | Logic VCC |
+| W103 | A1:GND (interface board bus) | U13.8 | `GND` | 22 | BK | - | Signal reference; B− is the power ground |
+| W104 | U13.M+ | F14.1 | `RR_DRV_POS` | 12 | RD | F1 40 A + driver current limit | Motor + to its inline fuse |
+| W105 | F14.2 | J7.3 | `RR_M_POS` | 12 | RD | F11-F14 15 A (one per motor) |  |
+| W106 | U13.M- | J7.4 | `RR_M_NEG` | 12 | BK | F1 40 A + driver current limit |  |
+| W107 | U20.R7 | U14.1 | `STEER_RPWM` | 22 | BU | - | Control cable: twist PWM and EN with GND |
+| W108 | U20.R6 | U14.2 | `STEER_LPWM` | 22 | BU | - |  |
+| W109 | U20.R12 | U14.3 | `STEER_EN` | 22 | YE | - | STEER_EN |
+| W110 | U14.3 | U14.4 | `STEER_EN` | 22 | YE | - | Jumper in the plug: R_EN = L_EN; the 10k pull-down sits in the plug too |
+| W111 | U14.5 | U14.6 | `IS_ST_RAW` | 22 | BN | - | Jumper in the plug: R_IS = L_IS |
+| W112 | U14.5 | R105.1 | `IS_ST_RAW` | 22 | BN | - | IS to A1 |
+| W113 | A1:3V3 (interface board bus) | U14.7 | `3V3_SENSE` | 22 | VT | U2 current limit | Logic VCC |
+| W114 | A1:GND (interface board bus) | U14.8 | `GND` | 22 | BK | - | Signal reference; B− is the power ground |
+| W115 | U14.M+ | J5.1 | `STEER_M_POS` | 12 | RD | F1 40 A |  |
+| W116 | U14.M- | J5.2 | `STEER_M_NEG` | 12 | BK | F1 40 A + driver current limit |  |
+| W127 | U20.L2 | R20.2 | `PEDAL` | 22 | BN | - | PEDAL to A1 |
+| W128 | U20.L3 | R3.2 | `BATTERY_SENSE` | 22 | BN | - | BATTERY_SENSE to A1 |
+| W129 | U20.L4 | R23.2 | `WHEEL_SPEED_L` | 22 | WH | - | WHEEL_SPEED_L to A1 |
+| W130 | U20.L5 | R24.2 | `WHEEL_SPEED_R` | 22 | WH | - | WHEEL_SPEED_R to A1 |
+| W131 | U20.R13 | R27.2 | `ONEWIRE_TEMP` | 22 | WH | - | ONEWIRE_TEMP to A1 |
+| W132 | U20.R8 | R28.1 | `SOUND_TX` | 22 | WH | - | SOUND_TX to A1 |
+| W133 | R28.2 | U30.2 | `DF_RX` | 22 | WH | - | DF_RX |
+| W134 | U20.R3 | R29.1 | `LOG_TX` | 22 | WH | - | LOG_TX (TX0) to A1 |
+| W135 | R29.2 | U33.RXD | `BT_RXD` | 22 | WH | - | BT_RXD. U33 TXD stays unconnected: listen-only |
+| W136 | A1:5V (interface board bus) | U33.VCC | `5V_LOGIC` | 22 | RD | F4 2 A (24 V side) | Bluetooth module VCC |
+| W137 | U33.GND | A1:GND (interface board bus) | `GND` | 22 | BK | - |  |
+| W138 | U20.R10 | U21.TX | `CRSF_RX` | 22 | WH | - | CRSF: receiver TX → ESP32 RX |
+| W139 | U20.R9 | U21.RX | `CRSF_TX` | 22 | WH | - | CRSF: ESP32 TX → receiver RX |
+| W140 | R1.2 | Q1.G | `Q1_GATE` | 22 | WH | - | On A1 (listed because Q1 is a TO-220 on flying leads if not on the board) |
+| W141 | R101.2 | U22.A0 | `IS_FL` | 22 | BN | - |  |
+| W142 | R102.2 | U22.A1 | `IS_FR` | 22 | BN | - |  |
+| W143 | R103.2 | U22.A2 | `IS_RL` | 22 | BN | - |  |
+| W144 | R104.2 | U22.A3 | `IS_RR` | 22 | BN | - |  |
+| W145 | R105.2 | U23.A0 | `IS_ST` | 22 | BN | - |  |
+| W146 | R5.2 | R6.1 | `BUS_SENSE` | 22 | BN | - | BUS_SENSE from the R5 lead at TB2 to A1 |
+| W147 | R6.1 | U23.A2 | `BUS_SENSE` | 22 | BN | - |  |
+| W148 | R7.2 | A1:GND (interface board bus) | `GND` | 20 | BK | - | Bleed return |
+| W149 | A1:3V3 (interface board bus) | R22.1 | `3V3_SENSE` | 22 | VT | U2 current limit | On A1 |
+| W150 | R22.2 | J3.1 | `PEDAL_VCC` | 22 | BN | - | Pedal supply |
+| W151 | J3.2 | R20.1 | `PEDAL_IN` | 22 | BN | - | Pedal signal |
+| W152 | J3.3 | A1:GND (interface board bus) | `GND` | 22 | BK | - |  |
+| W156 | U31.DQ | R27.2 | `ONEWIRE_TEMP` | 22 | WH | - | DS18B20 yellow |
+| W157 | U31.VDD | A1:3V3 (interface board bus) | `3V3_SENSE` | 22 | VT | U2 current limit | DS18B20 red |
+| W158 | U31.GND | A1:GND (interface board bus) | `GND` | 22 | BK | - | DS18B20 black |
+| W159 | U20.R2 | U22.SCL | `I2C_SCL` | 22 | GY | - | I2C bus start; keep SCL and SDA beside GND |
+| W160 | U20.R1 | U22.SDA | `I2C_SDA` | 22 | GN | - |  |
+| W161 | A1:3V3 (interface board bus) | U22.VDD | `3V3_SENSE` | 22 | VT | U2 current limit |  |
+| W162 | A1:GND (interface board bus) | U22.GND | `GND` | 22 | BK | - |  |
+| W163 | U22.SCL | U23.SCL | `I2C_SCL` | 22 | GY | - | I2C chain |
+| W164 | U22.SDA | U23.SDA | `I2C_SDA` | 22 | GN | - | I2C chain |
+| W165 | U22.VDD | U23.VDD | `3V3_SENSE` | 22 | VT | U2 current limit | I2C chain |
+| W166 | U22.GND | U23.GND | `GND` | 22 | BK | - | I2C chain |
+| W167 | U23.SCL | U24.SCL | `I2C_SCL` | 22 | GY | - | I2C chain |
+| W168 | U23.SDA | U24.SDA | `I2C_SDA` | 22 | GN | - | I2C chain |
+| W169 | U23.VDD | U24.VCC | `3V3_SENSE` | 22 | VT | U2 current limit | I2C chain |
+| W170 | U23.GND | U24.GND | `GND` | 22 | BK | - | I2C chain |
+| W171 | U24.SCL | U26.SCL | `I2C_SCL` | 22 | GY | - | I2C chain |
+| W172 | U24.SDA | U26.SDA | `I2C_SDA` | 22 | GN | - | I2C chain |
+| W173 | U24.VCC | U26.VCC | `3V3_SENSE` | 22 | VT | U2 current limit | I2C chain |
+| W174 | U24.GND | U26.GND | `GND` | 22 | BK | - | I2C chain |
+| W175 | U26.SCL | U28.SCL | `I2C_SCL` | 22 | GY | - | I2C chain |
+| W176 | U26.SDA | U28.SDA | `I2C_SDA` | 22 | GN | - | I2C chain |
+| W177 | U26.VCC | U28.VCC | `3V3_SENSE` | 22 | VT | U2 current limit | I2C chain |
+| W178 | U26.GND | U28.GND | `GND` | 22 | BK | - | I2C chain |
+| W179 | U22.ADDR | U22.GND | `GND` | 22 | BK | - | Address 0x48 |
+| W180 | U23.ADDR | U23.VDD | `3V3_SENSE` | 22 | VT | U2 current limit | Address 0x49 |
+| W181 | U26.AD0 | U26.GND | `GND` | 22 | BK | - | Address 0x68 |
+| W182 | U28.OE | U28.GND | `GND` | 22 | BK | - | Outputs always enabled |
+| W183 | U28.SCL | J10.6 | `I2C_SCL` | 20 | GY | - | Off-box I2C branch: steering column |
+| W184 | U28.SDA | J10.7 | `I2C_SDA` | 20 | GN | - |  |
+| W185 | A1:3V3 (interface board bus) | J10.5 | `3V3_SENSE` | 20 | VT | U2 current limit |  |
+| W186 | A1:GND (interface board bus) | J10.2 | `GND` | 20 | BK | - |  |
+| W187 | U28.SCL | J11.3 | `I2C_SCL` | 20 | GY | - | Off-box I2C branch: dash |
+| W188 | U28.SDA | J11.4 | `I2C_SDA` | 20 | GN | - |  |
+| W189 | A1:3V3 (interface board bus) | J11.1 | `3V3_SENSE` | 20 | VT | U2 current limit |  |
+| W190 | A1:GND (interface board bus) | J11.2 | `GND` | 20 | BK | - |  |
+| W191 | U28.PWM0 | U29.IN1 | `LIGHTS_PWM` | 22 | BU | - | Lights PWM |
+| W192 | U28.PWM1 | U29.IN2 | `FAN_PWM` | 22 | BU | - | Fan PWM |
+| W193 | U29.GND | A1:GND (interface board bus) | `GND` | 22 | BK | - |  |
+| W194 | J4.1 | U24.P0 | `SHIFT_FORWARD` | 22 | WH | - |  |
+| W195 | J4.2 | U24.P1 | `SHIFT_REVERSE` | 22 | WH | - |  |
+| W196 | J4.3 | A1:GND (interface board bus) | `GND` | 22 | BK | - |  |
+| W201 | J8.3 | U24.P2 | `HORN` | 22 | WH | - | Horn button |
+| W202 | J8.4 | A1:GND (interface board bus) | `GND` | 22 | BK | - |  |
+| W207 | J10.8 | U24.P4 | `SEAT` | 20 | WH | - | Seat switch |
+| W208 | J10.3 | R23.2 | `WHEEL_SPEED_L` | 20 | WH | - | WHEEL_SPEED_L to A1 |
+| W209 | J10.4 | R24.2 | `WHEEL_SPEED_R` | 20 | WH | - | WHEEL_SPEED_R to A1 |
+| W227 | U30.6 | J11.5 | `SPK_ALERT_P` | 18 | RD | amp output |  |
+| W228 | U30.8 | J11.6 | `SPK_ALERT_N` | 18 | BK | amp output |  |
+| W231 | U32.L+ | J12.1 | `SPK_L_P` | 18 | RD | amp output |  |
+| W232 | U32.L- | J12.2 | `SPK_L_N` | 18 | BK | amp output |  |
+| W233 | U32.R+ | J12.3 | `SPK_R_P` | 18 | RD | amp output |  |
+| W234 | U32.R- | J12.4 | `SPK_R_N` | 18 | BK | amp output |  |
 
 ## Our new off-box harnesses (J9-J12) (28 wires)
 
@@ -233,29 +237,29 @@ Lengths are not given yet: they wait on the box and under-seat measurements (#18
 | W025 | S2.22 | J9.2 | `COIL_24V` | 20 | OG | F3 1 A |  |
 | W028 | S2.33 | J9.3 | `ESTOP_SENSE` | 20 | WH | - |  |
 | W029 | S2.34 | J9.4 | `GND` | 20 | BK | - |  |
-| W206 | J10.1 | H1.1 | `5V_LOGIC` | 20 | RD | F4 2 A (24 V side) | Split to both wheels |
-| W207 | J10.1 | H2.1 | `5V_LOGIC` | 20 | RD | F4 2 A (24 V side) |  |
-| W208 | J10.2 | H1.2 | `GND` | 20 | BK | - |  |
-| W209 | J10.2 | H2.2 | `GND` | 20 | BK | - |  |
-| W210 | J10.3 | H1.3 | `WHEEL_SPEED_L` | 20 | WH | - |  |
-| W211 | J10.4 | H2.3 | `WHEEL_SPEED_R` | 20 | WH | - |  |
-| W212 | J10.5 | U25.VCC | `3V3_SENSE` | 20 | VT | U2 current limit | AS5600: ≤ 30 cm of I2C, twisted with GND |
-| W213 | J10.2 | U25.GND | `GND` | 20 | BK | - |  |
-| W214 | J10.6 | U25.SCL | `I2C_SCL` | 20 | GY | - |  |
-| W215 | J10.7 | U25.SDA | `I2C_SDA` | 20 | GN | - |  |
-| W216 | U25.DIR | U25.GND | `GND` | 20 | BK | - | Jumper on the sensor board |
-| W217 | J10.8 | SW5.1 | `SEAT` | 20 | WH | - |  |
-| W218 | SW5.2 | J10.2 | `GND` | 20 | BK | - |  |
-| W219 | J11.1 | U27.VCC | `3V3_SENSE` | 20 | VT | U2 current limit |  |
-| W220 | J11.2 | U27.GND | `GND` | 20 | BK | - |  |
-| W221 | J11.3 | U27.SCL | `I2C_SCL` | 20 | GY | - |  |
-| W222 | J11.4 | U27.SDA | `I2C_SDA` | 20 | GN | - |  |
-| W225 | J11.5 | LS1.1 | `SPK_ALERT_P` | 18 | RD | amp output |  |
-| W226 | J11.6 | LS1.2 | `SPK_ALERT_N` | 18 | BK | amp output |  |
-| W231 | J12.1 | LS2.1 | `SPK_L_P` | 18 | RD | amp output |  |
-| W232 | J12.2 | LS2.2 | `SPK_L_N` | 18 | BK | amp output |  |
-| W233 | J12.3 | LS3.1 | `SPK_R_P` | 18 | RD | amp output |  |
-| W234 | J12.4 | LS3.2 | `SPK_R_N` | 18 | BK | amp output |  |
+| W210 | J10.1 | H1.1 | `5V_LOGIC` | 20 | RD | F4 2 A (24 V side) | Split to both wheels |
+| W211 | J10.1 | H2.1 | `5V_LOGIC` | 20 | RD | F4 2 A (24 V side) |  |
+| W212 | J10.2 | H1.2 | `GND` | 20 | BK | - |  |
+| W213 | J10.2 | H2.2 | `GND` | 20 | BK | - |  |
+| W214 | J10.3 | H1.3 | `WHEEL_SPEED_L` | 20 | WH | - |  |
+| W215 | J10.4 | H2.3 | `WHEEL_SPEED_R` | 20 | WH | - |  |
+| W216 | J10.5 | U25.VCC | `3V3_SENSE` | 20 | VT | U2 current limit | AS5600: ≤ 30 cm of I2C, twisted with GND |
+| W217 | J10.2 | U25.GND | `GND` | 20 | BK | - |  |
+| W218 | J10.6 | U25.SCL | `I2C_SCL` | 20 | GY | - |  |
+| W219 | J10.7 | U25.SDA | `I2C_SDA` | 20 | GN | - |  |
+| W220 | U25.DIR | U25.GND | `GND` | 20 | BK | - | Jumper on the sensor board |
+| W221 | J10.8 | SW5.1 | `SEAT` | 20 | WH | - |  |
+| W222 | SW5.2 | J10.2 | `GND` | 20 | BK | - |  |
+| W223 | J11.1 | U27.VCC | `3V3_SENSE` | 20 | VT | U2 current limit |  |
+| W224 | J11.2 | U27.GND | `GND` | 20 | BK | - |  |
+| W225 | J11.3 | U27.SCL | `I2C_SCL` | 20 | GY | - |  |
+| W226 | J11.4 | U27.SDA | `I2C_SDA` | 20 | GN | - |  |
+| W229 | J11.5 | LS1.1 | `SPK_ALERT_P` | 18 | RD | amp output |  |
+| W230 | J11.6 | LS1.2 | `SPK_ALERT_N` | 18 | BK | amp output |  |
+| W235 | J12.1 | LS2.1 | `SPK_L_P` | 18 | RD | amp output |  |
+| W236 | J12.2 | LS2.2 | `SPK_L_N` | 18 | BK | amp output |  |
+| W237 | J12.3 | LS3.1 | `SPK_R_P` | 18 | RD | amp output |  |
+| W238 | J12.4 | LS3.2 | `SPK_R_N` | 18 | BK | amp output |  |
 
 ## The car's own harness: listed so the circuit is complete, not touched (24 wires)
 
@@ -264,27 +268,27 @@ Lengths are not given yet: they wait on the box and under-seat measurements (#18
 | W003 | BT1.2 | J1.2 | `GND` | stock | stock | - | Battery − |
 | W019 | J2.1 | SW1.1 | `KEY_FEED` | stock | stock | F2 15 A | Key switch |
 | W020 | SW1.2 | J2.2 | `KEY_24V` | stock | stock | F2 15 A |  |
-| W113 | J6.1 | M1.1 | `FL_M_POS` | stock | stock | F1 40 A + driver current limit | Stock motor wiring (or the splitter, #33) |
-| W114 | J6.2 | M1.2 | `FL_M_NEG` | stock | stock | F1 40 A + driver current limit | Stock motor wiring (or the splitter, #33) |
-| W115 | J6.3 | M2.1 | `FR_M_POS` | stock | stock | F1 40 A + driver current limit | Stock motor wiring (or the splitter, #33) |
-| W116 | J6.4 | M2.2 | `FR_M_NEG` | stock | stock | F1 40 A + driver current limit | Stock motor wiring (or the splitter, #33) |
-| W117 | J7.1 | M3.1 | `RL_M_POS` | stock | stock | F1 40 A + driver current limit | Stock motor wiring (or the splitter, #33) |
-| W118 | J7.2 | M3.2 | `RL_M_NEG` | stock | stock | F1 40 A + driver current limit | Stock motor wiring (or the splitter, #33) |
-| W119 | J7.3 | M4.1 | `RR_M_POS` | stock | stock | F1 40 A + driver current limit | Stock motor wiring (or the splitter, #33) |
-| W120 | J7.4 | M4.2 | `RR_M_NEG` | stock | stock | F1 40 A + driver current limit | Stock motor wiring (or the splitter, #33) |
-| W121 | J5.1 | M5.1 | `STEER_M_POS` | stock | stock | F1 40 A + driver current limit | Stock motor wiring (or the splitter, #33) |
-| W122 | J5.2 | M5.2 | `STEER_M_NEG` | stock | stock | F1 40 A + driver current limit | Stock motor wiring (or the splitter, #33) |
-| W149 | J3.1 | PED1.V+ | `PEDAL_VCC` | stock | stock | - |  |
-| W150 | J3.2 | PED1.SIG | `PEDAL_IN` | stock | stock | - |  |
-| W151 | J3.3 | PED1.GND | `GND` | stock | stock | - |  |
-| W193 | J4.1 | SW2.1 | `SHIFT_FORWARD` | stock | stock | - |  |
-| W194 | SW2.2 | J4.3 | `GND` | stock | stock | - |  |
-| W195 | J4.2 | SW3.1 | `SHIFT_REVERSE` | stock | stock | - |  |
-| W196 | SW3.2 | J4.3 | `GND` | stock | stock | - |  |
-| W199 | J8.3 | SW4.1 | `HORN` | stock | stock | - |  |
-| W200 | SW4.2 | J8.4 | `GND` | stock | stock | - |  |
-| W201 | J8.1 | LP1.1 | `LIGHTS_12V` | stock | stock | F9 3 A | Lights (voltage TBD) |
-| W202 | LP1.2 | J8.2 | `LIGHTS_SW` | stock | stock | F9 3 A |  |
+| W117 | J6.1 | M1.1 | `FL_M_POS` | stock | stock | F11-F14 15 A (one per motor) | Stock motor wiring (or the splitter, #33) |
+| W118 | J6.2 | M1.2 | `FL_M_NEG` | stock | stock | F1 40 A + driver current limit | Stock motor wiring (or the splitter, #33) |
+| W119 | J6.3 | M2.1 | `FR_M_POS` | stock | stock | F11-F14 15 A (one per motor) | Stock motor wiring (or the splitter, #33) |
+| W120 | J6.4 | M2.2 | `FR_M_NEG` | stock | stock | F1 40 A + driver current limit | Stock motor wiring (or the splitter, #33) |
+| W121 | J7.1 | M3.1 | `RL_M_POS` | stock | stock | F11-F14 15 A (one per motor) | Stock motor wiring (or the splitter, #33) |
+| W122 | J7.2 | M3.2 | `RL_M_NEG` | stock | stock | F1 40 A + driver current limit | Stock motor wiring (or the splitter, #33) |
+| W123 | J7.3 | M4.1 | `RR_M_POS` | stock | stock | F11-F14 15 A (one per motor) | Stock motor wiring (or the splitter, #33) |
+| W124 | J7.4 | M4.2 | `RR_M_NEG` | stock | stock | F1 40 A + driver current limit | Stock motor wiring (or the splitter, #33) |
+| W125 | J5.1 | M5.1 | `STEER_M_POS` | stock | stock | F1 40 A | Stock motor wiring (or the splitter, #33) |
+| W126 | J5.2 | M5.2 | `STEER_M_NEG` | stock | stock | F1 40 A + driver current limit | Stock motor wiring (or the splitter, #33) |
+| W153 | J3.1 | PED1.V+ | `PEDAL_VCC` | stock | stock | - |  |
+| W154 | J3.2 | PED1.SIG | `PEDAL_IN` | stock | stock | - |  |
+| W155 | J3.3 | PED1.GND | `GND` | stock | stock | - |  |
+| W197 | J4.1 | SW2.1 | `SHIFT_FORWARD` | stock | stock | - |  |
+| W198 | SW2.2 | J4.3 | `GND` | stock | stock | - |  |
+| W199 | J4.2 | SW3.1 | `SHIFT_REVERSE` | stock | stock | - |  |
+| W200 | SW3.2 | J4.3 | `GND` | stock | stock | - |  |
+| W203 | J8.3 | SW4.1 | `HORN` | stock | stock | - |  |
+| W204 | SW4.2 | J8.4 | `GND` | stock | stock | - |  |
+| W205 | J8.1 | LP1.1 | `LIGHTS_12V` | stock | stock | F9 3 A | Lights (voltage TBD) |
+| W206 | LP1.2 | J8.2 | `LIGHTS_SW` | stock | stock | F9 3 A |  |
 
 ## Pins with no wire of their own
 

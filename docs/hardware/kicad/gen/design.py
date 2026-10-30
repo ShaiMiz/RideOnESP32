@@ -277,7 +277,8 @@ def drive_channel(c, n):
     return [
         Part(DRV_REF[c], M("IBT2_BTS7960"), f"IBT-2 {c}", {
             "1": f"{pre}_RPWM", "2": f"{pre}_LPWM", "3": en, "4": en, "5": f"{isn}_RAW", "6": f"{isn}_RAW",
-            "7": "3V3_SENSE", "8": "GND", "B+": "MOTOR_24V", "B-": "GND", "M+": f"{pre}_M_POS", "M-": f"{pre}_M_NEG"},
+            "7": "3V3_SENSE", "8": "GND", "B+": "MOTOR_24V", "B-": "GND",
+            "M+": f"{pre}_M_POS" if c == "STEER" else f"{c}_DRV_POS", "M-": f"{pre}_M_NEG"},
             f"IBT-2 (BTS7960) board, {CH_NAME[c]}", OWNED if c != "STEER" else BUY, "box",
             "VCC on 3.3 V so 3.3 V PWM reads as a clean HIGH. Never tie R_EN/L_EN to VCC"),
         R(f"R10{n}", "4.7k", f"{isn}_RAW", isn, note="IS series resistor"),
@@ -288,7 +289,13 @@ def drive_channel(c, n):
            note="CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'"),
         R(f"R11{n}", "10k", en, "GND", loc=f"box, at {DRV_REF[c]} header",
           note="Pull-down at each board, so a broken enable wire still leaves that board off"),
-    ]
+    ] + ([] if c == "STEER" else [
+        F(f"F1{n}", "15 A", f"{c}_DRV_POS", f"{c}_M_POS", "Inline blade fuse holder (12 AWG) + 15 A blade",
+          loc=f"box, in the {c} motor + lead", source=BUY,
+          note="Stalled-motor backstop (safety review M3): one stalled motor draws under the 20 A software limit and "
+               "the 40 A main fuse. 15 A is a placeholder: set it from the motor label (#14), above the running current, "
+               "below the stall current"),
+    ])
 
 
 drive = []
@@ -403,8 +410,10 @@ SHEETS = [
     dict(file="drive", blurb='U10-U13 IBT-2 per wheel, U14 steering IBT-2.\n470 µF each, enable pull-down per board,\nIS current-sense networks to the ADS1115s.', name="Drive, variant A (4 + 1 IBT-2)", parts=drive, comments=[
         "Layer 2: DRIVE_EN and STEER_EN are pulled down at every board, so boot, reset, flashing and crashes leave the drivers off.",
         "IS sense: R_IS + L_IS joined (only one side conducts at a time) -> 4.7k -> ADS1115, 10 nF filter, clamp to 3.3 V.",
+        "F11-F14: a fuse in each drive motor's + lead, so a stalled wheel blows its own fuse (safety review M3).",
         "Variant B (2 x MDD20A) replaces this sheet: see variant_b/."], columns=[
-        (f"{c} ({CH_NAME[c]})", [DRV_REF[c], f"C11{i + 1}", f"R11{i + 1}", f"R10{i + 1}", f"C10{i + 1}", f"D10{i + 1}"])
+        (f"{c} ({CH_NAME[c]})", [DRV_REF[c], f"C11{i + 1}", f"R11{i + 1}", f"R10{i + 1}", f"C10{i + 1}", f"D10{i + 1}"]
+         + ([] if c == "STEER" else [f"F1{i + 1}"]))
         for i, c in enumerate(CH + ["STEER"])
     ]),
     dict(file="controller", blurb='ESP32 (nets from include/pins.h), ELRS receiver,\npedal input protection, wheel-speed pull-ups,\nDS18B20, DFPlayer serial, listen-only Bluetooth log.', name="Controller and inputs", parts=controller, comments=[
@@ -499,7 +508,7 @@ VARIANT_B = [
     CP("C41", "470µ 50V", "MOTOR_24V", "GND", "Electrolytic 470 µF ≥35 V low-ESR", "box, on U41 VB+/VB−"),
     CP("C42", "470µ 50V", "MOTOR_24V", "GND", "Electrolytic 470 µF ≥35 V low-ESR", "box, on U42 VB+/VB−"),
 ] + [
-    Part(f"U4{3 + i}", M("Current_Sensor_TBD"), f"CS {c}", {"IP+": f"{c}_CS_IN", "IP-": f"{c}_M_POS", "VCC": "3V3_SENSE", "GND": "GND", "OUT": f"IS_{c}"},
+    Part(f"U4{3 + i}", M("Current_Sensor_TBD"), f"CS {c}", {"IP+": f"{c}_CS_IN", "IP-": f"{c}_DRV_POS", "VCC": "3V3_SENSE", "GND": "GND", "OUT": f"IS_{c}"},
          "Hall current sensor, 3.3 V output (e.g. ACS724 or ACS758 with divider; TBD)", TBD, "box", issue="#32")
     for i, c in enumerate(CH)
 ] + [PWR("#FLG40", "MOTOR_24V"), PWR("#FLG41", "GND"), PWR("#FLG42", "3V3_SENSE")]

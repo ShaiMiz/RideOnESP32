@@ -175,9 +175,9 @@ void test_setup_failure_is_permanent() {
 
 // ---- Link loss -------------------------------------------------------------------------
 
-// SR-02: radio off at full speed: braked to zero within LINK_TIMEOUT_MS plus
-// the braking time (1 / BRAKE_PER_S), drive enable held while braking and
-// dropped once stopped. This is the firmware's share of the SAFETY.md stop time.
+// SR-02, SR-26: radio off at full speed: braked to zero within LINK_TIMEOUT_MS
+// plus the braking time (1 / BRAKE_PER_S), drive enable held while braking and
+// dropped once stopped, and that never takes longer than SAFETY.md's 0.75 s.
 void test_link_loss_at_full_speed_brakes_to_zero_within_budget() {
   car->driveParentAtFullSpeed();
   car->radioOff();
@@ -196,6 +196,7 @@ void test_link_loss_at_full_speed_brakes_to_zero_within_budget() {
   char msg[64];
   snprintf(msg, sizeof msg, "stopped %lu ms after the radio went off", (unsigned long)(stoppedAt - off));
   TEST_ASSERT_TRUE_MESSAGE(stoppedAt - off <= budget, msg);
+  TEST_ASSERT_TRUE_MESSAGE(stoppedAt - off <= 750, msg);  // SAFETY.md
   TEST_ASSERT_FALSE(car->out.lines.drive);
   TEST_ASSERT_EQUAL(Mode::Locked, car->out.mode);
   TEST_ASSERT_TRUE(car->ctl.faults().has(FAULT_LINK_LOST));

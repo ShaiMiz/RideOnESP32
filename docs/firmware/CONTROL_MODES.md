@@ -25,7 +25,7 @@ If the mode switch is already at Kid or Parent at power-on, nothing happens unti
 | Event | Result | Back to driving |
 | --- | --- | --- |
 | Kill switch | Killed: drive enable and contactor cut at once | Kill switch to run, then the steps above |
-| Radio link lost (no packet for 200 ms, link quality under 40 %, or link flag down) | Locked: brakes to a stop in about 0.5 s | When the link is back, the steps above |
+| Radio link lost (no packet for 200 ms, link quality under 40 %, or link flag down) | Locked: output to zero in 0.5 s of braking, at most 0.75 s after the radio goes off (SAFETY.md) | When the link is back, the steps above |
 | Link quality 40 to 70 % | Still drives, at half the speed cap | Automatic when the link improves |
 | Over-current, driver fault | Locked, drive enable cut at once (coast), then the contactor opens: a shorted driver ignores its enable | The steps above, once the cause is gone |
 | Tilt | Locked, drive enable cut at once (coast) | The steps above, once the cause is gone |

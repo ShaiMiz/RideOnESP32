@@ -26,7 +26,7 @@ Pin-by-pin reasons, boot behaviour and the header position of each pin are in [P
 | 35 | Wheel-speed hall, right | Input only; external 10k pull-up |
 | 5 | Sound module RX | Serial TX; strapping pin, idles HIGH |
 | 15 | DS18B20 data | 1-Wire, 4.7k pull-up keeps the strapping pin HIGH |
-| 1 / 3 | Nothing | USB serial: flashing and logs |
+| 1 / 3 | Nothing | USB serial: flashing and logs. TX0 also feeds the listen-only Bluetooth module through 1k ([BLUETOOTH.md](BLUETOOTH.md)) |
 | VIN | 5 V logic rail | Not 3.3 V |
 | 3V3 | Nothing | |
 | GND | Star ground | |

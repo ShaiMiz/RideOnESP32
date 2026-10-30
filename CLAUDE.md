@@ -4,7 +4,7 @@ Notes for Claude Code (in Cursor or in the cloud) working on this repo. Read [RE
 
 ## What this is
 
-ESP32 firmware for a 24 V Can-Am Maverick X3 ride-on (4WD: four drive motors, plus a steering motor). The child drives with the pedal; a parent drives or overrides with an ExpressLRS radio over CRSF. **No phone app, Wi-Fi or Bluetooth**, ever.
+ESP32 firmware for a 24 V Can-Am Maverick X3 ride-on (4WD: four drive motors, plus a steering motor). The child drives with the pedal; a parent drives or overrides with an ExpressLRS radio over CRSF. **No phone app, and the ESP32's Wi-Fi and Bluetooth stay off**, ever. The one exception Shai chose (26 Oct 2026) is a separate listen-only Bluetooth module that hears the serial log, with its TXD unconnected ([BLUETOOTH.md](docs/hardware/BLUETOOTH.md)).
 
 Priorities, in order: **1. safety, 2. smooth driving, 3. everything else.** When a feature and a safety rule disagree, the rule wins.
 
@@ -36,6 +36,7 @@ PlatformIO project (pioarduino platform, Arduino core 3.x). Libraries come from 
 | `car` | The car firmware, `src/main.cpp` |
 | `radio_check` | Phase 2 bench: radio link and channels only |
 | `one_motor` | Phase 4 bench: one motor on the front-left driver |
+| `bt_setup` | Bench: sets the listen-only Bluetooth log module to 115200 baud, once |
 | `native` | Unit tests for `lib/rideon_core` and the pin map, run on the PC |
 
 ```sh
@@ -64,7 +65,7 @@ On Windows, if `pio` is not on PATH, use the PlatformIO terminal in Cursor or `%
 
 ## Workflow
 
-- `main` is protected. Every change goes through a branch and a PR, with CI green (`pins`, `test`, `verify`, and builds of `car`, `radio_check`, `one_motor`). Shai reviews and merges; don't merge yourself.
+- `main` is protected. Every change goes through a branch and a PR, with CI green (`pins`, `test`, `verify`, and builds of `car`, `radio_check`, `one_motor`, `bt_setup`). Shai reviews and merges; don't merge yourself.
 - Claude in Shai's claude.ai project also opens PRs here from the cloud, and chats aren't shared. The repo, PRs and issues are the shared record: `git pull` and check open PRs before starting, and write decisions into an issue or doc rather than leaving them only in chat.
 - Add a line to [CHANGELOG.md](CHANGELOG.md) for user-visible or safety-relevant changes.
 - Tracking lives in GitHub issues: phase parents #6 (phase 1) to #12 (phase 7), task issues under them, labelled `phase-N`, `safety`, `firmware`, `hardware`, `radio`, `waiting-on-car`. Reference the issue in the PR.

@@ -62,6 +62,9 @@ MODULES = {
     "DFPlayer_Mini": dict(ref="U", descr="DFPlayer Mini MP3 module with 3 W speaker amp (pin numbers are the module's)", left=[
         ("1", "VCC", PI), ("7", "GND", PI), ("2", "RX", I), ("3", "TX", O)],
         right=[("6", "SPK_1", P), ("8", "SPK_2", P), ("16", "BUSY", O)]),
+    "HM10_BLE_Serial": dict(ref="U", descr="HM-10 (CC2541) Bluetooth Low Energy serial module on a 6-pin breakout, listen-only here: TXD not connected",
+                            left=[("VCC", "VCC", PI), ("GND", "GND", PI), ("BRK", "BRK", I)],
+                            right=[("RXD", "RXD", I), ("TXD", "TXD", O), ("STATE", "STATE", O)]),
     "BT_Amp_ZK502T": dict(ref="U", descr="ZK-502T 2 x 50 W Bluetooth amplifier board (Bluetooth on this board only)",
                           left=[("VIN+", "VIN+", PI), ("VIN-", "VIN-", PI)],
                           right=[("L+", "L+", P), ("L-", "L-", P), ("R+", "R+", P), ("R-", "R-", P)]),
@@ -312,6 +315,11 @@ controller = [
     Part("U31", M("DS18B20_Probe"), "DS18B20", {"VDD": "3V3_SENSE", "GND": "GND", "DQ": "ONEWIRE_TEMP"},
          "DS18B20 waterproof probe", BUY, "box, on the hottest driver heatsink"),
     R("R28", "1k", "SOUND_TX", "DF_RX", note="DFPlayer RX series resistor"),
+    R("R29", "1k", "LOG_TX", "BT_RXD", note="Bluetooth RXD series resistor: a dead module can't hold down the USB serial line"),
+    Part("U33", M("HM10_BLE_Serial"), "HM-10", {"VCC": "5V_LOGIC", "GND": "GND", "RXD": "BT_RXD", "TXD": None,
+                                                "STATE": None, "BRK": None},
+         "HM-10 BLE serial module (iPhone and Android)", BUY, "box",
+         "Listen-only log to a phone: hears TX0 (the USB serial log). TXD stays unconnected, so nothing can reach the ESP32. Set to 115200 with the bt_setup bench firmware first"),
 ]
 
 # ---- Sheet 8: I2C bus and inputs -----------------------------------------------------------------
@@ -399,12 +407,13 @@ SHEETS = [
         (f"{c} ({CH_NAME[c]})", [DRV_REF[c], f"C11{i + 1}", f"R11{i + 1}", f"R10{i + 1}", f"C10{i + 1}", f"D10{i + 1}"])
         for i, c in enumerate(CH + ["STEER"])
     ]),
-    dict(file="controller", blurb='ESP32 (nets from include/pins.h), ELRS receiver,\npedal input protection, wheel-speed pull-ups,\nDS18B20, DFPlayer serial.', name="Controller and inputs", parts=controller, comments=[
+    dict(file="controller", blurb='ESP32 (nets from include/pins.h), ELRS receiver,\npedal input protection, wheel-speed pull-ups,\nDS18B20, DFPlayer serial, listen-only Bluetooth log.', name="Controller and inputs", parts=controller, comments=[
         "Pin nets come from include/pins.h; CI keeps pins.h, PINOUT.md and WIRING.md in step and check_netlist.py checks this sheet.",
         "Analog inputs on ADC1 only. GPIO36/39 carry analog only (they glitch when the ADC runs). Kill lines on pins quiet at boot."], columns=[
         ("ESP32", ["U20", "U21"]),
         ("Pedal", ["R22", "R20", "R21", "C20", "D20", "NOTE:pedal"]),
         ("Wheel speed, temperature, sound", ["R23", "C21", "R24", "C22", "R27", "U31", "R28"]),
+        ("Bluetooth log, listen-only", ["R29", "U33"]),
     ]),
     dict(file="i2c_io", blurb='2 x ADS1115 current sense, PCF8574 switches\n(shifter, horn, E-stop sense, seat), MPU-6050,\nPCA9685 accessory PWM.', name="I2C bus and switch inputs", parts=i2c, comments=[
         "I2C on GPIO22 (SCL) / GPIO23 (SDA) at 3.3 V. Addresses: 0x20 0x36 0x3C 0x40 (+0x70 all-call) 0x48 0x49 0x68.",

@@ -258,9 +258,9 @@ def main():
                    comments=["Alternative to sheet 6 of the main project; undecided (#32).",
                              "Nets with flag labels connect to the main project's nets of the same name."],
                    notes=[])
-    # variant B's ESP32-side and motor-side nets end on the main project, so they show one pin here
+    # variant B's ESP32-side and motor-side nets end on the main project (motor + through F11-F14), so they show one pin here
     vb_single = ["FL_RPWM", "FR_RPWM", "RL_RPWM", "RR_RPWM", "FL_LPWM", "FR_LPWM", "RL_LPWM", "RR_LPWM",
-                 "FL_M_POS", "FR_M_POS", "RL_M_POS", "RR_M_POS", "FL_M_NEG", "FR_M_NEG", "RL_M_NEG", "RR_M_NEG",
+                 "FL_DRV_POS", "FR_DRV_POS", "RL_DRV_POS", "RR_DRV_POS", "FL_M_NEG", "FR_M_NEG", "RL_M_NEG", "RR_M_NEG",
                  "IS_FL", "IS_FR", "IS_RL", "IS_RR"]
     vb_parts, vb_nets, _ = build_project("variant_b", [D.VARIANT_B_SHEET], syms, vb_root, allow_single=vb_single)
     tables.write_all(OUT, parts, nets, syms, gpio, vb_parts)

@@ -36,8 +36,10 @@ def net_class(net):
         return 10, "RD", "F1 40 A"
     if net == "MOTOR_24V":
         return 10, "RD/YE", "F1 40 A (after K1)"
-    if net.endswith("_M_POS"):
+    if net.endswith("_DRV_POS"):
         return 12, "RD", "F1 40 A + driver current limit"
+    if net.endswith("_M_POS"):
+        return 12, "RD", "F1 40 A" if net == "STEER_M_POS" else "F11-F14 15 A (one per motor)"
     if net.endswith("_M_NEG"):
         return 12, "BK", "F1 40 A + driver current limit"
     if net in ("KEY_FEED", "KEY_24V"):
@@ -181,7 +183,13 @@ for c in ["FL", "FR", "RL", "RR", "STEER"]:
     run(f"{u}.5", f"{ISR[c]}.1", "box", "IS to A1")
     run("A1:3V3", f"{u}.7", "box", "Logic VCC")
     run("A1:GND", f"{u}.8", "box", "Signal reference; B− is the power ground")
-    run(f"{u}.M+", f"J{6 if c in ('FL', 'FR') else 7 if c != 'STEER' else 5}.{ {'FL': 1, 'FR': 3, 'RL': 1, 'RR': 3, 'STEER': 1}[c] }", "box")
+    jpos = f"J{6 if c in ('FL', 'FR') else 7 if c != 'STEER' else 5}.{ {'FL': 1, 'FR': 3, 'RL': 1, 'RR': 3, 'STEER': 1}[c] }"
+    if c == "STEER":
+        run(f"{u}.M+", jpos, "box")
+    else:
+        fuse = {"FL": "F11", "FR": "F12", "RL": "F13", "RR": "F14"}[c]
+        run(f"{u}.M+", f"{fuse}.1", "box", "Motor + to its inline fuse")
+        run(f"{fuse}.2", jpos, "box")
     run(f"{u}.M-", f"J{6 if c in ('FL', 'FR') else 7 if c != 'STEER' else 5}.{ {'FL': 2, 'FR': 4, 'RL': 2, 'RR': 4, 'STEER': 2}[c] }", "box")
 
 # ---- motors (car side)

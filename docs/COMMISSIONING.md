@@ -1,6 +1,6 @@
 # Commissioning
 
-Each phase ends with a gate that must pass before the next phase starts. **No child rides until phase 6 passes.** Write the date and your initials when a gate passes.
+Each phase ends with a gate that must pass before the next phase starts. **No child rides until phase 6 passes.** Lines marked *(recommended)* go beyond what any shop-bought ride-on is tested for: run them, but a failure turns that feature off rather than holding the phase ([SAFETY.md](../SAFETY.md), [safety review](reviews/2026-10-safety-standards.md)). Write the date and your initials when a gate passes.
 
 Build the new electronics as a removable box and leave the stock wiring intact. The car can then go back to stock with the spare HY2005RX controller at any time.
 
@@ -8,7 +8,8 @@ Build the new electronics as a removable box and leave the stock wiring intact. 
 
 - [ ] Count the BTS7960 boards and confirm the four drive motors.
 - [ ] Read the battery label: voltage, Ah, chemistry. Write it in [hardware/CAR.md](hardware/CAR.md).
-- [ ] Read one drive motor label and the steering motor label.
+- [ ] Read one drive motor label and the steering motor label. The drive motor current sets the F11-F14 fuse size.
+- [ ] Read the key switch rating (#19).
 - [ ] Drive the car once on its stock controller, to know its normal speed and feel.
 
 **Gate:** motor count, battery chemistry and Ah written down. Passed: ____
@@ -34,9 +35,9 @@ Passed: ____
 **Gate:**
 - [ ] With the ESP32 unplugged, the key and the E-stop each cut the load.
 - [ ] With the ESP32 running and the contactor held, pressing the ESP32's reset button opens the contactor.
-- [ ] With R5-R7 fitted (motor-bus sense and bleed), the log shows `bus=` near the battery voltage with the contactor closed and under 30 % within 10 s of it opening.
-- [ ] A 100 Ω 5 W resistor across the contactor studs (standing in for a weld) before key-on gives `K1_WELD`, and the contactor never closes.
-- [ ] Pulling the F3 coil fuse with the car armed gives `NO_BUS`.
+- [ ] *(recommended)* With R5-R7 fitted (motor-bus sense and bleed), the log shows `bus=` near the battery voltage with the contactor closed and under 30 % within 10 s of it opening.
+- [ ] *(recommended)* A 100 Ω 5 W resistor across the contactor studs (standing in for a weld) before key-on gives `K1_WELD`, and the contactor never closes.
+- [ ] *(recommended)* Pulling the F3 coil fuse with the car armed gives `NO_BUS`.
 - [ ] Event log on flash ([LOG_EVENTS.md](firmware/LOG_EVENTS.md)): cut the ESP32's power 10 times, some while it is printing. Every boot prints `BOOT` with the boot number one higher, and `LOG_MOUNT` with `records=` never going down and `torn=` at most 1.
 - [ ] Watchdog: with the contactor held and the car Locked, type `test watchdog` in the serial monitor. The contactor opens, the ESP32 restarts, and the next boot prints `BOOT reset=WATCHDOG`. `log 20` shows the records from before the restart.
 - [ ] Bluetooth log ([hardware/BLUETOOTH.md](hardware/BLUETOOTH.md)), if fitted: `bt_setup` ended with `done`; U33 TXD is not connected (check with a meter: no continuity from TXD to any ESP32 pin). An iPhone and an Android phone each connect to `RideOn` and show the live log. With the car Locked, holding the horn 3 s prints the whole report on the phone, ending with the last log record; holding it while Parent mode is armed and the wheels turn prints nothing.
@@ -53,7 +54,7 @@ Passed: ____
 - [ ] Turning the radio off while the motor runs at full output brings the output to zero within 0.75 s.
 - [ ] After any fault, holding the throttle never restarts the motor. It restarts only after the mode switch goes through Locked with the stick centred.
 - [ ] The kill switch stops the motor and opens the contactor.
-- [ ] The logged current agrees with a clamp meter at three loads (free spin, light brake, heavy brake). If it reads about half or double, `IS_PIN_RESISTOR_OHMS` is wrong (the firmware halves it for the joined IS pins).
+- [ ] *(recommended once F11-F14 are fitted)* The logged current agrees with a clamp meter at three loads (free spin, light brake, heavy brake). If it reads about half or double, `IS_PIN_RESISTOR_OHMS` is wrong (the firmware halves it for the joined IS pins).
 - [ ] A driver or over-current fault opens the contactor as well as cutting the drive enable.
 - [ ] Driver temperature after 10 minutes at 16 kHz PWM is acceptable to the touch.
 
@@ -61,7 +62,7 @@ Passed: ____
 
 ## Phase 5: whole car, wheels off the ground
 
-- [ ] Car on blocks. All five drivers, both ADS1115s, the PCF8574, the PCA9685, the DS18B20 and the pedal connected. Steering calibrated (once `SteeringController` is written).
+- [ ] Car on blocks. All five drivers, both ADS1115s, the PCF8574, the PCA9685, the DS18B20 and the pedal connected. F11-F14 fitted, sized from the motor label. Steering calibrated (once `SteeringController` is written).
 - [ ] Wheel direction: give a small forward command and check each wheel on its own. Set `WHEEL_REVERSED` in `config.h` for any wheel that turns backwards, reflash, and check again.
 - [ ] Both box fans run from key-on (log `fan=1`), and the log shows a sensible `box=` temperature. Then set `BOX_TEMP_REQUIRED = true`.
 - [ ] Flash `pio run -e car -t upload`.
@@ -76,6 +77,10 @@ Passed: ____
 - [ ] The parent stick-back brake overrides the pedal in Kid mode
 - [ ] Crash recorder: with the wheels turning in Parent mode, press the E-stop. The log shows `CRASH_SAVED cause=FAULT ESTOP`, and `crash` lists 50 samples with the output ramping up and the E-stop moment last. Power-cycle: `crash` still shows it
 
+**Gate:** heat and touch, as a toy lab tests a stock car:
+- [ ] Locked wheel: hold one wheel, full throttle for 30 s, then until its fuse blows or `OVERCUR`/`DRIVER` trips. Repeat for each wheel. Nothing smokes, and no wire, motor, driver heatsink or box surface is too hot to keep a hand on (about 50 °C; an IR thermometer helps)
+- [ ] Walk round the car: no sharp edges, screw tips, cut metal or zip-tie ends where the child sits or reaches; fan guards on; our box can't come loose
+
 Passed: ____
 
 ## Phase 6: ground tests, adult only
@@ -83,9 +88,13 @@ Passed: ____
 - [ ] An empty car, then a sandbag of the child's weight, at the lowest speed cap, in an open flat area.
 
 **Gate:**
-- [ ] Stopping distance measured at each speed cap: ____ / ____ / ____
+- [ ] Top speed at each cap (phone GPS, or 10 m and a stopwatch): ____ / ____ / ____ km/h. The top cap is within the limit for the rider's age: 16 km/h from age 6, 6 km/h under 6
+- [ ] Slope hold: on a 10° slope with the sandbag, key off, the car moves no more than 5 cm. If it rolls, fix it before a child rides (low-side brake while parked, or motor-shorting relays; safety review item M2)
 - [ ] Link-loss stop measured at the top cap: ____
-- [ ] Both acceptable.
+- [ ] Full-throttle starts uphill with the sandbag: no `OVERCUR`, no blown fuse
+- [ ] Surface temperatures after 20 minutes of hard driving: box and heatsinks comfortable to touch
+- [ ] *(recommended)* Stopping distance measured at each speed cap: ____ / ____ / ____
+- [ ] All acceptable.
 
 Passed: ____
 

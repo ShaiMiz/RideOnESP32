@@ -8,9 +8,9 @@ Version 2, 25 Oct 2026 (v1: 17 Oct). Car: Can-Am Maverick X3 24 V 4WD (kolbosima
 ## Short answer
 
 1. **The bar.** Every ride-on sold in Israel, the EU or the US is type-tested once per model by a lab against **EN 71-1 / SI 562-1** (mechanics: speed, brakes, stability), **EN 62115** (electrics: stalled motor, short circuit, temperatures, remote control) and, for the US, **ASTM F963 §4.25** (battery-operated toys, including a stalled-motor fire test). Two real lab reports for Chinese ride-ons (below) show exactly which items get ticked. Nobody measures stopping distance, link-loss time, current accuracy or EMC on a ride-on, and nobody fits an E-stop or contactor.
-2. **What's mandatory for us.** 22 items. 11 are already met (🟢 or 🔵). **10 are open (🔴)**: speed in km/h, roll-away, a stalled motor with no backstop, the locked-wheel heat test, surface temperatures, the box's fire rating, switch ratings, sharp edges on our added parts, loudness, and nuisance tripping. The last one (M10) is half met: same battery, but its label (#13) is still unread, so the battery thresholds are a guess.
-3. **What we can stop gating on.** Of our current "before a child rides" gates, 4 go beyond any standard: current calibration against a meter, stopping distance, the contactor weld and bus checks, and the 0.5 s link-loss time. They become **non-gating** (do them when convenient; a failure disables that feature rather than holding the project), provided we add the per-motor fuses in fix C.
-4. **What to do first.** Read the battery label and key switch rating, set the km/h caps, add four per-motor fuses, then run the roll-away test and the locked-wheel test. That's all low-cost and covers every high-concern gap. The ranked list is at the end.
+2. **What's mandatory for us.** 22 items. 12 are already met (🟢 or 🔵); the speed limit is met because the rider is 6.9. **9 are open (🔴)**: roll-away, a stalled motor with no backstop, the locked-wheel heat test, surface temperatures, the box's fire rating, switch ratings, sharp edges on our added parts, loudness, and nuisance tripping. The last one (M10) is half met: same battery, but its label (#13) is still unread, so the battery thresholds are a guess.
+3. **What we stopped gating on (30 Oct).** Three of our "before a child rides" gates go beyond any standard and are now *recommended*: current calibration against a meter (once the motor fuses are fitted), stopping distance, and the contactor weld and bus checks. A failure there turns that feature off rather than holding the project. The link-loss time stays a gate at 0.75 s, Shai's own figure from 28 Oct; the standard only asks that the car stops.
+4. **What to do first.** Read the battery label and key switch rating, add four per-motor fuses, then run the roll-away test and the locked-wheel test. That's all low-cost and covers every high-concern gap. The ranked list is at the end.
 
 **Legal note ◐:** these laws bind whoever *sells* a toy. A parent rebuilding their own child's car isn't legally bound, and once the stock controller is out, the car's CE and SII approval no longer covers it. "Mandatory" below means "what every car on the shelf had to pass, so the bar we won't go below".
 
@@ -39,9 +39,9 @@ So the factory's whole electrical safety case is: **24 V, a fuse, rated wiring a
 
 | # | Item | Required by | Factory tests it | Our status | Fix: how | Complexity | Concern |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| M1 | **Top speed** ≤ 6 km/h (or ≤ 8.2 km/h with a low/high switch shipped in low) for ages 3–6; ≤ 16 km/h for 6 y+ | EN 71-1 4.15.1.8, EN 62115 13.10 ✔, SI 562-1 ◐ | EU/IL: yes. US: no | 🔴 Caps are % of motor power; Kid high and Parent are 100 % | **Code + test:** measure km/h at each cap in phase 6 (phone GPS or 10 m and a stopwatch), then set `KID_CAP_*` and `PARENT_CAP` in config.h. The speed applies in Parent mode too | Low | High |
+| M1 | **Top speed** ≤ 6 km/h (or ≤ 8.2 km/h with a low/high switch shipped in low) for ages 3–6; ≤ 16 km/h for 6 y+ | EN 71-1 4.15.1.8, EN 62115 13.10 ✔, SI 562-1 ◐ | EU/IL: yes. US: no | 🟢 Rider is 6.9 (30 Oct): the limit is 16 km/h, and the stock top speed is 7.5 km/h, so even 100 % is far under it | **Test only:** confirm the top speed at 100 % in phase 6. Only if a child under 6 rides does the 6 km/h limit apply; then set `KID_CAP_*` | Low | Low |
 | M2 | **Roll-away:** a ride-on of 30 kg or more must hold on the brake test ramp (≤ 5 cm), or creep ≤ 0.36 m/s with motor braking | EN 71-1 4.15.1.5, test 8.26.1 ✔ | EU/IL: yes | 🔴 Locked drops drive enable after stopping; kill, E-stop and key-off coast. Untested | **Test first:** car (and later + 35 kg sandbag) on a 10° slope, everything off. If the gearbox holds, done. If not: **code** keeps the low-side brake on while parked in Locked (contactor closed), and **parts**: 4 × 24 V 40 A SPDT automotive relays that short each motor when the contactor is open (the classic Power Wheels brake) | Low test; Medium fix | High |
-| M3 | **Stalled motor:** a locked wheel must not overheat wiring or start a fire | EN 62115 cl. 9 ✔, ASTM 4.25.10.2 / 8.17 ✔ | Yes, every report | 🔴 One stalled motor likely draws < 20 A: software doesn't trip (20 A limit) and the 40 A main fuse never blows | **Parts:** a 15–20 A blade fuse in each motor lead (4 inline holders; size from the motor label, #14). **Code (optional):** an I²t heat-over-time limit per motor, with #44 | Low | High |
+| M3 | **Stalled motor:** a locked wheel must not overheat wiring or start a fire | EN 62115 cl. 9 ✔, ASTM 4.25.10.2 / 8.17 ✔ | Yes, every report | 🔴 One stalled motor likely draws < 20 A, under the software limit and the 40 A main fuse. F11–F14 (one fuse per motor) are now in the schematic and BOM (30 Oct); open until fitted and sized | **Parts:** a 15–20 A blade fuse in each motor lead (4 inline holders; size from the motor label, #14). **Code (optional):** an I²t heat-over-time limit per motor, with #44 | Low | High |
 | M4 | **Short circuit** in main or motor wiring is cleared by a fuse | ASTM 4.25.10.7 ✔, EN 62115 cl. 9 ✔ | Yes | 🟢 40 A fuse within 15 cm; a fuse per rail. M3's motor fuses also protect the 12–14 AWG motor leads | Part of M3 | — | — |
 | M5 | **Locked-wheel and heating test** as the lab runs it: hold full throttle on a locked wheel, record temperatures | EN 62115 cl. 9 ✔, ASTM 8.17 ✔ | Yes | 🔴 Not in COMMISSIONING.md | **Test:** add to phase 5: lock one wheel, full throttle 30 s, then until a fuse or fault trips; touch-check motor, driver, wiring and box | Low | High |
 | M6 | **Accessible surfaces** stay under the temperature limits after normal use and abuse | EN 62115 Table 1 ✔, ASTM 4.25.7–4.25.8 ✔ | Yes | 🔴 Box and heatsinks not measured. `HOT` cut-out at 65 °C inside the box exists (PR #52) | **Test:** after 20 min of hard driving, and after M5, a hand on the box and any surface a child can reach is comfortable (about ≤ 50 °C; an IR thermometer helps) | Low | Medium |
@@ -70,7 +70,7 @@ So the factory's whole electrical safety case is: **24 V, a fuse, rated wiring a
 | O2 | Contactor weld check (`K1_WELD`), `NO_BUS`, bus sense and bleed | Stock has no contactor, so nothing to weld | 🟢 Code done (PR #52) | **Non-gating.** Test when convenient; if it misbehaves, turn it off rather than block the car |
 | O3 | Current calibration against a clamp meter | Stock uses a fixed fuse; nobody calibrates | Open (#15, #29) | **Non-gating once M3's motor fuses are in.** Until then it's our only stall protection, so it gates |
 | O4 | Stopping distance measured at each cap | EN 71-1 tests a parked hold (M2), not stopping distance | Phase 6 gate | **Non-gating, but do it:** it costs 10 minutes in the same session as M1 |
-| O5 | Link loss stops within 0.5 s | Annex J only says it must stop | Phases 2, 4, 6 | Keep the test (it's free), drop the 0.5 s pass/fail number. "Stops" is the gate |
+| O5 | Link loss stops within a set time | Annex J only says it must stop | Phases 2, 4, 6 | Kept as a gate at 0.75 s (200 ms to call the link lost + 0.5 s braking; Shai, 28 Oct) |
 | O6 | Latched faults; no restart while the pedal is held | Beyond the standard ◐ | 🟢 Done | Keep; costs nothing |
 | O7 | Box over-temperature cut-out (`HOT`), fans | Stock has none; M6 is the mandatory part | 🟢 Code done | Keep, non-gating |
 | O8 | Battery under-voltage cut-off | Lead-acid has no requirement; lithium has its BMS | 🟢 Done | Keep |
@@ -103,19 +103,19 @@ Ranked by concern first, then by how easy the fix is.
 | --- | --- | --- | --- | --- |
 | 1 | **A. Battery and key switch labels** (#13, #19) | High | Very low | Two photos. Unblocks battery thresholds, TVS and the key relay decision |
 | 2 | **C. Per-motor fuses** | High | Low | The stalled-motor fire test is in every lab report; a few blade fuses fix it in hardware and remove a calibration gate. Add to the next order |
-| 3 | **B. km/h caps** | High | Low | The legal limit for the age group; just numbers in config.h after one measurement session |
-| 4 | **E. Locked-wheel and heat test** | High | Low | Proves C and M6. No parts |
-| 5 | **D. Roll-away test** (fix only if it fails) | High | Low test, Medium fix | A 42 kg car with a child rolling away is the worst outcome on a slope |
-| 6 | **F. Box fire rating** | Medium | Low | Swap one BOM line before the box is bought |
-| 7 | **G. Edges, pinch points and label** | Medium | Low | A walk-round checklist in phase 5 |
-| 8 | **M20 nuisance tripping** | Low | Low | Falls out of the phase 6 drive |
-| 9 | **H. Loudness cap** | Low | Low | Only once audio is fitted |
+| 3 | **E. Locked-wheel and heat test** | High | Low | Proves C and M6. No parts |
+| 4 | **D. Roll-away test** (fix only if it fails) | High | Low test, Medium fix | A 42 kg car with a child rolling away is the worst outcome on a slope |
+| 5 | **F. Box fire rating** | Medium | Low | Swap one BOM line before the box is bought |
+| 6 | **G. Edges, pinch points and label** | Medium | Low | A walk-round checklist in phase 5 |
+| 7 | **M20 nuisance tripping** | Low | Low | Falls out of the phase 6 drive |
+| 8 | **H. Loudness cap** | Low | Low | Only once audio is fitted |
+| 9 | **B. km/h caps** | Low | Low | Rider is 6.9, limit 16 km/h; the car tops out about 7.5 km/h. Just confirm in phase 6 |
 
-## What changes in our gates if you agree
+## What changed in our gates (30 Oct 2026)
 
-- **SAFETY.md "Before a child rides":** add M1 speed, M2 roll-away, M5 locked-wheel test; drop "within 0.5 s" (keep "stops"); mark current-vs-meter and stopping distance as recommended once the motor fuses are fitted.
-- **COMMISSIONING.md:** phase 5 gets the locked-wheel, surface-temperature and edges checks; phase 6 gets speed per cap and the slope hold; the K1 weld and bus gates move to "recommended".
-- **BOM:** per-motor fuses, a V-0 box, and the relays only if D fails.
+- **SAFETY.md "Before a child rides"** is split into *Required* (what every shop-bought ride-on is lab-tested for) and *Recommended*. Added to Required: key switch rating, motor fuses, locked-wheel test, slope hold, top speed for the rider's age, edges. Moved to Recommended: IS resistor and current-vs-meter (required until F11–F14 are fitted), stopping distance, contactor weld and bus checks. The 0.75 s link-loss stop stays required.
+- **COMMISSIONING.md:** phase 1 reads the key switch rating; phase 3's K1 weld and bus lines and phase 4's clamp-meter line are marked *(recommended)*; phase 5 gets a heat-and-touch gate (locked wheel, edges); phase 6 gets top speed per cap, slope hold, uphill full-throttle starts and surface temperatures.
+- **Schematic and BOM:** F11–F14, a 15 A placeholder blade fuse in each drive motor's + lead inside the box (size from #14). The V-0 or metal box was already in the BOM. The roll-away relays wait on the slope test.
 
 ## Sources
 

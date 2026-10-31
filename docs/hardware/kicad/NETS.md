@@ -30,13 +30,15 @@ Every net in the schematic with its default wire gauge, colour and protecting fu
 | `FAN_24V` | 20 | OG | F7 1 A | accessories power | F7.2, FAN1.1, FAN2.1 |
 | `FAN_LOW` | 20 | BK/WH | F7 1 A | accessories | FAN1.2, FAN2.2, U29.OUT2 |
 | `FAN_PWM` | 22 | BU | - | accessories i2c_io | U28.PWM1, U29.IN2 |
+| `FL_DRV_POS` | 12 | RD | F1 40 A + driver current limit | drive | F11.1, U10.M+ |
 | `FL_LPWM` | 22 | BU | - | controller drive | U10.2, U20.L9 |
 | `FL_M_NEG` | 12 | BK | F1 40 A + driver current limit | drive harness | C201.2, J6.2, M1.2, U10.M- |
-| `FL_M_POS` | 12 | RD | F1 40 A + driver current limit | drive harness | C201.1, J6.1, M1.1, U10.M+ |
+| `FL_M_POS` | 12 | RD | F11-F14 15 A (one per motor) | drive harness | C201.1, F11.2, J6.1, M1.1 |
 | `FL_RPWM` | 22 | BU | - | controller drive | U10.1, U20.L8 |
+| `FR_DRV_POS` | 12 | RD | F1 40 A + driver current limit | drive | F12.1, U11.M+ |
 | `FR_LPWM` | 22 | BU | - | controller drive | U11.2, U20.L11 |
 | `FR_M_NEG` | 12 | BK | F1 40 A + driver current limit | drive harness | C202.2, J6.4, M2.2, U11.M- |
-| `FR_M_POS` | 12 | RD | F1 40 A + driver current limit | drive harness | C202.1, J6.3, M2.1, U11.M+ |
+| `FR_M_POS` | 12 | RD | F11-F14 15 A (one per motor) | drive harness | C202.1, F12.2, J6.3, M2.1 |
 | `FR_RPWM` | 22 | BU | - | controller drive | U11.1, U20.L10 |
 | `GND` | 22 | BK | - | accessories controller drive harness i2c_io power rails | BT1.2, C1.2, C101.2, C102.2, C103.2, C104.2, C105.2, C111.2, C112.2, C113.2, C114.2, C115.2, C2.2, C20.2, C21.2, C22.2, D2.2, H1.2, H2.2, J1.2, J10.2, J11.2, J3.3, J4.3, J8.4, J9.4, PED1.GND, Q1.S, R111.2, R112.2, R113.2, R114.2, R115.2, R2.2, R21.2, R4.2, R6.2, R7.2, S2.34, SW2.2, SW3.2, SW4.2, SW5.2, TB1.1, TB1.10, TB1.11, TB1.12, TB1.2, TB1.3, TB1.4, TB1.5, TB1.6, TB1.7, TB1.8, TB1.9, U1.IN-, U1.OUT-, U10.8, U10.B-, U11.8, U11.B-, U12.8, U12.B-, U13.8, U13.B-, U14.8, U14.B-, U2.GND, U20.L14, U20.R14, U21.GND, U22.ADDR, U22.GND, U23.GND, U24.GND, U25.DIR, U25.GND, U26.AD0, U26.GND, U27.GND, U28.GND, U28.OE, U29.GND, U29.PGND, U3.IN-, U3.OUT-, U30.7, U31.GND, U32.VIN-, U33.GND, U4.IN-, U4.OUT- |
 | `HORN` | 22 | WH | - | harness i2c_io | J8.3, SW4.1, U24.P2 |
@@ -64,13 +66,15 @@ Every net in the schematic with its default wire gauge, colour and protecting fu
 | `PEDAL_IN` | 22 | BN | - | controller harness | J3.2, PED1.SIG, R20.1, R21.1 |
 | `PEDAL_VCC` | 22 | BN | - | controller harness | J3.1, PED1.V+, R22.2 |
 | `Q1_GATE` | 22 | WH | - | power | Q1.G, R1.2 |
+| `RL_DRV_POS` | 12 | RD | F1 40 A + driver current limit | drive | F13.1, U12.M+ |
 | `RL_LPWM` | 22 | BU | - | controller drive | U12.2, U20.L7 |
 | `RL_M_NEG` | 12 | BK | F1 40 A + driver current limit | drive harness | C203.2, J7.2, M3.2, U12.M- |
-| `RL_M_POS` | 12 | RD | F1 40 A + driver current limit | drive harness | C203.1, J7.1, M3.1, U12.M+ |
+| `RL_M_POS` | 12 | RD | F11-F14 15 A (one per motor) | drive harness | C203.1, F13.2, J7.1, M3.1 |
 | `RL_RPWM` | 22 | BU | - | controller drive | U12.1, U20.L6 |
+| `RR_DRV_POS` | 12 | RD | F1 40 A + driver current limit | drive | F14.1, U13.M+ |
 | `RR_LPWM` | 22 | BU | - | controller drive | U13.2, U20.R11 |
 | `RR_M_NEG` | 12 | BK | F1 40 A + driver current limit | drive harness | C204.2, J7.4, M4.2, U13.M- |
-| `RR_M_POS` | 12 | RD | F1 40 A + driver current limit | drive harness | C204.1, J7.3, M4.1, U13.M+ |
+| `RR_M_POS` | 12 | RD | F11-F14 15 A (one per motor) | drive harness | C204.1, F14.2, J7.3, M4.1 |
 | `RR_RPWM` | 22 | BU | - | controller drive | U13.1, U20.L13 |
 | `SEAT` | 22 | WH | - | harness i2c_io | J10.8, SW5.1, U24.P4 |
 | `SHIFT_FORWARD` | 22 | WH | - | harness i2c_io | J4.1, SW2.1, U24.P0 |
@@ -85,7 +89,7 @@ Every net in the schematic with its default wire gauge, colour and protecting fu
 | `STEER_EN` | 22 | YE | - | controller drive | R115.1, U14.3, U14.4, U20.R12 |
 | `STEER_LPWM` | 22 | BU | - | controller drive | U14.2, U20.R6 |
 | `STEER_M_NEG` | 12 | BK | F1 40 A + driver current limit | drive harness | C205.2, J5.2, M5.2, U14.M- |
-| `STEER_M_POS` | 12 | RD | F1 40 A + driver current limit | drive harness | C205.1, J5.1, M5.1, U14.M+ |
+| `STEER_M_POS` | 12 | RD | F1 40 A | drive harness | C205.1, J5.1, M5.1, U14.M+ |
 | `STEER_RPWM` | 22 | BU | - | controller drive | U14.1, U20.R7 |
 | `U1_IN` | 20 | OG | F4 2 A | power rails | F4.2, U1.IN+ |
 | `U3_IN` | 20 | OG | F5 3 A | power rails | F5.2, U3.IN+ |

@@ -15,6 +15,7 @@ Battery + ─► 40 A fuse (within 15 cm of the terminal) ─► fuse block ─�
 ```
 
 - **Fuse:** 40 A (ANL or maxi blade), matching the stock controller's rating.
+- **Stock 18 A breaker:** the battery pack has its own 18 A thermal breaker ([CAR.md](CAR.md)), upstream of the harness. It stays in circuit and is never bypassed, so the whole car (motors, logic, accessories) shares 18 A sustained.
 - **Key switch** and **red latching mushroom E-stop** are in series with the contactor coil. Either one opens the contactor whatever the ESP32 does.
 - **Contactor:** 24 V coil, or an 80 A+ automotive relay, with a flyback diode across the coil.
 - **MOSFET:** a logic-level N-MOSFET (e.g. IRLZ44N module) in series with the coil, gate on GPIO12 with a 10k pull-down. The ESP32 can open the contactor but can never close it against the key or E-stop. A reset, crash or brown-out opens it. GPIO12 is a strapping pin and must be LOW at boot, which the pull-down also guarantees.

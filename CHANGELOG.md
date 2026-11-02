@@ -18,6 +18,7 @@ A fresh start as a PlatformIO project, built on the v2.2 motor class and the [co
 - Fixed 100 Hz loop, task watchdog, reset reason logged, and a serial log that never blocks.
 - Docs: draft schematic v0.2, safety-standards review, audio plan, and a CLAUDE.md for Claude Code.
 - Bench firmwares `radio_check` (phase 2) and `one_motor` (phase 4).
+- First photos of the stock car ([CAR.md](docs/hardware/CAR.md)): the battery pack has an 18 A thermal breaker that stays in circuit, so the whole car shares 18 A sustained, and the stock power switch is a START/STOP button, not a key.
 - Safety gates follow the toy standards: SAFETY.md and COMMISSIONING.md split into required (what a lab tests on a shop-bought ride-on) and recommended. New required checks: per-motor fuses F11-F14, locked-wheel heat test, slope hold, top speed for the rider's age, key switch rating, edges.
 - Event log: every boot, fault trip, fault end, re-arm, mode, link and battery change is a 32-byte record with boot number, uptime, severity, category, part and values, printed as one line on serial. A fault table counts each fault per part with first/last seen, worst value and freeze frames. Events are listed in [LOG_EVENTS.md](docs/firmware/LOG_EVENTS.md).
 - The log and the fault table survive power-off: records go to a 256 KB flash ring (`evlog` partition, new `partitions.csv`), the fault table to NVS, and a panic or watchdog reset leaves a crash dump that the next boot logs. Flash is erased only at boot or with the car stopped.

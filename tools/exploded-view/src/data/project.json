@@ -17,7 +17,11 @@
   "Weight / size": "42 kg, 147 × 86 × 88 cm, two seats",
   "Rider limit": "about 35 kg",
   "Stock top speed": "4.5 / 6 / 7.5 km/h by gear",
-  "State": "100 % factory original; nothing wired yet"
+  "State": "100 % factory original; nothing wired yet",
+  "Battery protection": "18 A thermal overload breaker with a push-to-reset button, on the battery pack (rated 50 V DC)",
+  "Charging": "Round charge jack on top of the battery pack",
+  "Power switch": "START/STOP push button on the dash, no key",
+  "Stock remote": "Remote / Manual selector on the dash (the HY2005RX has a built-in 2.4 GHz receiver)"
  },
  "bom": [
   {

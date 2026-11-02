@@ -13,4 +13,4 @@ Two separate paths, so music can never affect the drive electronics and the ESP3
 - **Bluetooth lives on the amp board only.** SAFETY.md still holds: the ESP32's Wi-Fi and Bluetooth stay off.
 - **DFPlayer on 5V_ACC, not the logic rail**, so speaker current stays off the ESP32 supply (schematic sheet 4).
 - **Loudness:** EN 71-1 sets limits for toys near a child's ear. The [safety-standards review](../reviews/2026-10-safety-standards.md) lists audio loudness as a gap: cap the amp's volume and measure it before a child rides with music on.
-- **Mounting:** speaker spots are not chosen yet. They wait on photos of the dashboard.
+- **Mounting:** the dashboard photos ([CAR.md](CAR.md)) show a hex speaker grille on each end of the dash, probably the stock speakers. They are the first spots to try for the 3" full-range speakers, once a grille is off and the space behind it is measured. The stock MP3 panel (USB, SD, AUX) sits in the centre and may go when the stock controller does.

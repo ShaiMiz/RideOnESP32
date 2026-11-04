@@ -20,7 +20,7 @@ ORDER_LINES = [
     ("termkit", "Pre-insulated terminal kit", 70.40),
     ("cells", "Vapcell 18650", 69.16),
     ("fuseblock", "6/12 way blade fuse block", 31.01),
-    ("shrink", "Heat shrink 300-2000 pcs", 27.17),
+    ("ferrules", "Wire ferrule kit, 2000 pcs (the receipt's \"300-2000 pcs\" line)", 27.17),
     ("rings", "Ring terminals 220/110 pcs", 24.51),
     ("as5600", "AS5600", 20.22),
     ("estop", "22 mm E-stop 2NO+2NC", 19.42),
@@ -133,8 +133,11 @@ EXTRAS = [
     ("", 1, "20 AWG 4-6 core cable for off-box harnesses (E-stop, sensors, dash)", "Generic", "harness", D.BUY, [], ""),
     ("", 1, "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)", "Generic", "box", D.BUY, [],
      "Was in the cart review, not in the order"),
-    ("", 1, "Ring lugs (M6/M8 for 10 AWG), pre-insulated terminals, ferrules", "Generic", "box", D.ORDER, ["rings", "termkit"], ""),
-    ("", 1, "Heat shrink assortment (also the colour bands)", "Generic", "box", D.ORDER, ["shrink"], ""),
+    ("", 1, "Ring lugs (M6/M8 for 10 AWG) and pre-insulated terminal kit", "Generic", "box", D.ORDER, ["rings", "termkit"], ""),
+    ("", 1, "Wire ferrule kit, 2000 pcs, 0.5-10 mm²", "Generic", "box", D.ORDER, ["ferrules"],
+     "For the screw terminals (IBT-2, MRD068A, A1)"),
+    ("", 1, "Heat shrink assortment (also the colour bands)", "Generic", "box", D.BUY, [],
+     "Not in the 24 Oct order: the line thought to be heat shrink was the ferrule kit"),
     ("", 1, "Box: flame-retardant (UL94 V-0) ABS or metal, ~250 x 200 x 100 mm, IP54", "TBD", "box", D.TBD, [],
      "Size waits on #18; V-0 or metal is item M7 of the safety review (EN 62115 fire test)"),
     ("", 10, "Cable glands PG9 / PG13.5", "Generic nylon", "box", D.BUY, [], ""),
@@ -176,6 +179,7 @@ BUY_LINKS = {
 }
 
 EXTRA_LINKS = {
+    "Heat shrink assortment (also the colour bands)": ae("heat shrink tube assortment"),
     "Pigtail for the AS5600 board's 4-pin plug (match its pitch: JST-GH 1.25 or PH 2.0)": ae("jst gh 1.25 4 pin cable"),
     "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)": ae("22awg silicone wire 10 colors"),
 }
@@ -222,9 +226,12 @@ TOOLS = [dict(zip(("cat", "item", "mfr", "qty", "src", "lines", "premium", "link
     ("Tool", "Solder fume extractor", "Small desk fan with carbon filter", 1, D.BUY, [], "Larger extractor on an arm",
      ae("solder fume extractor"), ""),
     ("Tool", "Heat gun, dual temperature", "Generic 2000 W", 1, D.BUY, [], "Any brand with an adjustable dial", ae("heat gun 2000w"),
-     "For the heat shrink in the order; local hardware stores have them"),
+     "For the heat shrink; local hardware stores have them"),
     ("Tool", "Automatic wire stripper, 10-24 AWG", "Generic self-adjusting stripper", 1, D.BUY, [], "Knipex 12 62 180 (local)",
      ae("automatic wire stripper"), ""),
+    ("Tool", "Self-adjusting ferrule crimper, 0.25-10 mm² (square jaw)", "Generic HSC8 6-4A", 1, D.BUY, [],
+     "Knipex 97 53 14", ae("hsc8 6-4a ferrule crimper"),
+     "For the 2000-pc ferrule kit; skip if the terminal kit came with a ferrule crimper"),
     ("Tool", "Hex crimper for 6-50 mm² lugs", "Generic hexagon lug crimper", 1, D.BUY, [], "Hydraulic crimper (overkill here)",
      ae("hex crimping tool 6-50mm2"), "For the 10 AWG ring lugs; the terminal kit's crimper is for small terminals"),
 ]]

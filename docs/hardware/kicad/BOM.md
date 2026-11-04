@@ -7,7 +7,7 @@
 | Project | RideOnESP32 v3, Can-Am Maverick X3 24 V 4WD ride-on |
 | Revision | Schematic v0.3, drive variant A (4 + 1 IBT-2); BOM of 25 Oct 2026 |
 | Source | Generated from the schematic (gen/design.py) plus the extras and tools in gen/tables.py |
-| Lines | 117: Owned 18, Received 4 Nov 36, To buy 45, TBD 10, Stock car 8 |
+| Lines | 119: Owned 18, Received 4 Nov 36, To buy 47, TBD 10, Stock car 8 |
 | Spent | 1,081.76 ILS (24 Oct AliExpress order). Still to buy: not priced yet |
 
 This is the one list for the project: every part of the car, and every tool and material to build it. Parts that are the same share one line, with all their refs. To add something, add it in gen/tables.py (EXTRAS, TOOLS, BUY_LINKS) or as a schematic part, then regenerate. BOM.csv has the same lines with every column, for sorting and filtering in a spreadsheet.
@@ -94,8 +94,8 @@ This is the one list for the project: every part of the car, and every tool and 
 | 63 | Wiring | - | 1 | MRD068A screw-terminal adapter for the ESP32 | Generic MRD068A | box | Owned | - | - |  |
 | 64 | Wiring | - | 1 | 10 AWG wire, red + black, 10 m | Generic | box | Received 4 Nov | O3 | - | Battery, contactor, driver B+/B− |
 | 65 | Wiring | - | 1 | 12 AWG wire, red + black, 10 m | Generic | box | Received 4 Nov | O4 | - | Driver to motor plugs |
-| 66 | Wiring | - | 1 | Heat shrink assortment (also the colour bands) | Generic | box | Received 4 Nov | O9 | - |  |
-| 67 | Wiring | - | 1 | Ring lugs (M6/M8 for 10 AWG), pre-insulated terminals, ferrules | Generic | box | Received 4 Nov | O10, O6 | - |  |
+| 66 | Wiring | - | 1 | Ring lugs (M6/M8 for 10 AWG) and pre-insulated terminal kit | Generic | box | Received 4 Nov | O10, O6 | - |  |
+| 67 | Wiring | - | 1 | Wire ferrule kit, 2000 pcs, 0.5-10 mm² | Generic | box | Received 4 Nov | O9 | - | For the screw terminals (IBT-2, MRD068A, A1) |
 | 68 | Wiring | A1 | 1 | Interface board: screw-terminal proto board ~70 x 90 mm + 3.5 mm terminals | Generic | box | To buy | - | - | Holds Q1, the sense networks, pull-ups and the battery divider |
 | 69 | Wiring | - | 1 | 14-16 AWG wire, orange or red (key, F6 and 12 V branches) | Generic | box | To buy | - | - | 12 AWG from the order also works |
 | 70 | Wiring | - | 1 | 20 AWG 4-6 core cable for off-box harnesses (E-stop, sensors, dash) | Generic | harness | To buy | - | - |  |
@@ -103,49 +103,51 @@ This is the one list for the project: every part of the car, and every tool and 
 | 72 | Wiring | - | 5 | 8-way 2.54 mm housing + crimp pins for each IBT-2 control header (or JST-XH adapter) | Generic Dupont | box | To buy | - | - | Holds the EN and IS jumpers and the EN pull-down; a dab of hot glue against vibration |
 | 73 | Wiring | - | 10 | Cable glands PG9 / PG13.5 | Generic nylon | box | To buy | - | - |  |
 | 74 | Wiring | - | 4 | Deutsch DT mating pairs with seals: 4-way x2 (J9, J12), 6-way (J11), 8-way (J10) | TE Deutsch DT (or clone) | box edge | To buy | - | - | Mates for J9-J12 |
-| 75 | Wiring | - | 1 | Nylon M3 standoffs and a mounting plate | Generic | box | To buy | - | - |  |
-| 76 | Wiring | - | 1 | Pigtail for the AS5600 board's 4-pin plug (match its pitch: JST-GH 1.25 or PH 2.0) | Generic JST | car | To buy | - | [search](https://www.aliexpress.com/w/wholesale-jst-gh-1.25-4-pin-cable.html?SortType=total_tranpro_desc) | Optional: lets the sensor unplug. Or solder the cable to the board's pads, with strain relief |
-| 77 | Wiring | - | 1 | Box: flame-retardant (UL94 V-0) ABS or metal, ~250 x 200 x 100 mm, IP54 | TBD | box | TBD | - | - | Size waits on #18; V-0 or metal is item M7 of the safety review (EN 62115 fire test) |
-| 78 | Stock car | BT1 | 1 | Stock 24 V battery; voltage, Ah, chemistry TBD | Stock car (Kolbo 8419715) | car | Stock car | - | - | BTS7960 locks out above 27.5 V; check the charger voltage. Issue #13 |
-| 79 | Stock car | M1 M2 M3 M4 | 4 | Stock drive motor (label TBD) | Stock car (Kolbo 8419715) | car | Stock car | - | - | Issue #14 |
-| 80 | Stock car | M5 | 1 | Stock steering motor (label TBD) | Stock car (Kolbo 8419715) | car | Stock car | - | - | Issue #14 |
-| 81 | Stock car | PED1 | 1 | Stock pedal: switch, pot or hall throttle (TBD). Never a line that carries 24 V | Stock car (Kolbo 8419715) | car | Stock car | - | - | Issue #16 |
-| 82 | Stock car | SW1 | 1 | Stock dash key switch (rating TBD; if < 10 A, drive a 30 A relay from it) | Stock car (Kolbo 8419715) | dash | Stock car | - | - | Issue #17 |
-| 83 | Stock car | SW2 | 1 | Stock shifter, forward contact (must be signal-only) | Stock car (Kolbo 8419715) | car | Stock car | - | - | Issue #17 |
-| 84 | Stock car | SW3 | 1 | Stock shifter, reverse contact (must be signal-only) | Stock car (Kolbo 8419715) | car | Stock car | - | - | Issue #17 |
-| 85 | Stock car | SW4 | 1 | Stock horn button | Stock car (Kolbo 8419715) | dash | Stock car | - | - | Issue #17 |
-| 86 | Spare | - | 1 | 10 AWG red wire, 5 m | Generic | - | Owned | - | - | Adds to the 24 Oct wire |
-| 87 | Spare | - | 4 | 555 24 V motors (loose) | Generic | - | Owned | - | - | Spares, if they match the car's motors (#14) |
-| 88 | Spare | - | 1 | BMP280 pressure sensor module | Bosch BMP280 (generic module) | - | Owned | - | - | Not used |
-| 89 | Spare | - | 2 | DDT-S30 tweeters | Generic | - | Owned | - | - | Music path, each via a 10 µF film cap (AUDIO.md) |
-| 90 | Spare | - | 1 | ESP32-WROOM-32D 30-pin DevKit, USB-C (second board) | Espressif ESP32-WROOM-32D (DevKit V1 clone) | - | Owned | - | - | Bench firmwares and a spare |
-| 91 | Spare | - | 1 | HC-12 433 MHz radio module | Generic HC-12 | - | Owned | - | - | Not used: the radio link is ELRS only |
-| 92 | Spare | - | 1 | HY2005RX-24V/40A stock controller (spare) | HY2005RX | - | Owned | - | - | Plan B: puts the car back to stock |
-| 93 | Spare | - | 1 | LM2596 buck module (extra) | TI LM2596 (generic module) | - | Owned | - | - | Spare for U1 |
-| 94 | Spare | - | 1 | Ride-on key switch | Generic | - | Owned | - | - | Spare; could replace SW1 if the stock switch is too weak (#17) |
-| 95 | Spare | - | 5 | XT60 pairs | Amass XT60 (or clone) | - | Owned | - | - | Fallback plugs for J5-J7 |
-| 96 | Tool | - | 1 | ELRS radio transmitter | Jumper T-Lite V2 | bench | Owned | - | - | Parent transmitter |
-| 97 | Tool | - | 2 | 18650 protected cell | Vapcell N40 | bench | Received 4 Nov | O7 | - | For the T-Lite radio |
-| 98 | Tool | - | 1 | DC clamp meter | UNI-T UT210E | bench | Received 4 Nov | O2 | - | Motor and coil current without cutting wires |
-| 99 | Tool | - | 1 | Programmable bench supply, 30 V 10 A | Wanptek WPS3010H | bench | Received 4 Nov | O1 | - | Phases 3-4 run on its current limit instead of the battery |
-| 100 | Tool | - | 3 | USB-TTL adapter | Prolific PL2303 (generic) | bench | Received 4 Nov | O18 | - | Not needed (the ESP32 has USB); harmless spare |
-| 101 | Tool | - | 1 | Automatic wire stripper, 10-24 AWG | Generic self-adjusting stripper | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-automatic-wire-stripper.html?SortType=total_tranpro_desc) | Premium: Knipex 12 62 180 (local) |
-| 102 | Tool | - | 1 | Brass-wool tip cleaner with holder | Generic brass wool in a metal cup | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-brass-wire-tip-cleaner-holder.html?SortType=total_tranpro_desc) | No water needed. Premium: Hakko 599B (genuine sold locally) |
-| 103 | Tool | - | 1 | Desoldering pump | Generic aluminium pump | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-desoldering-pump-aluminum.html?SortType=total_tranpro_desc) | Premium: Engineer SS-02 |
-| 104 | Tool | - | 1 | Heat gun, dual temperature | Generic 2000 W | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-heat-gun-2000w.html?SortType=total_tranpro_desc) | For the heat shrink in the order; local hardware stores have them. Premium: Any brand with an adjustable dial |
-| 105 | Tool | - | 1 | Helping hands, weighted base, 4 flexible arms | Generic 4-arm with clips | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-helping-hands-soldering-4-arms.html?SortType=total_tranpro_desc) | Premium: Same with magnifier and LED |
-| 106 | Tool | - | 1 | Hex crimper for 6-50 mm² lugs | Generic hexagon lug crimper | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-hex-crimping-tool-6-50mm2.html?SortType=total_tranpro_desc) | For the 10 AWG ring lugs; the terminal kit's crimper is for small terminals. Premium: Hydraulic crimper (overkill here) |
-| 107 | Tool | - | 1 | Silicone soldering mat, about 45 x 30 cm | Generic heat-resistant mat with screw trays | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-silicone-soldering-mat.html?SortType=total_tranpro_desc) | Premium: Kaisi silicone mat |
-| 108 | Tool | - | 1 | Solder fume extractor | Small desk fan with carbon filter | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-solder-fume-extractor.html?SortType=total_tranpro_desc) | Premium: Larger extractor on an arm |
-| 109 | Tool | - | 1 | Soldering iron, 60 W or more, 3-5 mm chisel + conical tip | SEQURE S60 or FNIRSI HS-02 (USB-C PD pen iron, ~100 W; needs a 65-100 W PD charger) | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-fnirsi-hs-02.html?SortType=total_tranpro_desc), [search](https://www.aliexpress.com/w/wholesale-aixun-t3a.html?SortType=total_tranpro_desc) | Skip if you already have one this strong: 10 AWG and XT60 need the power. Premium: AIXUN T3A or SUGON T26D station (JBC C245-compatible tips) |
-| 110 | Consumable | - | 2 | Desoldering braid 2.0 and 2.5 mm, 1.5 m | MECHANIC wick | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-goot-wick-desoldering-braid.html?SortType=total_tranpro_desc) | Premium: Goot Wick CP-2015 / CP-3015 |
-| 111 | Consumable | - | 1 | Flux paste, 10 cc syringe with plunger and needle | MECHANIC UV-223 or RMA-223 | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-mechanic-uv-223-flux.html?SortType=total_tranpro_desc) | Flux paste, not solder paste: solder paste is for surface-mount boards and hot air. Premium: Amtech NC-559-V2-TF (often faked on AliExpress) |
-| 112 | Consumable | - | 1 | Isopropyl alcohol 99 % + ESD-safe brush | Generic ESD brush; alcohol from a pharmacy | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-esd-anti-static-brush.html?SortType=total_tranpro_desc) | Buy the alcohol locally: flammable, ships badly. Premium: Flux-remover spray (local) |
-| 113 | Consumable | - | 0 | Lead-free solder wire (instead of 63/37, if kids are near the bench) | Sn99.3/Cu0.7 rosin core | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-sac305-solder-wire.html?SortType=total_tranpro_desc) | Optional; harder to use than 63/37. Premium: SAC305 (Sn96.5/Ag3/Cu0.5) |
-| 114 | Consumable | - | 1 | No-clean flux pen | Generic rosin flux pen | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-no-clean-flux-pen.html?SortType=total_tranpro_desc) | Tinning wire ends. Premium: Kester 951 flux pen |
-| 115 | Consumable | - | 1 | Solder wire Sn63/Pb37 0.8 mm, rosin core 2 % flux, 100 g | Generic 63/37 rosin core | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-sn63pb37-solder-wire-0.8mm.html?SortType=total_tranpro_desc) | Signals and the proto board. 63/37 melts at one point (183 °C), the easiest to use. Premium: Kester 44 or Alpha Fry 63/37 (buy locally: fakes are common on AliExpress) |
-| 116 | Consumable | - | 1 | Solder wire Sn63/Pb37 1.0-1.2 mm, rosin core, 100 g | Generic 63/37 rosin core | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-sn63pb37-solder-wire-1.0mm.html?SortType=total_tranpro_desc) | 10/12 AWG lugs, XT60s, motor tabs. Premium: Kester 44 or Alpha Fry (local) |
-| 117 | Consumable | - | 1 | Soldering tip tinner / refresher | MECHANIC tip refresher | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-soldering-tip-refresher.html?SortType=total_tranpro_desc) | Revives a blackened tip. Premium: Hakko FS-100 or Goot BS-2 |
+| 75 | Wiring | - | 1 | Heat shrink assortment (also the colour bands) | Generic | box | To buy | - | [search](https://www.aliexpress.com/w/wholesale-heat-shrink-tube-assortment.html?SortType=total_tranpro_desc) | Not in the 24 Oct order: the line thought to be heat shrink was the ferrule kit |
+| 76 | Wiring | - | 1 | Nylon M3 standoffs and a mounting plate | Generic | box | To buy | - | - |  |
+| 77 | Wiring | - | 1 | Pigtail for the AS5600 board's 4-pin plug (match its pitch: JST-GH 1.25 or PH 2.0) | Generic JST | car | To buy | - | [search](https://www.aliexpress.com/w/wholesale-jst-gh-1.25-4-pin-cable.html?SortType=total_tranpro_desc) | Optional: lets the sensor unplug. Or solder the cable to the board's pads, with strain relief |
+| 78 | Wiring | - | 1 | Box: flame-retardant (UL94 V-0) ABS or metal, ~250 x 200 x 100 mm, IP54 | TBD | box | TBD | - | - | Size waits on #18; V-0 or metal is item M7 of the safety review (EN 62115 fire test) |
+| 79 | Stock car | BT1 | 1 | Stock 24 V battery; voltage, Ah, chemistry TBD | Stock car (Kolbo 8419715) | car | Stock car | - | - | BTS7960 locks out above 27.5 V; check the charger voltage. Issue #13 |
+| 80 | Stock car | M1 M2 M3 M4 | 4 | Stock drive motor (label TBD) | Stock car (Kolbo 8419715) | car | Stock car | - | - | Issue #14 |
+| 81 | Stock car | M5 | 1 | Stock steering motor (label TBD) | Stock car (Kolbo 8419715) | car | Stock car | - | - | Issue #14 |
+| 82 | Stock car | PED1 | 1 | Stock pedal: switch, pot or hall throttle (TBD). Never a line that carries 24 V | Stock car (Kolbo 8419715) | car | Stock car | - | - | Issue #16 |
+| 83 | Stock car | SW1 | 1 | Stock dash key switch (rating TBD; if < 10 A, drive a 30 A relay from it) | Stock car (Kolbo 8419715) | dash | Stock car | - | - | Issue #17 |
+| 84 | Stock car | SW2 | 1 | Stock shifter, forward contact (must be signal-only) | Stock car (Kolbo 8419715) | car | Stock car | - | - | Issue #17 |
+| 85 | Stock car | SW3 | 1 | Stock shifter, reverse contact (must be signal-only) | Stock car (Kolbo 8419715) | car | Stock car | - | - | Issue #17 |
+| 86 | Stock car | SW4 | 1 | Stock horn button | Stock car (Kolbo 8419715) | dash | Stock car | - | - | Issue #17 |
+| 87 | Spare | - | 1 | 10 AWG red wire, 5 m | Generic | - | Owned | - | - | Adds to the 24 Oct wire |
+| 88 | Spare | - | 4 | 555 24 V motors (loose) | Generic | - | Owned | - | - | Spares, if they match the car's motors (#14) |
+| 89 | Spare | - | 1 | BMP280 pressure sensor module | Bosch BMP280 (generic module) | - | Owned | - | - | Not used |
+| 90 | Spare | - | 2 | DDT-S30 tweeters | Generic | - | Owned | - | - | Music path, each via a 10 µF film cap (AUDIO.md) |
+| 91 | Spare | - | 1 | ESP32-WROOM-32D 30-pin DevKit, USB-C (second board) | Espressif ESP32-WROOM-32D (DevKit V1 clone) | - | Owned | - | - | Bench firmwares and a spare |
+| 92 | Spare | - | 1 | HC-12 433 MHz radio module | Generic HC-12 | - | Owned | - | - | Not used: the radio link is ELRS only |
+| 93 | Spare | - | 1 | HY2005RX-24V/40A stock controller (spare) | HY2005RX | - | Owned | - | - | Plan B: puts the car back to stock |
+| 94 | Spare | - | 1 | LM2596 buck module (extra) | TI LM2596 (generic module) | - | Owned | - | - | Spare for U1 |
+| 95 | Spare | - | 1 | Ride-on key switch | Generic | - | Owned | - | - | Spare; could replace SW1 if the stock switch is too weak (#17) |
+| 96 | Spare | - | 5 | XT60 pairs | Amass XT60 (or clone) | - | Owned | - | - | Fallback plugs for J5-J7 |
+| 97 | Tool | - | 1 | ELRS radio transmitter | Jumper T-Lite V2 | bench | Owned | - | - | Parent transmitter |
+| 98 | Tool | - | 2 | 18650 protected cell | Vapcell N40 | bench | Received 4 Nov | O7 | - | For the T-Lite radio |
+| 99 | Tool | - | 1 | DC clamp meter | UNI-T UT210E | bench | Received 4 Nov | O2 | - | Motor and coil current without cutting wires |
+| 100 | Tool | - | 1 | Programmable bench supply, 30 V 10 A | Wanptek WPS3010H | bench | Received 4 Nov | O1 | - | Phases 3-4 run on its current limit instead of the battery |
+| 101 | Tool | - | 3 | USB-TTL adapter | Prolific PL2303 (generic) | bench | Received 4 Nov | O18 | - | Not needed (the ESP32 has USB); harmless spare |
+| 102 | Tool | - | 1 | Automatic wire stripper, 10-24 AWG | Generic self-adjusting stripper | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-automatic-wire-stripper.html?SortType=total_tranpro_desc) | Premium: Knipex 12 62 180 (local) |
+| 103 | Tool | - | 1 | Brass-wool tip cleaner with holder | Generic brass wool in a metal cup | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-brass-wire-tip-cleaner-holder.html?SortType=total_tranpro_desc) | No water needed. Premium: Hakko 599B (genuine sold locally) |
+| 104 | Tool | - | 1 | Desoldering pump | Generic aluminium pump | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-desoldering-pump-aluminum.html?SortType=total_tranpro_desc) | Premium: Engineer SS-02 |
+| 105 | Tool | - | 1 | Heat gun, dual temperature | Generic 2000 W | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-heat-gun-2000w.html?SortType=total_tranpro_desc) | For the heat shrink; local hardware stores have them. Premium: Any brand with an adjustable dial |
+| 106 | Tool | - | 1 | Helping hands, weighted base, 4 flexible arms | Generic 4-arm with clips | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-helping-hands-soldering-4-arms.html?SortType=total_tranpro_desc) | Premium: Same with magnifier and LED |
+| 107 | Tool | - | 1 | Hex crimper for 6-50 mm² lugs | Generic hexagon lug crimper | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-hex-crimping-tool-6-50mm2.html?SortType=total_tranpro_desc) | For the 10 AWG ring lugs; the terminal kit's crimper is for small terminals. Premium: Hydraulic crimper (overkill here) |
+| 108 | Tool | - | 1 | Self-adjusting ferrule crimper, 0.25-10 mm² (square jaw) | Generic HSC8 6-4A | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-hsc8-6-4a-ferrule-crimper.html?SortType=total_tranpro_desc) | For the 2000-pc ferrule kit; skip if the terminal kit came with a ferrule crimper. Premium: Knipex 97 53 14 |
+| 109 | Tool | - | 1 | Silicone soldering mat, about 45 x 30 cm | Generic heat-resistant mat with screw trays | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-silicone-soldering-mat.html?SortType=total_tranpro_desc) | Premium: Kaisi silicone mat |
+| 110 | Tool | - | 1 | Solder fume extractor | Small desk fan with carbon filter | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-solder-fume-extractor.html?SortType=total_tranpro_desc) | Premium: Larger extractor on an arm |
+| 111 | Tool | - | 1 | Soldering iron, 60 W or more, 3-5 mm chisel + conical tip | SEQURE S60 or FNIRSI HS-02 (USB-C PD pen iron, ~100 W; needs a 65-100 W PD charger) | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-fnirsi-hs-02.html?SortType=total_tranpro_desc), [search](https://www.aliexpress.com/w/wholesale-aixun-t3a.html?SortType=total_tranpro_desc) | Skip if you already have one this strong: 10 AWG and XT60 need the power. Premium: AIXUN T3A or SUGON T26D station (JBC C245-compatible tips) |
+| 112 | Consumable | - | 2 | Desoldering braid 2.0 and 2.5 mm, 1.5 m | MECHANIC wick | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-goot-wick-desoldering-braid.html?SortType=total_tranpro_desc) | Premium: Goot Wick CP-2015 / CP-3015 |
+| 113 | Consumable | - | 1 | Flux paste, 10 cc syringe with plunger and needle | MECHANIC UV-223 or RMA-223 | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-mechanic-uv-223-flux.html?SortType=total_tranpro_desc) | Flux paste, not solder paste: solder paste is for surface-mount boards and hot air. Premium: Amtech NC-559-V2-TF (often faked on AliExpress) |
+| 114 | Consumable | - | 1 | Isopropyl alcohol 99 % + ESD-safe brush | Generic ESD brush; alcohol from a pharmacy | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-esd-anti-static-brush.html?SortType=total_tranpro_desc) | Buy the alcohol locally: flammable, ships badly. Premium: Flux-remover spray (local) |
+| 115 | Consumable | - | 0 | Lead-free solder wire (instead of 63/37, if kids are near the bench) | Sn99.3/Cu0.7 rosin core | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-sac305-solder-wire.html?SortType=total_tranpro_desc) | Optional; harder to use than 63/37. Premium: SAC305 (Sn96.5/Ag3/Cu0.5) |
+| 116 | Consumable | - | 1 | No-clean flux pen | Generic rosin flux pen | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-no-clean-flux-pen.html?SortType=total_tranpro_desc) | Tinning wire ends. Premium: Kester 951 flux pen |
+| 117 | Consumable | - | 1 | Solder wire Sn63/Pb37 0.8 mm, rosin core 2 % flux, 100 g | Generic 63/37 rosin core | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-sn63pb37-solder-wire-0.8mm.html?SortType=total_tranpro_desc) | Signals and the proto board. 63/37 melts at one point (183 °C), the easiest to use. Premium: Kester 44 or Alpha Fry 63/37 (buy locally: fakes are common on AliExpress) |
+| 118 | Consumable | - | 1 | Solder wire Sn63/Pb37 1.0-1.2 mm, rosin core, 100 g | Generic 63/37 rosin core | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-sn63pb37-solder-wire-1.0mm.html?SortType=total_tranpro_desc) | 10/12 AWG lugs, XT60s, motor tabs. Premium: Kester 44 or Alpha Fry (local) |
+| 119 | Consumable | - | 1 | Soldering tip tinner / refresher | MECHANIC tip refresher | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-soldering-tip-refresher.html?SortType=total_tranpro_desc) | Revives a blackened tip. Premium: Hakko FS-100 or Goot BS-2 |
 
 ## Cost: the 24 Oct order
 
@@ -153,16 +155,16 @@ Prices as the PayPal receipt gives them. Some receipt lines are split (two ANL l
 
 | Order line | Item (as the receipt truncates it) | ILS | BOM lines |
 |---|---|---|---|
-| O1 | Wanptek programmable bench supply | 258.19 | 99 |
-| O2 | UNI-T UT210E clamp meter | 165.67 | 98 |
+| O1 | Wanptek programmable bench supply | 258.19 | 100 |
+| O2 | UNI-T UT210E clamp meter | 165.67 | 99 |
 | O3 | 10 m/lot wire (lot 1), 10 AWG | 88.34 | 64 |
 | O4 | 10 m/lot wire (lot 2), 12 AWG | 64.02 | 65 |
 | O5 | ZJW100 (SW80) 125 A contactor | 72.88 | 30 |
-| O6 | Pre-insulated terminal kit | 70.40 | 67 |
-| O7 | Vapcell 18650 | 69.16 | 97 |
+| O6 | Pre-insulated terminal kit | 70.40 | 66 |
+| O7 | Vapcell 18650 | 69.16 | 98 |
 | O8 | 6/12 way blade fuse block | 31.01 | 29 |
-| O9 | Heat shrink 300-2000 pcs | 27.17 | 66 |
-| O10 | Ring terminals 220/110 pcs | 24.51 | 67 |
+| O9 | Wire ferrule kit, 2000 pcs (the receipt's "300-2000 pcs" line) | 27.17 | 67 |
+| O10 | Ring terminals 220/110 pcs | 24.51 | 66 |
 | O11 | AS5600 | 20.22 | 10 |
 | O12 | 22 mm E-stop 2NO+2NC | 19.42 | 31 |
 | O13 | Resistor kit, 60 values | 17.19 | 41, 42, 43, 44, 45, 46, 47 |
@@ -170,7 +172,7 @@ Prices as the PayPal receipt gives them. Some receipt lines are split (two ANL l
 | O15 | ADS1115 | 14.22 | 8 |
 | O16 | ANL fuse holder (2 lines) | 19.74 | 21 |
 | O17 | PCF8574 | 12.14 | 9 |
-| O18 | PL2303 USB-TTL 3 pcs | 11.09 | 100 |
+| O18 | PL2303 USB-TTL 3 pcs | 11.09 | 101 |
 | O19 | 12 AWG inline fuse holder x3 | 9.22 | 22, 27, 28 |
 | O20 | IRLZ44N x10 | 7.88 | 36 |
 | O21 | High-speed switching diodes x50 | 6.74 | 35 |

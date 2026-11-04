@@ -7,7 +7,7 @@
 | Project | RideOnESP32 v3, Can-Am Maverick X3 24 V 4WD ride-on |
 | Revision | Schematic v0.3, drive variant A (4 + 1 IBT-2); BOM of 25 Oct 2026 |
 | Source | Generated from the schematic (gen/design.py) plus the extras and tools in gen/tables.py |
-| Lines | 119: Owned 18, Received 4 Nov 36, To buy 47, TBD 10, Stock car 8 |
+| Lines | 120: Owned 18, Received 4 Nov 37, To buy 47, TBD 10, Stock car 8 |
 | Spent | 1,081.76 ILS (24 Oct AliExpress order). Still to buy: not priced yet |
 
 This is the one list for the project: every part of the car, and every tool and material to build it. Parts that are the same share one line, with all their refs. To add something, add it in gen/tables.py (EXTRAS, TOOLS, BUY_LINKS) or as a schematic part, then regenerate. BOM.csv has the same lines with every column, for sorting and filtering in a spreadsheet.
@@ -94,7 +94,7 @@ This is the one list for the project: every part of the car, and every tool and 
 | 63 | Wiring | - | 1 | MRD068A screw-terminal adapter for the ESP32 | Generic MRD068A | box | Owned | - | - |  |
 | 64 | Wiring | - | 1 | 10 AWG wire, red + black, 10 m | Generic | box | Received 4 Nov | O3 | - | Battery, contactor, driver B+/B− |
 | 65 | Wiring | - | 1 | 12 AWG wire, red + black, 10 m | Generic | box | Received 4 Nov | O4 | - | Driver to motor plugs |
-| 66 | Wiring | - | 1 | Ring lugs (M6/M8 for 10 AWG) and pre-insulated terminal kit | Generic | box | Received 4 Nov | O10, O6 | - |  |
+| 66 | Wiring | - | 1 | Ring terminals, 220/110 pc kit (check it has M6/M8 lugs for 10 AWG) | Generic | box | Received 4 Nov | O10 | - |  |
 | 67 | Wiring | - | 1 | Wire ferrule kit, 2000 pcs, 0.5-10 mm² | Generic | box | Received 4 Nov | O9 | - | For the screw terminals (IBT-2, MRD068A, A1) |
 | 68 | Wiring | A1 | 1 | Interface board: screw-terminal proto board ~70 x 90 mm + 3.5 mm terminals | Generic | box | To buy | - | - | Holds Q1, the sense networks, pull-ups and the battery divider |
 | 69 | Wiring | - | 1 | 14-16 AWG wire, orange or red (key, F6 and 12 V branches) | Generic | box | To buy | - | - | 12 AWG from the order also works |
@@ -127,27 +127,28 @@ This is the one list for the project: every part of the car, and every tool and 
 | 96 | Spare | - | 5 | XT60 pairs | Amass XT60 (or clone) | - | Owned | - | - | Fallback plugs for J5-J7 |
 | 97 | Tool | - | 1 | ELRS radio transmitter | Jumper T-Lite V2 | bench | Owned | - | - | Parent transmitter |
 | 98 | Tool | - | 2 | 18650 protected cell | Vapcell N40 | bench | Received 4 Nov | O7 | - | For the T-Lite radio |
-| 99 | Tool | - | 1 | DC clamp meter | UNI-T UT210E | bench | Received 4 Nov | O2 | - | Motor and coil current without cutting wires |
-| 100 | Tool | - | 1 | Programmable bench supply, 30 V 10 A | Wanptek WPS3010H | bench | Received 4 Nov | O1 | - | Phases 3-4 run on its current limit instead of the battery |
-| 101 | Tool | - | 3 | USB-TTL adapter | Prolific PL2303 (generic) | bench | Received 4 Nov | O18 | - | Not needed (the ESP32 has USB); harmless spare |
-| 102 | Tool | - | 1 | Automatic wire stripper, 10-24 AWG | Generic self-adjusting stripper | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-automatic-wire-stripper.html?SortType=total_tranpro_desc) | Premium: Knipex 12 62 180 (local) |
-| 103 | Tool | - | 1 | Brass-wool tip cleaner with holder | Generic brass wool in a metal cup | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-brass-wire-tip-cleaner-holder.html?SortType=total_tranpro_desc) | No water needed. Premium: Hakko 599B (genuine sold locally) |
-| 104 | Tool | - | 1 | Desoldering pump | Generic aluminium pump | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-desoldering-pump-aluminum.html?SortType=total_tranpro_desc) | Premium: Engineer SS-02 |
-| 105 | Tool | - | 1 | Heat gun, dual temperature | Generic 2000 W | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-heat-gun-2000w.html?SortType=total_tranpro_desc) | For the heat shrink; local hardware stores have them. Premium: Any brand with an adjustable dial |
-| 106 | Tool | - | 1 | Helping hands, weighted base, 4 flexible arms | Generic 4-arm with clips | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-helping-hands-soldering-4-arms.html?SortType=total_tranpro_desc) | Premium: Same with magnifier and LED |
-| 107 | Tool | - | 1 | Hex crimper for 6-50 mm² lugs | Generic hexagon lug crimper | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-hex-crimping-tool-6-50mm2.html?SortType=total_tranpro_desc) | For the 10 AWG ring lugs; the terminal kit's crimper is for small terminals. Premium: Hydraulic crimper (overkill here) |
-| 108 | Tool | - | 1 | Self-adjusting ferrule crimper, 0.25-10 mm² (square jaw) | Generic HSC8 6-4A | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-hsc8-6-4a-ferrule-crimper.html?SortType=total_tranpro_desc) | For the 2000-pc ferrule kit; skip if the terminal kit came with a ferrule crimper. Premium: Knipex 97 53 14 |
-| 109 | Tool | - | 1 | Silicone soldering mat, about 45 x 30 cm | Generic heat-resistant mat with screw trays | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-silicone-soldering-mat.html?SortType=total_tranpro_desc) | Premium: Kaisi silicone mat |
-| 110 | Tool | - | 1 | Solder fume extractor | Small desk fan with carbon filter | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-solder-fume-extractor.html?SortType=total_tranpro_desc) | Premium: Larger extractor on an arm |
-| 111 | Tool | - | 1 | Soldering iron, 60 W or more, 3-5 mm chisel + conical tip | SEQURE S60 or FNIRSI HS-02 (USB-C PD pen iron, ~100 W; needs a 65-100 W PD charger) | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-fnirsi-hs-02.html?SortType=total_tranpro_desc), [search](https://www.aliexpress.com/w/wholesale-aixun-t3a.html?SortType=total_tranpro_desc) | Skip if you already have one this strong: 10 AWG and XT60 need the power. Premium: AIXUN T3A or SUGON T26D station (JBC C245-compatible tips) |
-| 112 | Consumable | - | 2 | Desoldering braid 2.0 and 2.5 mm, 1.5 m | MECHANIC wick | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-goot-wick-desoldering-braid.html?SortType=total_tranpro_desc) | Premium: Goot Wick CP-2015 / CP-3015 |
-| 113 | Consumable | - | 1 | Flux paste, 10 cc syringe with plunger and needle | MECHANIC UV-223 or RMA-223 | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-mechanic-uv-223-flux.html?SortType=total_tranpro_desc) | Flux paste, not solder paste: solder paste is for surface-mount boards and hot air. Premium: Amtech NC-559-V2-TF (often faked on AliExpress) |
-| 114 | Consumable | - | 1 | Isopropyl alcohol 99 % + ESD-safe brush | Generic ESD brush; alcohol from a pharmacy | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-esd-anti-static-brush.html?SortType=total_tranpro_desc) | Buy the alcohol locally: flammable, ships badly. Premium: Flux-remover spray (local) |
-| 115 | Consumable | - | 0 | Lead-free solder wire (instead of 63/37, if kids are near the bench) | Sn99.3/Cu0.7 rosin core | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-sac305-solder-wire.html?SortType=total_tranpro_desc) | Optional; harder to use than 63/37. Premium: SAC305 (Sn96.5/Ag3/Cu0.5) |
-| 116 | Consumable | - | 1 | No-clean flux pen | Generic rosin flux pen | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-no-clean-flux-pen.html?SortType=total_tranpro_desc) | Tinning wire ends. Premium: Kester 951 flux pen |
-| 117 | Consumable | - | 1 | Solder wire Sn63/Pb37 0.8 mm, rosin core 2 % flux, 100 g | Generic 63/37 rosin core | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-sn63pb37-solder-wire-0.8mm.html?SortType=total_tranpro_desc) | Signals and the proto board. 63/37 melts at one point (183 °C), the easiest to use. Premium: Kester 44 or Alpha Fry 63/37 (buy locally: fakes are common on AliExpress) |
-| 118 | Consumable | - | 1 | Solder wire Sn63/Pb37 1.0-1.2 mm, rosin core, 100 g | Generic 63/37 rosin core | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-sn63pb37-solder-wire-1.0mm.html?SortType=total_tranpro_desc) | 10/12 AWG lugs, XT60s, motor tabs. Premium: Kester 44 or Alpha Fry (local) |
-| 119 | Consumable | - | 1 | Soldering tip tinner / refresher | MECHANIC tip refresher | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-soldering-tip-refresher.html?SortType=total_tranpro_desc) | Revives a blackened tip. Premium: Hakko FS-100 or Goot BS-2 |
+| 99 | Tool | - | 1 | Crimping pliers, ratchet, 4 swap jaws (insulated terminals, ferrules, ...) | Lion Rage HS-30J | bench | Received 4 Nov | O6 | - | Use the jaw marked with mm² ferrule sizes for ferrules, the red/blue/yellow one for insulated terminals |
+| 100 | Tool | - | 1 | DC clamp meter | UNI-T UT210E | bench | Received 4 Nov | O2 | - | Motor and coil current without cutting wires |
+| 101 | Tool | - | 1 | Programmable bench supply, 30 V 10 A | Wanptek WPS3010H | bench | Received 4 Nov | O1 | - | Phases 3-4 run on its current limit instead of the battery |
+| 102 | Tool | - | 3 | USB-TTL adapter | Prolific PL2303 (generic) | bench | Received 4 Nov | O18 | - | Not needed (the ESP32 has USB); harmless spare |
+| 103 | Tool | - | 1 | Automatic wire stripper, 10-24 AWG | Generic self-adjusting stripper | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-automatic-wire-stripper.html?SortType=total_tranpro_desc) | Premium: Knipex 12 62 180 (local) |
+| 104 | Tool | - | 1 | Brass-wool tip cleaner with holder | Generic brass wool in a metal cup | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-brass-wire-tip-cleaner-holder.html?SortType=total_tranpro_desc) | No water needed. Premium: Hakko 599B (genuine sold locally) |
+| 105 | Tool | - | 1 | Desoldering pump | Generic aluminium pump | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-desoldering-pump-aluminum.html?SortType=total_tranpro_desc) | Premium: Engineer SS-02 |
+| 106 | Tool | - | 1 | Heat gun, dual temperature | Generic 2000 W | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-heat-gun-2000w.html?SortType=total_tranpro_desc) | For the heat shrink; local hardware stores have them. Premium: Any brand with an adjustable dial |
+| 107 | Tool | - | 1 | Helping hands, weighted base, 4 flexible arms | Generic 4-arm with clips | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-helping-hands-soldering-4-arms.html?SortType=total_tranpro_desc) | Premium: Same with magnifier and LED |
+| 108 | Tool | - | 1 | Hex crimper for 6-50 mm² lugs | Generic hexagon lug crimper | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-hex-crimping-tool-6-50mm2.html?SortType=total_tranpro_desc) | For the 10 AWG ring lugs; the HS-30J is for small terminals. Premium: Hydraulic crimper (overkill here) |
+| 109 | Tool | - | 0 | Self-adjusting ferrule crimper, 0.25-10 mm² (square jaw) | Generic HSC8 6-4A | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-hsc8-6-4a-ferrule-crimper.html?SortType=total_tranpro_desc) | Optional: only if none of the HS-30J jaws is a ferrule jaw. Premium: Knipex 97 53 14 |
+| 110 | Tool | - | 1 | Silicone soldering mat, about 45 x 30 cm | Generic heat-resistant mat with screw trays | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-silicone-soldering-mat.html?SortType=total_tranpro_desc) | Premium: Kaisi silicone mat |
+| 111 | Tool | - | 1 | Solder fume extractor | Small desk fan with carbon filter | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-solder-fume-extractor.html?SortType=total_tranpro_desc) | Premium: Larger extractor on an arm |
+| 112 | Tool | - | 1 | Soldering iron, 60 W or more, 3-5 mm chisel + conical tip | SEQURE S60 or FNIRSI HS-02 (USB-C PD pen iron, ~100 W; needs a 65-100 W PD charger) | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-fnirsi-hs-02.html?SortType=total_tranpro_desc), [search](https://www.aliexpress.com/w/wholesale-aixun-t3a.html?SortType=total_tranpro_desc) | Skip if you already have one this strong: 10 AWG and XT60 need the power. Premium: AIXUN T3A or SUGON T26D station (JBC C245-compatible tips) |
+| 113 | Consumable | - | 2 | Desoldering braid 2.0 and 2.5 mm, 1.5 m | MECHANIC wick | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-goot-wick-desoldering-braid.html?SortType=total_tranpro_desc) | Premium: Goot Wick CP-2015 / CP-3015 |
+| 114 | Consumable | - | 1 | Flux paste, 10 cc syringe with plunger and needle | MECHANIC UV-223 or RMA-223 | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-mechanic-uv-223-flux.html?SortType=total_tranpro_desc) | Flux paste, not solder paste: solder paste is for surface-mount boards and hot air. Premium: Amtech NC-559-V2-TF (often faked on AliExpress) |
+| 115 | Consumable | - | 1 | Isopropyl alcohol 99 % + ESD-safe brush | Generic ESD brush; alcohol from a pharmacy | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-esd-anti-static-brush.html?SortType=total_tranpro_desc) | Buy the alcohol locally: flammable, ships badly. Premium: Flux-remover spray (local) |
+| 116 | Consumable | - | 0 | Lead-free solder wire (instead of 63/37, if kids are near the bench) | Sn99.3/Cu0.7 rosin core | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-sac305-solder-wire.html?SortType=total_tranpro_desc) | Optional; harder to use than 63/37. Premium: SAC305 (Sn96.5/Ag3/Cu0.5) |
+| 117 | Consumable | - | 1 | No-clean flux pen | Generic rosin flux pen | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-no-clean-flux-pen.html?SortType=total_tranpro_desc) | Tinning wire ends. Premium: Kester 951 flux pen |
+| 118 | Consumable | - | 1 | Solder wire Sn63/Pb37 0.8 mm, rosin core 2 % flux, 100 g | Generic 63/37 rosin core | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-sn63pb37-solder-wire-0.8mm.html?SortType=total_tranpro_desc) | Signals and the proto board. 63/37 melts at one point (183 °C), the easiest to use. Premium: Kester 44 or Alpha Fry 63/37 (buy locally: fakes are common on AliExpress) |
+| 119 | Consumable | - | 1 | Solder wire Sn63/Pb37 1.0-1.2 mm, rosin core, 100 g | Generic 63/37 rosin core | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-sn63pb37-solder-wire-1.0mm.html?SortType=total_tranpro_desc) | 10/12 AWG lugs, XT60s, motor tabs. Premium: Kester 44 or Alpha Fry (local) |
+| 120 | Consumable | - | 1 | Soldering tip tinner / refresher | MECHANIC tip refresher | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-soldering-tip-refresher.html?SortType=total_tranpro_desc) | Revives a blackened tip. Premium: Hakko FS-100 or Goot BS-2 |
 
 ## Cost: the 24 Oct order
 
@@ -155,12 +156,12 @@ Prices as the PayPal receipt gives them. Some receipt lines are split (two ANL l
 
 | Order line | Item (as the receipt truncates it) | ILS | BOM lines |
 |---|---|---|---|
-| O1 | Wanptek programmable bench supply | 258.19 | 100 |
-| O2 | UNI-T UT210E clamp meter | 165.67 | 99 |
+| O1 | Wanptek programmable bench supply | 258.19 | 101 |
+| O2 | UNI-T UT210E clamp meter | 165.67 | 100 |
 | O3 | 10 m/lot wire (lot 1), 10 AWG | 88.34 | 64 |
 | O4 | 10 m/lot wire (lot 2), 12 AWG | 64.02 | 65 |
 | O5 | ZJW100 (SW80) 125 A contactor | 72.88 | 30 |
-| O6 | Pre-insulated terminal kit | 70.40 | 66 |
+| O6 | Crimping pliers kit, Lion Rage HS-30J, 4 jaws ("Pre insulated terminal...") | 70.40 | 99 |
 | O7 | Vapcell 18650 | 69.16 | 98 |
 | O8 | 6/12 way blade fuse block | 31.01 | 29 |
 | O9 | Wire ferrule kit, 2000 pcs (the receipt's "300-2000 pcs" line) | 27.17 | 67 |
@@ -172,7 +173,7 @@ Prices as the PayPal receipt gives them. Some receipt lines are split (two ANL l
 | O15 | ADS1115 | 14.22 | 8 |
 | O16 | ANL fuse holder (2 lines) | 19.74 | 21 |
 | O17 | PCF8574 | 12.14 | 9 |
-| O18 | PL2303 USB-TTL 3 pcs | 11.09 | 101 |
+| O18 | PL2303 USB-TTL 3 pcs | 11.09 | 102 |
 | O19 | 12 AWG inline fuse holder x3 | 9.22 | 22, 27, 28 |
 | O20 | IRLZ44N x10 | 7.88 | 36 |
 | O21 | High-speed switching diodes x50 | 6.74 | 35 |

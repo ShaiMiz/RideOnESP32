@@ -215,7 +215,7 @@ ROOT_NOTES = dict(
             "(used on more than one sheet); plain text labels stay on one sheet.",
             "Each box above is a sheet: double-click it in KiCad to open it",
             "(or page down in the PDF). Location field: box, A1 (the interface board),",
-            "car, dash. Source field: owned, ordered 24 Oct, stock car, to buy, TBD.",
+            "car, dash. Source field: owned, received 4 Nov (24 Oct order), stock car, to buy, TBD.",
             "Tables: NETS.md, CONNECTORS.md, WIRE_LIST.md, BOM.md (same data)."], 125.0),
         ("Three safety layers (POWER_CHAIN.md)", [
             "1. A power chain a person can always cut, no software:",

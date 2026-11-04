@@ -37,7 +37,7 @@ The schematic is generated, like v0.2, so the drawing, the tables and the pin ma
 - `python3 gen/generate.py` writes the KiCad files and the tables. The ESP32's pin nets are read from [include/pins.h](../../../include/pins.h), so a pin change shows up here on the next run. It stops if a net has one pin, if a wire joins two different nets, or if any pin has no wire and no stated reason. CI runs it and fails if the committed files are out of date.
 - [check.sh](check.sh) then runs KiCad's own ERC (0 errors, 0 warnings in v0.3), exports KiCad's netlist and checks it against design.py and pins.h with [gen/check_netlist.py](gen/check_netlist.py), and writes the PDFs. It uses the official `kicad/kicad:9.0` Docker image, or a local KiCad with `KICAD_CLI=kicad-cli`.
 
-Style: every pin has a short stub and a net label, so each pin says where it goes. Flag-shaped labels are nets used on more than one sheet. Each part carries `Part`, `Source` (owned, ordered 24 Oct, to buy, TBD, stock car), `Location` (box, A1, car, dash) and `Note` fields, which the BOM comes from. Footprints are left empty: there is no PCB; the box is wired from modules on screw terminals plus one small interface board A1.
+Style: every pin has a short stub and a net label, so each pin says where it goes. Flag-shaped labels are nets used on more than one sheet. Each part carries `Part`, `Source` (owned, received 4 Nov, to buy, TBD, stock car), `Location` (box, A1, car, dash) and `Note` fields, which the BOM comes from. Footprints are left empty: there is no PCB; the box is wired from modules on screw terminals plus one small interface board A1.
 
 ## Changes from draft v0.2
 

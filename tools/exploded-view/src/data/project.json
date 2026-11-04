@@ -200,7 +200,7 @@
    "model": "AMS AMS1117-3.3 (generic module)",
    "category": "Module",
    "where": "box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "3V3_SENSE: IBT-2 logic, I2C devices, clamps, pedal. About 0.1 A",
    "fields": {
     "Line": "7",
@@ -210,7 +210,7 @@
     "Description": "AMS1117-3.3 module",
     "Manufacturer / part number": "AMS AMS1117-3.3 (generic module)",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O22",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "3V3_SENSE: IBT-2 logic, I2C devices, clamps, pedal. About 0.1 A"
@@ -229,7 +229,7 @@
    "model": "TI ADS1115 (generic module)",
    "category": "Module",
    "where": "box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "U22: Drive current sense; U23: Steering current sense (A0), motor bus (A2); A1 reserved for AS5600 OUT, A3 spare",
    "fields": {
     "Line": "8",
@@ -239,7 +239,7 @@
     "Description": "ADS1115 module",
     "Manufacturer / part number": "TI ADS1115 (generic module)",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O15",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "U22: Drive current sense; U23: Steering current sense (A0), motor bus (A2); A1 reserved for AS5600 OUT, A3 spare"
@@ -257,7 +257,7 @@
    "model": "TI PCF8574 (generic module)",
    "category": "Module",
    "where": "box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "Switches pull to GND: 0 = pressed",
    "fields": {
     "Line": "9",
@@ -267,7 +267,7 @@
     "Description": "PCF8574 module, A2-A0 jumpers all to GND",
     "Manufacturer / part number": "TI PCF8574 (generic module)",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O17",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "Switches pull to GND: 0 = pressed"
@@ -285,7 +285,7 @@
    "model": "ams OSRAM AS5600 (generic module)",
    "category": "Module",
    "where": "car",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "Over ~30 cm of cable: use OUT on ADS#2 A1, or a bus buffer (TBD #11 in v0.2)",
    "fields": {
     "Line": "10",
@@ -295,7 +295,7 @@
     "Description": "AS5600 module + diametric magnet",
     "Manufacturer / part number": "ams OSRAM AS5600 (generic module)",
     "Where": "car",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O11",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "Over ~30 cm of cable: use OUT on ADS#2 A1, or a bus buffer (TBD #11 in v0.2)"
@@ -585,7 +585,7 @@
    "model": "Generic ANL",
    "category": "Power",
    "where": "car",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "Unfused wire before F1 must stay under 15 cm. If the stock harness already has a 40 A fuse this close, that fuse is F1",
    "fields": {
     "Line": "21",
@@ -595,7 +595,7 @@
     "Description": "ANL fuse holder + 40 A ANL fuse",
     "Manufacturer / part number": "Generic ANL",
     "Where": "car",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O16",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "Unfused wire before F1 must stay under 15 cm. If the stock harness already has a 40 A fuse this close, that fuse is F1"
@@ -617,7 +617,7 @@
    "model": "Generic ATO/ATC blade",
    "category": "Power",
    "where": "box",
-   "status": "Ordered 24 Oct 1, To buy 4",
+   "status": "Received 4 Nov 1, To buy 4",
    "note": "F2: Feeds the key; protects the key wiring; F11-F14: Stalled-motor backstop (safety review M3): one stalled motor draws under the 20 A software limit and the 40 A main fuse. 15 A is a placeholder: set it from the motor label (#14), above the running current, below the stall current. Spec: Inline ATO/ATC blade fuse holder for 12 AWG, with cover; plus 15 A and 20 A blades (size from #14)",
    "fields": {
     "Line": "22",
@@ -627,7 +627,7 @@
     "Description": "Inline blade fuse holder (12 AWG) + 15 A blade",
     "Manufacturer / part number": "Generic ATO/ATC blade",
     "Where": "box",
-    "Status": "Ordered 24 Oct 1, To buy 4",
+    "Status": "Received 4 Nov 1, To buy 4",
     "Order line": "O19, O25",
     "Supplier": "AliExpress, 24 Oct order",
     "Link": "https://www.aliexpress.com/w/wholesale-inline-blade-fuse-holder-12awg.html?SortType=total_tranpro_desc",
@@ -650,7 +650,7 @@
    "model": "Generic ATO/ATC blade",
    "category": "Power",
    "where": "box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "F3: K1 coil chain; F7: Box fans; F8: Battery divider wire (0.5 A in v0.2; 1 A is in the order)",
    "fields": {
     "Line": "23",
@@ -660,7 +660,7 @@
     "Description": "Blade fuse 1 A in the fuse block",
     "Manufacturer / part number": "Generic ATO/ATC blade",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O25",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "F3: K1 coil chain; F7: Box fans; F8: Battery divider wire (0.5 A in v0.2; 1 A is in the order)"
@@ -678,7 +678,7 @@
    "model": "Generic ATO/ATC blade",
    "category": "Power",
    "where": "box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "5V_LOGIC buck input",
    "fields": {
     "Line": "24",
@@ -688,7 +688,7 @@
     "Description": "Blade fuse 2 A in the fuse block",
     "Manufacturer / part number": "Generic ATO/ATC blade",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O25",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "5V_LOGIC buck input"
@@ -706,7 +706,7 @@
    "model": "Generic ATO/ATC blade",
    "category": "Power",
    "where": "box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "5V_ACC buck input",
    "fields": {
     "Line": "25",
@@ -716,7 +716,7 @@
     "Description": "Blade fuse 3 A in the fuse block",
     "Manufacturer / part number": "Generic ATO/ATC blade",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O25",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "5V_ACC buck input"
@@ -734,7 +734,7 @@
    "model": "Generic ATO/ATC blade",
    "category": "Power",
    "where": "box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "12V_ACC buck input",
    "fields": {
     "Line": "26",
@@ -744,7 +744,7 @@
     "Description": "Blade fuse 10 A in the fuse block",
     "Manufacturer / part number": "Generic ATO/ATC blade",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O25",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "12V_ACC buck input"
@@ -762,7 +762,7 @@
    "model": "Generic ATO/ATC blade",
    "category": "Power",
    "where": "box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "Lights branch of the 10-20 A buck",
    "fields": {
     "Line": "27",
@@ -772,7 +772,7 @@
     "Description": "Inline blade fuse holder (ordered, 3 pcs) + 3 A",
     "Manufacturer / part number": "Generic ATO/ATC blade",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O19, O25",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "Lights branch of the 10-20 A buck"
@@ -790,7 +790,7 @@
    "model": "Generic ATO/ATC blade",
    "category": "Power",
    "where": "box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "Music amp branch",
    "fields": {
     "Line": "28",
@@ -800,7 +800,7 @@
     "Description": "Inline blade fuse holder (ordered, 3 pcs) + 10 A",
     "Manufacturer / part number": "Generic ATO/ATC blade",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O19, O25",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "Music amp branch"
@@ -818,7 +818,7 @@
    "model": "Generic",
    "category": "Power",
    "where": "box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "",
    "fields": {
     "Line": "29",
@@ -828,7 +828,7 @@
     "Description": "6/12-way blade fuse block with common bus (holds F3-F8)",
     "Manufacturer / part number": "Generic",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O8",
     "Supplier": "AliExpress, 24 Oct order"
    },
@@ -845,7 +845,7 @@
    "model": "ZJW100 / SW80 type (generic)",
    "category": "Power",
    "where": "box (may mount beside it: ~10 cm tall)",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "Measure its coil current on the bench; if over 0.6 A make F3 2 A",
    "fields": {
     "Line": "30",
@@ -855,7 +855,7 @@
     "Description": "ZJW100 (SW80 type) contactor, 125 A, 24 V coil",
     "Manufacturer / part number": "ZJW100 / SW80 type (generic)",
     "Where": "box (may mount beside it: ~10 cm tall)",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O5",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "Measure its coil current on the bench; if over 0.6 A make F3 2 A"
@@ -873,7 +873,7 @@
    "model": "Generic 22 mm",
    "category": "Power",
    "where": "dash",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "Both NC blocks in series with the K1 coil (a welded NC block still leaves one that opens). NO3 reads the state",
    "fields": {
     "Line": "31",
@@ -883,7 +883,7 @@
     "Description": "22 mm latching E-stop 2NO + 2NC",
     "Manufacturer / part number": "Generic 22 mm",
     "Where": "dash",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O12",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "Both NC blocks in series with the K1 coil (a welded NC block still leaves one that opens). NO3 reads the state"
@@ -952,7 +952,7 @@
    "model": "Generic 1N4007",
    "category": "Discrete",
    "where": "box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "A plain diode slows K1 opening a little; a 1N4007 + 24 V zener in series opens faster (optional)",
    "fields": {
     "Line": "34",
@@ -962,7 +962,7 @@
     "Description": "1N4007, flyback across the K1 coil",
     "Manufacturer / part number": "Generic 1N4007",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O23",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "A plain diode slows K1 opening a little; a 1N4007 + 24 V zener in series opens faster (optional)"
@@ -985,7 +985,7 @@
    "model": "Generic 1N4148",
    "category": "Discrete",
    "where": "A1",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "D20: pedal clamp to 3.3 V; D101-D105: IS clamp to 3.3 V. Clamps the 4-7 mA fault current so the ADS1115 input stays ≤ 3.6 V",
    "fields": {
     "Line": "35",
@@ -995,7 +995,7 @@
     "Description": "1N4148 small-signal diode",
     "Manufacturer / part number": "Generic 1N4148",
     "Where": "A1",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O21",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "D20: pedal clamp to 3.3 V; D101-D105: IS clamp to 3.3 V. Clamps the 4-7 mA fault current so the ADS1115 input stays ≤ 3.6 V"
@@ -1013,7 +1013,7 @@
    "model": "Infineon IRLZ44NPBF",
    "category": "Discrete",
    "where": "A1",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "The ESP32 can open K1 but never close it against the key or E-stop",
    "fields": {
     "Line": "36",
@@ -1023,7 +1023,7 @@
     "Description": "IRLZ44N logic-level N-MOSFET, TO-220",
     "Manufacturer / part number": "Infineon IRLZ44NPBF",
     "Where": "A1",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O20",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "The ESP32 can open K1 but never close it against the key or E-stop"
@@ -1078,7 +1078,7 @@
    "model": "Generic MLCC",
    "category": "Passive",
    "where": "A1, car",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "C201-C204: across the motor terminals. Noise suppression; solder right on the motor tabs; C205: across the motor terminals",
    "fields": {
     "Line": "38",
@@ -1088,7 +1088,7 @@
     "Description": "Ceramic capacitor 100n, 50 V",
     "Manufacturer / part number": "Generic MLCC",
     "Where": "A1, car",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O24",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "C201-C204: across the motor terminals. Noise suppression; solder right on the motor tabs; C205: across the motor terminals"
@@ -1110,7 +1110,7 @@
    "model": "Generic MLCC",
    "category": "Passive",
    "where": "A1",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "IS filter",
    "fields": {
     "Line": "39",
@@ -1120,7 +1120,7 @@
     "Description": "Ceramic capacitor 10n, 50 V",
     "Manufacturer / part number": "Generic MLCC",
     "Where": "A1",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O24",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "IS filter"
@@ -1142,7 +1142,7 @@
    "model": "Generic low-ESR electrolytic",
    "category": "Passive",
    "where": "box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'",
    "fields": {
     "Line": "40",
@@ -1152,7 +1152,7 @@
     "Description": "Electrolytic 470 µF ≥35 V low-ESR (50 V preferred)",
     "Manufacturer / part number": "Generic low-ESR electrolytic",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O14",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'"
@@ -1171,7 +1171,7 @@
    "model": "Generic metal film",
    "category": "Passive",
    "where": "A1",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "R1: Gate resistor; R22: Pedal supply; a shorted pedal cable can't pull down 3V3_SENSE",
    "fields": {
     "Line": "41",
@@ -1181,7 +1181,7 @@
     "Description": "Resistor 100, metal film 1 %, 0.25 W",
     "Manufacturer / part number": "Generic metal film",
     "Where": "A1",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O13, O26",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "R1: Gate resistor; R22: Pedal supply; a shorted pedal cable can't pull down 3V3_SENSE"
@@ -1207,7 +1207,7 @@
    "model": "Generic metal film",
    "category": "Passive",
    "where": "A1, box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "R2: Holds K1 open and strapping pin GPIO12 LOW at boot. Never a pull-up; R20: Series protection; R23: GPIO34 has no internal pull-up; R24: GPIO35 has no internal pull-up; R111-R115: Pull-down at each board, so a broken enable wire still leaves that board off",
    "fields": {
     "Line": "42",
@@ -1217,7 +1217,7 @@
     "Description": "Resistor 10k, metal film 1 %, 0.25 W",
     "Manufacturer / part number": "Generic metal film",
     "Where": "A1, box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O13, O26",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "R2: Holds K1 open and strapping pin GPIO12 LOW at boot. Never a pull-up; R20: Series protection; R23: GPIO34 has no internal pull-up; R24: GPIO35 has no internal pull-up; R111-R115: Pull-down at each board, so a broken enable wire still leaves that board off"
@@ -1236,7 +1236,7 @@
    "model": "Generic metal film",
    "category": "Passive",
    "where": "A1, box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "R3: 2.2 V at 29.4 V; R5: Motor-bus sense for the K1 checks; at the stud, so only the divided signal runs to A1",
    "fields": {
     "Line": "43",
@@ -1246,7 +1246,7 @@
     "Description": "Resistor 150k, metal film 1 %, 0.25 W",
     "Manufacturer / part number": "Generic metal film",
     "Where": "A1, box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O13, O26",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "R3: 2.2 V at 29.4 V; R5: Motor-bus sense for the K1 checks; at the stud, so only the divided signal runs to A1"
@@ -1265,7 +1265,7 @@
    "model": "Generic metal film",
    "category": "Passive",
    "where": "A1",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "R6: 2.2 V at 29.4 V, as the battery divider",
    "fields": {
     "Line": "44",
@@ -1275,7 +1275,7 @@
     "Description": "Resistor 12k, metal film 1 %, 0.25 W",
     "Manufacturer / part number": "Generic metal film",
     "Where": "A1",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O13, O26",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "R6: 2.2 V at 29.4 V, as the battery divider"
@@ -1293,7 +1293,7 @@
    "model": "Generic metal film",
    "category": "Passive",
    "where": "A1",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "Unplugged pedal reads 0 (released)",
    "fields": {
     "Line": "45",
@@ -1303,7 +1303,7 @@
     "Description": "Resistor 100k, metal film 1 %, 0.25 W",
     "Manufacturer / part number": "Generic metal film",
     "Where": "A1",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O13, O26",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "Unplugged pedal reads 0 (released)"
@@ -1328,7 +1328,7 @@
    "model": "Generic metal film",
    "category": "Passive",
    "where": "A1",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "R25: not fitted yet. Fit only if the module pull-ups in parallel measure above 4.7k. Seven modules with their own 10k/4.7k already give ~1-2k; R26: not fitted yet. As R25; R27: 1-Wire pull-up; also keeps strapping pin GPIO15 HIGH; R101-R105: IS series resistor",
    "fields": {
     "Line": "46",
@@ -1338,7 +1338,7 @@
     "Description": "Resistor 4.7k, metal film 1 %, 0.25 W",
     "Manufacturer / part number": "Generic metal film",
     "Where": "A1",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O13, O26",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "R25: not fitted yet. Fit only if the module pull-ups in parallel measure above 4.7k. Seven modules with their own 10k/4.7k already give ~1-2k; R26: not fitted yet. As R25; R27: 1-Wire pull-up; also keeps strapping pin GPIO15 HIGH; R101-R105: IS series resistor"
@@ -1357,7 +1357,7 @@
    "model": "Generic metal film",
    "category": "Passive",
    "where": "A1",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "R28: DFPlayer RX series resistor; R29: Bluetooth RXD series resistor: a dead module can't hold down the USB serial line",
    "fields": {
     "Line": "47",
@@ -1367,7 +1367,7 @@
     "Description": "Resistor 1k, metal film 1 %, 0.25 W",
     "Manufacturer / part number": "Generic metal film",
     "Where": "A1",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O13, O26",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "R28: DFPlayer RX series resistor; R29: Bluetooth RXD series resistor: a dead module can't hold down the USB serial line"
@@ -1819,7 +1819,7 @@
    "model": "Generic",
    "category": "Wiring",
    "where": "box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "Battery, contactor, driver B+/B−",
    "fields": {
     "Line": "64",
@@ -1828,7 +1828,7 @@
     "Description": "10 AWG wire, red + black, 10 m",
     "Manufacturer / part number": "Generic",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O3",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "Battery, contactor, driver B+/B−"
@@ -1844,7 +1844,7 @@
    "model": "Generic",
    "category": "Wiring",
    "where": "box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "Driver to motor plugs",
    "fields": {
     "Line": "65",
@@ -1853,7 +1853,7 @@
     "Description": "12 AWG wire, red + black, 10 m",
     "Manufacturer / part number": "Generic",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O4",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "Driver to motor plugs"
@@ -1865,21 +1865,21 @@
    "line": "66",
    "refs": [],
    "qty": "1",
-   "part": "Heat shrink assortment (also the colour bands)",
+   "part": "Insulated ring terminal kit, red/blue/yellow (yellow 4-6 mm² takes 10 AWG; check the stud sizes)",
    "model": "Generic",
    "category": "Wiring",
    "where": "box",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "",
    "fields": {
     "Line": "66",
     "Category": "Wiring",
     "Qty": "1",
-    "Description": "Heat shrink assortment (also the colour bands)",
+    "Description": "Insulated ring terminal kit, red/blue/yellow (yellow 4-6 mm² takes 10 AWG; check the stud sizes)",
     "Manufacturer / part number": "Generic",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
-    "Order line": "O9",
+    "Status": "Received 4 Nov",
+    "Order line": "O10",
     "Supplier": "AliExpress, 24 Oct order"
    },
    "kind": "material",
@@ -1889,22 +1889,23 @@
    "line": "67",
    "refs": [],
    "qty": "1",
-   "part": "Ring lugs (M6/M8 for 10 AWG), pre-insulated terminals, ferrules",
+   "part": "Wire ferrule kit, 2000 pcs, 0.5-10 mm²",
    "model": "Generic",
    "category": "Wiring",
    "where": "box",
-   "status": "Ordered 24 Oct",
-   "note": "",
+   "status": "Received 4 Nov",
+   "note": "For the screw terminals (IBT-2, MRD068A, A1)",
    "fields": {
     "Line": "67",
     "Category": "Wiring",
     "Qty": "1",
-    "Description": "Ring lugs (M6/M8 for 10 AWG), pre-insulated terminals, ferrules",
+    "Description": "Wire ferrule kit, 2000 pcs, 0.5-10 mm²",
     "Manufacturer / part number": "Generic",
     "Where": "box",
-    "Status": "Ordered 24 Oct",
-    "Order line": "O10, O6",
-    "Supplier": "AliExpress, 24 Oct order"
+    "Status": "Received 4 Nov",
+    "Order line": "O9",
+    "Supplier": "AliExpress, 24 Oct order",
+    "Notes": "For the screw terminals (IBT-2, MRD068A, A1)"
    },
    "kind": "material",
    "issues": []
@@ -2077,6 +2078,31 @@
    "line": "75",
    "refs": [],
    "qty": "1",
+   "part": "Heat shrink assortment (also the colour bands)",
+   "model": "Generic",
+   "category": "Wiring",
+   "where": "box",
+   "status": "To buy",
+   "note": "Not in the 24 Oct order: the line thought to be heat shrink was the ferrule kit",
+   "fields": {
+    "Line": "75",
+    "Category": "Wiring",
+    "Qty": "1",
+    "Description": "Heat shrink assortment (also the colour bands)",
+    "Manufacturer / part number": "Generic",
+    "Where": "box",
+    "Status": "To buy",
+    "Supplier": "AliExpress",
+    "Link": "https://www.aliexpress.com/w/wholesale-heat-shrink-tube-assortment.html?SortType=total_tranpro_desc",
+    "Notes": "Not in the 24 Oct order: the line thought to be heat shrink was the ferrule kit"
+   },
+   "kind": "material",
+   "issues": []
+  },
+  {
+   "line": "76",
+   "refs": [],
+   "qty": "1",
    "part": "Nylon M3 standoffs and a mounting plate",
    "model": "Generic",
    "category": "Wiring",
@@ -2084,7 +2110,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "75",
+    "Line": "76",
     "Category": "Wiring",
     "Qty": "1",
     "Description": "Nylon M3 standoffs and a mounting plate",
@@ -2096,7 +2122,32 @@
    "issues": []
   },
   {
-   "line": "76",
+   "line": "77",
+   "refs": [],
+   "qty": "1",
+   "part": "Pigtail for the AS5600 board's 4-pin plug (match its pitch: JST-GH 1.25 or PH 2.0)",
+   "model": "Generic JST",
+   "category": "Wiring",
+   "where": "car",
+   "status": "To buy",
+   "note": "Optional: lets the sensor unplug. Or solder the cable to the board's pads, with strain relief",
+   "fields": {
+    "Line": "77",
+    "Category": "Wiring",
+    "Qty": "1",
+    "Description": "Pigtail for the AS5600 board's 4-pin plug (match its pitch: JST-GH 1.25 or PH 2.0)",
+    "Manufacturer / part number": "Generic JST",
+    "Where": "car",
+    "Status": "To buy",
+    "Supplier": "AliExpress",
+    "Link": "https://www.aliexpress.com/w/wholesale-jst-gh-1.25-4-pin-cable.html?SortType=total_tranpro_desc",
+    "Notes": "Optional: lets the sensor unplug. Or solder the cable to the board's pads, with strain relief"
+   },
+   "kind": "material",
+   "issues": []
+  },
+  {
+   "line": "78",
    "refs": [],
    "qty": "1",
    "part": "Box: flame-retardant (UL94 V-0) ABS or metal, ~250 x 200 x 100 mm, IP54",
@@ -2106,7 +2157,7 @@
    "status": "TBD",
    "note": "Size waits on #18; V-0 or metal is item M7 of the safety review (EN 62115 fire test)",
    "fields": {
-    "Line": "76",
+    "Line": "78",
     "Category": "Wiring",
     "Qty": "1",
     "Description": "Box: flame-retardant (UL94 V-0) ABS or metal, ~250 x 200 x 100 mm, IP54",
@@ -2121,7 +2172,7 @@
    ]
   },
   {
-   "line": "77",
+   "line": "79",
    "refs": [
     "BT1"
    ],
@@ -2133,7 +2184,7 @@
    "status": "Stock car",
    "note": "BTS7960 locks out above 27.5 V; check the charger voltage. Issue #13",
    "fields": {
-    "Line": "77",
+    "Line": "79",
     "Category": "Stock car",
     "Refs": "BT1",
     "Qty": "1",
@@ -2150,7 +2201,7 @@
    ]
   },
   {
-   "line": "78",
+   "line": "80",
    "refs": [
     "M1",
     "M2",
@@ -2165,7 +2216,7 @@
    "status": "Stock car",
    "note": "Issue #14",
    "fields": {
-    "Line": "78",
+    "Line": "80",
     "Category": "Stock car",
     "Refs": "M1 M2 M3 M4",
     "Qty": "4",
@@ -2182,7 +2233,7 @@
    ]
   },
   {
-   "line": "79",
+   "line": "81",
    "refs": [
     "M5"
    ],
@@ -2194,7 +2245,7 @@
    "status": "Stock car",
    "note": "Issue #14",
    "fields": {
-    "Line": "79",
+    "Line": "81",
     "Category": "Stock car",
     "Refs": "M5",
     "Qty": "1",
@@ -2211,7 +2262,7 @@
    ]
   },
   {
-   "line": "80",
+   "line": "82",
    "refs": [
     "PED1"
    ],
@@ -2223,7 +2274,7 @@
    "status": "Stock car",
    "note": "Issue #16",
    "fields": {
-    "Line": "80",
+    "Line": "82",
     "Category": "Stock car",
     "Refs": "PED1",
     "Qty": "1",
@@ -2240,7 +2291,7 @@
    ]
   },
   {
-   "line": "81",
+   "line": "83",
    "refs": [
     "SW1"
    ],
@@ -2252,7 +2303,7 @@
    "status": "Stock car",
    "note": "Issue #17",
    "fields": {
-    "Line": "81",
+    "Line": "83",
     "Category": "Stock car",
     "Refs": "SW1",
     "Qty": "1",
@@ -2269,7 +2320,7 @@
    ]
   },
   {
-   "line": "82",
+   "line": "84",
    "refs": [
     "SW2"
    ],
@@ -2281,7 +2332,7 @@
    "status": "Stock car",
    "note": "Issue #17",
    "fields": {
-    "Line": "82",
+    "Line": "84",
     "Category": "Stock car",
     "Refs": "SW2",
     "Qty": "1",
@@ -2298,7 +2349,7 @@
    ]
   },
   {
-   "line": "83",
+   "line": "85",
    "refs": [
     "SW3"
    ],
@@ -2310,7 +2361,7 @@
    "status": "Stock car",
    "note": "Issue #17",
    "fields": {
-    "Line": "83",
+    "Line": "85",
     "Category": "Stock car",
     "Refs": "SW3",
     "Qty": "1",
@@ -2327,7 +2378,7 @@
    ]
   },
   {
-   "line": "84",
+   "line": "86",
    "refs": [
     "SW4"
    ],
@@ -2339,7 +2390,7 @@
    "status": "Stock car",
    "note": "Issue #17",
    "fields": {
-    "Line": "84",
+    "Line": "86",
     "Category": "Stock car",
     "Refs": "SW4",
     "Qty": "1",
@@ -2356,7 +2407,7 @@
    ]
   },
   {
-   "line": "85",
+   "line": "87",
    "refs": [],
    "qty": "1",
    "part": "10 AWG red wire, 5 m",
@@ -2366,7 +2417,7 @@
    "status": "Owned",
    "note": "Adds to the 24 Oct wire",
    "fields": {
-    "Line": "85",
+    "Line": "87",
     "Category": "Spare",
     "Qty": "1",
     "Description": "10 AWG red wire, 5 m",
@@ -2380,7 +2431,7 @@
    "issues": []
   },
   {
-   "line": "86",
+   "line": "88",
    "refs": [],
    "qty": "4",
    "part": "555 24 V motors (loose)",
@@ -2390,7 +2441,7 @@
    "status": "Owned",
    "note": "Spares, if they match the car's motors (#14)",
    "fields": {
-    "Line": "86",
+    "Line": "88",
     "Category": "Spare",
     "Qty": "4",
     "Description": "555 24 V motors (loose)",
@@ -2406,7 +2457,7 @@
    ]
   },
   {
-   "line": "87",
+   "line": "89",
    "refs": [],
    "qty": "1",
    "part": "BMP280 pressure sensor module",
@@ -2416,7 +2467,7 @@
    "status": "Owned",
    "note": "Not used",
    "fields": {
-    "Line": "87",
+    "Line": "89",
     "Category": "Spare",
     "Qty": "1",
     "Description": "BMP280 pressure sensor module",
@@ -2430,7 +2481,7 @@
    "issues": []
   },
   {
-   "line": "88",
+   "line": "90",
    "refs": [],
    "qty": "2",
    "part": "DDT-S30 tweeters",
@@ -2440,7 +2491,7 @@
    "status": "Owned",
    "note": "Music path, each via a 10 µF film cap (AUDIO.md)",
    "fields": {
-    "Line": "88",
+    "Line": "90",
     "Category": "Spare",
     "Qty": "2",
     "Description": "DDT-S30 tweeters",
@@ -2454,7 +2505,7 @@
    "issues": []
   },
   {
-   "line": "89",
+   "line": "91",
    "refs": [],
    "qty": "1",
    "part": "ESP32-WROOM-32D 30-pin DevKit, USB-C (second board)",
@@ -2464,7 +2515,7 @@
    "status": "Owned",
    "note": "Bench firmwares and a spare",
    "fields": {
-    "Line": "89",
+    "Line": "91",
     "Category": "Spare",
     "Qty": "1",
     "Description": "ESP32-WROOM-32D 30-pin DevKit, USB-C (second board)",
@@ -2478,7 +2529,7 @@
    "issues": []
   },
   {
-   "line": "90",
+   "line": "92",
    "refs": [],
    "qty": "1",
    "part": "HC-12 433 MHz radio module",
@@ -2488,7 +2539,7 @@
    "status": "Owned",
    "note": "Not used: the radio link is ELRS only",
    "fields": {
-    "Line": "90",
+    "Line": "92",
     "Category": "Spare",
     "Qty": "1",
     "Description": "HC-12 433 MHz radio module",
@@ -2502,7 +2553,7 @@
    "issues": []
   },
   {
-   "line": "91",
+   "line": "93",
    "refs": [],
    "qty": "1",
    "part": "HY2005RX-24V/40A stock controller (spare)",
@@ -2512,7 +2563,7 @@
    "status": "Owned",
    "note": "Plan B: puts the car back to stock",
    "fields": {
-    "Line": "91",
+    "Line": "93",
     "Category": "Spare",
     "Qty": "1",
     "Description": "HY2005RX-24V/40A stock controller (spare)",
@@ -2526,7 +2577,7 @@
    "issues": []
   },
   {
-   "line": "92",
+   "line": "94",
    "refs": [],
    "qty": "1",
    "part": "LM2596 buck module (extra)",
@@ -2536,7 +2587,7 @@
    "status": "Owned",
    "note": "Spare for U1",
    "fields": {
-    "Line": "92",
+    "Line": "94",
     "Category": "Spare",
     "Qty": "1",
     "Description": "LM2596 buck module (extra)",
@@ -2550,7 +2601,7 @@
    "issues": []
   },
   {
-   "line": "93",
+   "line": "95",
    "refs": [],
    "qty": "1",
    "part": "Ride-on key switch",
@@ -2560,7 +2611,7 @@
    "status": "Owned",
    "note": "Spare; could replace SW1 if the stock switch is too weak (#17)",
    "fields": {
-    "Line": "93",
+    "Line": "95",
     "Category": "Spare",
     "Qty": "1",
     "Description": "Ride-on key switch",
@@ -2576,7 +2627,7 @@
    ]
   },
   {
-   "line": "94",
+   "line": "96",
    "refs": [],
    "qty": "5",
    "part": "XT60 pairs",
@@ -2586,7 +2637,7 @@
    "status": "Owned",
    "note": "Fallback plugs for J5-J7",
    "fields": {
-    "Line": "94",
+    "Line": "96",
     "Category": "Spare",
     "Qty": "5",
     "Description": "XT60 pairs",
@@ -2600,7 +2651,7 @@
    "issues": []
   },
   {
-   "line": "95",
+   "line": "97",
    "refs": [],
    "qty": "1",
    "part": "ELRS radio transmitter",
@@ -2610,7 +2661,7 @@
    "status": "Owned",
    "note": "Parent transmitter",
    "fields": {
-    "Line": "95",
+    "Line": "97",
     "Category": "Tool",
     "Qty": "1",
     "Description": "ELRS radio transmitter",
@@ -2624,23 +2675,23 @@
    "issues": []
   },
   {
-   "line": "96",
+   "line": "98",
    "refs": [],
    "qty": "2",
    "part": "18650 protected cell",
    "model": "Vapcell N40",
    "category": "Tool",
    "where": "bench",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "For the T-Lite radio",
    "fields": {
-    "Line": "96",
+    "Line": "98",
     "Category": "Tool",
     "Qty": "2",
     "Description": "18650 protected cell",
     "Manufacturer / part number": "Vapcell N40",
     "Where": "bench",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O7",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "For the T-Lite radio"
@@ -2649,23 +2700,48 @@
    "issues": []
   },
   {
-   "line": "97",
+   "line": "99",
+   "refs": [],
+   "qty": "1",
+   "part": "Crimping pliers, ratchet, 4 swap jaws (insulated terminals, ferrules, ...)",
+   "model": "Lion Rage HS-30J",
+   "category": "Tool",
+   "where": "bench",
+   "status": "Received 4 Nov",
+   "note": "Use the jaw marked with mm² ferrule sizes for ferrules, the red/blue/yellow one for insulated terminals",
+   "fields": {
+    "Line": "99",
+    "Category": "Tool",
+    "Qty": "1",
+    "Description": "Crimping pliers, ratchet, 4 swap jaws (insulated terminals, ferrules, ...)",
+    "Manufacturer / part number": "Lion Rage HS-30J",
+    "Where": "bench",
+    "Status": "Received 4 Nov",
+    "Order line": "O6",
+    "Supplier": "AliExpress, 24 Oct order",
+    "Notes": "Use the jaw marked with mm² ferrule sizes for ferrules, the red/blue/yellow one for insulated terminals"
+   },
+   "kind": "tool",
+   "issues": []
+  },
+  {
+   "line": "100",
    "refs": [],
    "qty": "1",
    "part": "DC clamp meter",
    "model": "UNI-T UT210E",
    "category": "Tool",
    "where": "bench",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "Motor and coil current without cutting wires",
    "fields": {
-    "Line": "97",
+    "Line": "100",
     "Category": "Tool",
     "Qty": "1",
     "Description": "DC clamp meter",
     "Manufacturer / part number": "UNI-T UT210E",
     "Where": "bench",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O2",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "Motor and coil current without cutting wires"
@@ -2674,23 +2750,23 @@
    "issues": []
   },
   {
-   "line": "98",
+   "line": "101",
    "refs": [],
    "qty": "1",
    "part": "Programmable bench supply, 30 V 10 A",
    "model": "Wanptek WPS3010H",
    "category": "Tool",
    "where": "bench",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "Phases 3-4 run on its current limit instead of the battery",
    "fields": {
-    "Line": "98",
+    "Line": "101",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Programmable bench supply, 30 V 10 A",
     "Manufacturer / part number": "Wanptek WPS3010H",
     "Where": "bench",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O1",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "Phases 3-4 run on its current limit instead of the battery"
@@ -2699,23 +2775,23 @@
    "issues": []
   },
   {
-   "line": "99",
+   "line": "102",
    "refs": [],
    "qty": "3",
    "part": "USB-TTL adapter",
    "model": "Prolific PL2303 (generic)",
    "category": "Tool",
    "where": "bench",
-   "status": "Ordered 24 Oct",
+   "status": "Received 4 Nov",
    "note": "Not needed (the ESP32 has USB); harmless spare",
    "fields": {
-    "Line": "99",
+    "Line": "102",
     "Category": "Tool",
     "Qty": "3",
     "Description": "USB-TTL adapter",
     "Manufacturer / part number": "Prolific PL2303 (generic)",
     "Where": "bench",
-    "Status": "Ordered 24 Oct",
+    "Status": "Received 4 Nov",
     "Order line": "O18",
     "Supplier": "AliExpress, 24 Oct order",
     "Notes": "Not needed (the ESP32 has USB); harmless spare"
@@ -2724,7 +2800,7 @@
    "issues": []
   },
   {
-   "line": "100",
+   "line": "103",
    "refs": [],
    "qty": "1",
    "part": "Automatic wire stripper, 10-24 AWG",
@@ -2734,7 +2810,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "100",
+    "Line": "103",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Automatic wire stripper, 10-24 AWG",
@@ -2749,7 +2825,7 @@
    "issues": []
   },
   {
-   "line": "101",
+   "line": "104",
    "refs": [],
    "qty": "1",
    "part": "Brass-wool tip cleaner with holder",
@@ -2759,7 +2835,7 @@
    "status": "To buy",
    "note": "No water needed",
    "fields": {
-    "Line": "101",
+    "Line": "104",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Brass-wool tip cleaner with holder",
@@ -2775,7 +2851,7 @@
    "issues": []
   },
   {
-   "line": "102",
+   "line": "105",
    "refs": [],
    "qty": "1",
    "part": "Desoldering pump",
@@ -2785,7 +2861,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "102",
+    "Line": "105",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Desoldering pump",
@@ -2800,7 +2876,7 @@
    "issues": []
   },
   {
-   "line": "103",
+   "line": "106",
    "refs": [],
    "qty": "1",
    "part": "Heat gun, dual temperature",
@@ -2808,9 +2884,9 @@
    "category": "Tool",
    "where": "bench",
    "status": "To buy",
-   "note": "For the heat shrink in the order; local hardware stores have them",
+   "note": "For the heat shrink; local hardware stores have them",
    "fields": {
-    "Line": "103",
+    "Line": "106",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Heat gun, dual temperature",
@@ -2820,13 +2896,13 @@
     "Supplier": "AliExpress",
     "Premium pick": "Any brand with an adjustable dial",
     "Link": "https://www.aliexpress.com/w/wholesale-heat-gun-2000w.html?SortType=total_tranpro_desc",
-    "Notes": "For the heat shrink in the order; local hardware stores have them"
+    "Notes": "For the heat shrink; local hardware stores have them"
    },
    "kind": "tool",
    "issues": []
   },
   {
-   "line": "104",
+   "line": "107",
    "refs": [],
    "qty": "1",
    "part": "Helping hands, weighted base, 4 flexible arms",
@@ -2836,7 +2912,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "104",
+    "Line": "107",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Helping hands, weighted base, 4 flexible arms",
@@ -2851,19 +2927,19 @@
    "issues": []
   },
   {
-   "line": "105",
+   "line": "108",
    "refs": [],
-   "qty": "1",
+   "qty": "0",
    "part": "Hex crimper for 6-50 mm² lugs",
    "model": "Generic hexagon lug crimper",
    "category": "Tool",
    "where": "bench",
    "status": "To buy",
-   "note": "For the 10 AWG ring lugs; the terminal kit's crimper is for small terminals",
+   "note": "Optional: yellow insulated rings (4-6 mm²) from O10 take 10 AWG and crimp with the HS-30J. Needed only for bare tube lugs, or if no yellow ring fits the M6/M8 studs",
    "fields": {
-    "Line": "105",
+    "Line": "108",
     "Category": "Tool",
-    "Qty": "1",
+    "Qty": "0",
     "Description": "Hex crimper for 6-50 mm² lugs",
     "Manufacturer / part number": "Generic hexagon lug crimper",
     "Where": "bench",
@@ -2871,13 +2947,39 @@
     "Supplier": "AliExpress",
     "Premium pick": "Hydraulic crimper (overkill here)",
     "Link": "https://www.aliexpress.com/w/wholesale-hex-crimping-tool-6-50mm2.html?SortType=total_tranpro_desc",
-    "Notes": "For the 10 AWG ring lugs; the terminal kit's crimper is for small terminals"
+    "Notes": "Optional: yellow insulated rings (4-6 mm²) from O10 take 10 AWG and crimp with the HS-30J. Needed only for bare tube lugs, or if no yellow ring fits the M6/M8 studs"
    },
    "kind": "tool",
    "issues": []
   },
   {
-   "line": "106",
+   "line": "109",
+   "refs": [],
+   "qty": "0",
+   "part": "Self-adjusting ferrule crimper, 0.25-10 mm² (square jaw)",
+   "model": "Generic HSC8 6-4A",
+   "category": "Tool",
+   "where": "bench",
+   "status": "To buy",
+   "note": "Optional: only if none of the HS-30J jaws is a ferrule jaw",
+   "fields": {
+    "Line": "109",
+    "Category": "Tool",
+    "Qty": "0",
+    "Description": "Self-adjusting ferrule crimper, 0.25-10 mm² (square jaw)",
+    "Manufacturer / part number": "Generic HSC8 6-4A",
+    "Where": "bench",
+    "Status": "To buy",
+    "Supplier": "AliExpress",
+    "Premium pick": "Knipex 97 53 14",
+    "Link": "https://www.aliexpress.com/w/wholesale-hsc8-6-4a-ferrule-crimper.html?SortType=total_tranpro_desc",
+    "Notes": "Optional: only if none of the HS-30J jaws is a ferrule jaw"
+   },
+   "kind": "tool",
+   "issues": []
+  },
+  {
+   "line": "110",
    "refs": [],
    "qty": "1",
    "part": "Silicone soldering mat, about 45 x 30 cm",
@@ -2887,7 +2989,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "106",
+    "Line": "110",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Silicone soldering mat, about 45 x 30 cm",
@@ -2902,7 +3004,7 @@
    "issues": []
   },
   {
-   "line": "107",
+   "line": "111",
    "refs": [],
    "qty": "1",
    "part": "Solder fume extractor",
@@ -2912,7 +3014,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "107",
+    "Line": "111",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Solder fume extractor",
@@ -2927,7 +3029,7 @@
    "issues": []
   },
   {
-   "line": "108",
+   "line": "112",
    "refs": [],
    "qty": "1",
    "part": "Soldering iron, 60 W or more, 3-5 mm chisel + conical tip",
@@ -2937,7 +3039,7 @@
    "status": "To buy",
    "note": "Skip if you already have one this strong: 10 AWG and XT60 need the power",
    "fields": {
-    "Line": "108",
+    "Line": "112",
     "Category": "Tool",
     "Qty": "1",
     "Description": "Soldering iron, 60 W or more, 3-5 mm chisel + conical tip",
@@ -2953,7 +3055,7 @@
    "issues": []
   },
   {
-   "line": "109",
+   "line": "113",
    "refs": [],
    "qty": "2",
    "part": "Desoldering braid 2.0 and 2.5 mm, 1.5 m",
@@ -2963,7 +3065,7 @@
    "status": "To buy",
    "note": "",
    "fields": {
-    "Line": "109",
+    "Line": "113",
     "Category": "Consumable",
     "Qty": "2",
     "Description": "Desoldering braid 2.0 and 2.5 mm, 1.5 m",
@@ -2978,7 +3080,7 @@
    "issues": []
   },
   {
-   "line": "110",
+   "line": "114",
    "refs": [],
    "qty": "1",
    "part": "Flux paste, 10 cc syringe with plunger and needle",
@@ -2988,7 +3090,7 @@
    "status": "To buy",
    "note": "Flux paste, not solder paste: solder paste is for surface-mount boards and hot air",
    "fields": {
-    "Line": "110",
+    "Line": "114",
     "Category": "Consumable",
     "Qty": "1",
     "Description": "Flux paste, 10 cc syringe with plunger and needle",
@@ -3004,7 +3106,7 @@
    "issues": []
   },
   {
-   "line": "111",
+   "line": "115",
    "refs": [],
    "qty": "1",
    "part": "Isopropyl alcohol 99 % + ESD-safe brush",
@@ -3014,7 +3116,7 @@
    "status": "To buy",
    "note": "Buy the alcohol locally: flammable, ships badly",
    "fields": {
-    "Line": "111",
+    "Line": "115",
     "Category": "Consumable",
     "Qty": "1",
     "Description": "Isopropyl alcohol 99 % + ESD-safe brush",
@@ -3030,7 +3132,7 @@
    "issues": []
   },
   {
-   "line": "112",
+   "line": "116",
    "refs": [],
    "qty": "0",
    "part": "Lead-free solder wire (instead of 63/37, if kids are near the bench)",
@@ -3040,7 +3142,7 @@
    "status": "To buy",
    "note": "Optional; harder to use than 63/37",
    "fields": {
-    "Line": "112",
+    "Line": "116",
     "Category": "Consumable",
     "Qty": "0",
     "Description": "Lead-free solder wire (instead of 63/37, if kids are near the bench)",
@@ -3056,7 +3158,7 @@
    "issues": []
   },
   {
-   "line": "113",
+   "line": "117",
    "refs": [],
    "qty": "1",
    "part": "No-clean flux pen",
@@ -3066,7 +3168,7 @@
    "status": "To buy",
    "note": "Tinning wire ends",
    "fields": {
-    "Line": "113",
+    "Line": "117",
     "Category": "Consumable",
     "Qty": "1",
     "Description": "No-clean flux pen",
@@ -3082,7 +3184,7 @@
    "issues": []
   },
   {
-   "line": "114",
+   "line": "118",
    "refs": [],
    "qty": "1",
    "part": "Solder wire Sn63/Pb37 0.8 mm, rosin core 2 % flux, 100 g",
@@ -3092,7 +3194,7 @@
    "status": "To buy",
    "note": "Signals and the proto board. 63/37 melts at one point (183 °C), the easiest to use",
    "fields": {
-    "Line": "114",
+    "Line": "118",
     "Category": "Consumable",
     "Qty": "1",
     "Description": "Solder wire Sn63/Pb37 0.8 mm, rosin core 2 % flux, 100 g",
@@ -3108,7 +3210,7 @@
    "issues": []
   },
   {
-   "line": "115",
+   "line": "119",
    "refs": [],
    "qty": "1",
    "part": "Solder wire Sn63/Pb37 1.0-1.2 mm, rosin core, 100 g",
@@ -3118,7 +3220,7 @@
    "status": "To buy",
    "note": "10/12 AWG lugs, XT60s, motor tabs",
    "fields": {
-    "Line": "115",
+    "Line": "119",
     "Category": "Consumable",
     "Qty": "1",
     "Description": "Solder wire Sn63/Pb37 1.0-1.2 mm, rosin core, 100 g",
@@ -3134,7 +3236,7 @@
    "issues": []
   },
   {
-   "line": "116",
+   "line": "120",
    "refs": [],
    "qty": "1",
    "part": "Soldering tip tinner / refresher",
@@ -3144,7 +3246,7 @@
    "status": "To buy",
    "note": "Revives a blackened tip",
    "fields": {
-    "Line": "116",
+    "Line": "120",
     "Category": "Consumable",
     "Qty": "1",
     "Description": "Soldering tip tinner / refresher",
@@ -3758,58 +3860,58 @@
   },
   "BT1": {
    "ref": "BT1",
-   "bomLine": "77",
-   "bomIndex": 76
-  },
-  "M1": {
-   "ref": "M1",
-   "bomLine": "78",
-   "bomIndex": 77
-  },
-  "M2": {
-   "ref": "M2",
-   "bomLine": "78",
-   "bomIndex": 77
-  },
-  "M3": {
-   "ref": "M3",
-   "bomLine": "78",
-   "bomIndex": 77
-  },
-  "M4": {
-   "ref": "M4",
-   "bomLine": "78",
-   "bomIndex": 77
-  },
-  "M5": {
-   "ref": "M5",
    "bomLine": "79",
    "bomIndex": 78
   },
-  "PED1": {
-   "ref": "PED1",
+  "M1": {
+   "ref": "M1",
    "bomLine": "80",
    "bomIndex": 79
   },
-  "SW1": {
-   "ref": "SW1",
+  "M2": {
+   "ref": "M2",
+   "bomLine": "80",
+   "bomIndex": 79
+  },
+  "M3": {
+   "ref": "M3",
+   "bomLine": "80",
+   "bomIndex": 79
+  },
+  "M4": {
+   "ref": "M4",
+   "bomLine": "80",
+   "bomIndex": 79
+  },
+  "M5": {
+   "ref": "M5",
    "bomLine": "81",
    "bomIndex": 80
   },
-  "SW2": {
-   "ref": "SW2",
+  "PED1": {
+   "ref": "PED1",
    "bomLine": "82",
    "bomIndex": 81
   },
-  "SW3": {
-   "ref": "SW3",
+  "SW1": {
+   "ref": "SW1",
    "bomLine": "83",
    "bomIndex": 82
   },
-  "SW4": {
-   "ref": "SW4",
+  "SW2": {
+   "ref": "SW2",
    "bomLine": "84",
    "bomIndex": 83
+  },
+  "SW3": {
+   "ref": "SW3",
+   "bomLine": "85",
+   "bomIndex": 84
+  },
+  "SW4": {
+   "ref": "SW4",
+   "bomLine": "86",
+   "bomIndex": 85
   }
  },
  "wires": [
@@ -8189,7 +8291,7 @@
    "ref": "F1",
    "value": "40 A ANL",
    "part": "ANL fuse holder + 40 A ANL fuse",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "car, ≤15 cm from battery +",
    "note": "Unfused wire before F1 must stay under 15 cm. If the stock harness already has a 40 A fuse this close, that fuse is F1",
    "issue": "",
@@ -8434,7 +8536,7 @@
    "ref": "C201",
    "value": "100n",
    "part": "Ceramic capacitor 100 nF 50 V, across the motor terminals",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "car, at motor",
    "note": "Noise suppression; solder right on the motor tabs",
    "issue": "",
@@ -8448,7 +8550,7 @@
    "ref": "C202",
    "value": "100n",
    "part": "Ceramic capacitor 100 nF 50 V, across the motor terminals",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "car, at motor",
    "note": "Noise suppression; solder right on the motor tabs",
    "issue": "",
@@ -8462,7 +8564,7 @@
    "ref": "C203",
    "value": "100n",
    "part": "Ceramic capacitor 100 nF 50 V, across the motor terminals",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "car, at motor",
    "note": "Noise suppression; solder right on the motor tabs",
    "issue": "",
@@ -8476,7 +8578,7 @@
    "ref": "C204",
    "value": "100n",
    "part": "Ceramic capacitor 100 nF 50 V, across the motor terminals",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "car, at motor",
    "note": "Noise suppression; solder right on the motor tabs",
    "issue": "",
@@ -8490,7 +8592,7 @@
    "ref": "C205",
    "value": "100n",
    "part": "Ceramic capacitor 100 nF 50 V, across the motor terminals",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "car, at motor",
    "note": "",
    "issue": "",
@@ -8534,7 +8636,7 @@
    "ref": "S2",
    "value": "E-STOP",
    "part": "22 mm latching E-stop 2NO + 2NC",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "dash",
    "note": "Both NC blocks in series with the K1 coil (a welded NC block still leaves one that opens). NO3 reads the state",
    "issue": "",
@@ -8600,7 +8702,7 @@
    "ref": "U25",
    "value": "AS5600 0x36",
    "part": "AS5600 module + diametric magnet",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "car, steering column",
    "note": "Over ~30 cm of cable: use OUT on ADS#2 A1, or a bus buffer (TBD #11 in v0.2)",
    "issue": "",
@@ -8745,7 +8847,7 @@
    "ref": "K1",
    "value": "125 A 24 V",
    "part": "ZJW100 (SW80 type) contactor, 125 A, 24 V coil",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box (may mount beside it: ~10 cm tall)",
    "note": "Measure its coil current on the bench; if over 0.6 A make F3 2 A",
    "issue": "",
@@ -8761,7 +8863,7 @@
    "ref": "D1",
    "value": "1N4007",
    "part": "1N4007, flyback across the K1 coil",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box, on K1 coil tabs",
    "note": "A plain diode slows K1 opening a little; a 1N4007 + 24 V zener in series opens faster (optional)",
    "issue": "",
@@ -8775,7 +8877,7 @@
    "ref": "Q1",
    "value": "IRLZ44N",
    "part": "IRLZ44N logic-level N-MOSFET, TO-220",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "The ESP32 can open K1 but never close it against the key or E-stop",
    "issue": "",
@@ -8790,7 +8892,7 @@
    "ref": "R1",
    "value": "100",
    "part": "Resistor 100, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "Gate resistor",
    "issue": "",
@@ -8804,7 +8906,7 @@
    "ref": "R2",
    "value": "10k",
    "part": "Resistor 10k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "Holds K1 open and strapping pin GPIO12 LOW at boot. Never a pull-up",
    "issue": "",
@@ -8818,7 +8920,7 @@
    "ref": "F2",
    "value": "15 A",
    "part": "Inline blade fuse holder (12 AWG) + 15 A blade",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box, on K1 stud A",
    "note": "Feeds the key; protects the key wiring",
    "issue": "",
@@ -8832,7 +8934,7 @@
    "ref": "F3",
    "value": "1 A",
    "part": "Blade fuse 1 A in the fuse block",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box",
    "note": "K1 coil chain",
    "issue": "",
@@ -8846,7 +8948,7 @@
    "ref": "F4",
    "value": "2 A",
    "part": "Blade fuse 2 A in the fuse block",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box",
    "note": "5V_LOGIC buck input",
    "issue": "",
@@ -8860,7 +8962,7 @@
    "ref": "F5",
    "value": "3 A",
    "part": "Blade fuse 3 A in the fuse block",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box",
    "note": "5V_ACC buck input",
    "issue": "",
@@ -8874,7 +8976,7 @@
    "ref": "F6",
    "value": "10 A",
    "part": "Blade fuse 10 A in the fuse block",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box",
    "note": "12V_ACC buck input",
    "issue": "",
@@ -8888,7 +8990,7 @@
    "ref": "F7",
    "value": "1 A",
    "part": "Blade fuse 1 A in the fuse block",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box",
    "note": "Box fans",
    "issue": "",
@@ -8902,7 +9004,7 @@
    "ref": "F8",
    "value": "1 A",
    "part": "Blade fuse 1 A in the fuse block",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box",
    "note": "Battery divider wire (0.5 A in v0.2; 1 A is in the order)",
    "issue": "",
@@ -8916,7 +9018,7 @@
    "ref": "R3",
    "value": "150k",
    "part": "Resistor 150k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "2.2 V at 29.4 V",
    "issue": "",
@@ -8930,7 +9032,7 @@
    "ref": "R4",
    "value": "12k",
    "part": "Resistor 12k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "",
    "issue": "",
@@ -8944,7 +9046,7 @@
    "ref": "C1",
    "value": "100n",
    "part": "Ceramic capacitor 100n, 50 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "",
    "issue": "",
@@ -8958,7 +9060,7 @@
    "ref": "R5",
    "value": "150k",
    "part": "Resistor 150k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box, on TB2.8",
    "note": "Motor-bus sense for the K1 checks; at the stud, so only the divided signal runs to A1",
    "issue": "",
@@ -8972,7 +9074,7 @@
    "ref": "R6",
    "value": "12k",
    "part": "Resistor 12k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "2.2 V at 29.4 V, as the battery divider",
    "issue": "",
@@ -8986,7 +9088,7 @@
    "ref": "C2",
    "value": "100n",
    "part": "Ceramic capacitor 100n, 50 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "",
    "issue": "",
@@ -9088,7 +9190,7 @@
    "ref": "U2",
    "value": "AMS1117-3.3",
    "part": "AMS1117-3.3 module",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box",
    "note": "3V3_SENSE: IBT-2 logic, I2C devices, clamps, pedal. About 0.1 A",
    "issue": "",
@@ -9159,7 +9261,7 @@
    "ref": "R101",
    "value": "4.7k",
    "part": "Resistor 4.7k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "IS series resistor",
    "issue": "",
@@ -9173,7 +9275,7 @@
    "ref": "C101",
    "value": "10n",
    "part": "Ceramic capacitor 10n, 50 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "IS filter",
    "issue": "",
@@ -9187,7 +9289,7 @@
    "ref": "D101",
    "value": "1N4148",
    "part": "1N4148 (ordered high-speed switching diodes), IS clamp to 3.3 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "Clamps the 4-7 mA fault current so the ADS1115 input stays ≤ 3.6 V",
    "issue": "",
@@ -9201,7 +9303,7 @@
    "ref": "C111",
    "value": "470µ 50V",
    "part": "Electrolytic 470 µF ≥35 V low-ESR (50 V preferred)",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box, on U10 B+/B−",
    "note": "CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'",
    "issue": "",
@@ -9215,7 +9317,7 @@
    "ref": "R111",
    "value": "10k",
    "part": "Resistor 10k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box, at U10 header",
    "note": "Pull-down at each board, so a broken enable wire still leaves that board off",
    "issue": "",
@@ -9267,7 +9369,7 @@
    "ref": "R102",
    "value": "4.7k",
    "part": "Resistor 4.7k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "IS series resistor",
    "issue": "",
@@ -9281,7 +9383,7 @@
    "ref": "C102",
    "value": "10n",
    "part": "Ceramic capacitor 10n, 50 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "IS filter",
    "issue": "",
@@ -9295,7 +9397,7 @@
    "ref": "D102",
    "value": "1N4148",
    "part": "1N4148 (ordered high-speed switching diodes), IS clamp to 3.3 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "Clamps the 4-7 mA fault current so the ADS1115 input stays ≤ 3.6 V",
    "issue": "",
@@ -9309,7 +9411,7 @@
    "ref": "C112",
    "value": "470µ 50V",
    "part": "Electrolytic 470 µF ≥35 V low-ESR (50 V preferred)",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box, on U11 B+/B−",
    "note": "CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'",
    "issue": "",
@@ -9323,7 +9425,7 @@
    "ref": "R112",
    "value": "10k",
    "part": "Resistor 10k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box, at U11 header",
    "note": "Pull-down at each board, so a broken enable wire still leaves that board off",
    "issue": "",
@@ -9375,7 +9477,7 @@
    "ref": "R103",
    "value": "4.7k",
    "part": "Resistor 4.7k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "IS series resistor",
    "issue": "",
@@ -9389,7 +9491,7 @@
    "ref": "C103",
    "value": "10n",
    "part": "Ceramic capacitor 10n, 50 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "IS filter",
    "issue": "",
@@ -9403,7 +9505,7 @@
    "ref": "D103",
    "value": "1N4148",
    "part": "1N4148 (ordered high-speed switching diodes), IS clamp to 3.3 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "Clamps the 4-7 mA fault current so the ADS1115 input stays ≤ 3.6 V",
    "issue": "",
@@ -9417,7 +9519,7 @@
    "ref": "C113",
    "value": "470µ 50V",
    "part": "Electrolytic 470 µF ≥35 V low-ESR (50 V preferred)",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box, on U12 B+/B−",
    "note": "CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'",
    "issue": "",
@@ -9431,7 +9533,7 @@
    "ref": "R113",
    "value": "10k",
    "part": "Resistor 10k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box, at U12 header",
    "note": "Pull-down at each board, so a broken enable wire still leaves that board off",
    "issue": "",
@@ -9483,7 +9585,7 @@
    "ref": "R104",
    "value": "4.7k",
    "part": "Resistor 4.7k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "IS series resistor",
    "issue": "",
@@ -9497,7 +9599,7 @@
    "ref": "C104",
    "value": "10n",
    "part": "Ceramic capacitor 10n, 50 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "IS filter",
    "issue": "",
@@ -9511,7 +9613,7 @@
    "ref": "D104",
    "value": "1N4148",
    "part": "1N4148 (ordered high-speed switching diodes), IS clamp to 3.3 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "Clamps the 4-7 mA fault current so the ADS1115 input stays ≤ 3.6 V",
    "issue": "",
@@ -9525,7 +9627,7 @@
    "ref": "C114",
    "value": "470µ 50V",
    "part": "Electrolytic 470 µF ≥35 V low-ESR (50 V preferred)",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box, on U13 B+/B−",
    "note": "CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'",
    "issue": "",
@@ -9539,7 +9641,7 @@
    "ref": "R114",
    "value": "10k",
    "part": "Resistor 10k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box, at U13 header",
    "note": "Pull-down at each board, so a broken enable wire still leaves that board off",
    "issue": "",
@@ -9591,7 +9693,7 @@
    "ref": "R105",
    "value": "4.7k",
    "part": "Resistor 4.7k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "IS series resistor",
    "issue": "",
@@ -9605,7 +9707,7 @@
    "ref": "C105",
    "value": "10n",
    "part": "Ceramic capacitor 10n, 50 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "IS filter",
    "issue": "",
@@ -9619,7 +9721,7 @@
    "ref": "D105",
    "value": "1N4148",
    "part": "1N4148 (ordered high-speed switching diodes), IS clamp to 3.3 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "Clamps the 4-7 mA fault current so the ADS1115 input stays ≤ 3.6 V",
    "issue": "",
@@ -9633,7 +9735,7 @@
    "ref": "C115",
    "value": "470µ 50V",
    "part": "Electrolytic 470 µF ≥35 V low-ESR (50 V preferred)",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box, on U14 B+/B−",
    "note": "CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'",
    "issue": "",
@@ -9647,7 +9749,7 @@
    "ref": "R115",
    "value": "10k",
    "part": "Resistor 10k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box, at U14 header",
    "note": "Pull-down at each board, so a broken enable wire still leaves that board off",
    "issue": "",
@@ -9688,7 +9790,7 @@
    "ref": "R22",
    "value": "100",
    "part": "Resistor 100, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "Pedal supply; a shorted pedal cable can't pull down 3V3_SENSE",
    "issue": "",
@@ -9702,7 +9804,7 @@
    "ref": "R20",
    "value": "10k",
    "part": "Resistor 10k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "Series protection",
    "issue": "",
@@ -9716,7 +9818,7 @@
    "ref": "R21",
    "value": "100k",
    "part": "Resistor 100k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "Unplugged pedal reads 0 (released)",
    "issue": "",
@@ -9730,7 +9832,7 @@
    "ref": "C20",
    "value": "100n",
    "part": "Ceramic capacitor 100n, 50 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "",
    "issue": "",
@@ -9744,7 +9846,7 @@
    "ref": "D20",
    "value": "1N4148",
    "part": "1N4148, clamp to 3.3 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "",
    "issue": "",
@@ -9758,7 +9860,7 @@
    "ref": "R23",
    "value": "10k",
    "part": "Resistor 10k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "GPIO34 has no internal pull-up",
    "issue": "",
@@ -9772,7 +9874,7 @@
    "ref": "C21",
    "value": "100n",
    "part": "Ceramic capacitor 100n, 50 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "",
    "issue": "",
@@ -9786,7 +9888,7 @@
    "ref": "R24",
    "value": "10k",
    "part": "Resistor 10k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "GPIO35 has no internal pull-up",
    "issue": "",
@@ -9800,7 +9902,7 @@
    "ref": "C22",
    "value": "100n",
    "part": "Ceramic capacitor 100n, 50 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "",
    "issue": "",
@@ -9814,7 +9916,7 @@
    "ref": "R27",
    "value": "4.7k",
    "part": "Resistor 4.7k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "1-Wire pull-up; also keeps strapping pin GPIO15 HIGH",
    "issue": "",
@@ -9843,7 +9945,7 @@
    "ref": "R28",
    "value": "1k",
    "part": "Resistor 1k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "DFPlayer RX series resistor",
    "issue": "",
@@ -9857,7 +9959,7 @@
    "ref": "R29",
    "value": "1k",
    "part": "Resistor 1k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "Bluetooth RXD series resistor: a dead module can't hold down the USB serial line",
    "issue": "",
@@ -9889,7 +9991,7 @@
    "ref": "R25",
    "value": "4.7k",
    "part": "Resistor 4.7k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "Fit only if the module pull-ups in parallel measure above 4.7k. Seven modules with their own 10k/4.7k already give ~1-2k",
    "issue": "",
@@ -9903,7 +10005,7 @@
    "ref": "R26",
    "value": "4.7k",
    "part": "Resistor 4.7k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "As R25",
    "issue": "",
@@ -9917,7 +10019,7 @@
    "ref": "U22",
    "value": "ADS1115 0x48",
    "part": "ADS1115 module",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box",
    "note": "Drive current sense",
    "issue": "",
@@ -9939,7 +10041,7 @@
    "ref": "U23",
    "value": "ADS1115 0x49",
    "part": "ADS1115 module",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box",
    "note": "Steering current sense (A0), motor bus (A2); A1 reserved for AS5600 OUT, A3 spare",
    "issue": "",
@@ -9961,7 +10063,7 @@
    "ref": "U24",
    "value": "PCF8574 0x20",
    "part": "PCF8574 module, A2-A0 jumpers all to GND",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box",
    "note": "Switches pull to GND: 0 = pressed",
    "issue": "",
@@ -10090,7 +10192,7 @@
    "ref": "F9",
    "value": "3 A",
    "part": "Inline blade fuse holder (ordered, 3 pcs) + 3 A",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box",
    "note": "Lights branch of the 10-20 A buck",
    "issue": "",
@@ -10104,7 +10206,7 @@
    "ref": "F10",
    "value": "10 A",
    "part": "Inline blade fuse holder (ordered, 3 pcs) + 10 A",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box",
    "note": "Music amp branch",
    "issue": "",
@@ -10183,7 +10285,7 @@
    "ref": "C40",
    "value": "100n",
    "part": "Ceramic capacitor 100n, 50 V",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "U40 decoupling",
    "issue": "",
@@ -10197,7 +10299,7 @@
    "ref": "R40",
    "value": "10k",
    "part": "Resistor 10k, metal film 1 %, 0.25 W",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "A1",
    "note": "DRIVE_EN pull-down at U40",
    "issue": "",
@@ -10257,7 +10359,7 @@
    "ref": "C41",
    "value": "470µ 50V",
    "part": "Electrolytic 470 µF ≥35 V low-ESR",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box, on U41 VB+/VB−",
    "note": "",
    "issue": "",
@@ -10271,7 +10373,7 @@
    "ref": "C42",
    "value": "470µ 50V",
    "part": "Electrolytic 470 µF ≥35 V low-ESR",
-   "source": "Ordered 24 Oct",
+   "source": "Received 4 Nov",
    "where": "box, on U42 VB+/VB−",
    "note": "",
    "issue": "",

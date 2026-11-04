@@ -17,10 +17,10 @@ ORDER_LINES = [
     ("wire10", "10 m/lot wire (lot 1), 10 AWG", 88.34),
     ("wire12", "10 m/lot wire (lot 2), 12 AWG", 64.02),
     ("k1", "ZJW100 (SW80) 125 A contactor", 72.88),
-    ("termkit", "Pre-insulated terminal kit", 70.40),
+    ("termkit", "Crimping pliers kit, Lion Rage HS-30J, 4 jaws (\"Pre insulated terminal...\")", 70.40),
     ("cells", "Vapcell 18650", 69.16),
     ("fuseblock", "6/12 way blade fuse block", 31.01),
-    ("shrink", "Heat shrink 300-2000 pcs", 27.17),
+    ("ferrules", "Wire ferrule kit, 2000 pcs (the receipt's \"300-2000 pcs\" line)", 27.17),
     ("rings", "Ring terminals 220/110 pcs", 24.51),
     ("as5600", "AS5600", 20.22),
     ("estop", "22 mm E-stop 2NO+2NC", 19.42),
@@ -128,11 +128,16 @@ EXTRAS = [
     ("", 1, "10 AWG wire, red + black, 10 m", "Generic", "box", D.ORDER, ["wire10"], "Battery, contactor, driver B+/B−"),
     ("", 1, "12 AWG wire, red + black, 10 m", "Generic", "box", D.ORDER, ["wire12"], "Driver to motor plugs"),
     ("", 1, "14-16 AWG wire, orange or red (key, F6 and 12 V branches)", "Generic", "box", D.BUY, [], "12 AWG from the order also works"),
+    ("", 1, "Pigtail for the AS5600 board's 4-pin plug (match its pitch: JST-GH 1.25 or PH 2.0)", "Generic JST", "car",
+     D.BUY, [], "Optional: lets the sensor unplug. Or solder the cable to the board's pads, with strain relief"),
     ("", 1, "20 AWG 4-6 core cable for off-box harnesses (E-stop, sensors, dash)", "Generic", "harness", D.BUY, [], ""),
     ("", 1, "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)", "Generic", "box", D.BUY, [],
      "Was in the cart review, not in the order"),
-    ("", 1, "Ring lugs (M6/M8 for 10 AWG), pre-insulated terminals, ferrules", "Generic", "box", D.ORDER, ["rings", "termkit"], ""),
-    ("", 1, "Heat shrink assortment (also the colour bands)", "Generic", "box", D.ORDER, ["shrink"], ""),
+    ("", 1, "Insulated ring terminal kit, red/blue/yellow (yellow 4-6 mm² takes 10 AWG; check the stud sizes)", "Generic", "box", D.ORDER, ["rings"], ""),
+    ("", 1, "Wire ferrule kit, 2000 pcs, 0.5-10 mm²", "Generic", "box", D.ORDER, ["ferrules"],
+     "For the screw terminals (IBT-2, MRD068A, A1)"),
+    ("", 1, "Heat shrink assortment (also the colour bands)", "Generic", "box", D.BUY, [],
+     "Not in the 24 Oct order: the line thought to be heat shrink was the ferrule kit"),
     ("", 1, "Box: flame-retardant (UL94 V-0) ABS or metal, ~250 x 200 x 100 mm, IP54", "TBD", "box", D.TBD, [],
      "Size waits on #18; V-0 or metal is item M7 of the safety review (EN 62115 fire test)"),
     ("", 10, "Cable glands PG9 / PG13.5", "Generic nylon", "box", D.BUY, [], ""),
@@ -174,6 +179,8 @@ BUY_LINKS = {
 }
 
 EXTRA_LINKS = {
+    "Heat shrink assortment (also the colour bands)": ae("heat shrink tube assortment"),
+    "Pigtail for the AS5600 board's 4-pin plug (match its pitch: JST-GH 1.25 or PH 2.0)": ae("jst gh 1.25 4 pin cable"),
     "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)": ae("22awg silicone wire 10 colors"),
 }
 
@@ -219,11 +226,16 @@ TOOLS = [dict(zip(("cat", "item", "mfr", "qty", "src", "lines", "premium", "link
     ("Tool", "Solder fume extractor", "Small desk fan with carbon filter", 1, D.BUY, [], "Larger extractor on an arm",
      ae("solder fume extractor"), ""),
     ("Tool", "Heat gun, dual temperature", "Generic 2000 W", 1, D.BUY, [], "Any brand with an adjustable dial", ae("heat gun 2000w"),
-     "For the heat shrink in the order; local hardware stores have them"),
+     "For the heat shrink; local hardware stores have them"),
     ("Tool", "Automatic wire stripper, 10-24 AWG", "Generic self-adjusting stripper", 1, D.BUY, [], "Knipex 12 62 180 (local)",
      ae("automatic wire stripper"), ""),
-    ("Tool", "Hex crimper for 6-50 mm² lugs", "Generic hexagon lug crimper", 1, D.BUY, [], "Hydraulic crimper (overkill here)",
-     ae("hex crimping tool 6-50mm2"), "For the 10 AWG ring lugs; the terminal kit's crimper is for small terminals"),
+    ("Tool", "Crimping pliers, ratchet, 4 swap jaws (insulated terminals, ferrules, ...)", "Lion Rage HS-30J", 1, D.ORDER,
+     ["termkit"], "", "", "Use the jaw marked with mm² ferrule sizes for ferrules, the red/blue/yellow one for insulated terminals"),
+    ("Tool", "Self-adjusting ferrule crimper, 0.25-10 mm² (square jaw)", "Generic HSC8 6-4A", 0, D.BUY, [],
+     "Knipex 97 53 14", ae("hsc8 6-4a ferrule crimper"),
+     "Optional: only if none of the HS-30J jaws is a ferrule jaw"),
+    ("Tool", "Hex crimper for 6-50 mm² lugs", "Generic hexagon lug crimper", 0, D.BUY, [], "Hydraulic crimper (overkill here)",
+     ae("hex crimping tool 6-50mm2"), "Optional: yellow insulated rings (4-6 mm²) from O10 take 10 AWG and crimp with the HS-30J. Needed only for bare tube lugs, or if no yellow ring fits the M6/M8 studs"),
 ]]
 
 
@@ -486,14 +498,14 @@ def write_bom(out, parts, vb_parts):
            "Parts that are the same share one line, with all their refs. To add something, add it in gen/tables.py "
            "(EXTRAS, TOOLS, BUY_LINKS) or as a schematic part, then regenerate. BOM.csv has the same lines with every "
            "column, for sorting and filtering in a spreadsheet.\n\n",
-           "**Status:** *Owned* = in hand. *Ordered 24 Oct* = in the AliExpress order (order lines O1-O26 below). "
+           "**Status:** *Owned* = in hand. *Received 4 Nov* = from the AliExpress order of 24 Oct, in hand since 4 Nov (order lines O1-O26 below). "
            "*To buy* = not ordered yet. *TBD* = waits on a decision or the car photos. *Stock car* = the car's own part, "
            "kept. A line with mixed status gives the count of each.\n\n"
            "**Manufacturer / part number:** for generic modules this names the chip and its maker; the board is a clone. "
            "For tools it is the value pick; the premium pick is in Notes.\n\n"
            "**Links** for things to buy are AliExpress searches sorted by most orders (the cloud session can't open "
            "aliexpress.com listings); pick a top result that matches the spec.\n\n",
-           "## Check when the order arrives\n\n",
+           "## Check the 24 Oct order (arrived 4 Nov)\n\n",
            "- **470 µF capacitors (C111-C115):** the order line reads \"Electrolytic caps 10-25 V\". On a 24 V bus they must be "
            "**35 V or more** (50 V preferred). If the bag says 25 V, do not fit them; buy 470 µF 50 V low-ESR.\n",
            "- **ADS1115:** the order shows one line; the design needs 2 (U22, U23). Check the quantity.\n",

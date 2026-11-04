@@ -8,7 +8,7 @@ Variant A (4 + 1 IBT-2) is the main design. Variant B (2 x MDD20A) is in VARIANT
 
 # ---------------------------------------------------------------- sources
 
-ORDER = "Ordered 24 Oct"   # the AliExpress order of 24 Oct 2026 (shopping/2026-10-24-aliexpress-order.md)
+ORDER = "Received 4 Nov"   # the AliExpress order of 24 Oct 2026, in hand 4 Nov (shopping/2026-10-24-aliexpress-order.md)
 OWNED = "Owned"
 STOCK = "Stock car"
 BUY = "To buy"

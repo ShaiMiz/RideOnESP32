@@ -65,7 +65,7 @@
   (property "Datasheet" "" (at 43.18 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Description" "AMS1117-3.3 module" (at 43.18 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Part" "AMS1117-3.3 module" (at 43.18 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Source" "Ordered 24 Oct" (at 43.18 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+  (property "Source" "Received 4 Nov" (at 43.18 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Location" "box" (at 43.18 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (property "Note" "3V3_SENSE: IBT-2 logic, I2C devices, clamps, pedal. About 0.1 A" (at 43.18 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
   (pin "VIN" (uuid "ef88b445-60fd-5a14-819a-00b80cb0525e"))

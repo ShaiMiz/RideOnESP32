@@ -128,6 +128,8 @@ EXTRAS = [
     ("", 1, "10 AWG wire, red + black, 10 m", "Generic", "box", D.ORDER, ["wire10"], "Battery, contactor, driver B+/B−"),
     ("", 1, "12 AWG wire, red + black, 10 m", "Generic", "box", D.ORDER, ["wire12"], "Driver to motor plugs"),
     ("", 1, "14-16 AWG wire, orange or red (key, F6 and 12 V branches)", "Generic", "box", D.BUY, [], "12 AWG from the order also works"),
+    ("", 1, "Pigtail for the AS5600 board's 4-pin plug (match its pitch: JST-GH 1.25 or PH 2.0)", "Generic JST", "car",
+     D.BUY, [], "Optional: lets the sensor unplug. Or solder the cable to the board's pads, with strain relief"),
     ("", 1, "20 AWG 4-6 core cable for off-box harnesses (E-stop, sensors, dash)", "Generic", "harness", D.BUY, [], ""),
     ("", 1, "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)", "Generic", "box", D.BUY, [],
      "Was in the cart review, not in the order"),
@@ -174,6 +176,7 @@ BUY_LINKS = {
 }
 
 EXTRA_LINKS = {
+    "Pigtail for the AS5600 board's 4-pin plug (match its pitch: JST-GH 1.25 or PH 2.0)": ae("jst gh 1.25 4 pin cable"),
     "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)": ae("22awg silicone wire 10 colors"),
 }
 
@@ -486,14 +489,14 @@ def write_bom(out, parts, vb_parts):
            "Parts that are the same share one line, with all their refs. To add something, add it in gen/tables.py "
            "(EXTRAS, TOOLS, BUY_LINKS) or as a schematic part, then regenerate. BOM.csv has the same lines with every "
            "column, for sorting and filtering in a spreadsheet.\n\n",
-           "**Status:** *Owned* = in hand. *Ordered 24 Oct* = in the AliExpress order (order lines O1-O26 below). "
+           "**Status:** *Owned* = in hand. *Received 4 Nov* = from the AliExpress order of 24 Oct, in hand since 4 Nov (order lines O1-O26 below). "
            "*To buy* = not ordered yet. *TBD* = waits on a decision or the car photos. *Stock car* = the car's own part, "
            "kept. A line with mixed status gives the count of each.\n\n"
            "**Manufacturer / part number:** for generic modules this names the chip and its maker; the board is a clone. "
            "For tools it is the value pick; the premium pick is in Notes.\n\n"
            "**Links** for things to buy are AliExpress searches sorted by most orders (the cloud session can't open "
            "aliexpress.com listings); pick a top result that matches the spec.\n\n",
-           "## Check when the order arrives\n\n",
+           "## Check the 24 Oct order (arrived 4 Nov)\n\n",
            "- **470 µF capacitors (C111-C115):** the order line reads \"Electrolytic caps 10-25 V\". On a 24 V bus they must be "
            "**35 V or more** (50 V preferred). If the bag says 25 V, do not fit them; buy 470 µF 50 V low-ESR.\n",
            "- **ADS1115:** the order shows one line; the design needs 2 (U22, U23). Check the quantity.\n",

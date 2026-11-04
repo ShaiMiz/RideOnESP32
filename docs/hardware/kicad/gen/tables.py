@@ -133,7 +133,7 @@ EXTRAS = [
     ("", 1, "20 AWG 4-6 core cable for off-box harnesses (E-stop, sensors, dash)", "Generic", "harness", D.BUY, [], ""),
     ("", 1, "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)", "Generic", "box", D.BUY, [],
      "Was in the cart review, not in the order"),
-    ("", 1, "Ring terminals, 220/110 pc kit (check it has M6/M8 lugs for 10 AWG)", "Generic", "box", D.ORDER, ["rings"], ""),
+    ("", 1, "Insulated ring terminal kit, red/blue/yellow (yellow 4-6 mm² takes 10 AWG; check the stud sizes)", "Generic", "box", D.ORDER, ["rings"], ""),
     ("", 1, "Wire ferrule kit, 2000 pcs, 0.5-10 mm²", "Generic", "box", D.ORDER, ["ferrules"],
      "For the screw terminals (IBT-2, MRD068A, A1)"),
     ("", 1, "Heat shrink assortment (also the colour bands)", "Generic", "box", D.BUY, [],
@@ -234,8 +234,8 @@ TOOLS = [dict(zip(("cat", "item", "mfr", "qty", "src", "lines", "premium", "link
     ("Tool", "Self-adjusting ferrule crimper, 0.25-10 mm² (square jaw)", "Generic HSC8 6-4A", 0, D.BUY, [],
      "Knipex 97 53 14", ae("hsc8 6-4a ferrule crimper"),
      "Optional: only if none of the HS-30J jaws is a ferrule jaw"),
-    ("Tool", "Hex crimper for 6-50 mm² lugs", "Generic hexagon lug crimper", 1, D.BUY, [], "Hydraulic crimper (overkill here)",
-     ae("hex crimping tool 6-50mm2"), "For the 10 AWG ring lugs; the HS-30J is for small terminals"),
+    ("Tool", "Hex crimper for 6-50 mm² lugs", "Generic hexagon lug crimper", 0, D.BUY, [], "Hydraulic crimper (overkill here)",
+     ae("hex crimping tool 6-50mm2"), "Optional: yellow insulated rings (4-6 mm²) from O10 take 10 AWG and crimp with the HS-30J. Needed only for bare tube lugs, or if no yellow ring fits the M6/M8 studs"),
 ]]
 
 

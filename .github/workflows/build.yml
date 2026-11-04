@@ -72,6 +72,8 @@ jobs:
           path: ~/.platformio
           key: pio-${{ hashFiles('platformio.ini') }}
       - run: pip install platformio
+      # A cached penv can point at a Python the runner no longer has; drop it so the platform rebuilds it
+      - run: test -x ~/.platformio/penv/bin/python || rm -rf ~/.platformio/penv
       - name: Build ${{ matrix.env }}
         run: pio run -e ${{ matrix.env }}
 

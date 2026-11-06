@@ -221,7 +221,7 @@ car = [
 
 power = [
     Part("K1", M("Contactor_SW80"), "125 A 24 V", {"C+": "COIL_24V", "C-": "COIL_LOW", "A": "BATT_FUSED", "B": "MOTOR_24V"},
-         "ZJW100 (SW80 type) contactor, 125 A, 24 V coil", ORDER, "box (may mount beside it: ~10 cm tall)",
+         "Taiye TSW-80/24V DC contactor (SW80 type), 125 A, 24 V DC coil", ORDER, "box (may mount beside it: ~10 cm tall)",
          "Measure its coil current on the bench; if over 0.6 A make F3 2 A"),
     D("D1", "1N4007", "COIL_24V", "COIL_LOW", "1N4007, flyback across the K1 coil", loc="box, on K1 coil tabs",
       note="A plain diode slows K1 opening a little; a 1N4007 + 24 V zener in series opens faster (optional)"),

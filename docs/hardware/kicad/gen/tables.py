@@ -82,7 +82,7 @@ MFR = {
     "U29": "Generic, LR7843 or AOD4184 MOSFETs", "U30": "DFRobot DFPlayer Mini DFR0299 (or clone)",
     "U31": "Analog Devices (Maxim) DS18B20", "U32": "ZK-502T (generic)", "U33": "DSD TECH HM-10 (TI CC2541), or a CC2541 clone", "Q1": "Infineon IRLZ44NPBF",
     "D1": "Generic 1N4007", "D101": "Generic 1N4148", "D2": "TBD (SMBJ/P6KE family)", "H1": "Allegro A3144 (or clone)",
-    "K1": "ZJW100 / SW80 type (generic)", "S2": "Generic 22 mm", "F1": "Generic ANL", "F2": "Generic ATO/ATC blade",
+    "K1": "Taiye TSW-80/24V (label checked 6 Nov)", "S2": "Generic 22 mm", "F1": "Generic ANL", "F2": "Generic ATO/ATC blade",
     "F3": "Generic ATO/ATC blade", "J9": "TE Deutsch DT04-4P / DT06-4S (or clone)",
     "J10": "TE Deutsch DT04-08PA / DT06-08SA (or clone)", "J11": "TE Deutsch DT04-6P / DT06-6S (or clone)",
     "J12": "TE Deutsch DT04-4P / DT06-4S (or clone)", "FAN1": "Generic 8025 24 V", "LS1": "Generic", "LS2": "Generic",

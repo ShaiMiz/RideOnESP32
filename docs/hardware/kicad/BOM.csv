@@ -28,7 +28,7 @@ Line,Category,Refs,Qty,Description,Manufacturer / part number,Where,Status,Order
 27,Power,F9,1,"Inline blade fuse holder (ordered, 3 pcs) + 3 A",Generic ATO/ATC blade,box,Received 4 Nov,"O19, O25","AliExpress, 24 Oct order",,,Lights branch of the 10-20 A buck
 28,Power,F10,1,"Inline blade fuse holder (ordered, 3 pcs) + 10 A",Generic ATO/ATC blade,box,Received 4 Nov,"O19, O25","AliExpress, 24 Oct order",,,Music amp branch
 29,Power,FB1,1,6/12-way blade fuse block with common bus (holds F3-F8),Generic,box,Received 4 Nov,O8,"AliExpress, 24 Oct order",,,
-30,Power,K1,1,"ZJW100 (SW80 type) contactor, 125 A, 24 V coil",ZJW100 / SW80 type (generic),box (may mount beside it: ~10 cm tall),Received 4 Nov,O5,"AliExpress, 24 Oct order",,,Measure its coil current on the bench; if over 0.6 A make F3 2 A
+30,Power,K1,1,"Taiye TSW-80/24V DC contactor (SW80 type), 125 A, 24 V DC coil",Taiye TSW-80/24V (label checked 6 Nov),box (may mount beside it: ~10 cm tall),Received 4 Nov,O5,"AliExpress, 24 Oct order",,,Measure its coil current on the bench; if over 0.6 A make F3 2 A
 31,Power,S2,1,22 mm latching E-stop 2NO + 2NC,Generic 22 mm,dash,Received 4 Nov,O12,"AliExpress, 24 Oct order",,,Both NC blocks in series with the K1 coil (a welded NC block still leaves one that opens). NO3 reads the state
 32,Power,TB1,1,M6 brass stud or bus bar: the one ground star point,Generic,box,To buy,,,,,"Battery −, every driver B−, rails and logic ground meet here and nowhere else"
 33,Power,TB2,1,M6 stud or bus bar after K1 stud B,Generic,box,To buy,,,,,

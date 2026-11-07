@@ -6,7 +6,7 @@ import { load, toYaml } from '../src/lib/model.js';
 import { mix, toUs } from '../src/lib/mixer.js';
 import { channelNumbers, configValues } from '../src/lib/repo.js';
 import { decode, ModeMachine, switchPosition } from '../src/lib/firmware.js';
-import { check } from '../src/lib/rules.js';
+import { check, controlReach } from '../src/lib/rules.js';
 
 const ch = channelNumbers(CHANNEL_MAP_H);
 const lim = configValues(CONFIG_H);
@@ -39,10 +39,33 @@ test('the repo model drives the channels CHANNEL_MAP.md names', () => {
   assert.equal(switchPosition(down[ch.SPEED_CAP - 1], lim), 1, 'SB middle = 60 %');
   assert.ok(run({ ...rest, rv: 1 })[ch.THROTTLE - 1] > 2000, 'right stick up = forward');
   assert.ok(run({ ...rest, rh: -1 })[ch.STEERING - 1] < 1000, 'right stick left = left');
-  assert.ok(run({ ...rest, lh: 0.6 })[ch.HORN - 1] > 1900, 'left stick sideways = horn');
-  assert.ok(run({ ...rest, lh: -0.6 })[ch.HORN - 1] > 1900, 'either way');
-  assert.ok(run({ ...rest, lh: 0.4 })[ch.HORN - 1] < 1100, 'not before half way');
+  assert.ok(run({ ...rest, lh: 0.85 })[ch.HORN - 1] > 1900, 'left stick pushed sideways = horn');
+  assert.ok(run({ ...rest, lh: -0.85 })[ch.HORN - 1] > 1900, 'either way');
+  assert.ok(run({ ...rest, lh: 0.75 })[ch.HORN - 1] < 1100, 'not before 80 %');
+  assert.ok(run({ lh: 0.6, lv: 1, rh: 0, rv: 0 })[ch.HORN - 1] < 1100, 'moving the left stick up/down with some sideways wobble does not sound it');
   assert.equal(run({ ...rest, lv: 1 })[ch.THROTTLE - 1], 1500, 'left stick up/down drives nothing');
+});
+
+test('each control drives one function only, whatever the other controls do', () => {
+  // Every switch combination, every stick at -1/0/1, each control swept on its own, judged as the
+  // firmware reads the channels. SD and the left stick up/down are spare.
+  assert.deepEqual(controlReach(config, ch, lim), {
+    SA: [ch.MODE],
+    SB: [ch.SPEED_CAP],
+    SC: [ch.KILL],
+    SD: [],
+    lh: [ch.HORN],
+    lv: [],
+    rh: [ch.STEERING],
+    rv: [ch.THROTTLE],
+  });
+});
+
+test('the checks block an edit that makes one control drive two functions', () => {
+  const add = (m) => (c) => c.mixes.push({ weight: 100, offset: 0, swtch: 'NONE', noTrim: false, mltpx: 'ADD', name: 'X', ...m });
+  assert.match(edit(add({ ch: ch.HORN, src: 'SA', mltpx: 'REPL', swtch: 'NONE' })), /SA moves CH6 Mode and CH8 Horn/, 'horn also on the mode switch');
+  assert.match(edit(add({ ch: ch.STEERING, src: 'Thr', weight: 30 })), /Steering follows Left stick up\/down and Right stick sideways/, 'left stick mixed into steering');
+  assert.match(edit(add({ ch: ch.SPEED_CAP, src: 'Ail', weight: 100 })), /Right stick sideways moves CH1 Steering and CH7 Kid speed cap/, 'steering stick also moves the cap');
 });
 
 test('CRSF output range is 989..2011 us, centre 1500', () => {

@@ -60,7 +60,7 @@ mixData:
 logicalSw:
   0:
     func: FUNC_APOS
-    def: "Rud,50"
+    def: "Rud,80"
     andsw: "NONE"
     delay: 0
     duration: 0

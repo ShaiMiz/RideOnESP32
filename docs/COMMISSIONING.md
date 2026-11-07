@@ -22,7 +22,7 @@ Build the new electronics as a removable box and leave the stock wiring intact. 
 
 **Gate:**
 - [ ] Turning the radio off prints `link OK -> LOST` with the last packet under 200 ms old.
-- [ ] Every stick and switch moves the channel [CHANNEL_MAP.md](firmware/CHANNEL_MAP.md) says it does, in the right direction.
+- [ ] Every stick and switch moves the channel [CHANNEL_MAP.md](firmware/CHANNEL_MAP.md) says it does, in the right direction. Moved on its own through its whole travel, each one moves no other channel (SR-32). Moving the left stick up and down, or in circles short of the edge, leaves the horn off; it sounds only with the stick pushed most of the way sideways.
 - [ ] Letting go of the right stick reads `thr=+0.00 str=+0.00`.
 - [ ] The radio bench checks in [radio/README.md](../radio/README.md#bench-phase-2-receiver-on-the-esp32-radio_check-firmware): Model Match, receiver Wi-Fi off, telemetry screen and fault alarm.
 - [ ] *(recommended)* Range walk to 150 m with no link drops and link quality never under 70 %, from the radio's log summary ([radio/README.md](../radio/README.md#range-and-reliability-in-the-field)).

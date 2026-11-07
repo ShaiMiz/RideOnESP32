@@ -595,6 +595,91 @@ uint16_t randomUs() {
 }
 }  // namespace
 
+// SR-32: each radio control changes only its own output. From a car in each
+// state, one control is moved on its own and the outputs that change are
+// exactly the allowed ones; the only cross-effects are the designed ones:
+// kill stops the drive and the steering, the throttle stick pulled back brakes
+// in Kid, and the speed cap applies only in Kid. The left stick up/down
+// (CH3) and SD are not read at all (ControlInputs has no field for them).
+namespace {
+
+enum Out : uint8_t { M = 1, C = 2, S = 4, H = 8 };  // mode, command, steering, horn
+enum class State { Locked, Kid, Parent, Killed };
+enum class Move { SteerLeft, SteerRight, Horn, CapMid, CapHigh, ThrottleUp, ThrottleDown, Kill };
+
+ControlOutputs settle(State st, Move* move) {
+  Car c;
+  if (st == State::Kid) {
+    c.arm(MID_US);
+    c.in.pedal = 1.0f;
+  } else if (st == State::Parent || st == State::Killed) {
+    c.arm(HIGH_US);
+    c.in.throttleUs = 1700;  // part throttle, so stopping shows
+  }
+  if (st == State::Killed) c.in.killUs = LOW_US;
+  c.in.steeringUs = 1600;  // a little right, so a cut steering shows
+  c.run(100);
+  if (move) {
+    switch (*move) {
+      case Move::SteerLeft: c.in.steeringUs = LOW_US; break;
+      case Move::SteerRight: c.in.steeringUs = HIGH_US; break;
+      case Move::Horn: c.in.hornUs = HIGH_US; break;
+      case Move::CapMid: c.in.speedCapUs = MID_US; break;
+      case Move::CapHigh: c.in.speedCapUs = HIGH_US; break;
+      case Move::ThrottleUp: c.in.throttleUs = HIGH_US; break;
+      case Move::ThrottleDown: c.in.throttleUs = LOW_US; break;
+      case Move::Kill: c.in.killUs = LOW_US; break;
+    }
+  }
+  c.run(100);
+  return c.out;
+}
+
+uint8_t changed(const ControlOutputs& a, const ControlOutputs& b) {
+  return (a.mode != b.mode ? M : 0) | (a.command != b.command ? C : 0) | (a.steering != b.steering ? S : 0) |
+         (a.horn != b.horn ? H : 0);
+}
+
+}  // namespace
+
+void test_each_control_changes_only_its_own_output() {
+  struct Case {
+    State st;
+    Move move;
+    uint8_t expect;
+  };
+  const Case cases[] = {
+      {State::Locked, Move::SteerLeft, S},    {State::Locked, Move::SteerRight, S},
+      {State::Locked, Move::Horn, H},         {State::Locked, Move::CapMid, 0},
+      {State::Locked, Move::CapHigh, 0},      {State::Locked, Move::ThrottleUp, 0},
+      {State::Locked, Move::ThrottleDown, 0}, {State::Locked, Move::Kill, M | S},
+
+      {State::Kid, Move::SteerLeft, S},       {State::Kid, Move::SteerRight, S},
+      {State::Kid, Move::Horn, H},            {State::Kid, Move::CapMid, C},
+      {State::Kid, Move::CapHigh, C},         {State::Kid, Move::ThrottleUp, 0},
+      {State::Kid, Move::ThrottleDown, C},    {State::Kid, Move::Kill, M | C | S},
+
+      {State::Parent, Move::SteerLeft, S},    {State::Parent, Move::SteerRight, S},
+      {State::Parent, Move::Horn, H},         {State::Parent, Move::CapMid, 0},
+      {State::Parent, Move::CapHigh, 0},      {State::Parent, Move::ThrottleUp, C},
+      {State::Parent, Move::ThrottleDown, C}, {State::Parent, Move::Kill, M | C | S},
+
+      {State::Killed, Move::SteerLeft, 0},    {State::Killed, Move::SteerRight, 0},
+      {State::Killed, Move::Horn, H},         {State::Killed, Move::CapMid, 0},
+      {State::Killed, Move::CapHigh, 0},      {State::Killed, Move::ThrottleUp, 0},
+      {State::Killed, Move::ThrottleDown, 0},
+  };
+  const Mode expectMode[] = {Mode::Locked, Mode::Kid, Mode::Parent, Mode::Killed};
+  for (const Case& k : cases) {
+    ControlOutputs base = settle(k.st, nullptr);
+    TEST_ASSERT_EQUAL(expectMode[(int)k.st], base.mode);
+    Move m = k.move;
+    char msg[48];
+    snprintf(msg, sizeof msg, "state %d, move %d", (int)k.st, (int)k.move);
+    TEST_ASSERT_EQUAL_HEX8_MESSAGE(k.expect, changed(base, settle(k.st, &m)), msg);
+  }
+}
+
 // SR-18: 200 000 ticks of random sticks, switches, pedal, faults and link
 // drops. Every tick the safety invariants hold:
 //   - a latched HARD_FAULT or Killed: drive enable LOW and output zero
@@ -729,6 +814,7 @@ int main() {
   RUN_TEST(test_kid_mode_needs_the_pedal_expander);
   RUN_TEST(test_kid_ramp_is_gentler);
   RUN_TEST(test_direction_change_stops_first);
+  RUN_TEST(test_each_control_changes_only_its_own_output);
   RUN_TEST(test_invariants_hold_under_random_input);
   return UNITY_END();
 }

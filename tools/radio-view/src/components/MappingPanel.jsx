@@ -85,7 +85,7 @@ export default function MappingPanel({ config, setConfig, rules, reset }) {
 
       <section className="card">
         <h3>Logical switches</h3>
-        <p className="muted small">Conditions for mix lines. The repo uses L1 = left stick sideways past half way, for the horn.</p>
+        <p className="muted small">Conditions for mix lines. The repo uses L1 = left stick sideways past 80 %, for the horn.</p>
         {[...Array(LS_COUNT).keys()].map((idx) => {
           const ls = config.logical.find((l) => l.idx === idx);
           const set = (patch) => update((n) => {

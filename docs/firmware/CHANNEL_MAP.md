@@ -11,7 +11,7 @@ Channels are numbered from 1, as EdgeTX and AlfredoCRSF number them.
 | 5 | `ch::KILL` | SC, left, 2-position: up = KILL, down = run | above 1700 = run; anything else = KILL |
 | 6 | `ch::MODE` | SA, left, 3-position: up / middle / down | below 1300 Locked, 1300 to 1700 Kid, above 1700 Parent |
 | 7 | `ch::SPEED_CAP` | SB, right, 3-position: up / middle / down | Kid speed cap 30 % / 60 % / 100 % |
-| 8 | `ch::HORN` | Left stick pushed sideways, either way | above 1700 = horn |
+| 8 | `ch::HORN` | Left stick pushed most of the way sideways (past 80 %), either way | above 1700 = horn |
 
 Channels 3 and 4 (the left stick) are not used for driving. The T-Lite's left throttle axis does not spring back to centre. SD (right, 2-position) is spare.
 

@@ -17,13 +17,13 @@ The T-Lite has four toggle switches. They stick straight out of its back edge (t
 | CH5 kill | **SC**, left 2-position | **KILL** | | Run |
 | CH6 mode | **SA**, left 3-position | **Locked** | Kid | Parent |
 | CH7 Kid speed cap | **SB**, right 3-position | **30 %** | 60 % | 100 % |
-| CH8 horn | Left stick pushed sideways past half way, either way | | | |
+| CH8 horn | Left stick pushed most of the way sideways (past 80 %), either way | | | |
 
 Your right thumb drives; your left hand holds the radio with a finger on SC, so the kill switch is always under a finger. SC and SA feel different (2 and 3 positions), so they can be told apart without looking. SD is spare.
 
 ## What the file sets
 
-- **Mixes:** CH1 = right stick sideways (`Ail`), CH2 = right stick up/down (`Ele`), CH3 and CH4 = the left stick (unused by the firmware), CH5 = SC, CH6 = SA, CH7 = SB, all at 100 %. CH8 = −100 % unless logical switch L1 (left stick sideways, |Rud| > 50 %) replaces it with +100 %. Range 988 to 2012 µs, centre 1500 µs, no expo.
+- **Mixes:** CH1 = right stick sideways (`Ail`), CH2 = right stick up/down (`Ele`), CH3 and CH4 = the left stick (unused by the firmware), CH5 = SC, CH6 = SA, CH7 = SB, all at 100 %. CH8 = −100 % unless logical switch L1 (left stick sideways, |Rud| > 80 %) replaces it with +100 %. Range 988 to 2012 µs, centre 1500 µs, no expo.
 - **Trims off:** all four trims are disabled, and CH1 and CH2 don't take trims. A trimmed throttle that is not centred stops the car from arming.
 - **Start-up check:** at power-on the radio refuses to start sending until SA, SB and SC are all up (Locked, slowest, KILL). The throttle warning is off, because the left stick it watches is unused.
 - **Internal module:** CRSF (ELRS), receiver number **42** for Model Match.

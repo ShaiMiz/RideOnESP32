@@ -14,6 +14,8 @@ What does what:
 | SD backup, install, version and stick-mode check, log archive | [install_radio.py](install_radio.py) (double-click `install_radio.cmd` on Windows) | Everything above that lives on the SD card |
 | Checks | CI: `tools/check_radio_files.py`, `tools/test_radio_scripts.py` | Model matches the firmware's channel map and limits; both Lua scripts and the installer run against simulations |
 
+To see the model before the radio is set up, or try a different button layout, open the 3D radio view ([tools/radio-view](../tools/radio-view/README.md)): it shows every control's job, the screen and the channel values live, and can save an edited `model42.yml`.
+
 Detail: [MODEL_SETUP.md](MODEL_SETUP.md) (the model, switch by switch), [ELRS_SETUP.md](ELRS_SETUP.md) (the link settings and why), [DEVICE_FIRMWARE.md](../docs/hardware/DEVICE_FIRMWARE.md) (flashing, recovery, version log).
 
 ## The hardware

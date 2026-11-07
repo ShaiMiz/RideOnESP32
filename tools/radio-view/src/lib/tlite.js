@@ -101,7 +101,7 @@ export const SPECS = [
   ['Screen', '1.3 in monochrome LCD, 128 x 64, backlit'],
   ['Sticks', 'Two hall-sensor gimbals, 25 mm sticks (tops unscrew for about 5 mm more). Mode 2: the left stick up/down has no spring and stays where it is left'],
   ['Switches', 'SA and SB 3-position (upper), SC and SD 2-position (lower), all on the back edge. No momentary switch, no knobs or sliders'],
-  ['Trims', 'T1 to T4, a pair of buttons each, between the sticks. Off in the RideOn model'],
+  ['Trims', 'T1 to T4, a pair of buttons each, between the sticks. Off as trims in the RideOn model, which frees them as push-buttons: the T1 pair is the horn'],
   ['Keys', 'ENT and RTN left of the screen, UP and DOWN right of it, SYS and MDL under it'],
   ['Power', 'Oval button below the green status LED, hold to turn on or off'],
   ['Feedback', 'Speaker (lower left), vibration motor'],

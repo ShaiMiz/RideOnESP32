@@ -79,7 +79,7 @@ What CI cannot check: that EdgeTX reads `model42.yml` exactly as intended (it wa
 ### Bench, phase 2 (receiver on the ESP32, `radio_check` firmware)
 
 - [ ] The RideOn model loads with no "unknown" items; Model → Mixes shows CH1 Steer, CH2 Thrtl, CH5 Kill, CH6 Mode, CH7 KidCap, CH8 Horn.
-- [ ] Every stick and switch moves its channel as [CHANNEL_MAP.md](../docs/firmware/CHANNEL_MAP.md) says, in the right direction: SC up = CH5 below 1100, down = above 1900; SA up / middle / down = Locked / Kid / Parent; left stick sideways = horn.
+- [ ] Every stick and switch moves its channel as [CHANNEL_MAP.md](../docs/firmware/CHANNEL_MAP.md) says, in the right direction: SC up = CH5 below 1100, down = above 1900; SA up / middle / down = Locked / Kid / Parent; holding a T1 trim button (under the left stick) = horn, letting go = off; the left stick moves nothing the car reads.
 - [ ] Letting go of the right stick reads `thr=+0.00 str=+0.00`.
 - [ ] Turning the radio off prints `link OK -> LOST` with the last packet under 200 ms old.
 - [ ] Model Match: select another model on the radio; the car reports link lost. Back to RideOn; link returns (and the car stays Locked until re-armed).

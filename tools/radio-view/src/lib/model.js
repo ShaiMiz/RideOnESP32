@@ -8,6 +8,16 @@ import { parse, stringify, get, value, setKey, removeKey, scalar, quoted, map, c
 export const STICKS = ['Rud', 'Ele', 'Thr', 'Ail'];
 export const SWITCHES = { SA: 3, SB: 3, SC: 2, SD: 2 }; // positions, from EdgeTX hw_defs/tlite.json
 export const SOURCES = [...STICKS, ...Object.keys(SWITCHES), 'MAX'];
+// The eight trim buttons, as EdgeTX names them when a trim is used as a push-button switch
+// (radio/src/storage/yaml/yaml_datastructs_funcs.cpp, trimSwitchNames). True while held.
+// Mode 2: T1 = left stick sideways (rudder), T2 = right up/down, T3 = left up/down, T4 = right sideways.
+export const TRIM_SWITCH = {
+  'T1-': 'TrimRudLeft', 'T1+': 'TrimRudRight',
+  'T2-': 'TrimEleDown', 'T2+': 'TrimEleUp',
+  'T3-': 'TrimThrDown', 'T3+': 'TrimThrUp',
+  'T4-': 'TrimAilLeft', 'T4+': 'TrimAilRight',
+};
+export const TRIM_NAMES = Object.keys(TRIM_SWITCH);
 export const MLTPX = ['ADD', 'MUL', 'REPL'];
 export const LS_FUNCS = {
   FUNC_APOS: '|a| > x',
@@ -34,6 +44,7 @@ export const SOURCE_LABEL = {
 export function conditions() {
   const out = ['NONE'];
   for (let i = 1; i <= LS_COUNT; i++) out.push(`L${i}`, `!L${i}`);
+  out.push(...Object.values(TRIM_SWITCH));
   return out;
 }
 

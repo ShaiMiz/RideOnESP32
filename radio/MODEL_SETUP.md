@@ -17,13 +17,13 @@ The T-Lite has four toggle switches. They stick straight out of its back edge (t
 | CH5 kill | **SC**, left 2-position | **KILL** | | Run |
 | CH6 mode | **SA**, left 3-position | **Locked** | Kid | Parent |
 | CH7 Kid speed cap | **SB**, right 3-position | **30 %** | 60 % | 100 % |
-| CH8 horn | Left stick pushed most of the way sideways (past 80 %), either way | | | |
+| CH8 horn | Either T1 trim button (the left/right pair under the left stick), while held | | | |
 
 Your right thumb drives; your left hand holds the radio with a finger on SC, so the kill switch is always under a finger. SC and SA feel different (2 and 3 positions), so they can be told apart without looking. SD is spare.
 
 ## What the file sets
 
-- **Mixes:** CH1 = right stick sideways (`Ail`), CH2 = right stick up/down (`Ele`), CH3 and CH4 = the left stick (unused by the firmware), CH5 = SC, CH6 = SA, CH7 = SB, all at 100 %. CH8 = −100 % unless logical switch L1 (left stick sideways, |Rud| > 80 %) replaces it with +100 %. Range 988 to 2012 µs, centre 1500 µs, no expo.
+- **Mixes:** CH1 = right stick sideways (`Ail`), CH2 = right stick up/down (`Ele`), CH3 and CH4 = the left stick (unused by the firmware), CH5 = SC, CH6 = SA, CH7 = SB, all at 100 %. CH8 = −100 %, replaced with +100 % while trim button T1- or T1+ is held (EdgeTX switches `TrimRudLeft` and `TrimRudRight`; the trims are off, so the buttons are free to act as push-buttons). No logical switches. Range 988 to 2012 µs, centre 1500 µs, no expo.
 - **Trims off:** all four trims are disabled, and CH1 and CH2 don't take trims. A trimmed throttle that is not centred stops the car from arming.
 - **Start-up check:** at power-on the radio refuses to start sending until SA, SB and SC are all up (Locked, slowest, KILL). The throttle warning is off, because the left stick it watches is unused.
 - **Internal module:** CRSF (ELRS), receiver number **42** for Model Match.
@@ -65,5 +65,5 @@ The thresholds are copied from `include/config.h`; CI fails if they drift apart.
 
 ## Check on the radio
 
-- Model → Mixes lists CH1 Steer, CH2 Thrtl, CH5 Kill, CH6 Mode, CH7 KidCap, CH8 Horn (twice). Channel monitor: SC up shows CH5 at −100 %, SA up CH6 at −100 %, the left stick sideways CH8 at +100 %.
+- Model → Mixes lists CH1 Steer, CH2 Thrtl, CH5 Kill, CH6 Mode, CH7 KidCap, CH8 Horn (three lines). Channel monitor: SC up shows CH5 at −100 %, SA up CH6 at −100 %, holding either T1 trim button CH8 at +100 % (and −100 % again on letting go). The T1 buttons must not move a trim: the trims are off.
 - With the car on the bench, wheels off the ground: `FM` reads `LOCKED`; switch to Parent and it reads `PARENT` within a second, with 3 beeps; press the E-stop and it reads `LOCKED ESTOP` at once, with the fault alarm. `RxBt` matches a multimeter on the battery to within 0.3 V.

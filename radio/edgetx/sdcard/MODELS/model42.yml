@@ -54,16 +54,15 @@ mixData:
   - destCh: 7
     srcRaw: MAX
     weight: 100
-    swtch: L1
+    swtch: TrimRudLeft
     mltpx: REPL
     name: "Horn"
-logicalSw:
-  0:
-    func: FUNC_APOS
-    def: "Rud,80"
-    andsw: "NONE"
-    delay: 0
-    duration: 0
+  - destCh: 7
+    srcRaw: MAX
+    weight: 100
+    swtch: TrimRudRight
+    mltpx: REPL
+    name: "Horn"
 customFn:
   0:
     swtch: "ON"

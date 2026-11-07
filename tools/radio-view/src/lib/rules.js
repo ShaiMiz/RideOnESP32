@@ -3,7 +3,7 @@
 // The checks run the mixer over every switch combination and the stick extremes, so they judge
 // what the channels actually do, not how the mixes are spelled. Errors block the export; warnings
 // say what else has to change (CHANNEL_MAP.md, tools/check_radio_files.py) for CI to pass.
-import { SWITCHES, STICKS, mixesFor } from './model.js';
+import { SWITCHES, STICKS, TRIM_NAMES, mixesFor } from './model.js';
 import { mix, toUs, axisOf } from './mixer.js';
 import { switchPosition, stickFraction } from './firmware.js';
 
@@ -121,7 +121,8 @@ export function check(config, ch, limits, stickMode = 2) {
   if (config.name !== 'RideOn') errors.push('The model must be called RideOn: install_radio.py finds it by name.');
 
   // 6. Horn: a warning only.
-  const hornOn = combos.some((c) => allSticks.some((s) => switchPosition(us(config, run(s, c), ch.HORN), limits) === 2));
+  const presses = [{}, ...TRIM_NAMES.map((t) => ({ [t]: true }))];
+  const hornOn = combos.some((c) => allSticks.some((s) => presses.some((trims) => switchPosition(us(config, { ...run(s, c), trims }, ch.HORN), limits) === 2)));
   if (!hornOn) warnings.push(`CH${ch.HORN} Horn: nothing turns it on.`);
   const hornIdle = combos.some((c) => switchPosition(us(config, run(neutral, c), ch.HORN), limits) !== 2);
   if (!hornIdle) warnings.push(`CH${ch.HORN} Horn: it is on with the sticks let go.`);
@@ -136,7 +137,8 @@ export function check(config, ch, limits, stickMode = 2) {
     if (chans.length > 1) errors.push(`${controlName(control)} moves ${chans.map((c) => channelRole(c, ch)).join(' and ')}. One control must drive one function only.`);
   }
   for (const role of FIRMWARE_ROLES) {
-    const by = Object.entries(reach).filter(([, chans]) => chans.includes(ch[role])).map(([c]) => controlName(c));
+    // a trim pair (T1- and T1+) counts as one control
+    const by = [...new Set(Object.entries(reach).filter(([, chans]) => chans.includes(ch[role])).map(([c]) => (TRIM_NAMES.includes(c) ? `Trim buttons ${c.slice(0, 2)}` : controlName(c))))];
     if (by.length > 1) errors.push(`CH${ch[role]} ${channelRole(ch[role], ch).replace(/^CH\d+ /, '')} follows ${by.join(' and ')}. A function must come from one control only.`);
   }
 
@@ -152,13 +154,13 @@ const channelRole = (c, ch) => {
   const role = FIRMWARE_ROLES.find((r) => ch[r] === c);
   return `CH${c} ${role ? ROLE_NAME[role] : ''}`.trim();
 };
-const controlName = (c) => AXIS_LABEL[c] || c;
+const controlName = (c) => AXIS_LABEL[c] || (TRIM_NAMES.includes(c) ? `Trim button ${c}` : c);
 
 /**
  * Which firmware channels each control reaches, judged the way the firmware reads them (a stick
  * fraction for steering and throttle, a switch position for the rest). A control reaches a
  * channel if moving it alone changes that reading for any position of all the other controls.
- * Returns { SA: [6], ..., lh: [8], ... } (channel numbers, sorted).
+ * Returns { SA: [6], ..., lh: [], ..., 'T1+': [8], ... } (channel numbers, sorted).
  */
 export function controlReach(config, ch, limits, stickMode = 2) {
   const read = (role, u) => (STICK_ROLES.includes(role) ? stickFraction(u, limits) : switchPosition(u, limits));
@@ -167,6 +169,7 @@ export function controlReach(config, ch, limits, stickMode = 2) {
   const controls = [
     ...Object.entries(SWITCHES).map(([sw, n]) => ({ name: sw, values: [...Array(n).keys()], set: (i, p) => ({ ...i, switches: { ...i.switches, [sw]: p } }) })),
     ...axes.map((a) => ({ name: a, values: [-1, -0.6, 0, 0.6, 1], set: (i, v) => ({ ...i, sticks: { ...i.sticks, [a]: v } }) })),
+    ...TRIM_NAMES.map((t) => ({ name: t, values: [false, true], set: (i, v) => ({ ...i, trims: v ? { [t]: true } : {} }) })),
   ];
   const combos = [...switchCombos()];
   const sticks = [...stickCombos(axes)];

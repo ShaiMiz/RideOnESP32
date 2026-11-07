@@ -1,5 +1,5 @@
 // What each physical control does in a config, and what a channel value means to the car.
-import { SWITCHES, STICKS } from './model.js';
+import { SWITCHES, STICKS, TRIM_NAMES } from './model.js';
 import { mix, toUs, axisOf } from './mixer.js';
 import { switchPosition, stickFraction } from './firmware.js';
 import { ROLE_LABEL } from './repo.js';
@@ -69,6 +69,11 @@ export function controlUses(config, input, CH, L) {
   for (const axis of ['lh', 'lv', 'rh', 'rv']) {
     const variants = [-1, -0.6, 0, 0.6, 1].map((v) => ({ ...input, sticks: { ...input.sticks, [axis]: v } }));
     out[axis] = changed(variants).map((c) => ({ ch: c, label: channelLabel(c, CH, config) }));
+  }
+  // trim buttons: pressed against released (they are push-buttons, true only while held)
+  for (const t of TRIM_NAMES) {
+    const variants = [{ ...input, trims: {} }, { ...input, trims: { [t]: true } }];
+    out[t] = changed(variants).map((c) => ({ ch: c, label: channelLabel(c, CH, config) }));
   }
   return out;
 }

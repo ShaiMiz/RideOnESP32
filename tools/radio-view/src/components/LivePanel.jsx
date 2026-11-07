@@ -42,7 +42,7 @@ function Bar({ v }) {
 const MODE_CLASS = { LOCKED: 'm-locked', KID: 'm-kid', PARENT: 'm-parent', KILLED: 'm-killed' };
 
 export default function LivePanel(p) {
-  const { us, out, config, car, sending, power, warningPending, carOn, setCarOn, lq, setLq, batt, setBatt, stickMode, setStickMode, sticks, setSticks, switches, setSwitch, onKey, channelName } = p;
+  const { us, out, config, car, sending, power, warningPending, carOn, setCarOn, lq, setLq, batt, setBatt, stickMode, setStickMode, sticks, setSticks, switches, setSwitch, onKey, channelName, onTrim, heldTrim, uses } = p;
   const used = new Set(config.mixes.map((m) => m.ch));
   const shown = [...Array(CHANNELS).keys()].map((i) => i + 1).filter((c) => c <= 8 || used.has(c));
   return (
@@ -104,6 +104,19 @@ export default function LivePanel(p) {
             </div>
           ))}
         </div>
+        <div className="sw trims">
+          <b title="Trim buttons: push-buttons, on only while held">Trim</b>
+          {['T1-', 'T1+', 'T2-', 'T2+', 'T3-', 'T3+', 'T4-', 'T4+'].map((t) => {
+            const u = (uses?.[t] || []).map((x) => `CH${x.ch} ${x.label}`).join(', ');
+            return (
+              <button key={t} className={heldTrim === t ? 'seg on' : 'seg'} title={u ? `${u}, while held` : 'spare'} style={{ touchAction: 'none' }}
+                onPointerDown={(e) => { e.preventDefault(); onTrim(t, true); }} onPointerUp={() => onTrim(t, false)} onPointerLeave={() => heldTrim === t && onTrim(t, false)}>
+                {t}{u ? ` ${u.replace(/^CH\d+ /, '')}` : ''}
+              </button>
+            );
+          })}
+        </div>
+        <p className="muted small">Hold a trim button to press it (or hold H for T1+). The trims are off in this model, so the buttons are free; T1, the pair under the left stick, is the horn.</p>
       </section>
 
       <section className="card">

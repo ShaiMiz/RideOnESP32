@@ -111,8 +111,16 @@ def model_name(path: Path) -> str | None:
         text = path.read_text(encoding="utf-8", errors="replace")
     except OSError:
         return None
-    m = re.search(r"^header:\s*\r?\n(?:[ \t]+.*\r?\n)*?[ \t]+name:\s*\"?([^\"\r\n]*)\"?", text, re.MULTILINE)
-    return m.group(1).strip() if m else None
+    in_header = False
+    for line in text.splitlines():
+        if not line.strip():
+            continue
+        if not line[0].isspace():
+            in_header = line.rstrip() == "header:"
+            continue
+        if in_header and line.strip().startswith("name:"):
+            return line.split(":", 1)[1].strip().strip('"').strip()
+    return None
 
 
 def choose_model_file(sd: Path) -> Path:

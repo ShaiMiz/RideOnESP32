@@ -101,3 +101,21 @@ jobs:
         run: npm test
       - name: Build the 3D exploded view
         run: npm run build
+
+  radio-view:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/radio-view
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: tools/radio-view/package-lock.json
+      - run: npm ci
+      - name: model42.yml round-trips byte for byte, drives the channel map and passes the safety checks
+        run: npm test
+      - name: Build the 3D radio view
+        run: npm run build

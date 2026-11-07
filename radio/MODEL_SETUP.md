@@ -10,7 +10,7 @@ The T-Lite's left stick throttle axis does not spring back to centre. If throttl
 
 ## Switches
 
-The T-Lite has four switches: SA (3-position) and SC (2-position) on the left shoulder, SB (3-position) and SD (2-position) on the right. Up means pushed away from you.
+The T-Lite has four toggle switches. They stick straight out of its back edge (the antenna side), two per side: SA (3-position) above SC (2-position) on the left, and SB (3-position) above SD (2-position) on the right. Up means the lever tip up, towards the sky as you hold the radio. The phase 2 channel check in [README.md](README.md) confirms it on the real radio.
 
 | Channel | Control | Up | Middle | Down |
 | --- | --- | --- | --- | --- |

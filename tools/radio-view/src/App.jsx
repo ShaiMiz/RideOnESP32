@@ -5,6 +5,7 @@ import Radio3D from './components/Radio3D.jsx';
 import LivePanel from './components/LivePanel.jsx';
 import MappingPanel from './components/MappingPanel.jsx';
 import ExportPanel from './components/ExportPanel.jsx';
+import SpecsPanel from './components/SpecsPanel.jsx';
 import { REPO, CH, LIMITS } from './lib/repoData.js';
 import { SWITCHES, load, toYaml } from './lib/model.js';
 import { mix, toUs } from './lib/mixer.js';
@@ -31,8 +32,8 @@ function Fit() {
   const { camera, size } = useThree();
   useEffect(() => {
     const aspect = size.width / size.height;
-    const dist = aspect < 1.25 ? 2.9 * Math.min(2.2, 1.25 / aspect) : 2.9;
-    camera.position.set(0, 0.9 * (dist / 2.9), dist);
+    const k = aspect < 1.25 ? Math.min(2.2, 1.25 / aspect) : 1;
+    camera.position.set(0.85 * k, 1.55 * k, 2.55 * k); // a three-quarter view from the front, above
     camera.updateProjectionMatrix();
   }, [camera, size]);
   return null;
@@ -179,7 +180,8 @@ export default function App() {
   const onTrim = useCallback((t) => {
     setPressed(t);
     setTimeout(() => setPressed(null), 140);
-    say(config.trimsOff ? 'Trims are off in this model, so the trim buttons change nothing.' : `Trim ${t}`);
+    const which = { T1: 'T1, left stick sideways (rudder)', T2: 'T2, right stick up/down (elevator)', T3: 'T3, left stick up/down (throttle)', T4: 'T4, right stick sideways (aileron)' }[t.slice(0, 2)];
+    say(config.trimsOff ? `Trim ${which}: trims are off in this model, so it changes nothing.` : `Trim ${which}`);
   }, [config.trimsOff, say]);
 
   // stick dragging: pointer moves anywhere on the page while held
@@ -289,7 +291,7 @@ export default function App() {
       </header>
       <main className="layout">
         <section className="stage">
-          <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0.9, 2.9], fov: 36 }} gl={{ preserveDrawingBuffer: true }} onCreated={() => setTimeout(() => setReady(true), 0)}>
+          <Canvas shadows dpr={[1, 2]} camera={{ position: [0.85, 1.55, 2.55], fov: 36 }} gl={{ preserveDrawingBuffer: true }} onCreated={() => setTimeout(() => setReady(true), 0)}>
             <color attach="background" args={['#e9edf1']} />
             <hemisphereLight args={['#ffffff', '#7d8794', 0.9]} />
             <directionalLight position={[2, 3, 4]} intensity={1.6} castShadow shadow-mapSize={[1024, 1024]} />
@@ -299,11 +301,11 @@ export default function App() {
               <Lightformer intensity={0.8} position={[-4, 1, 1]} scale={[2, 4, 1]} />
               <Lightformer intensity={0.6} position={[4, 0, 3]} scale={[2, 4, 1]} />
             </Environment>
-            <group rotation={[-0.35, 0, 0]}>
+            <group rotation={[-0.2, 0, 0]}>
               <Radio3D
                 sticks={sticks} switches={switches} dragging={dragging}
                 onStickDown={onStickDown} onSwitch={cycleSwitch} onKey={onKey} onTrim={onTrim}
-                pressed={pressed} lcd={lcd} lcdVersion={lcdVersion} labels={labels} showLabels={showLabels && ready}
+                pressed={pressed} lcd={lcd} lcdVersion={lcdVersion} labels={labels} showLabels={showLabels && ready} power={power}
               />
             </group>
             <Fit />
@@ -318,7 +320,7 @@ export default function App() {
         </section>
         <aside className="side">
           <nav className="tabs">
-            {[['live', 'Live'], ['map', `Mapping${rules.errors.length ? ` (${rules.errors.length})` : ''}`], ['export', 'Export']].map(([k, t]) => (
+            {[['live', 'Live'], ['map', `Mapping${rules.errors.length ? ` (${rules.errors.length})` : ''}`], ['export', 'Export'], ['specs', 'Radio']].map(([k, t]) => (
               <button key={k} className={tab === k ? 'tab on' : 'tab'} onClick={() => setTab(k)}>{t}</button>
             ))}
           </nav>
@@ -329,6 +331,7 @@ export default function App() {
             />
           )}
           {tab === 'map' && <MappingPanel config={config} setConfig={setConfig} rules={rules} stickMode={stickMode} reset={resetModel} uses={uses} />}
+          {tab === 'specs' && <SpecsPanel />}
           {tab === 'export' && <ExportPanel base={base} config={config} rules={rules} importModel={importModel} reset={resetModel} say={say} />}
         </aside>
       </main>

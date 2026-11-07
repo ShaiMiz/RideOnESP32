@@ -1,22 +1,50 @@
-// The Jumper T-Lite V2, built in code. Sizes are in millimetres (the group is scaled to metres).
-// The layout follows EdgeTX's T-Lite hardware list (hw_defs/tlite.json): two gimbals, four
-// switches on the top edge (SA, SC left; SD, SB right, as radio/MODEL_SETUP.md places them),
-// four trims, six keys (RTN, ENT, Up, Down, Left/SYS, Right/MDL), a 128 x 64 screen and power.
-// Proportions are approximate, from photos; nothing here is a measured drawing.
+// The Jumper T-Lite V2, built in code from the measurements in src/lib/tlite.js (millimetres;
+// the group is scaled to metres). Layout follows Jumper's own components diagram: ENT and RTN left
+// of the screen, UP and DOWN right of it, SYS and MDL under it, the LED and the oval power key in
+// the middle with the trim buttons around it, the speaker lower left, and the switches, antenna
+// and ports on the back edge.
 import React, { useMemo, useRef, useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import * as THREE from 'three';
+import { BODY, OUTLINE_RIGHT, STICK_X, GIMBAL, SCREEN, KEYS, LED, TRIMS, SPEAKER, SWITCH_POS, BACK_PORTS } from '../lib/tlite.js';
 
-const BODY = '#2b2f36';
-const FACE = '#22262c';
-const METAL = '#b8bcc2';
+const SHELL = '#55595f'; // Jumper's grey
+const SHELL_DARK = '#3d4045';
+const WELL = '#17191c';
+const CHROME = '#c9ccd0';
 const ACCENT = '#e2531f';
+const FACE_Z = BODY.shell / 2; // the face plane
+const BEVEL = 6;
+
+const smoothOutline = (inset) => {
+  const right = OUTLINE_RIGHT;
+  const left = [...right].reverse().map(([x, y]) => [-x, y]);
+  const pts = [...right, ...left.slice(1, -1)];
+  const cy = (BODY.top + BODY.bottom) / 2;
+  const sx = (BODY.width / 2 - inset) / (BODY.width / 2);
+  const sy = ((BODY.top - BODY.bottom) / 2 - inset) / ((BODY.top - BODY.bottom) / 2);
+  const curve = new THREE.CatmullRomCurve3(pts.map(([x, y]) => new THREE.Vector3(x * sx, cy + (y - cy) * sy, 0)), true, 'centripetal');
+  return curve.getPoints(160).map((p) => new THREE.Vector2(p.x, p.y));
+};
+
+/** The outline's top edge height at x (for placing parts on the back edge). */
+export function topEdgeAt(x) {
+  const pts = OUTLINE_RIGHT.filter(([, y]) => y > 30);
+  const ax = Math.abs(x);
+  for (let i = 0; i < pts.length - 1; i++) {
+    const [x0, y0] = pts[i];
+    const [x1, y1] = pts[i + 1];
+    if (ax >= x0 && ax <= x1) return y0 + ((y1 - y0) * (ax - x0)) / (x1 - x0);
+  }
+  return pts[pts.length - 1][1];
+}
 
 function roundedRect(w, h, r) {
   const s = new THREE.Shape();
   const x = -w / 2;
   const y = -h / 2;
+  r = Math.min(r, w / 2, h / 2);
   s.moveTo(x + r, y);
   s.lineTo(x + w - r, y);
   s.quadraticCurveTo(x + w, y, x + w, y + r);
@@ -29,42 +57,66 @@ function roundedRect(w, h, r) {
   return s;
 }
 
+function roundedTriangle(size) {
+  // points up; corners softened
+  const s = new THREE.Shape();
+  const h = size * 0.86;
+  const p = [[0, h / 2], [size / 2, -h / 2], [-size / 2, -h / 2]];
+  const k = 0.28;
+  const lerp = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+  for (let i = 0; i < 3; i++) {
+    const a = p[i];
+    const b = p[(i + 1) % 3];
+    const prev = p[(i + 2) % 3];
+    const start = lerp(a, prev, k);
+    const end = lerp(a, b, k);
+    if (i === 0) s.moveTo(...start);
+    else s.lineTo(...start);
+    s.quadraticCurveTo(a[0], a[1], end[0], end[1]);
+  }
+  s.closePath();
+  return s;
+}
+
+const shellMat = <meshStandardMaterial color={SHELL} roughness={0.78} metalness={0.02} />;
+
 function Body() {
   const geo = useMemo(() => {
-    const opts = { depth: 22, bevelEnabled: true, bevelThickness: 5, bevelSize: 5, bevelSegments: 5, curveSegments: 24 };
-    const main = new THREE.ExtrudeGeometry(roundedRect(160, 78, 22), opts);
-    const grip = new THREE.ExtrudeGeometry(new THREE.Shape().absarc(0, 0, 27, 0, Math.PI * 2), opts);
-    return { main, grip };
+    const shape = new THREE.Shape(smoothOutline(BEVEL));
+    const g = new THREE.ExtrudeGeometry(shape, {
+      depth: BODY.shell - 2 * BEVEL, bevelEnabled: true, bevelThickness: BEVEL, bevelSize: BEVEL, bevelSegments: 8, curveSegments: 12,
+    });
+    g.translate(0, 0, -(BODY.shell - 2 * BEVEL) / 2);
+    g.computeVertexNormals();
+    return g;
   }, []);
-  const mat = <meshStandardMaterial color={BODY} roughness={0.62} metalness={0.05} />;
+  // a seam line around the middle of the shell, where the two halves meet
+  const seam = useMemo(() => {
+    const pts = smoothOutline(-0.15).map((p) => new THREE.Vector3(p.x, p.y, -3));
+    return new THREE.BufferGeometry().setFromPoints([...pts, pts[0]]);
+  }, []);
   return (
     <group>
-      <mesh geometry={geo.main} position={[0, 12, -11]} castShadow receiveShadow>{mat}</mesh>
-      <mesh geometry={geo.grip} position={[-60, -30, -11]} castShadow receiveShadow>{mat}</mesh>
-      <mesh geometry={geo.grip} position={[60, -30, -11]} castShadow receiveShadow>{mat}</mesh>
-      {/* face plate */}
-      <mesh position={[0, 12, 16.2]}>
-        <shapeGeometry args={[roundedRect(150, 70, 18)]} />
-        <meshStandardMaterial color={FACE} roughness={0.8} />
+      <mesh geometry={geo} castShadow receiveShadow>{shellMat}</mesh>
+      <line geometry={seam}><lineBasicMaterial color="#2c2f33" /></line>
+      {/* battery door on the back (one 18650), with its latch */}
+      <mesh position={[0, -6, -FACE_Z - 0.2]}>
+        <shapeGeometry args={[roundedRect(78, 28, 5)]} />
+        <meshStandardMaterial color={SHELL_DARK} roughness={0.8} side={THREE.DoubleSide} />
       </mesh>
-      {/* battery door on the back (one 18650) and the USB-C port on the bottom edge */}
-      <mesh position={[0, 6, -16.4]}>
-        <boxGeometry args={[84, 30, 1.2]} />
-        <meshStandardMaterial color="#353a42" roughness={0.7} />
-      </mesh>
-      <mesh position={[0, -32, 0]}>
-        <boxGeometry args={[10, 2, 3.6]} />
-        <meshStandardMaterial color="#0b0c0e" />
+      <mesh position={[0, -21.5, -FACE_Z - 0.3]}>
+        <boxGeometry args={[14, 2.5, 0.6]} />
+        <meshStandardMaterial color="#2a2c30" />
       </mesh>
     </group>
   );
 }
 
-function Label({ position, children, show, side = 'center' }) {
+function Label({ position, children, show }) {
   if (!show) return null;
   return (
-    <Html position={position} center={side === 'center'} zIndexRange={[20, 0]} style={{ pointerEvents: 'none' }}>
-      <div className={`tag tag-${side}`}>{children}</div>
+    <Html position={position} center zIndexRange={[20, 0]} style={{ pointerEvents: 'none' }}>
+      <div className="tag">{children}</div>
     </Html>
   );
 }
@@ -77,122 +129,257 @@ function useHover() {
   }];
 }
 
-function Stick({ position, x, y, onDown, label, show, id, active }) {
-  const g = useRef();
-  const [hover, hv] = useHover();
-  useFrame(() => {
-    if (!g.current) return;
-    g.current.rotation.x += (-y * 0.42 - g.current.rotation.x) * 0.45;
-    g.current.rotation.y += (x * 0.42 - g.current.rotation.y) * 0.45;
-  });
+const textures = new Map();
+// Small printed text on the face, drawn once per string.
+function textTexture(text, color = '#e6e8eb') {
+  const k = `${text}|${color}`;
+  if (!textures.has(k)) {
+    const c = document.createElement('canvas');
+    c.width = 128;
+    c.height = 48;
+    const g = c.getContext('2d');
+    g.fillStyle = color;
+    g.font = 'bold 30px Inter, system-ui, sans-serif';
+    g.textAlign = 'center';
+    g.textBaseline = 'middle';
+    g.fillText(text, 64, 26);
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = 4;
+    textures.set(k, t);
+  }
+  return textures.get(k);
+}
+
+function Print({ text, position, width = 8, color }) {
   return (
-    <group position={position}>
-      <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 16.6]}>
-        <cylinderGeometry args={[19, 19, 1.2, 48]} />
-        <meshStandardMaterial color="#17191d" roughness={0.9} />
+    <mesh position={position}>
+      <planeGeometry args={[width, width * 0.375]} />
+      <meshBasicMaterial map={textTexture(text, color)} transparent depthWrite={false} toneMapped={false} />
+    </mesh>
+  );
+}
+
+// ---- gimbals and sticks ----------------------------------------------------------------------
+
+function Knurl() {
+  // the knurled metal stick end: a cylinder with fine ridges and a crowned top
+  const r = GIMBAL.capDiameter / 2;
+  const ridges = 22;
+  return (
+    <group>
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[r - 0.25, r - 0.25, 9, 32]} />
+        <meshStandardMaterial color={CHROME} metalness={0.95} roughness={0.25} />
       </mesh>
-      <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 17.4]}>
-        <cylinderGeometry args={[9, 11, 1.4, 32]} />
-        <meshStandardMaterial color="#30343b" roughness={0.5} />
+      {[...Array(ridges).keys()].map((i) => {
+        const a = (i / ridges) * Math.PI * 2;
+        return (
+          <mesh key={i} position={[Math.cos(a) * (r - 0.2), Math.sin(a) * (r - 0.2), 0]} rotation={[0, 0, a]}>
+            <boxGeometry args={[0.55, 0.55, 8.6]} />
+            <meshStandardMaterial color="#e3e5e8" metalness={0.95} roughness={0.2} />
+          </mesh>
+        );
+      })}
+      <mesh position={[0, 0, 4.6]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[r * 0.55, r - 0.2, 1.4, 24]} />
+        <meshStandardMaterial color={CHROME} metalness={0.95} roughness={0.25} />
       </mesh>
-      <group ref={g} position={[0, 0, 17]}>
-        <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 8]}>
-          <cylinderGeometry args={[2.2, 2.6, 16, 16]} />
-          <meshStandardMaterial color={METAL} metalness={0.8} roughness={0.3} />
-        </mesh>
-        <mesh
-          rotation={[Math.PI / 2, 0, 0]}
-          position={[0, 0, 19]}
-          onPointerDown={(e) => { e.stopPropagation(); onDown(id, e); }}
-          {...hv}
-          castShadow
-        >
-          <cylinderGeometry args={[6.5, 6.5, 7, 28]} />
-          <meshStandardMaterial color={active ? ACCENT : hover ? '#d4d8de' : METAL} metalness={0.85} roughness={0.35} />
-        </mesh>
-      </group>
-      <Label position={[0, -27, 20]} show={show}>{label}</Label>
     </group>
   );
 }
 
-function Switch({ position, name, pos, positions, onCycle, label, show, labelY = 24 }) {
+function Stick({ side, x, y, onDown, label, show, active }) {
   const g = useRef();
   const [hover, hv] = useHover();
-  const target = positions === 2 ? (pos ? 0.55 : -0.55) : (pos - 1) * 0.55;
+  const throw_ = (GIMBAL.throwDeg * Math.PI) / 180;
+  useFrame(() => {
+    if (!g.current) return;
+    g.current.rotation.x += (-y * throw_ - g.current.rotation.x) * 0.45;
+    g.current.rotation.y += (x * throw_ - g.current.rotation.y) * 0.45;
+  });
+  const cx = side === 'left' ? -STICK_X : STICK_X;
+  const o = GIMBAL.openingSize;
+  return (
+    <group position={[cx, 0, FACE_Z]}>
+      {/* the round well */}
+      <mesh position={[0, 0, 0.05]}>
+        <circleGeometry args={[GIMBAL.recessRadius, 64]} />
+        <meshStandardMaterial color={WELL} roughness={0.9} />
+      </mesh>
+      <mesh position={[0, 0, 0.2]}>
+        <ringGeometry args={[GIMBAL.recessRadius - 0.9, GIMBAL.recessRadius, 64]} />
+        <meshStandardMaterial color="#2a2d31" roughness={0.6} />
+      </mesh>
+      {/* the gimbal frame: square opening, side rails, the ratchet strip on the throttle side */}
+      <mesh position={[0, 0, 0.3]}>
+        <shapeGeometry args={[roundedRect(o + 4, o + 4, 4)]} />
+        <meshStandardMaterial color="#222428" roughness={0.7} />
+      </mesh>
+      <mesh position={[0, 0, 0.4]}>
+        <shapeGeometry args={[roundedRect(o, o, 3)]} />
+        <meshStandardMaterial color="#0b0c0e" roughness={1} />
+      </mesh>
+      {[-1, 1].map((d) => (
+        <mesh key={d} position={[d * (o / 2 + 0.6), 0, 0.6]}>
+          <boxGeometry args={[1.2, o - 6, 0.6]} />
+          <meshStandardMaterial color="#34373c" />
+        </mesh>
+      ))}
+      {[...Array(9).keys()].map((i) => (
+        <mesh key={i} position={[(side === 'left' ? 1 : -1) * (o / 2 - 2.2), -o / 2 + 5 + i * 2.5, 0.55]}>
+          <boxGeometry args={[2.4, 0.5, 0.3]} />
+          <meshStandardMaterial color="#3b3e43" />
+        </mesh>
+      ))}
+      {/* stick: pivot below the face, dust plate, shaft, knurled end */}
+      <group ref={g} position={[0, 0, -4]}>
+        <mesh position={[0, 0, 5.2]}>
+          <boxGeometry args={[o - 9, o - 9, 1]} />
+          <meshStandardMaterial color="#1c1e21" roughness={0.6} />
+        </mesh>
+        <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 14]}>
+          <cylinderGeometry args={[1.9, 3, 18, 20]} />
+          <meshStandardMaterial color="#141517" roughness={0.45} />
+        </mesh>
+        <group position={[0, 0, 27.5]} onPointerDown={(e) => { e.stopPropagation(); onDown(side, e); }} {...hv}>
+          <Knurl />
+          <mesh rotation={[Math.PI / 2, 0, 0]} visible={false}>
+            <cylinderGeometry args={[7, 7, 12, 12]} />
+            <meshBasicMaterial />
+          </mesh>
+        </group>
+        {(hover || active) && (
+          <mesh position={[0, 0, 33]}>
+            <ringGeometry args={[5.4, 6.4, 32]} />
+            <meshBasicMaterial color={ACCENT} />
+          </mesh>
+        )}
+      </group>
+      <Label position={[0, -GIMBAL.recessRadius - 6, 4]} show={show}>{label}</Label>
+    </group>
+  );
+}
+
+// ---- switches on the back edge -----------------------------------------------------------------
+
+function Switch({ name, pos, onCycle, label, show }) {
+  const s = SWITCH_POS[name];
+  const g = useRef();
+  const [hover, hv] = useHover();
+  const target = s.positions === 2 ? (pos ? -0.42 : 0.42) : (1 - pos) * 0.42; // up = tip towards the face
   useFrame(() => {
     if (g.current) g.current.rotation.x += (target - g.current.rotation.x) * 0.35;
   });
+  const y0 = topEdgeAt(s.x) - 1.2;
+  const click = (e) => { e.stopPropagation(); onCycle(name, e.shiftKey ? -1 : 1); };
   return (
-    <group position={position}>
-      <mesh>
-        <cylinderGeometry args={[4.2, 4.6, 4, 24]} />
-        <meshStandardMaterial color="#3a3f47" metalness={0.4} roughness={0.4} />
+    <group position={[s.x, y0, s.z]}>
+      {/* boss, hex nut and chrome bushing */}
+      <mesh position={[0, 0.6, 0]}>
+        <cylinderGeometry args={[5.2, 5.6, 2.2, 32]} />
+        <meshStandardMaterial color={SHELL} roughness={0.78} />
       </mesh>
-      <group ref={g}>
-        <mesh
-          position={[0, 8, 0]}
-          onClick={(e) => { e.stopPropagation(); onCycle(name, e.shiftKey ? -1 : 1); }}
-          {...hv}
-          castShadow
-        >
-          <cylinderGeometry args={[1.5, 2, 14, 14]} />
-          <meshStandardMaterial color={hover ? ACCENT : METAL} metalness={0.85} roughness={0.3} />
+      <mesh position={[0, 2.6, 0]}>
+        <cylinderGeometry args={[4, 4, 2, 6]} />
+        <meshStandardMaterial color={CHROME} metalness={0.9} roughness={0.3} />
+      </mesh>
+      <mesh position={[0, 4.6, 0]}>
+        <cylinderGeometry args={[2.8, 2.8, 2.4, 24]} />
+        <meshStandardMaterial color={CHROME} metalness={0.9} roughness={0.25} />
+      </mesh>
+      <group ref={g} position={[0, 5.4, 0]}>
+        <mesh position={[0, 4.5, 0]} onClick={click} {...hv} castShadow>
+          <cylinderGeometry args={[1.05, 1.5, 9, 16]} />
+          <meshStandardMaterial color={hover ? ACCENT : CHROME} metalness={0.9} roughness={0.25} />
         </mesh>
-        <mesh position={[0, 15, 0]} onClick={(e) => { e.stopPropagation(); onCycle(name, e.shiftKey ? -1 : 1); }} {...hv}>
-          <sphereGeometry args={[2.6, 16, 12]} />
-          <meshStandardMaterial color={hover ? ACCENT : '#dfe2e6'} metalness={0.6} roughness={0.3} />
+        {/* flat paddle tip */}
+        <mesh position={[0, 10.8, 0]} onClick={click} {...hv} castShadow>
+          <boxGeometry args={[4.6, 5.2, 1.3]} />
+          <meshStandardMaterial color={hover ? ACCENT : '#e2e4e7'} metalness={0.85} roughness={0.25} />
         </mesh>
       </group>
-      <Label position={[0, labelY, 0]} show={show}>{label}</Label>
+      <Label position={[0, s.positions === 3 ? 34 : 20, 0]} show={show}>{label}</Label>
     </group>
   );
 }
 
-const keyTextures = new Map();
-// A key's legend, drawn once on a small canvas.
-function keyTexture(text) {
-  if (!keyTextures.has(text)) {
-    const c = document.createElement('canvas');
-    c.width = 128;
-    c.height = 64;
-    const g = c.getContext('2d');
-    g.fillStyle = '#e9ecef';
-    g.font = `bold ${text.length > 1 ? 34 : 40}px Inter, system-ui, sans-serif`;
-    g.textAlign = 'center';
-    g.textBaseline = 'middle';
-    g.fillText(text, 64, 34);
-    const t = new THREE.CanvasTexture(c);
-    t.colorSpace = THREE.SRGBColorSpace;
-    keyTextures.set(text, t);
-  }
-  return keyTextures.get(text);
-}
+// ---- back edge: antenna, reserved screw holes, ports ------------------------------------------
 
-function Key({ position, size, name, onKey, pressed, label, round }) {
-  const [hover, hv] = useHover();
-  const down = pressed === name;
+function BackEdge() {
+  const top = topEdgeAt(0);
   return (
-    <group position={position}>
-      <mesh
-        rotation={round ? [Math.PI / 2, 0, 0] : [0, 0, 0]}
-        position={[0, 0, down ? 16.9 : 17.6]}
-        onClick={(e) => { e.stopPropagation(); onKey(name); }}
-        {...hv}
-        castShadow
-      >
-        {round ? <cylinderGeometry args={[size[0] / 2, size[0] / 2, 2.4, 24]} /> : <boxGeometry args={[size[0], size[1], 2.4]} />}
-        <meshStandardMaterial color={hover ? '#5b616b' : '#40454d'} roughness={0.55} />
-      </mesh>
-      {label ? (
-        <mesh position={[0, 0, (down ? 16.9 : 17.6) + 1.25]}>
-          <planeGeometry args={[size[0] * 0.9, size[0] * 0.9 * 0.5]} />
-          <meshBasicMaterial map={keyTexture(label)} transparent toneMapped={false} />
+    <group>
+      {BACK_PORTS.map((p) => {
+        const y = topEdgeAt(p.x);
+        if (p.kind === 'jack') return (
+          <mesh key={p.name} position={[p.x, y + 0.05, p.z]}>
+            <cylinderGeometry args={[2.4, 2.4, 0.4, 24]} />
+            <meshStandardMaterial color="#08090a" />
+          </mesh>
+        );
+        if (p.kind === 'usbc') return (
+          <mesh key={p.name} position={[p.x, y + 0.05, p.z]}>
+            <boxGeometry args={[9, 0.4, 3.4]} />
+            <meshStandardMaterial color="#08090a" />
+          </mesh>
+        );
+        if (p.kind === 'slot') return (
+          <mesh key={p.name} position={[p.x, y + 0.05, p.z]}>
+            <boxGeometry args={[12, 0.4, 1.2]} />
+            <meshStandardMaterial color="#08090a" />
+          </mesh>
+        );
+        return null;
+      })}
+      {/* the two reserved screw holes for an FPV monitor holder, either side of the antenna */}
+      {[-14, 14].map((x) => (
+        <group key={x} position={[x, topEdgeAt(x), -3]}>
+          <mesh position={[0, 0.1, 0]}>
+            <cylinderGeometry args={[3.4, 3.4, 0.3, 32]} />
+            <meshStandardMaterial color="#8d939a" metalness={0.8} roughness={0.35} />
+          </mesh>
+          <mesh position={[0, 0.3, 0]}>
+            <cylinderGeometry args={[1.3, 1.3, 0.3, 16]} />
+            <meshStandardMaterial color="#060607" />
+          </mesh>
+        </group>
+      ))}
+      {/* SMA connector, knurled hinge and the dipole antenna, tilted a little back */}
+      <group position={[0, top, -3]}>
+        <mesh position={[0, 2.5, 0]}>
+          <cylinderGeometry args={[3.2, 3.2, 5, 6]} />
+          <meshStandardMaterial color="#c9a54a" metalness={0.9} roughness={0.3} />
         </mesh>
-      ) : null}
+        <group position={[0, 5, 0]} rotation={[-0.12, 0, 0]}>
+          <mesh position={[0, 5, 0]}>
+            <cylinderGeometry args={[4.2, 4.2, 10, 24]} />
+            <meshStandardMaterial color="#1b1c1e" roughness={0.6} />
+          </mesh>
+          {[...Array(16).keys()].map((i) => {
+            const a = (i / 16) * Math.PI * 2;
+            return (
+              <mesh key={i} position={[Math.cos(a) * 4.2, 5, Math.sin(a) * 4.2]} rotation={[0, -a, 0]}>
+                <boxGeometry args={[0.5, 9, 0.5]} />
+                <meshStandardMaterial color="#26272a" />
+              </mesh>
+            );
+          })}
+          <mesh position={[0, 58, 0]} castShadow>
+            <cylinderGeometry args={[3.6, 4.3, 86, 24]} />
+            <meshStandardMaterial color="#151618" roughness={0.55} />
+          </mesh>
+          <mesh position={[0, 101, 0]}>
+            <sphereGeometry args={[3.6, 20, 12]} />
+            <meshStandardMaterial color="#151618" roughness={0.55} />
+          </mesh>
+        </group>
+      </group>
     </group>
   );
 }
+
+// ---- face: screen, keys, LED, trims, speaker ----------------------------------------------------
 
 function Screen({ canvas, version }) {
   const tex = useMemo(() => {
@@ -202,54 +389,126 @@ function Screen({ canvas, version }) {
     return t;
   }, [canvas]);
   useEffect(() => { tex.needsUpdate = true; }, [tex, version]);
+  const [bw, bh] = SCREEN.bezel;
+  const [ww, wh] = SCREEN.window;
+  const [aw, ah] = SCREEN.active;
   return (
-    <group position={[0, 27, 16.4]}>
-      <mesh>
-        <boxGeometry args={[64, 36, 1.2]} />
-        <meshStandardMaterial color="#0e1013" roughness={0.3} />
+    <group position={[0, SCREEN.y, FACE_Z]}>
+      <mesh position={[0, 0, 0.1]}>
+        <shapeGeometry args={[roundedRect(bw + 3, bh + 3, 4)]} />
+        <meshStandardMaterial color="#45484d" roughness={0.6} />
       </mesh>
-      <mesh position={[0, 0, 0.65]}>
-        <planeGeometry args={[56, 28]} />
+      <mesh position={[0, 0, 0.2]}>
+        <shapeGeometry args={[roundedRect(bw, bh, 3)]} />
+        <meshStandardMaterial color="#0d0f12" roughness={0.25} metalness={0.2} />
+      </mesh>
+      <mesh position={[0, 0, 0.3]}>
+        <planeGeometry args={[ww, wh]} />
+        <meshStandardMaterial color="#1a2129" roughness={0.3} />
+      </mesh>
+      <mesh position={[0, 0, 0.4]}>
+        <planeGeometry args={[aw, ah]} />
         <meshBasicMaterial map={tex} toneMapped={false} />
       </mesh>
     </group>
   );
 }
 
-export default function Radio3D({ sticks, switches, dragging, onStickDown, onSwitch, onKey, onTrim, pressed, lcd, lcdVersion, labels, showLabels }) {
+function Key({ k, onKey, pressed, showText }) {
+  const [hover, hv] = useHover();
+  const down = pressed === k.key;
+  const geo = useMemo(() => {
+    const shape = k.shape === 'oval' ? roundedRect(k.w, k.h, k.w / 2) : roundedRect(k.w, k.h, k.h / 2);
+    const g = new THREE.ExtrudeGeometry(shape, { depth: 1.2, bevelEnabled: true, bevelThickness: 0.5, bevelSize: 0.4, bevelSegments: 3 });
+    return g;
+  }, [k]);
+  const isPower = k.key === 'POWER';
+  return (
+    <group position={[k.x, k.y, FACE_Z]} rotation={[0, 0, k.angle]}>
+      <mesh position={[0, 0, 0.05]}>
+        <shapeGeometry args={[roundedRect(k.w + 1.6, k.h + 1.6, (k.shape === 'oval' ? k.w : k.h) / 2 + 0.8)]} />
+        <meshStandardMaterial color="#2b2e32" roughness={0.9} />
+      </mesh>
+      <mesh geometry={geo} position={[0, 0, down ? -0.6 : 0]} onClick={(e) => { e.stopPropagation(); onKey(k.key); }} {...hv}>
+        <meshStandardMaterial color={hover ? '#6c7178' : '#3f4247'} roughness={0.55} />
+      </mesh>
+      {isPower && <Print text="⏻" position={[0, 0, 2.3 + (down ? -0.6 : 0)]} width={6} color="#c8ccd1" />}
+      {showText && k.label && (
+        <group rotation={[0, 0, -k.angle]}>
+          <Print text={k.label} position={[k.x < 0 ? -8.5 : 8.5, 0, 0.3]} width={7} color="#b8bec5" />
+        </group>
+      )}
+    </group>
+  );
+}
+
+function Trim({ t, onTrim, pressed }) {
+  const [hover, hv] = useHover();
+  const down = pressed === t.name;
+  const rot = { up: 0, down: Math.PI, left: Math.PI / 2, right: -Math.PI / 2 }[t.dir];
+  const geo = useMemo(() => new THREE.ExtrudeGeometry(roundedTriangle(6), { depth: 1, bevelEnabled: true, bevelThickness: 0.5, bevelSize: 0.35, bevelSegments: 3 }), []);
+  return (
+    <group position={[t.x, t.y, FACE_Z]} rotation={[0, 0, rot]}>
+      <mesh position={[0, 0, 0.05]}>
+        <shapeGeometry args={[roundedTriangle(8)]} />
+        <meshStandardMaterial color="#2b2e32" roughness={0.9} />
+      </mesh>
+      <mesh geometry={geo} position={[0, 0, down ? -0.5 : 0]} onClick={(e) => { e.stopPropagation(); onTrim(t.name); }} {...hv}>
+        <meshStandardMaterial color={hover ? '#6c7178' : '#3f4247'} roughness={0.55} />
+      </mesh>
+    </group>
+  );
+}
+
+function Speaker() {
+  const holes = [];
+  for (let r = 0; r <= 3; r++) {
+    const n = r === 0 ? 1 : r * 6;
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2;
+      holes.push([SPEAKER.x + Math.cos(a) * r * 1.9, SPEAKER.y + Math.sin(a) * r * 1.9]);
+    }
+  }
+  return holes.map(([x, y], i) => (
+    <mesh key={i} position={[x, y, FACE_Z + 0.05]}>
+      <circleGeometry args={[0.55, 12]} />
+      <meshBasicMaterial color="#1c1d20" />
+    </mesh>
+  ));
+}
+
+function Led({ on }) {
+  return (
+    <group position={[LED.x, LED.y, FACE_Z]}>
+      <mesh position={[0, 0, 0.05]}>
+        <circleGeometry args={[LED.d / 2 + 1, 32]} />
+        <meshStandardMaterial color="#2b2e32" />
+      </mesh>
+      <mesh position={[0, 0, 0.3]}>
+        <circleGeometry args={[LED.d / 2, 32]} />
+        <meshStandardMaterial color={on ? '#3dff6e' : '#1f3326'} emissive={on ? '#2bff5a' : '#000000'} emissiveIntensity={on ? 1.6 : 0} />
+      </mesh>
+    </group>
+  );
+}
+
+export default function Radio3D({ sticks, switches, dragging, onStickDown, onSwitch, onKey, onTrim, pressed, lcd, lcdVersion, labels, showLabels, power }) {
   const T = (s) => labels[s] || s;
   return (
     <group scale={0.01}>
       <Body />
+      <BackEdge />
       <Screen canvas={lcd} version={lcdVersion} />
-      <Stick id="left" position={[-58, 2, 0]} x={sticks.lh} y={sticks.lv} onDown={onStickDown} label={T('left')} show={showLabels} active={dragging === 'left'} />
-      <Stick id="right" position={[58, 2, 0]} x={sticks.rh} y={sticks.rv} onDown={onStickDown} label={T('right')} show={showLabels} active={dragging === 'right'} />
-
-      {/* switches on the top edge: "up" is away from you */}
-      <Switch name="SA" position={[-62, 55.5, 0]} pos={switches.SA} positions={3} onCycle={onSwitch} label={T('SA')} show={showLabels} labelY={44} />
-      <Switch name="SC" position={[-38, 55.5, 0]} pos={switches.SC} positions={2} onCycle={onSwitch} label={T('SC')} show={showLabels} />
-      <Switch name="SD" position={[38, 55.5, 0]} pos={switches.SD} positions={2} onCycle={onSwitch} label={T('SD')} show={showLabels} />
-      <Switch name="SB" position={[62, 55.5, 0]} pos={switches.SB} positions={3} onCycle={onSwitch} label={T('SB')} show={showLabels} labelY={44} />
-
-      {/* trims: T1 left horizontal, T2 left vertical, T3 right vertical, T4 right horizontal */}
-      {[
-        ['T1', [-58, -22], true], ['T2', [-31, 2], false], ['T3', [31, 2], false], ['T4', [58, -22], true],
-      ].map(([n, [x, y], horiz]) => (
-        <group key={n} position={[x, y, 0]}>
-          {[-1, 1].map((d) => (
-            <Key key={d} name={`${n}${d > 0 ? '+' : '-'}`} position={horiz ? [d * 5, 0, 0] : [0, d * 5, 0]} size={horiz ? [8, 4] : [4, 8]} onKey={onTrim} pressed={pressed} label="" />
-          ))}
-        </group>
+      <Print text="JUMPER" position={[9, 14.6, FACE_Z + 0.05]} width={10} color="#d9dde2" />
+      <Led on={power} />
+      <Speaker />
+      <Stick side="left" x={sticks.lh} y={sticks.lv} onDown={onStickDown} label={T('left')} show={showLabels} active={dragging === 'left'} />
+      <Stick side="right" x={sticks.rh} y={sticks.rv} onDown={onStickDown} label={T('right')} show={showLabels} active={dragging === 'right'} />
+      {Object.keys(SWITCH_POS).map((sw) => (
+        <Switch key={sw} name={sw} pos={switches[sw]} onCycle={onSwitch} label={T(sw)} show={showLabels} />
       ))}
-
-      {/* keys under the screen */}
-      <Key name="UP" label="▲" position={[0, 4, 0]} size={[9, 5]} onKey={onKey} pressed={pressed} />
-      <Key name="DOWN" label="▼" position={[0, -7, 0]} size={[9, 5]} onKey={onKey} pressed={pressed} />
-      <Key name="LEFT" label="SYS" position={[-14, -2, 0]} size={[11, 6]} onKey={onKey} pressed={pressed} />
-      <Key name="RIGHT" label="MDL" position={[14, -2, 0]} size={[11, 6]} onKey={onKey} pressed={pressed} />
-      <Key name="EXIT" label="RTN" position={[-14, -13, 0]} size={[11, 6]} onKey={onKey} pressed={pressed} />
-      <Key name="ENTER" label="ENT" position={[14, -13, 0]} size={[11, 6]} onKey={onKey} pressed={pressed} />
-      <Key name="POWER" label="⏻" position={[0, -19, 0]} size={[7, 7]} round onKey={onKey} pressed={pressed} />
+      {KEYS.map((k) => <Key key={k.key} k={k} onKey={onKey} pressed={pressed} showText={showLabels} />)}
+      {TRIMS.map((t) => <Trim key={t.name} t={t} onTrim={onTrim} pressed={pressed} />)}
     </group>
   );
 }

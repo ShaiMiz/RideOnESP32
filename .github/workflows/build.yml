@@ -21,6 +21,11 @@ jobs:
         run: python3 tools/check_log_events.py
       - name: Every requirement in VERIFICATION.md has a test or gate, and every test runs
         run: python3 tools/check_verification.py
+      - name: Radio model matches the channel map and config.h; radio scripts run against simulations
+        run: |
+          pip install pyyaml==6.0.3 lupa==2.8
+          python3 tools/check_radio_files.py
+          python3 tools/test_radio_scripts.py
       - name: KiCad schematic and tables are generated from the current design and pins.h
         run: |
           python3 docs/hardware/kicad/gen/generate.py

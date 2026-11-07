@@ -23,9 +23,9 @@ Researched 17 Oct 2026. Sources are at the end.
 
 ## Compatibility rules
 
-- **Radio module and receiver must run the same ExpressLRS major version.** ELRS 4.x does not link with 3.x. Update both in the same session, transmitter first.
-- **Stay on 3.x until 4.x is confirmed for both devices.** Upgrade only after checking that the Configurator lists both the "Jumper AION T-Lite 2.4GHz TX" and "Jumper AION Mini 2.4GHz RX" targets for that release. A working link is worth more than new features.
-- **The radio needs EdgeTX 2.8.0 or newer** to talk to its internal ELRS module properly. EdgeTX 2.7 broke it.
+- **Radio module and receiver must run the same ExpressLRS release.** ELRS 4.x does not link with 3.x. Update both in the same session, transmitter first.
+- **Target: ExpressLRS 4.1.0, EdgeTX 2.12.5** (the latest releases on 7 Nov 2026, [radio/README.md](../../radio/README.md#target-versions-checked-7-nov-2026)). The ExpressLRS target list (28 Oct 2026) still lists both "Jumper AION T-Lite 2.4GHz TX" and "Jumper AION Mini 2.4GHz RX" for 4.x, so 4.x is confirmed for both. 3.6.4 is the fallback. Before a later upgrade, check that the Configurator still lists both targets for that release. A working link is worth more than new features.
+- **The radio needs EdgeTX 2.10 or newer** for the RideOn model file (2.12 format). EdgeTX 2.7 broke the internal ELRS module; 2.8 fixed it.
 - **Write down every version** you flash in the table at the bottom of this file.
 
 ## ESP32 (car controller)
@@ -60,11 +60,11 @@ The board is an ESP32-WROOM-32D with a USB-C port and a USB-to-serial chip (usua
 3. To update the bootloader: power on normally, open the SD card browser, select the `.bin` and choose "Flash bootloader".
 4. To write the firmware: with the radio off, push both inner horizontal trims toward the centre and press power. Choose "Write Firmware", pick the `.bin`, and long-press to flash. "Invalid firmware" means the file is for a different radio.
 
-**Our configuration** lives in [radio/MODEL_SETUP.md](../../radio/MODEL_SETUP.md). After an EdgeTX update, check that the `RideOn` model and its switch warnings survived. Later, the EdgeTX Lua script in [radio/edgetx/](../../radio/edgetx/) is copied to `SCRIPTS/TOOLS/` on the SD card.
+**Our configuration** is files: the `RideOn` model and two Lua scripts in [radio/edgetx/sdcard/](../../radio/edgetx/sdcard/), copied by `radio/install_radio.py` ([radio/README.md](../../radio/README.md)). Updating the SD card contents with EdgeTX Buddy can replace the scripts folder, so run the installer again after every EdgeTX update.
 
 ## T-Lite internal ELRS module (ExpressLRS TX)
 
-**ExpressLRS Configurator settings:** Device Category "Jumper 2.4 GHz", Device "Jumper AION T-Lite 2.4GHz TX", the official release you chose, regulatory domain (mandatory: ISM 2.4 GHz, or CE LBT in the EU), and the **binding phrase**.
+**ExpressLRS Configurator settings:** Device Category "Jumper 2.4 GHz", Device "Jumper AION T-Lite 2.4GHz TX", the official release you chose, regulatory domain (ISM 2400, the same as the receiver), and the **binding phrase** from `install_radio.py`.
 
 **Method 1: Wi-Fi (no cables)**
 1. In the Configurator, click **Build** and keep the output folder open (`firmware.bin`, or `firmware.bin.gz` on 3.3+; don't unzip it).
@@ -79,11 +79,11 @@ The board is an ESP32-WROOM-32D with a USB-C port and a USB-to-serial chip (usua
 
 **Check it:** reload the ExpressLRS Lua script and read the version line.
 
-**Settings from the Lua script** (no reflash needed): packet rate (100 or 150 Hz), maximum and dynamic power (100 mW), telemetry ratio, and Model Match. Our values are in [radio/ELRS_SETUP.md](../../radio/ELRS_SETUP.md).
+**Settings** (no reflash needed): packet rate, switch mode, telemetry ratio, maximum and dynamic power, and Model Match are set by the radio's "RideOn ELRS setup" tool, which also reads back the module's and the receiver's exact name and version. Our values and why: [radio/ELRS_SETUP.md](../../radio/ELRS_SETUP.md).
 
 ## Jumper AION RX Mini receiver (ExpressLRS RX)
 
-**Configurator settings:** Device Category "Jumper 2.4 GHz", Device "Jumper AION Mini 2.4GHz RX", the **same release and binding phrase** as the radio.
+**Configurator settings:** Device Category "Jumper 2.4 GHz", Device "Jumper AION Mini 2.4GHz RX", the **same release, regulatory domain and binding phrase** as the radio, and **untick `AUTO_WIFI_ON_INTERVAL`** so the receiver never starts its Wi-Fi hotspot by itself.
 
 **Method 1: Wi-Fi.** Use this one; the receiver stays wired to the ESP32.
 1. Power the car's 5 V logic rail (key on, or the ESP32 on USB if it powers the receiver), with the radio on and bound.
@@ -92,7 +92,7 @@ The board is an ESP32-WROOM-32D with a USB-C port and a USB-to-serial chip (usua
 4. Upload the Configurator build on the Update tab, or set the Configurator's Flashing Method to WiFi and click Flash.
 5. The LED goes back to slow blinking when it's done. Rebind if needed and check the link with `radio_check`.
 
-We turn the receiver's **automatic** Wi-Fi off, which otherwise starts after 60 s without a link. The Lua "Enable RX WiFi" route still works because it only needs the receiver bound to the radio. If the receiver is ever unbound and auto Wi-Fi is off, use Method 2.
+We turn the receiver's **automatic** Wi-Fi off (the unticked `AUTO_WIFI_ON_INTERVAL` above), which otherwise starts after 60 s without a link. The Lua "Enable RX WiFi" route still works because it only needs the receiver bound to the radio. If the receiver is ever unbound and auto Wi-Fi is off, use Method 2.
 
 **Method 2: UART (recovery).**
 1. Unplug the receiver from the ESP32 and wire it to a USB-to-UART adapter: 5 V, GND, receiver TX to adapter RX, receiver RX to adapter TX.
@@ -131,7 +131,7 @@ The AS5600 holds its zero position, maximum position and configuration in regist
 
 ## Version log
 
-Fill this in every time something is flashed.
+Fill this in every time something is flashed. The exact names and versions come from `RideOn-radio.txt`, which the radio's "RideOn ELRS setup" tool writes and `install_radio.py` prints.
 
 | Date | Device | From | To | By | Notes |
 | --- | --- | --- | --- | --- | --- |

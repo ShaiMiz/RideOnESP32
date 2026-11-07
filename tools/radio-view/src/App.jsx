@@ -6,7 +6,7 @@ import LivePanel from './components/LivePanel.jsx';
 import MappingPanel from './components/MappingPanel.jsx';
 import ExportPanel from './components/ExportPanel.jsx';
 import SpecsPanel from './components/SpecsPanel.jsx';
-import { REPO, CH, LIMITS } from './lib/repoData.js';
+import { REPO, REPO_YML, CH, LIMITS } from './lib/repoData.js';
 import { SWITCHES, TRIM_NAMES, load, toYaml } from './lib/model.js';
 import { mix, toUs } from './lib/mixer.js';
 import { decode, ModeMachine } from './lib/firmware.js';
@@ -15,14 +15,19 @@ import { controlUses, channelLabel } from './lib/uses.js';
 import { makeCanvas, draw, PAGES } from './lib/lcd.js';
 import { beepsFor, enableSound } from './lib/sound.js';
 
-const STORE = 'rideon-radio-view-v1';
+// The browser keeps the model between visits, with the repo model it started from. When the repo
+// model has changed since, an unedited copy is dropped (so the page shows the new model) and an
+// edited one is kept with a note. v1 kept no repo copy, so it is dropped.
+const STORE = 'rideon-radio-view-v2';
 const START_SWITCHES = { SA: 0, SB: 0, SC: 0, SD: 0 };
 const REST = { lh: 0, lv: -1, rh: 0, rv: 0 }; // the left stick's up/down rests where it was left: start at the bottom
 
 function stored() {
   try {
+    try { localStorage.removeItem('rideon-radio-view-v1'); } catch { /* fine */ }
     const s = JSON.parse(localStorage.getItem(STORE) || 'null');
-    if (s?.yaml) return { ...load(s.yaml), yaml: s.yaml };
+    if (!s?.yaml || s.yaml === s.repo || s.yaml === REPO_YML) return null;
+    return { ...load(s.yaml), yaml: s.yaml, stale: s.repo !== REPO_YML };
   } catch { /* storage blocked or bad: start from the repo model */ }
   return null;
 }
@@ -71,14 +76,17 @@ export default function App() {
   const capa = useRef(0);
 
   useEffect(() => {
-    try { localStorage.setItem(STORE, JSON.stringify({ yaml: toYaml(base, config) })); } catch { /* fine */ }
+    try { localStorage.setItem(STORE, JSON.stringify({ yaml: toYaml(base, config), repo: REPO_YML })); } catch { /* fine */ }
   }, [base, config]);
 
-  const say = useCallback((t) => {
+  const say = useCallback((t, ms = 3500) => {
     setToast(t);
     clearTimeout(say.timer);
-    say.timer = setTimeout(() => setToast(''), 3500);
+    say.timer = setTimeout(() => setToast(''), ms);
   }, []);
+  useEffect(() => {
+    if (saved?.stale) say('Showing your edited model from an earlier visit. The repo model has changed since: Mapping → Reset to the repo model to get it.', 10000);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ---- radio ------------------------------------------------------------------------------
   const input = useMemo(() => ({ sticks, switches, stickMode, trims: heldTrim ? { [heldTrim]: true } : {} }), [sticks, switches, stickMode, heldTrim]);

@@ -12,9 +12,14 @@ no radio and no ESP32 needed:
 
 It prints the receiver's product, target and firmware version, whether its binding
 phrase matches the one in Documents/RideOnESP32-radio/binding-phrase.txt (creating
-that file if there is none yet), and whether its automatic Wi-Fi is still on. It saves
-everything to Documents/RideOnESP32-radio/receiver-<date>.json. It only reads; it
-changes nothing on the receiver.
+that file if there is none yet), and whether its automatic Wi-Fi is still on.
+
+It also backs the receiver up to Documents/RideOnESP32-radio/receiver-backup-<date>/:
+the running firmware as the receiver hands it out (/firmware.bin: the image with its
+options and hardware layout appended, so it can be flashed back as is), plus
+config.json, options.json and hardware.json. To restore, flash that .bin from the
+receiver's web page (Update) or the Configurator's local-file option.
+It only reads; it changes nothing on the receiver.
 """
 from __future__ import annotations
 
@@ -44,6 +49,47 @@ def fetch(host: str, path: str, timeout: float) -> dict | None:
             return json.loads(r.read().decode("utf-8", errors="replace"))
     except (urllib.error.URLError, OSError, ValueError):
         return None
+
+
+def download(host: str, path: str, timeout: float) -> tuple[bytes, str] | None:
+    """Raw bytes and the file name the receiver suggests, or None."""
+    try:
+        with urllib.request.urlopen(f"http://{host}{path}", timeout=timeout) as r:
+            data = r.read()
+            name = ""
+            disp = r.headers.get("Content-Disposition") or ""
+            if "filename=" in disp:
+                name = disp.split("filename=", 1)[1].strip().strip('"')
+            return data, name
+    except (urllib.error.URLError, OSError):
+        return None
+
+
+def backup(host: str, folder: Path, info: dict, firmware: bool = True) -> list[str]:
+    """Save the receiver's firmware and settings; return what was saved or why not."""
+    folder.mkdir(parents=True, exist_ok=True)
+    lines = []
+    (folder / "config.json").write_text(json.dumps(info, indent=2), encoding="utf-8")
+    lines.append("config.json (settings, options, binding UID)")
+    for name in ("options.json", "hardware.json"):
+        got = download(host, "/" + name, 10)
+        if got and got[0].strip():
+            (folder / name).write_bytes(got[0])
+            lines.append(name)
+    if firmware:
+        got = download(host, "/firmware.bin", 120)
+        if got is None:
+            lines.append("firmware: this receiver's firmware does not hand out its image")
+        else:
+            data, name = got
+            s = info["settings"]
+            name = Path(name).name or f"{s.get('target', 'receiver')}_{s.get('version', 'unknown')}.bin"
+            if len(data) < 64 * 1024 or data[0] != 0xE9:   # 0xE9 = ESP firmware image header
+                lines.append(f"firmware: download did not look like a firmware image ({len(data)} bytes), not saved")
+            else:
+                (folder / name).write_bytes(data)
+                lines.append(f"{name} ({len(data) // 1024} KB firmware)")
+    return lines
 
 
 def read_receiver(host: str, timeout: float = 5.0) -> dict | None:
@@ -98,6 +144,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--host", default=DEFAULT_HOST, help="receiver address (default 10.0.0.1)")
     ap.add_argument("--home", type=Path, default=None,
                     help="where the binding phrase and reports live (default: Documents/RideOnESP32-radio)")
+    ap.add_argument("--no-firmware", action="store_true", help="back up the settings only")
     args = ap.parse_args(argv)
     home = args.home or (install_radio.documents_dir() / "RideOnESP32-radio")
 
@@ -113,9 +160,10 @@ def main(argv: list[str] | None = None) -> int:
     lines, problems = report(info, phrase)
     print("\n".join(lines))
     home.mkdir(parents=True, exist_ok=True)
-    out = home / f"receiver-{_dt.datetime.now():%Y%m%d-%H%M%S}.json"
-    out.write_text(json.dumps(info, indent=2), encoding="utf-8")
-    print(f"\nSaved {out}")
+    folder = home / f"receiver-backup-{_dt.datetime.now():%Y%m%d-%H%M%S}"
+    print(f"\nBacking up to {folder} (the firmware takes up to a minute):")
+    for line in backup(args.host, folder, info, firmware=not args.no_firmware):
+        print("  " + line)
     print("Copy the firmware version into the version log in docs/hardware/DEVICE_FIRMWARE.md.")
     return 1 if problems else 0
 

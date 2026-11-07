@@ -10,7 +10,7 @@ What does what:
 | Telemetry screen and alarms | [SCRIPTS/TELEMETRY/rideon.lua](edgetx/sdcard/SCRIPTS/TELEMETRY/rideon.lua) | Mode and fault, battery, current, link quality; vibrates and beeps on a new fault, mode change, low battery, weak link and lost link |
 | ELRS module settings, Model Match, version check | [SCRIPTS/TOOLS/RideOnRF.lua](edgetx/sdcard/SCRIPTS/TOOLS/RideOnRF.lua) on the radio ("RideOn ELRS setup") | Packet rate, switch mode, telemetry ratio, power; teaches the receiver this model; writes the exact radio, module and receiver versions to the SD card |
 | Binding phrase, receiver Wi-Fi off | ExpressLRS Configurator, when flashing | Compiled into both firmwares |
-| Receiver version, binding-phrase and Wi-Fi check | [receiver_check.py](receiver_check.py) (`receiver_check.cmd`), over the receiver's own Wi-Fi | Nothing: it only reads, and saves a report |
+| Receiver version, binding-phrase and Wi-Fi check, firmware and settings backup | [receiver_check.py](receiver_check.py) (`receiver_check.cmd`), over the receiver's own Wi-Fi | Nothing: it only reads, and saves the backup |
 | SD backup, install, version and stick-mode check, log archive | [install_radio.py](install_radio.py) (double-click `install_radio.cmd` on Windows) | Everything above that lives on the SD card |
 | Checks | CI: `tools/check_radio_files.py`, `tools/test_radio_scripts.py` | Model matches the firmware's channel map and limits; both Lua scripts and the installer run against simulations |
 
@@ -43,7 +43,7 @@ The receiver can be checked and flashed with nothing but a bench supply. The ESP
 
 1. Set the bench supply to **5.0 V** with the current limit at **0.2 A**, output off. Connect only the receiver's **5V and GND** (check polarity); leave TX and RX loose. Output on: the LED blinks slowly.
 2. Wait 60 s. With no radio around, the receiver opens a Wi-Fi network called `ExpressLRS RX` (LED blinks fast). Join it from the PC, password `expresslrs`. The PC has no internet while it is joined.
-3. Double-click `radio/receiver_check.cmd`. It prints the receiver's product, target and exact firmware version, whether its binding phrase is ours, and whether its automatic Wi-Fi is on, and saves a report to `Documents\RideOnESP32-radio\`. The first run also creates the binding phrase there; the installer reuses it later for the radio.
+3. Double-click `radio/receiver_check.cmd`. It prints the receiver's product, target and exact firmware version, whether its binding phrase is ours, and whether its automatic Wi-Fi is on. It also **backs the receiver up** to `Documents\RideOnESP32-radio\receiver-backup-<date>\`: the running firmware (`.bin`, with its settings built in, so it can be flashed straight back from the receiver's Update page or the Configurator) and its config, options and hardware files. Run it before flashing, so the factory firmware is kept. The first run also creates the binding phrase there; the installer reuses it later for the radio.
 4. To flash it now, stay on the `ExpressLRS RX` network and do step 5 below with flashing method **WiFi**. The receiver reboots, and because auto Wi-Fi is now off it won't open the hotspot by itself again: that is expected.
 5. Check it: power-cycle the receiver, wait 2 minutes, and confirm no `ExpressLRS RX` network appears. To read it again later, use the radio's ExpressLRS Lua → WiFi Connectivity → Enable RX WiFi once the radio is bound, then run `receiver_check.cmd`; the report should read "All good".
 

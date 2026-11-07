@@ -442,14 +442,20 @@ class Logs(unittest.TestCase):
 class FakeReceiver:
     """An HTTP server answering /config and /target like an ExpressLRS receiver in Wi-Fi mode."""
 
-    def __init__(self, config, target=None):
+    def __init__(self, config, target=None, firmware=None, hardware=None):
         import http.server
         import json
         import threading
-        pages = {"/config": config, "/target": target}
+        pages = {"/config": config, "/target": target, "/hardware.json": hardware}
 
         class H(http.server.BaseHTTPRequestHandler):
             def do_GET(self):
+                if self.path == "/firmware.bin" and firmware is not None:
+                    self.send_response(200)
+                    self.send_header("Content-Disposition", 'attachment; filename="Unified_ESP8285_2400_RX_4.1.0.bin"')
+                    self.end_headers()
+                    self.wfile.write(firmware)
+                    return
                 body = pages.get(self.path.split("?")[0])
                 if body is None:
                     self.send_response(404)
@@ -491,7 +497,8 @@ class Receiver(unittest.TestCase):
             phrase, _ = install_radio.binding_phrase(home / "binding-phrase.txt")
             rx = FakeReceiver({"settings": {"product_name": "Jumper AION Mini 2.4GHz RX", "target": "Unified_ESP8285_2400_RX",
                                             "version": "4.1.0", "module-type": "RX"},
-                               "options": {}, "config": {"uid": receiver_check.phrase_uid(phrase)}})
+                               "options": {}, "config": {"uid": receiver_check.phrase_uid(phrase)}},
+                              firmware=bytes([0xE9]) + bytes(300 * 1024), hardware={"serial_rx": 3})
             try:
                 rc, out = self.run_check(rx, home)
             finally:
@@ -500,7 +507,11 @@ class Receiver(unittest.TestCase):
             self.assertIn("firmware: 4.1.0", out)
             self.assertIn("matches binding-phrase.txt", out)
             self.assertIn("Automatic Wi-Fi: off", out)
-            self.assertEqual(len(list(home.glob("receiver-*.json"))), 1)
+            [folder] = list(home.glob("receiver-backup-*"))
+            fw = folder / "Unified_ESP8285_2400_RX_4.1.0.bin"
+            self.assertEqual(fw.stat().st_size, 300 * 1024 + 1)
+            self.assertTrue((folder / "config.json").is_file())
+            self.assertTrue((folder / "hardware.json").is_file())
 
     def test_factory_receiver_v3(self):
         with tempfile.TemporaryDirectory() as d:
@@ -516,6 +527,7 @@ class Receiver(unittest.TestCase):
             self.assertIn("binding phrase is not ours", out)
             self.assertIn("automatic Wi-Fi is on (after 60 s)", out)
             self.assertTrue((Path(d) / "binding-phrase.txt").is_file())
+            self.assertIn("does not hand out its image", out)
 
     def test_no_receiver(self):
         with tempfile.TemporaryDirectory() as d:

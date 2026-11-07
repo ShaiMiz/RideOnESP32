@@ -10,6 +10,7 @@ What does what:
 | Telemetry screen and alarms | [SCRIPTS/TELEMETRY/rideon.lua](edgetx/sdcard/SCRIPTS/TELEMETRY/rideon.lua) | Mode and fault, battery, current, link quality; vibrates and beeps on a new fault, mode change, low battery, weak link and lost link |
 | ELRS module settings, Model Match, version check | [SCRIPTS/TOOLS/RideOnRF.lua](edgetx/sdcard/SCRIPTS/TOOLS/RideOnRF.lua) on the radio ("RideOn ELRS setup") | Packet rate, switch mode, telemetry ratio, power; teaches the receiver this model; writes the exact radio, module and receiver versions to the SD card |
 | Binding phrase, receiver Wi-Fi off | ExpressLRS Configurator, when flashing | Compiled into both firmwares |
+| Receiver version, binding-phrase and Wi-Fi check | [receiver_check.py](receiver_check.py) (`receiver_check.cmd`), over the receiver's own Wi-Fi | Nothing: it only reads, and saves a report |
 | SD backup, install, version and stick-mode check, log archive | [install_radio.py](install_radio.py) (double-click `install_radio.cmd` on Windows) | Everything above that lives on the SD card |
 | Checks | CI: `tools/check_radio_files.py`, `tools/test_radio_scripts.py` | Model matches the firmware's channel map and limits; both Lua scripts and the installer run against simulations |
 
@@ -36,6 +37,18 @@ The exact versions on your units are read in steps 1 and 7 and saved in `RideOn-
 
 If ELRS 4.1 gives any trouble, 3.6.4 is the fallback: flash both to it, the rest of this setup is the same.
 
+## Before the radio has a battery: the receiver alone
+
+The receiver can be checked and flashed with nothing but a bench supply. The ESP32 and the car come later.
+
+1. Set the bench supply to **5.0 V** with the current limit at **0.2 A**, output off. Connect only the receiver's **5V and GND** (check polarity); leave TX and RX loose. Output on: the LED blinks slowly.
+2. Wait 60 s. With no radio around, the receiver opens a Wi-Fi network called `ExpressLRS RX` (LED blinks fast). Join it from the PC, password `expresslrs`. The PC has no internet while it is joined.
+3. Double-click `radio/receiver_check.cmd`. It prints the receiver's product, target and exact firmware version, whether its binding phrase is ours, and whether its automatic Wi-Fi is on, and saves a report to `Documents\RideOnESP32-radio\`. The first run also creates the binding phrase there; the installer reuses it later for the radio.
+4. To flash it now, stay on the `ExpressLRS RX` network and do step 5 below with flashing method **WiFi**. The receiver reboots, and because auto Wi-Fi is now off it won't open the hotspot by itself again: that is expected.
+5. Check it: power-cycle the receiver, wait 2 minutes, and confirm no `ExpressLRS RX` network appears. To read it again later, use the radio's ExpressLRS Lua → WiFi Connectivity → Enable RX WiFi once the radio is bound, then run `receiver_check.cmd`; the report should read "All good".
+
+Why this can't be done for you remotely: the PC has to leave your home Wi-Fi to join the receiver's network, which cuts the PC off from the internet (and from Claude) until it rejoins.
+
 ## Steps
 
 You need: the T-Lite with a charged 18650, a USB-C data cable, a Windows PC, and for steps 6 to 9 the receiver wired to the ESP32 (phase 2, [COMMISSIONING.md](../docs/COMMISSIONING.md)).
@@ -44,12 +57,12 @@ You need: the T-Lite with a charged 18650, a USB-C data cable, a Windows PC, and
 2. **Update EdgeTX** if step 1 said it is older than 2.12.5: open EdgeTX Buddy, pick the latest release and "Jumper T-Lite (F4 MCU)", tick "update SD card contents", and follow it (radio off, plug USB in, it flashes in DFU mode). Then run `install_radio.cmd` again, because the new SD contents need the RideOn files put back.
 3. **Check the radio.** On the radio: SYS → Hardware → Internal RF is **CRSF** (it is from the factory on the ELRS T-Lite), and Radio setup → Mode is **2**. Select the RideOn model if it isn't already. The radio complains about switches until SA, SB and SC are all **up**: that is the start-up check working.
 4. **Flash the radio's ELRS module.** In the Configurator: Jumper 2.4 GHz → "Jumper AION T-Lite 2.4GHz TX", release 4.1.0, regulatory domain **ISM 2400 (FCC)**, paste the binding phrase, flashing method **EdgeTXPassthrough**. On the radio: SYS → Hardware → Serial port USB-VCP = **CLI**; plug USB, choose **USB Serial (VCP)**; click Flash. Details and the Wi-Fi alternative: [DEVICE_FIRMWARE.md](../docs/hardware/DEVICE_FIRMWARE.md#t-lite-internal-elrs-module-expresslrs-tx).
-5. **Flash the receiver.** Configurator: "Jumper AION Mini 2.4GHz RX", the same release, domain and phrase, and **untick AUTO_WIFI_ON_INTERVAL** (this turns the receiver's automatic Wi-Fi hotspot off). Flash over Wi-Fi: power the receiver (ESP32 on USB powers it), wait 60 s for its `ExpressLRS RX` hotspot (the current firmware still has auto Wi-Fi on), join it with password `expresslrs` and flash, or use the radio's ExpressLRS Lua → WiFi Connectivity → Enable RX WiFi if it is already bound. Recovery over UART: [DEVICE_FIRMWARE.md](../docs/hardware/DEVICE_FIRMWARE.md#jumper-aion-rx-mini-receiver-expresslrs-rx).
+5. **Flash the receiver** (or do it early, on the bench supply, [above](#before-the-radio-has-a-battery-the-receiver-alone)). Configurator: "Jumper AION Mini 2.4GHz RX", the same release, domain and phrase, and **untick AUTO_WIFI_ON_INTERVAL** (this turns the receiver's automatic Wi-Fi hotspot off). Flash over Wi-Fi: power the receiver (ESP32 on USB powers it), wait 60 s for its `ExpressLRS RX` hotspot (the current firmware still has auto Wi-Fi on), join it with password `expresslrs` and flash, or use the radio's ExpressLRS Lua → WiFi Connectivity → Enable RX WiFi if it is already bound. Recovery over UART: [DEVICE_FIRMWARE.md](../docs/hardware/DEVICE_FIRMWARE.md#jumper-aion-rx-mini-receiver-expresslrs-rx).
 6. **Bind.** Nothing to do: the same binding phrase in both binds them. Power both; the receiver LED goes solid.
 7. **Run the setup tool twice.** Switches SA, SB, SC up (Locked, KILL, slowest).
    - Car **off** (receiver unpowered): SYS → Tools → **RideOn ELRS setup**. It sets packet rate 150 Hz, Hybrid switches, telemetry 1:8, 100 mW with dynamic power. Every line should end in `ok` or `set`; Model Match says "run again car ON".
    - Car **on**: run it again. It turns Model Match on, which teaches the receiver this model's number (42), and reads the receiver's version. Every line now ends in `ok`. It writes `RideOn-radio.txt` to the SD card both times.
-8. **Collect the report.** USB Storage again, run `install_radio.cmd`. It prints the report (exact names and versions of radio, module and receiver, and every setting) and warns about any version mismatch. Copy the versions into the [version log](../docs/hardware/DEVICE_FIRMWARE.md#version-log).
+8. **Collect the reports.** Run `receiver_check.cmd` once more if you like (Enable RX WiFi from the ExpressLRS Lua first). Then put the radio in USB Storage again and, run `install_radio.cmd`. It prints the report (exact names and versions of radio, module and receiver, and every setting) and warns about any version mismatch. Copy the versions into the [version log](../docs/hardware/DEVICE_FIRMWARE.md#version-log).
 9. **Bench checks**, wheels off the ground, below.
 
 ## Checks

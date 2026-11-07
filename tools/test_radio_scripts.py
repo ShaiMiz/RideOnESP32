@@ -26,6 +26,7 @@ SD = ROOT / "radio/edgetx/sdcard"
 sys.path.insert(0, str(ROOT / "radio"))
 import install_radio  # noqa: E402
 import radio_logs  # noqa: E402
+import receiver_check  # noqa: E402
 
 CONSTS = dict(INVERS=1, BLINK=2, SMLSIZE=4, MIDSIZE=8, DBLSIZE=16, PLAY_NOW=1,
               PLAY_BACKGROUND=2, UNIT_VOLTS=1, PREC1=32, EVT_VIRTUAL_EXIT=99)
@@ -436,6 +437,93 @@ class Logs(unittest.TestCase):
                 install_radio.main(["--sd", str(sd), "--home", str(home)])
             self.assertTrue((home / "logs/RideOn-2026-11-07.csv").is_file())
             self.assertIn("link quality: min 99 %", out.getvalue())
+
+
+class FakeReceiver:
+    """An HTTP server answering /config and /target like an ExpressLRS receiver in Wi-Fi mode."""
+
+    def __init__(self, config, target=None):
+        import http.server
+        import json
+        import threading
+        pages = {"/config": config, "/target": target}
+
+        class H(http.server.BaseHTTPRequestHandler):
+            def do_GET(self):
+                body = pages.get(self.path.split("?")[0])
+                if body is None:
+                    self.send_response(404)
+                    self.end_headers()
+                    return
+                data = json.dumps(body).encode()
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                self.wfile.write(data)
+
+            def log_message(self, *a):
+                pass
+
+        self.server = http.server.HTTPServer(("127.0.0.1", 0), H)
+        self.host = f"127.0.0.1:{self.server.server_port}"
+        threading.Thread(target=self.server.serve_forever, daemon=True).start()
+
+    def close(self):
+        self.server.shutdown()
+
+
+class Receiver(unittest.TestCase):
+    def run_check(self, rx, home):
+        out = io.StringIO()
+        with redirect_stdout(out):
+            rc = receiver_check.main(["--host", rx.host, "--home", str(home)])
+        return rc, out.getvalue()
+
+    def test_uid_formula(self):
+        # Same derivation as ExpressLRS's binary_configurator.py.
+        import hashlib
+        self.assertEqual(receiver_check.phrase_uid("x"),
+                         list(hashlib.md5(b'-DMY_BINDING_PHRASE="x"').digest()[:6]))
+
+    def test_good_receiver_v4(self):
+        with tempfile.TemporaryDirectory() as d:
+            home = Path(d)
+            phrase, _ = install_radio.binding_phrase(home / "binding-phrase.txt")
+            rx = FakeReceiver({"settings": {"product_name": "Jumper AION Mini 2.4GHz RX", "target": "Unified_ESP8285_2400_RX",
+                                            "version": "4.1.0", "module-type": "RX"},
+                               "options": {}, "config": {"uid": receiver_check.phrase_uid(phrase)}})
+            try:
+                rc, out = self.run_check(rx, home)
+            finally:
+                rx.close()
+            self.assertEqual(rc, 0, out)
+            self.assertIn("firmware: 4.1.0", out)
+            self.assertIn("matches binding-phrase.txt", out)
+            self.assertIn("Automatic Wi-Fi: off", out)
+            self.assertEqual(len(list(home.glob("receiver-*.json"))), 1)
+
+    def test_factory_receiver_v3(self):
+        with tempfile.TemporaryDirectory() as d:
+            rx = FakeReceiver({"options": {"wifi-on-interval": 60}, "config": {"uid": [1, 2, 3, 4, 5, 6]}},
+                              target={"product_name": "Jumper AION Mini 2.4GHz RX", "version": "3.3.2", "target": "X"})
+            try:
+                rc, out = self.run_check(rx, Path(d))
+            finally:
+                rx.close()
+            self.assertEqual(rc, 1)
+            self.assertIn("firmware: 3.3.2", out)
+            self.assertIn("flash 4.1.0", out)
+            self.assertIn("binding phrase is not ours", out)
+            self.assertIn("automatic Wi-Fi is on (after 60 s)", out)
+            self.assertTrue((Path(d) / "binding-phrase.txt").is_file())
+
+    def test_no_receiver(self):
+        with tempfile.TemporaryDirectory() as d:
+            out = io.StringIO()
+            with redirect_stdout(out):
+                rc = receiver_check.main(["--host", "127.0.0.1:9", "--home", d])
+            self.assertEqual(rc, 2)
+            self.assertIn("No receiver", out.getvalue())
 
 
 if __name__ == "__main__":

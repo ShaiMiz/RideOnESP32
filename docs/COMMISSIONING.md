@@ -17,14 +17,15 @@ Build the new electronics as a removable box and leave the stock wiring intact. 
 ## Phase 2: radio on the desk
 
 - [ ] Charge the T-Lite (18650 cell).
-- [ ] Update the radio to EdgeTX 2.8 or newer, then flash the radio module and receiver to the same ELRS 3.x ([hardware/DEVICE_FIRMWARE.md](hardware/DEVICE_FIRMWARE.md)) and set the binding phrase and Model Match ([radio/ELRS_SETUP.md](../radio/ELRS_SETUP.md)).
-- [ ] Build the `RideOn` model ([radio/MODEL_SETUP.md](../radio/MODEL_SETUP.md)).
 - [ ] Wire only the receiver to the ESP32. Flash `pio run -e radio_check -t upload` and open the monitor.
+- [ ] Radio setup steps 1 to 8 in [radio/README.md](../radio/README.md): install the `RideOn` model and scripts, update to EdgeTX 2.12.5 and ExpressLRS 4.1.0 on both radio module and receiver with the binding phrase and receiver Wi-Fi off, run "RideOn ELRS setup" with the car off and then on (Model Match), and record the versions from `RideOn-radio.txt`.
 
 **Gate:**
 - [ ] Turning the radio off prints `link OK -> LOST` with the last packet under 200 ms old.
 - [ ] Every stick and switch moves the channel [CHANNEL_MAP.md](firmware/CHANNEL_MAP.md) says it does, in the right direction.
 - [ ] Letting go of the right stick reads `thr=+0.00 str=+0.00`.
+- [ ] The radio bench checks in [radio/README.md](../radio/README.md#bench-phase-2-receiver-on-the-esp32-radio_check-firmware): Model Match, receiver Wi-Fi off, telemetry screen and fault alarm.
+- [ ] *(recommended)* Range walk to 150 m with no link drops and link quality never under 70 %, from the radio's log summary ([radio/README.md](../radio/README.md#range-and-reliability-in-the-field)).
 
 Passed: ____
 

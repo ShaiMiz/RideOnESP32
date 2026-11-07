@@ -3,3 +3,4 @@
 !.vscode/extensions.json
 *.bak
 archive/unrelated/
+__pycache__/

@@ -61,6 +61,7 @@ On Windows, if `pio` is not on PATH, use the PlatformIO terminal in Cursor or `%
 - Changing a `config.h` limit means re-running the commissioning gates that depend on it; say which in the PR.
 - Logging: a new fault, event, part or symptom needs its row in [docs/firmware/LOG_EVENTS.md](docs/firmware/LOG_EVENTS.md) (CI `pins` job runs `tools/check_log_events.py`). The loop only queues records; flash erases and NVS writes happen only with the car stopped and the drivers off. A change to `LogRecord` or `FaultRow` layout must bump `FaultTable::FORMAT` or start a new log format.
 - Firmware design: [docs/firmware/ARCHITECTURE.md](docs/firmware/ARCHITECTURE.md), modes: [CONTROL_MODES.md](docs/firmware/CONTROL_MODES.md), radio channels: [CHANNEL_MAP.md](docs/firmware/CHANNEL_MAP.md) and [radio/](radio/).
+- Radio: the T-Lite model and Lua scripts are files in `radio/edgetx/sdcard/`, installed by `radio/install_radio.py` ([radio/README.md](radio/README.md)). A channel, switch or alarm-threshold change edits `model42.yml` or the Lua script in the same PR; `tools/check_radio_files.py` and `tools/test_radio_scripts.py` (CI `pins` job) fail otherwise. `model42.yml` must stay comment-free: EdgeTX's YAML reader has no comments.
 - `archive/` is the old v2 Arduino code, reference only. Don't build on it.
 
 ## Workflow

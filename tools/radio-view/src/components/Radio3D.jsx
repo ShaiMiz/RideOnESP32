@@ -453,7 +453,10 @@ function Trim({ t, onTrim, pressed }) {
         <shapeGeometry args={[roundedTriangle(8)]} />
         <meshStandardMaterial color="#2b2e32" roughness={0.9} />
       </mesh>
-      <mesh geometry={geo} position={[0, 0, down ? -0.5 : 0]} onClick={(e) => { e.stopPropagation(); onTrim(t.name); }} {...hv}>
+      <mesh geometry={geo} position={[0, 0, down ? -0.5 : 0]}
+        onPointerDown={(e) => { e.stopPropagation(); onTrim(t.name, true); }}
+        onPointerUp={(e) => { e.stopPropagation(); onTrim(t.name, false); }}
+        {...hv}>
         <meshStandardMaterial color={hover ? '#6c7178' : '#3f4247'} roughness={0.55} />
       </mesh>
     </group>
@@ -509,6 +512,12 @@ export default function Radio3D({ sticks, switches, dragging, onStickDown, onSwi
       ))}
       {KEYS.map((k) => <Key key={k.key} k={k} onKey={onKey} pressed={pressed} showText={showLabels} />)}
       {TRIMS.map((t) => <Trim key={t.name} t={t} onTrim={onTrim} pressed={pressed} />)}
+      {['T1', 'T2', 'T3', 'T4'].filter((p) => labels[p]).map((p) => {
+        const pair = TRIMS.filter((t) => t.name.startsWith(p));
+        const x = pair.reduce((a, t) => a + t.x, 0) / 2;
+        const y = Math.min(...pair.map((t) => t.y)) - 8;
+        return <Label key={p} position={[x, y, FACE_Z + 2]} show={showLabels}>{labels[p]}</Label>;
+      })}
     </group>
   );
 }

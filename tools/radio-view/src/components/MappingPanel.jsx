@@ -1,9 +1,10 @@
 import React from 'react';
-import { SOURCES, SOURCE_LABEL, MLTPX, LS_FUNCS, LS_COUNT, CHANNELS, NAME_LEN, SWITCHES, conditions } from '../lib/model.js';
+import { SOURCES, SOURCE_LABEL, MLTPX, LS_FUNCS, LS_COUNT, CHANNELS, NAME_LEN, SWITCHES, conditions, TRIM_SWITCH } from '../lib/model.js';
 import { CH } from '../lib/repoData.js';
 import { channelLabel, roleOf } from '../lib/uses.js';
 
 const NEW_MIX = { src: 'MAX', weight: 100, offset: 0, swtch: 'NONE', noTrim: false, mltpx: 'ADD', name: '' };
+const TRIM_LABEL = Object.fromEntries(Object.entries(TRIM_SWITCH).map(([k, v]) => [v, `trim ${k}`]));
 
 export function Checks({ rules }) {
   return (
@@ -63,7 +64,7 @@ export default function MappingPanel({ config, setConfig, rules, reset }) {
                 <label title="Weight, %">w<input type="number" min={-100} max={100} value={m.weight} onChange={(e) => update((n) => { n.mixes[i].weight = Math.max(-100, Math.min(100, Math.round(Number(e.target.value) || 0))); })} /></label>
                 <label title="Offset, %">off<input type="number" min={-100} max={100} value={m.offset} onChange={(e) => update((n) => { n.mixes[i].offset = Math.max(-100, Math.min(100, Math.round(Number(e.target.value) || 0))); })} /></label>
                 <select value={m.swtch} title="Only while this logical switch is on" onChange={(e) => update((n) => { n.mixes[i].swtch = e.target.value; })}>
-                  {conds.map((s) => <option key={s} value={s}>{s === 'NONE' ? 'always' : `if ${s}`}</option>)}
+                  {conds.map((s) => <option key={s} value={s}>{s === 'NONE' ? 'always' : TRIM_LABEL[s] ? `while ${TRIM_LABEL[s]} held` : `if ${s}`}</option>)}
                 </select>
                 <input className="name" maxLength={NAME_LEN} value={m.name} placeholder="name" onChange={(e) => update((n) => { n.mixes[i].name = e.target.value.replace(/[^A-Za-z0-9 %+-]/g, ''); })} />
                 <button className="x" title="Delete line" onClick={() => update((n) => { n.mixes.splice(i, 1); })}>✕</button>
@@ -85,7 +86,7 @@ export default function MappingPanel({ config, setConfig, rules, reset }) {
 
       <section className="card">
         <h3>Logical switches</h3>
-        <p className="muted small">Conditions for mix lines. The repo uses L1 = left stick sideways past half way, for the horn.</p>
+        <p className="muted small">Conditions for mix lines. The repo uses none: the horn is the T1 trim buttons, as push-buttons (the trims are off). In a mix line's condition, "while T1- held" is EdgeTX's TrimRudLeft.</p>
         {[...Array(LS_COUNT).keys()].map((idx) => {
           const ls = config.logical.find((l) => l.idx === idx);
           const set = (patch) => update((n) => {

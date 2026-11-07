@@ -130,3 +130,5 @@ pre.yaml { max-height: 320px; overflow: auto; font-size: 11px; background: var(-
   .top { padding: 8px 16px; }
   .top .sub { display: none; }
 }
+.sw.trims { margin-top: 8px; }
+.sw.trims b { width: auto; margin-right: 4px; }

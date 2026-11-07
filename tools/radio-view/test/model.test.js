@@ -6,7 +6,7 @@ import { load, toYaml } from '../src/lib/model.js';
 import { mix, toUs } from '../src/lib/mixer.js';
 import { channelNumbers, configValues } from '../src/lib/repo.js';
 import { decode, ModeMachine, switchPosition } from '../src/lib/firmware.js';
-import { check } from '../src/lib/rules.js';
+import { check, controlReach } from '../src/lib/rules.js';
 
 const ch = channelNumbers(CHANNEL_MAP_H);
 const lim = configValues(CONFIG_H);
@@ -39,10 +39,38 @@ test('the repo model drives the channels CHANNEL_MAP.md names', () => {
   assert.equal(switchPosition(down[ch.SPEED_CAP - 1], lim), 1, 'SB middle = 60 %');
   assert.ok(run({ ...rest, rv: 1 })[ch.THROTTLE - 1] > 2000, 'right stick up = forward');
   assert.ok(run({ ...rest, rh: -1 })[ch.STEERING - 1] < 1000, 'right stick left = left');
-  assert.ok(run({ ...rest, lh: 0.6 })[ch.HORN - 1] > 1900, 'left stick sideways = horn');
-  assert.ok(run({ ...rest, lh: -0.6 })[ch.HORN - 1] > 1900, 'either way');
-  assert.ok(run({ ...rest, lh: 0.4 })[ch.HORN - 1] < 1100, 'not before half way');
+  const press = (t) => mix(config, { sticks: rest, switches: start, stickMode: 2, trims: { [t]: true } }).channels.map(toUs);
+  assert.ok(press('T1-')[ch.HORN - 1] > 1900, 'trim button T1- = horn');
+  assert.ok(press('T1+')[ch.HORN - 1] > 1900, 'T1+ too');
+  for (const t of ['T2-', 'T2+', 'T3-', 'T3+', 'T4-', 'T4+']) assert.ok(press(t)[ch.HORN - 1] < 1100, `${t} is not the horn`);
+  for (const lh of [-1, -0.6, 0.6, 1]) for (const lv of [-1, 0, 1]) assert.ok(run({ lh, lv, rh: 0, rv: 0 })[ch.HORN - 1] < 1100, 'the left stick never sounds the horn');
   assert.equal(run({ ...rest, lv: 1 })[ch.THROTTLE - 1], 1500, 'left stick up/down drives nothing');
+});
+
+test('each control drives one function only, whatever the other controls do', () => {
+  // Every switch combination, every stick at -1/0/1, each control swept on its own, judged as the
+  // firmware reads the channels. SD, the left stick and trim buttons T2 to T4 are spare.
+  assert.deepEqual(controlReach(config, ch, lim), {
+    SA: [ch.MODE],
+    SB: [ch.SPEED_CAP],
+    SC: [ch.KILL],
+    SD: [],
+    lh: [],
+    lv: [],
+    rh: [ch.STEERING],
+    rv: [ch.THROTTLE],
+    'T1-': [ch.HORN],
+    'T1+': [ch.HORN],
+    'T2-': [], 'T2+': [], 'T3-': [], 'T3+': [], 'T4-': [], 'T4+': [],
+  });
+});
+
+test('the checks block an edit that makes one control drive two functions', () => {
+  const add = (m) => (c) => c.mixes.push({ weight: 100, offset: 0, swtch: 'NONE', noTrim: false, mltpx: 'ADD', name: 'X', ...m });
+  assert.match(edit(add({ ch: ch.HORN, src: 'SA', mltpx: 'REPL', swtch: 'NONE' })), /SA moves CH6 Mode and CH8 Horn/, 'horn also on the mode switch');
+  assert.match(edit(add({ ch: ch.KILL, src: 'MAX', weight: -100, mltpx: 'REPL', swtch: 'TrimRudLeft' })), /Trim button T1- moves CH5 Kill and CH8 Horn/, 'the horn button also kills');
+  assert.match(edit(add({ ch: ch.STEERING, src: 'Thr', weight: 30 })), /Steering follows Left stick up\/down and Right stick sideways/, 'left stick mixed into steering');
+  assert.match(edit(add({ ch: ch.SPEED_CAP, src: 'Ail', weight: 100 })), /Right stick sideways moves CH1 Steering and CH7 Kid speed cap/, 'steering stick also moves the cap');
 });
 
 test('CRSF output range is 989..2011 us, centre 1500', () => {
@@ -86,7 +114,7 @@ test('mode 1 puts the repo throttle on the non-centring stick, and the check say
 test('an edit writes a model the reader takes back unchanged', () => {
   const c = structuredClone(config);
   c.mixes.push({ ch: 9, src: 'SD', weight: 100, offset: 0, swtch: 'NONE', noTrim: false, mltpx: 'ADD', name: 'Lights' });
-  c.logical[0].x = 40;
+  c.logical.push({ idx: 0, func: 'FUNC_APOS', a: 'Rud', x: 40, andsw: 'NONE', delay: 0, duration: 0 });
   const text = toYaml(tree, c);
   assert.match(text, /destCh: 8\n    srcRaw: SD/);
   assert.match(text, /def: "Rud,40"/);

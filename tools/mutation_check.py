@@ -81,6 +81,13 @@ MUTANTS = [
      ["test_crash_console"]),
     ("SR-30", "CrashRing.cpp", "r.fault != FAULT_KILL_SWITCH && ", "", ["test_crash_console"]),
     ("SR-31", "Console.cpp", "  if (!parked) {", "  if (false) {", ["test_crash_console"]),
+    # SR-32: one control, one output.
+    ("SR-32", "Controller.cpp", "limitCommand(throttle, cfg_.parentCap * linkCap", "limitCommand(throttle, kidCap(in.speedCapUs) * linkCap",
+     ["test_controller"]),
+    ("SR-32", "Controller.cpp", "stickFraction(in.steeringUs, chl) : 0.0f", "stickFraction(in.throttleUs, chl) : 0.0f",
+     ["test_controller"]),
+    ("SR-32", "Controller.cpp", "(linkUsable && switchPosition(in.hornUs, chl) == 2)",
+     "(linkUsable && out.mode != Mode::Killed && switchPosition(in.hornUs, chl) == 2)", ["test_controller"]),
 ]
 
 

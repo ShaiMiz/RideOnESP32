@@ -101,14 +101,18 @@ def main() -> int:
             if mix.get("carryTrim") != 1:
                 err(f"CH{chans[const]} ({const}) must not carry trims (carryTrim: 1)")
 
-    # Horn: -100 % always, replaced by +100 % while L1 (left stick sideways) is on.
+    # Horn: -100 % always, replaced by +100 % while either T1 trim button (under the left stick)
+    # is held. With the trims off, EdgeTX lets the trim buttons act as push-button switches.
     horn = mixes.get(chans["HORN"], [])
-    ok = (len(horn) == 2 and horn[0]["srcRaw"] == "MAX" and horn[0]["weight"] == -100
-          and horn[1]["srcRaw"] == "MAX" and horn[1]["weight"] == 100
-          and horn[1].get("swtch") == "L1" and horn[1]["mltpx"] == "REPL")
-    ls = model.get("logicalSw", {}).get(0, {})
-    if not ok or ls.get("func") != "FUNC_APOS" or not str(ls.get("def", "")).startswith("Rud,"):
-        err("CH8 horn must be MAX -100 %, replaced by +100 % on L1 = |Rud| > x")
+    ok = (len(horn) == 3 and horn[0]["srcRaw"] == "MAX" and horn[0]["weight"] == -100
+          and horn[0].get("swtch") in (None, "NONE")
+          and all(h["srcRaw"] == "MAX" and h["weight"] == 100 and h["mltpx"] == "REPL" for h in horn[1:])
+          and sorted(h.get("swtch") for h in horn[1:]) == ["TrimRudLeft", "TrimRudRight"])
+    if not ok:
+        err("CH8 horn must be MAX -100 %, replaced by +100 % while trim button T1- or T1+ is held "
+            "(swtch TrimRudLeft / TrimRudRight)")
+    if model.get("logicalSw"):
+        err("no logical switches are expected; the horn uses the T1 trim buttons")
 
     warn = model.get("switchWarningState", "")
     for sw in ("Au", "Bu", "Cu"):

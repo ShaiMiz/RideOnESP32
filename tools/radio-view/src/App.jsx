@@ -7,7 +7,7 @@ import MappingPanel from './components/MappingPanel.jsx';
 import ExportPanel from './components/ExportPanel.jsx';
 import SpecsPanel from './components/SpecsPanel.jsx';
 import { REPO, CH, LIMITS } from './lib/repoData.js';
-import { SWITCHES, load, toYaml } from './lib/model.js';
+import { SWITCHES, TRIM_NAMES, load, toYaml } from './lib/model.js';
 import { mix, toUs } from './lib/mixer.js';
 import { decode, ModeMachine } from './lib/firmware.js';
 import { check, warningPositions } from './lib/rules.js';
@@ -58,6 +58,8 @@ export default function App() {
   const [mixScroll, setMixScroll] = useState(0);
   const [tab, setTab] = useState('live');
   const [pressed, setPressed] = useState(null);
+  const [heldTrim, setHeldTrim] = useState(null); // a trim button held down (they work as push-buttons)
+  const usesRef = useRef({});
   const [toast, setToast] = useState('');
   const [dragging, setDragging] = useState(null);
   const [ready, setReady] = useState(false); // drei's Html needs the canvas in the page first
@@ -79,7 +81,7 @@ export default function App() {
   }, []);
 
   // ---- radio ------------------------------------------------------------------------------
-  const input = useMemo(() => ({ sticks, switches, stickMode }), [sticks, switches, stickMode]);
+  const input = useMemo(() => ({ sticks, switches, stickMode, trims: heldTrim ? { [heldTrim]: true } : {} }), [sticks, switches, stickMode, heldTrim]);
   const out = useMemo(() => mix(config, input), [config, input]);
   const us = useMemo(() => out.channels.map(toUs), [out]);
   const wp = useMemo(() => warningPositions(config), [config]);
@@ -92,6 +94,7 @@ export default function App() {
   const linkUp = sending && carOn;
   const rules = useMemo(() => check(config, CH, LIMITS, stickMode), [config, stickMode]);
   const uses = useMemo(() => controlUses(config, input, CH, LIMITS), [config, input]);
+  usesRef.current = uses;
 
   // ---- car (firmware picture), 20 times a second -------------------------------------------
   const live = useRef({});
@@ -137,6 +140,7 @@ export default function App() {
     const controls = [
       ...Object.keys(SWITCHES).map((s) => ({ name: s, value: SWITCHES[s] === 2 ? (switches[s] ? 'down' : 'up') : ['up', 'mid', 'down'][switches[s]], use: (uses[s] || []).map((u) => `CH${u.ch}`).join(' ') || '-' })),
       ...['lh', 'lv', 'rh', 'rv'].map((a) => ({ name: a.toUpperCase(), value: `${Math.round(sticks[a] * 100)}`, use: (uses[a] || []).map((u) => `CH${u.ch}`).join(' ') || '-' })),
+      ...TRIM_NAMES.filter((t) => (uses[t] || []).length).map((t) => ({ name: t, value: heldTrim === t ? 'held' : '-', use: uses[t].map((u) => `CH${u.ch}`).join(' ') })),
     ];
     draw(lcd, {
       power, warning: power && warningPending, warnList, page, chPage, mixScroll,
@@ -147,7 +151,7 @@ export default function App() {
       controls,
     }, blink);
     setLcdVersion((v) => v + 1);
-  }, [lcd, power, warningPending, page, chPage, mixScroll, switches, sticks, car, linkUp, batt, lq, out, names, config, uses, blink]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [lcd, power, warningPending, page, chPage, mixScroll, switches, sticks, heldTrim, car, linkUp, batt, lq, out, names, config, uses, blink]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ---- controls -----------------------------------------------------------------------------
   const cycleSwitch = useCallback((sw, dir = 1) => {
@@ -177,12 +181,23 @@ export default function App() {
     }
   }, [power, warningPending, page, config.mixes.length, say]);
 
-  const onTrim = useCallback((t) => {
+  // Trim buttons are push-buttons: on while held. With the trims off, the model can use them as
+  // switches (the horn is the T1 pair).
+  const onTrim = useCallback((t, down = true) => {
+    if (!down) { setHeldTrim((h) => (h === t ? null : h)); setPressed((p) => (p === t ? null : p)); return; }
+    setHeldTrim(t);
     setPressed(t);
-    setTimeout(() => setPressed(null), 140);
-    const which = { T1: 'T1, left stick sideways (rudder)', T2: 'T2, right stick up/down (elevator)', T3: 'T3, left stick up/down (throttle)', T4: 'T4, right stick sideways (aileron)' }[t.slice(0, 2)];
-    say(config.trimsOff ? `Trim ${which}: trims are off in this model, so it changes nothing.` : `Trim ${which}`);
+    const which = { T1: 'T1 (under the left stick, sideways pair)', T2: 'T2 (right, up/down pair)', T3: 'T3 (left, up/down pair)', T4: 'T4 (under the right stick, sideways pair)' }[t.slice(0, 2)];
+    const u = usesRef.current[t] || [];
+    say(u.length ? `Trim button ${t}, ${which}: ${u.map((x) => `CH${x.ch} ${x.label}`).join(', ')} while held.`
+      : config.trimsOff ? `Trim button ${t}, ${which}: spare, it does nothing in this model.` : `Trim ${t}`);
   }, [config.trimsOff, say]);
+  useEffect(() => {
+    if (!heldTrim) return undefined;
+    const up = () => { setHeldTrim(null); setPressed(null); };
+    window.addEventListener('pointerup', up);
+    return () => window.removeEventListener('pointerup', up);
+  }, [heldTrim]);
 
   // stick dragging: pointer moves anywhere on the page while held
   const drag = useRef(null);
@@ -215,7 +230,7 @@ export default function App() {
   }, [dragging]);
 
   // keyboard: arrows = right stick, A/D = left stick sideways, W/S = left stick up/down,
-  // 1-4 = SA SB SC SD, K = the kill switch to KILL
+  // 1-4 = SA SB SC SD, K = the kill switch to KILL, H = hold trim button T1+ (the horn)
   useEffect(() => {
     const held = new Set();
     const apply = () => setSticks((s) => ({
@@ -232,10 +247,12 @@ export default function App() {
       else if (k === 'w' || k === 's') setSticks((s) => ({ ...s, lv: Math.max(-1, Math.min(1, s.lv + (k === 'w' ? 0.1 : -0.1))) }));
       else if (['1', '2', '3', '4'].includes(k)) cycleSwitch(['SA', 'SB', 'SC', 'SD'][Number(k) - 1], e.shiftKey ? -1 : 1);
       else if (k === 'k' && live.killer) setSwitch(live.killer.sw, live.killer.p);
+      else if (k === 'h' && !e.repeat) { setHeldTrim('T1+'); setPressed('T1+'); }
     };
     const upKey = (e) => {
       const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
       if (held.delete(k)) apply();
+      if (k === 'h') { setHeldTrim(null); setPressed(null); }
     };
     window.addEventListener('keydown', down);
     window.addEventListener('keyup', upKey);
@@ -264,6 +281,11 @@ export default function App() {
         ))}
       </>
     );
+    for (const p of ['T1', 'T2', 'T3', 'T4']) {
+      const u = [...(uses[`${p}-`] || []), ...(uses[`${p}+`] || [])];
+      const chs = [...new Map(u.map((x) => [x.ch, x])).values()];
+      if (chs.length) L[p] = <><b>{p} trim buttons</b>{chs.map((x) => <div key={x.ch}>CH{x.ch} {x.label}, while held</div>)}</>;
+    }
     L.left = stick('lh', 'lv');
     L.right = stick('rh', 'rv');
     return L;
@@ -313,7 +335,7 @@ export default function App() {
             <OrbitControls enabled={!dragging} enablePan={false} minDistance={1.2} maxDistance={7} target={[0, 0.05, 0]} />
           </Canvas>
           <div className="hint">
-            Keys: arrows = right stick · A/D = left stick sideways · W/S = left stick up/down · 1-4 = SA SB SC SD (Shift reverses) · K = kill.
+            Keys: arrows = right stick · A/D = left stick sideways · W/S = left stick up/down · 1-4 = SA SB SC SD (Shift reverses) · K = kill · hold H = trim T1+ (horn).
             Screen: SYS / MDL change page, ▲ ▼ scroll, ⏻ power.
           </div>
           {toast && <div className="toast">{toast}</div>}
@@ -326,7 +348,7 @@ export default function App() {
           </nav>
           {tab === 'live' && (
             <LivePanel
-              {...{ us, out, config, car, sending, power, warningPending, carOn, setCarOn, lq, setLq, batt, setBatt, stickMode, setStickMode, sticks, setSticks, switches, setSwitch, onKey, uses }}
+              {...{ us, out, config, car, sending, power, warningPending, carOn, setCarOn, lq, setLq, batt, setBatt, stickMode, setStickMode, sticks, setSticks, switches, setSwitch, onKey, uses, onTrim, heldTrim }}
               channelName={(c) => channelLabel(c, CH, config)}
             />
           )}

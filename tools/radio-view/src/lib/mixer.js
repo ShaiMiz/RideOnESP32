@@ -1,7 +1,9 @@
 // A small EdgeTX mixer: sticks and switches -> logical switches -> mixes -> channel outputs ->
 // CRSF -> the microseconds the ESP32 reads. Enough of EdgeTX for the RideOn model and the
 // edits the view allows (sources, weight, offset, ADD / MUL / REPL, a logical-switch condition).
-import { SWITCHES, LS_COUNT, CHANNELS } from './model.js';
+import { SWITCHES, LS_COUNT, CHANNELS, TRIM_SWITCH } from './model.js';
+
+const TRIM_BY_EDGETX = Object.fromEntries(Object.entries(TRIM_SWITCH).map(([k, v]) => [v, k]));
 
 export const RESOLUTION = 1024; // EdgeTX's internal full scale
 
@@ -36,7 +38,7 @@ function sourceValues(input) {
   return v;
 }
 
-function lsTrue(ls, src, lsState) {
+function lsTrue(ls, src, lsState, trims) {
   const a = src[ls.a];
   if (a === undefined) return false;
   const x = (ls.x * RESOLUTION) / 100; // the def value is in percent for sticks and switches
@@ -48,12 +50,14 @@ function lsTrue(ls, src, lsState) {
     case 'FUNC_VNEG': on = a < x; break;
     default: on = false;
   }
-  if (on && ls.andsw && ls.andsw !== 'NONE') on = conditionTrue(ls.andsw, lsState);
+  if (on && ls.andsw && ls.andsw !== 'NONE') on = conditionTrue(ls.andsw, lsState, trims);
   return on;
 }
 
-function conditionTrue(sw, lsState) {
+function conditionTrue(sw, lsState, trims = {}) {
   if (!sw || sw === 'NONE' || sw === 'ON') return true;
+  const bare = sw.replace(/^!/, '');
+  if (TRIM_BY_EDGETX[bare]) return !!trims[TRIM_BY_EDGETX[bare]] !== sw.startsWith('!');
   const neg = sw.startsWith('!');
   const m = /^!?L(\d+)$/.exec(sw);
   const on = m ? !!lsState[Number(m[1])] : false;
@@ -61,7 +65,7 @@ function conditionTrue(sw, lsState) {
 }
 
 /**
- * Run the mixer. input = { sticks: {lh, lv, rh, rv} (-1..1), switches: {SA: 0..2, ...}, stickMode }.
+ * Run the mixer. input = { sticks: {lh, lv, rh, rv} (-1..1), switches: {SA: 0..2, ...}, trims: {'T1+': true, ...} (held), stickMode }.
  * Returns { channels: [16 values, -1024..1024], ls: {1: bool, ...}, active: [bool per mix line] }.
  */
 export function mix(config, input) {
@@ -69,7 +73,7 @@ export function mix(config, input) {
   const ls = {};
   // Logical switches in order; an AND switch may name an earlier one.
   for (const l of [...config.logical].sort((a, b) => a.idx - b.idx)) {
-    if (l.idx < LS_COUNT) ls[l.idx + 1] = lsTrue(l, src, ls);
+    if (l.idx < LS_COUNT) ls[l.idx + 1] = lsTrue(l, src, ls, input.trims);
   }
   const channels = new Array(CHANNELS).fill(0);
   const touched = new Array(CHANNELS).fill(false);
@@ -77,7 +81,7 @@ export function mix(config, input) {
   config.mixes.forEach((m, i) => {
     const c = m.ch - 1;
     if (c < 0 || c >= CHANNELS) return;
-    if (!conditionTrue(m.swtch, ls)) return;
+    if (!conditionTrue(m.swtch, ls, input.trims)) return;
     active[i] = true;
     const v = ((src[m.src] ?? 0) * m.weight) / 100 + ((m.offset || 0) * RESOLUTION) / 100;
     if (m.mltpx === 'REPL' || !touched[c]) channels[c] = m.mltpx === 'MUL' && !touched[c] ? 0 : v;

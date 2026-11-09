@@ -24,10 +24,10 @@ ORDER_LINES = [
     ("rings", "Ring terminals 220/110 pcs", 24.51),
     ("as5600", "AS5600", 20.22),
     ("estop", "22 mm E-stop 2NO+2NC", 19.42),
-    ("rkit", "Resistor kit, 60 values", 17.19),
+    ("rkit", "Resistor kit, 60 values x 5 pcs (300 pcs)", 17.19),
     ("ecaps", "Electrolytic caps 10-25 V... (bag: 470 µF 50 V low-ESR x10)", 15.28),
     ("ads", "ADS1115", 14.22),
-    ("anl", "ANL fuse holder (2 lines)", 6.26 + 13.48),
+    ("anl", "ANL fuse holder + 40 A fuse, and 2 spare 40 A fuses (2 lines)", 6.26 + 13.48),
     ("pcf", "PCF8574", 12.14),
     ("pl2303", "PL2303 USB-TTL 3 pcs (a set: PL2303HX, CP2102, CH340G)", 11.09),
     ("inline", "12 AWG inline fuse holder x3", 9.22),
@@ -125,7 +125,7 @@ EXTRAS = [
      "box", D.BUY, [], "Holds the EN and IS jumpers and the EN pull-down; a dab of hot glue against vibration"),
     ("", 4, "Deutsch DT mating pairs with seals: 4-way x2 (J9, J12), 6-way (J11), 8-way (J10)", "TE Deutsch DT (or clone)",
      "box edge", D.BUY, [], "Mates for J9-J12"),
-    ("", 1, "10 AWG wire, red + black, 10 m", "Generic", "box", D.ORDER, ["wire10"], "Battery, contactor, driver B+/B−"),
+    ("", 1, "10 AWG silicone wire (200 °C), 5 m red + 5 m black", "Generic", "box", D.ORDER, ["wire10"], "Battery, contactor, driver B+/B−"),
     ("", 1, "12 AWG wire, red + black, 10 m", "Generic", "box", D.ORDER, ["wire12"], "Driver to motor plugs"),
     ("", 1, "14-16 AWG wire, orange or red (key, F6 and 12 V branches)", "Generic", "box", D.BUY, [], "12 AWG from the order also works"),
     ("", 1, "Pigtail for the AS5600 board's 4-pin plug (match its pitch: JST-GH 1.25 or PH 2.0)", "Generic JST", "car",
@@ -514,8 +514,13 @@ def write_bom(out, parts, vb_parts):
            "still to buy.\n",
            "- **Small parts, counted 9 Nov:** 1 A blades 10, 100 nF and 10 nF 50 V ceramics 100 each, 1N4007 100, 1N4148 50, "
            "IRLZ44N 10, AMS1117-3.3 modules 5, 4.7k and 10k 1 % resistors 100 each. Plenty of spares for every line below.\n",
-           "- **Blade fuse values:** the design uses 1, 2, 3, 10 and 15 A (F3-F10, F2). F8 is 1 A now (0.5 A in v0.2) and F10 "
-           "is 10 A, so these five values cover every blade.\n",
+           "- **Blade fuse values: checked 9 Nov.** The design uses 1, 2, 3, 10 and 15 A (F2-F14). All five bags are in hand, "
+           "10 of each (10 A seen 6 Nov). The 15 A bag covers F2 and F11-F14 with 5 spare; 15 A for F11-F14 is still a "
+           "placeholder until the motor label (#14).\n",
+           "- **ANL (F1): checked 9 Nov.** One bolt-on ANL holder with a 40 A fuse, plus 2 spare 40 A ANL fuses. "
+           "That is the whole F1 line.\n",
+           "- **Also seen 9 Nov:** 10 AWG silicone wire (200 °C), 5 m red + 5 m black; the 60-value 1/4 W 1 % resistor kit "
+           "(5 each, 300 pcs); the clamp meter parcel.\n",
            "- **K1 coil current:** measure it on the bench supply; over 0.6 A, F3 becomes 2 A.\n\n",
            "## Parts, tools and materials\n\n"]
     body = []

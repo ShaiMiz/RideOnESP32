@@ -24,7 +24,9 @@ This is the one list for the project: every part of the car, and every tool and 
 - **ADS1115:** two bags seen in the 9 Nov photos; the design needs 2 (U22, U23). Confirm each bag holds one module.
 - **Inline fuse holders (O19):** 3 holders for 12 AWG arrived (the label says "for 12V"; ATO/ATC blades are rated 32 V DC, so they are fine on the 24 V system). They go to F2, F9 and F10. F11-F14 (one per drive motor) need 4 more: still to buy.
 - **Small parts, counted 9 Nov:** 1 A blades 10, 100 nF and 10 nF 50 V ceramics 100 each, 1N4007 100, 1N4148 50, IRLZ44N 10, AMS1117-3.3 modules 5, 4.7k and 10k 1 % resistors 100 each. Plenty of spares for every line below.
-- **Blade fuse values:** the design uses 1, 2, 3, 10 and 15 A (F3-F10, F2). F8 is 1 A now (0.5 A in v0.2) and F10 is 10 A, so these five values cover every blade.
+- **Blade fuse values: checked 9 Nov.** The design uses 1, 2, 3, 10 and 15 A (F2-F14). All five bags are in hand, 10 of each (10 A seen 6 Nov). The 15 A bag covers F2 and F11-F14 with 5 spare; 15 A for F11-F14 is still a placeholder until the motor label (#14).
+- **ANL (F1): checked 9 Nov.** One bolt-on ANL holder with a 40 A fuse, plus 2 spare 40 A ANL fuses. That is the whole F1 line.
+- **Also seen 9 Nov:** 10 AWG silicone wire (200 °C), 5 m red + 5 m black; the 60-value 1/4 W 1 % resistor kit (5 each, 300 pcs); the clamp meter parcel.
 - **K1 coil current:** measure it on the bench supply; over 0.6 A, F3 becomes 2 A.
 
 ## Parts, tools and materials
@@ -94,7 +96,7 @@ This is the one list for the project: every part of the car, and every tool and 
 | 61 | Audio | LS1 | 1 | 3 in 4 Ω full-range speaker, car sounds | Generic | dash | To buy | - | - |  |
 | 62 | Audio | LS2 LS3 | 2 | 3 in full-range speaker (+ DDT-S30 tweeter via 10 µF film cap, AUDIO.md) | Generic | car | To buy | - | - |  |
 | 63 | Wiring | - | 1 | MRD068A screw-terminal adapter for the ESP32 | Generic MRD068A | box | Owned | - | - |  |
-| 64 | Wiring | - | 1 | 10 AWG wire, red + black, 10 m | Generic | box | Received 4 Nov | O3 | - | Battery, contactor, driver B+/B− |
+| 64 | Wiring | - | 1 | 10 AWG silicone wire (200 °C), 5 m red + 5 m black | Generic | box | Received 4 Nov | O3 | - | Battery, contactor, driver B+/B− |
 | 65 | Wiring | - | 1 | 12 AWG wire, red + black, 10 m | Generic | box | Received 4 Nov | O4 | - | Driver to motor plugs |
 | 66 | Wiring | - | 1 | Insulated ring terminal kit, red/blue/yellow (yellow 4-6 mm² takes 10 AWG; check the stud sizes) | Generic | box | Received 4 Nov | O10 | - |  |
 | 67 | Wiring | - | 1 | Wire ferrule kit, 2000 pcs, 0.5-10 mm² | Generic | box | Received 4 Nov | O9 | - | For the screw terminals (IBT-2, MRD068A, A1) |
@@ -170,10 +172,10 @@ Prices as the PayPal receipt gives them. Some receipt lines are split (two ANL l
 | O10 | Ring terminals 220/110 pcs | 24.51 | 66 |
 | O11 | AS5600 | 20.22 | 10 |
 | O12 | 22 mm E-stop 2NO+2NC | 19.42 | 31 |
-| O13 | Resistor kit, 60 values | 17.19 | 41, 42, 43, 44, 45, 46, 47 |
+| O13 | Resistor kit, 60 values x 5 pcs (300 pcs) | 17.19 | 41, 42, 43, 44, 45, 46, 47 |
 | O14 | Electrolytic caps 10-25 V... (bag: 470 µF 50 V low-ESR x10) | 15.28 | 40 |
 | O15 | ADS1115 | 14.22 | 8 |
-| O16 | ANL fuse holder (2 lines) | 19.74 | 21 |
+| O16 | ANL fuse holder + 40 A fuse, and 2 spare 40 A fuses (2 lines) | 19.74 | 21 |
 | O17 | PCF8574 | 12.14 | 9 |
 | O18 | PL2303 USB-TTL 3 pcs (a set: PL2303HX, CP2102, CH340G) | 11.09 | 102 |
 | O19 | 12 AWG inline fuse holder x3 | 9.22 | 22, 27, 28 |

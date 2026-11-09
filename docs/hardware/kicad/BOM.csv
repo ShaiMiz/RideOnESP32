@@ -62,7 +62,7 @@ Line,Category,Refs,Qty,Description,Manufacturer / part number,Where,Status,Order
 61,Audio,LS1,1,"3 in 4 Ω full-range speaker, car sounds",Generic,dash,To buy,,,,,
 62,Audio,LS2 LS3,2,"3 in full-range speaker (+ DDT-S30 tweeter via 10 µF film cap, AUDIO.md)",Generic,car,To buy,,,,,
 63,Wiring,,1,MRD068A screw-terminal adapter for the ESP32,Generic MRD068A,box,Owned,,Owned,,,
-64,Wiring,,1,"10 AWG wire, red + black, 10 m",Generic,box,Received 4 Nov,O3,"AliExpress, 24 Oct order",,,"Battery, contactor, driver B+/B−"
+64,Wiring,,1,"10 AWG silicone wire (200 °C), 5 m red + 5 m black",Generic,box,Received 4 Nov,O3,"AliExpress, 24 Oct order",,,"Battery, contactor, driver B+/B−"
 65,Wiring,,1,"12 AWG wire, red + black, 10 m",Generic,box,Received 4 Nov,O4,"AliExpress, 24 Oct order",,,Driver to motor plugs
 66,Wiring,,1,"Insulated ring terminal kit, red/blue/yellow (yellow 4-6 mm² takes 10 AWG; check the stud sizes)",Generic,box,Received 4 Nov,O10,"AliExpress, 24 Oct order",,,
 67,Wiring,,1,"Wire ferrule kit, 2000 pcs, 0.5-10 mm²",Generic,box,Received 4 Nov,O9,"AliExpress, 24 Oct order",,,"For the screw terminals (IBT-2, MRD068A, A1)"

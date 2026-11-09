@@ -20,8 +20,10 @@ This is the one list for the project: every part of the car, and every tool and 
 
 ## Check the 24 Oct order (arrived 4 Nov)
 
-- **470 µF capacitors (C111-C115):** the order line reads "Electrolytic caps 10-25 V". On a 24 V bus they must be **35 V or more** (50 V preferred). If the bag says 25 V, do not fit them; buy 470 µF 50 V low-ESR.
-- **ADS1115:** the order shows one line; the design needs 2 (U22, U23). Check the quantity.
+- **470 µF capacitors (C111-C115): checked 9 Nov.** The bag reads 50 V 470 µF low-ESR, 10 pcs, so they fit the 24 V bus (the receipt's "10-25 V" was the listing name).
+- **ADS1115:** two bags seen in the 9 Nov photos; the design needs 2 (U22, U23). Confirm each bag holds one module.
+- **Inline fuse holders (O19):** 3 holders for 12 AWG arrived (the label says "for 12V"; ATO/ATC blades are rated 32 V DC, so they are fine on the 24 V system). They go to F2, F9 and F10. F11-F14 (one per drive motor) need 4 more: still to buy.
+- **Small parts, counted 9 Nov:** 1 A blades 10, 100 nF and 10 nF 50 V ceramics 100 each, 1N4007 100, 1N4148 50, IRLZ44N 10, AMS1117-3.3 modules 5, 4.7k and 10k 1 % resistors 100 each. Plenty of spares for every line below.
 - **Blade fuse values:** the design uses 1, 2, 3, 10 and 15 A (F3-F10, F2). F8 is 1 A now (0.5 A in v0.2) and F10 is 10 A, so these five values cover every blade.
 - **K1 coil current:** measure it on the bench supply; over 0.6 A, F3 becomes 2 A.
 
@@ -68,7 +70,7 @@ This is the one list for the project: every part of the car, and every tool and 
 | 37 | Discrete | D2 | 1 | Unidirectional TVS across MOTOR_24V, voltage set by the battery (TBD) | TBD (SMBJ/P6KE family) | box | TBD | - | - | not fitted yet. Clamps the regen spike when K1 opens on a rolling car. Fit once the battery voltage is known. Issue #13 |
 | 38 | Passive | C1 C2 C20 C21 C22 C201 C202 C203 C204 C205 | 10 | Ceramic capacitor 100n, 50 V | Generic MLCC | A1, car | Received 4 Nov | O24 | - | C201-C204: across the motor terminals. Noise suppression; solder right on the motor tabs; C205: across the motor terminals |
 | 39 | Passive | C101 C102 C103 C104 C105 | 5 | Ceramic capacitor 10n, 50 V | Generic MLCC | A1 | Received 4 Nov | O24 | - | IS filter |
-| 40 | Passive | C111 C112 C113 C114 C115 | 5 | Electrolytic 470 µF ≥35 V low-ESR (50 V preferred) | Generic low-ESR electrolytic | box | Received 4 Nov | O14 | - | CHECK the ordered caps are ≥35 V: the order line reads '10-25 V' |
+| 40 | Passive | C111 C112 C113 C114 C115 | 5 | Electrolytic 470 µF 50 V low-ESR | Generic low-ESR electrolytic | box | Received 4 Nov | O14 | - | 50 V low-ESR, 10 pcs (bag label checked 9 Nov); anything ≥35 V works on the 24 V bus |
 | 41 | Passive | R1 R22 | 2 | Resistor 100, metal film 1 %, 0.25 W | Generic metal film | A1 | Received 4 Nov | O13, O26 | - | R1: Gate resistor; R22: Pedal supply; a shorted pedal cable can't pull down 3V3_SENSE |
 | 42 | Passive | R2 R20 R23 R24 R111 R112 R113 R114 R115 | 9 | Resistor 10k, metal film 1 %, 0.25 W | Generic metal film | A1, box | Received 4 Nov | O13, O26 | - | R2: Holds K1 open and strapping pin GPIO12 LOW at boot. Never a pull-up; R20: Series protection; R23: GPIO34 has no internal pull-up; R24: GPIO35 has no internal pull-up; R111-R115: Pull-down at each board, so a broken enable wire still leaves that board off |
 | 43 | Passive | R3 R5 | 2 | Resistor 150k, metal film 1 %, 0.25 W | Generic metal film | A1, box | Received 4 Nov | O13, O26 | - | R3: 2.2 V at 29.4 V; R5: Motor-bus sense for the K1 checks; at the stud, so only the divided signal runs to A1 |
@@ -130,7 +132,7 @@ This is the one list for the project: every part of the car, and every tool and 
 | 99 | Tool | - | 1 | Crimping pliers, ratchet, 4 swap jaws (insulated terminals, ferrules, ...) | Lion Rage HS-30J | bench | Received 4 Nov | O6 | - | Use the jaw marked with mm² ferrule sizes for ferrules, the red/blue/yellow one for insulated terminals |
 | 100 | Tool | - | 1 | DC clamp meter | UNI-T UT210E | bench | Received 4 Nov | O2 | - | Motor and coil current without cutting wires |
 | 101 | Tool | - | 1 | Programmable bench supply, 30 V 10 A | Wanptek WPS3010H | bench | Received 4 Nov | O1 | - | Phases 3-4 run on its current limit instead of the battery |
-| 102 | Tool | - | 3 | USB-TTL adapter | Prolific PL2303 (generic) | bench | Received 4 Nov | O18 | - | Not needed (the ESP32 has USB); harmless spare |
+| 102 | Tool | - | 3 | USB-TTL adapter set: one each PL2303HX, CP2102, CH340G | Prolific PL2303HX, Silicon Labs CP2102, WCH CH340G (generic modules) | bench | Received 4 Nov | O18 | - | Not needed (the ESP32 has USB); harmless spare |
 | 103 | Tool | - | 1 | Automatic wire stripper, 10-24 AWG | Generic self-adjusting stripper | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-automatic-wire-stripper.html?SortType=total_tranpro_desc) | Premium: Knipex 12 62 180 (local) |
 | 104 | Tool | - | 1 | Brass-wool tip cleaner with holder | Generic brass wool in a metal cup | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-brass-wire-tip-cleaner-holder.html?SortType=total_tranpro_desc) | No water needed. Premium: Hakko 599B (genuine sold locally) |
 | 105 | Tool | - | 1 | Desoldering pump | Generic aluminium pump | bench | To buy | - | [search](https://www.aliexpress.com/w/wholesale-desoldering-pump-aluminum.html?SortType=total_tranpro_desc) | Premium: Engineer SS-02 |
@@ -169,11 +171,11 @@ Prices as the PayPal receipt gives them. Some receipt lines are split (two ANL l
 | O11 | AS5600 | 20.22 | 10 |
 | O12 | 22 mm E-stop 2NO+2NC | 19.42 | 31 |
 | O13 | Resistor kit, 60 values | 17.19 | 41, 42, 43, 44, 45, 46, 47 |
-| O14 | Electrolytic caps 10-25 V... | 15.28 | 40 |
+| O14 | Electrolytic caps 10-25 V... (bag: 470 µF 50 V low-ESR x10) | 15.28 | 40 |
 | O15 | ADS1115 | 14.22 | 8 |
 | O16 | ANL fuse holder (2 lines) | 19.74 | 21 |
 | O17 | PCF8574 | 12.14 | 9 |
-| O18 | PL2303 USB-TTL 3 pcs | 11.09 | 102 |
+| O18 | PL2303 USB-TTL 3 pcs (a set: PL2303HX, CP2102, CH340G) | 11.09 | 102 |
 | O19 | 12 AWG inline fuse holder x3 | 9.22 | 22, 27, 28 |
 | O20 | IRLZ44N x10 | 7.88 | 36 |
 | O21 | High-speed switching diodes x50 | 6.74 | 35 |
@@ -194,5 +196,5 @@ If #32 picks variant B, these replace U10-U13 and C111-C114 (the steering IBT-2,
 | C40 | 1 | Ceramic capacitor 100n, 50 V | Received 4 Nov |
 | R40 | 1 | Resistor 10k, metal film 1 %, 0.25 W | Received 4 Nov |
 | U41 U42 | 2 | Cytron MDD20A | To buy |
-| C41 C42 | 2 | Electrolytic 470 µF ≥35 V low-ESR | Received 4 Nov |
+| C41 C42 | 2 | Electrolytic 470 µF 50 V low-ESR | Received 4 Nov |
 | U43 U44 U45 U46 | 4 | Hall current sensor, 3.3 V output (e.g. ACS724 or ACS758 with divider; TBD) | TBD |

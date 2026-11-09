@@ -1138,24 +1138,24 @@
     "C115"
    ],
    "qty": "5",
-   "part": "Electrolytic 470 µF ≥35 V low-ESR (50 V preferred)",
+   "part": "Electrolytic 470 µF 50 V low-ESR",
    "model": "Generic low-ESR electrolytic",
    "category": "Passive",
    "where": "box",
    "status": "Received 4 Nov",
-   "note": "CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'",
+   "note": "50 V low-ESR, 10 pcs (bag label checked 9 Nov); anything ≥35 V works on the 24 V bus",
    "fields": {
     "Line": "40",
     "Category": "Passive",
     "Refs": "C111 C112 C113 C114 C115",
     "Qty": "5",
-    "Description": "Electrolytic 470 µF ≥35 V low-ESR (50 V preferred)",
+    "Description": "Electrolytic 470 µF 50 V low-ESR",
     "Manufacturer / part number": "Generic low-ESR electrolytic",
     "Where": "box",
     "Status": "Received 4 Nov",
     "Order line": "O14",
     "Supplier": "AliExpress, 24 Oct order",
-    "Notes": "CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'"
+    "Notes": "50 V low-ESR, 10 pcs (bag label checked 9 Nov); anything ≥35 V works on the 24 V bus"
    },
    "kind": "part",
    "issues": []
@@ -2778,8 +2778,8 @@
    "line": "102",
    "refs": [],
    "qty": "3",
-   "part": "USB-TTL adapter",
-   "model": "Prolific PL2303 (generic)",
+   "part": "USB-TTL adapter set: one each PL2303HX, CP2102, CH340G",
+   "model": "Prolific PL2303HX, Silicon Labs CP2102, WCH CH340G (generic modules)",
    "category": "Tool",
    "where": "bench",
    "status": "Received 4 Nov",
@@ -2788,8 +2788,8 @@
     "Line": "102",
     "Category": "Tool",
     "Qty": "3",
-    "Description": "USB-TTL adapter",
-    "Manufacturer / part number": "Prolific PL2303 (generic)",
+    "Description": "USB-TTL adapter set: one each PL2303HX, CP2102, CH340G",
+    "Manufacturer / part number": "Prolific PL2303HX, Silicon Labs CP2102, WCH CH340G (generic modules)",
     "Where": "bench",
     "Status": "Received 4 Nov",
     "Order line": "O18",
@@ -9302,10 +9302,10 @@
   "C111": {
    "ref": "C111",
    "value": "470µ 50V",
-   "part": "Electrolytic 470 µF ≥35 V low-ESR (50 V preferred)",
+   "part": "Electrolytic 470 µF 50 V low-ESR",
    "source": "Received 4 Nov",
    "where": "box, on U10 B+/B−",
-   "note": "CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'",
+   "note": "50 V low-ESR, 10 pcs (bag label checked 9 Nov); anything ≥35 V works on the 24 V bus",
    "issue": "",
    "sheet": "Drive, variant A (4 + 1 IBT-2)",
    "pins": {
@@ -9410,10 +9410,10 @@
   "C112": {
    "ref": "C112",
    "value": "470µ 50V",
-   "part": "Electrolytic 470 µF ≥35 V low-ESR (50 V preferred)",
+   "part": "Electrolytic 470 µF 50 V low-ESR",
    "source": "Received 4 Nov",
    "where": "box, on U11 B+/B−",
-   "note": "CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'",
+   "note": "50 V low-ESR, 10 pcs (bag label checked 9 Nov); anything ≥35 V works on the 24 V bus",
    "issue": "",
    "sheet": "Drive, variant A (4 + 1 IBT-2)",
    "pins": {
@@ -9518,10 +9518,10 @@
   "C113": {
    "ref": "C113",
    "value": "470µ 50V",
-   "part": "Electrolytic 470 µF ≥35 V low-ESR (50 V preferred)",
+   "part": "Electrolytic 470 µF 50 V low-ESR",
    "source": "Received 4 Nov",
    "where": "box, on U12 B+/B−",
-   "note": "CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'",
+   "note": "50 V low-ESR, 10 pcs (bag label checked 9 Nov); anything ≥35 V works on the 24 V bus",
    "issue": "",
    "sheet": "Drive, variant A (4 + 1 IBT-2)",
    "pins": {
@@ -9626,10 +9626,10 @@
   "C114": {
    "ref": "C114",
    "value": "470µ 50V",
-   "part": "Electrolytic 470 µF ≥35 V low-ESR (50 V preferred)",
+   "part": "Electrolytic 470 µF 50 V low-ESR",
    "source": "Received 4 Nov",
    "where": "box, on U13 B+/B−",
-   "note": "CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'",
+   "note": "50 V low-ESR, 10 pcs (bag label checked 9 Nov); anything ≥35 V works on the 24 V bus",
    "issue": "",
    "sheet": "Drive, variant A (4 + 1 IBT-2)",
    "pins": {
@@ -9734,10 +9734,10 @@
   "C115": {
    "ref": "C115",
    "value": "470µ 50V",
-   "part": "Electrolytic 470 µF ≥35 V low-ESR (50 V preferred)",
+   "part": "Electrolytic 470 µF 50 V low-ESR",
    "source": "Received 4 Nov",
    "where": "box, on U14 B+/B−",
-   "note": "CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'",
+   "note": "50 V low-ESR, 10 pcs (bag label checked 9 Nov); anything ≥35 V works on the 24 V bus",
    "issue": "",
    "sheet": "Drive, variant A (4 + 1 IBT-2)",
    "pins": {
@@ -10358,7 +10358,7 @@
   {
    "ref": "C41",
    "value": "470µ 50V",
-   "part": "Electrolytic 470 µF ≥35 V low-ESR",
+   "part": "Electrolytic 470 µF 50 V low-ESR",
    "source": "Received 4 Nov",
    "where": "box, on U41 VB+/VB−",
    "note": "",
@@ -10372,7 +10372,7 @@
   {
    "ref": "C42",
    "value": "470µ 50V",
-   "part": "Electrolytic 470 µF ≥35 V low-ESR",
+   "part": "Electrolytic 470 µF 50 V low-ESR",
    "source": "Received 4 Nov",
    "where": "box, on U42 VB+/VB−",
    "note": "",

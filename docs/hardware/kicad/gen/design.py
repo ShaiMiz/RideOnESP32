@@ -285,8 +285,8 @@ def drive_channel(c, n):
         C(f"C10{n}", "10n", isn, "GND", note="IS filter"),
         D(f"D10{n}", "1N4148", "3V3_SENSE", isn, "1N4148 (ordered high-speed switching diodes), IS clamp to 3.3 V",
           note="Clamps the 4-7 mA fault current so the ADS1115 input stays ≤ 3.6 V"),
-        CP(f"C11{n}", "470µ 50V", "MOTOR_24V", "GND", "Electrolytic 470 µF ≥35 V low-ESR (50 V preferred)", f"box, on {DRV_REF[c]} B+/B−",
-           note="CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'"),
+        CP(f"C11{n}", "470µ 50V", "MOTOR_24V", "GND", "Electrolytic 470 µF 50 V low-ESR", f"box, on {DRV_REF[c]} B+/B−",
+           note="50 V low-ESR, 10 pcs (bag label checked 9 Nov); anything ≥35 V works on the 24 V bus"),
         R(f"R11{n}", "10k", en, "GND", loc=f"box, at {DRV_REF[c]} header",
           note="Pull-down at each board, so a broken enable wire still leaves that board off"),
     ] + ([] if c == "STEER" else [
@@ -505,8 +505,8 @@ VARIANT_B = [
     Part("U42", M("MDD20A"), "MDD20A rear", {"GND": "GND", "PWM1": "RL_PWM_G", "DIR1": "RL_LPWM", "PWM2": "RR_PWM_G", "DIR2": "RR_LPWM",
                                             "VB+": "MOTOR_24V", "VB-": "GND", "M1A": "RL_CS_IN", "M1B": "RL_M_NEG", "M2A": "RR_CS_IN", "M2B": "RR_M_NEG"},
          "Cytron MDD20A", BUY, "box"),
-    CP("C41", "470µ 50V", "MOTOR_24V", "GND", "Electrolytic 470 µF ≥35 V low-ESR", "box, on U41 VB+/VB−"),
-    CP("C42", "470µ 50V", "MOTOR_24V", "GND", "Electrolytic 470 µF ≥35 V low-ESR", "box, on U42 VB+/VB−"),
+    CP("C41", "470µ 50V", "MOTOR_24V", "GND", "Electrolytic 470 µF 50 V low-ESR", "box, on U41 VB+/VB−"),
+    CP("C42", "470µ 50V", "MOTOR_24V", "GND", "Electrolytic 470 µF 50 V low-ESR", "box, on U42 VB+/VB−"),
 ] + [
     Part(f"U4{3 + i}", M("Current_Sensor_TBD"), f"CS {c}", {"IP+": f"{c}_CS_IN", "IP-": f"{c}_DRV_POS", "VCC": "3V3_SENSE", "GND": "GND", "OUT": f"IS_{c}"},
          "Hall current sensor, 3.3 V output (e.g. ACS724 or ACS758 with divider; TBD)", TBD, "box", issue="#32")

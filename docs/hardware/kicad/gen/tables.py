@@ -25,11 +25,11 @@ ORDER_LINES = [
     ("as5600", "AS5600", 20.22),
     ("estop", "22 mm E-stop 2NO+2NC", 19.42),
     ("rkit", "Resistor kit, 60 values", 17.19),
-    ("ecaps", "Electrolytic caps 10-25 V...", 15.28),
+    ("ecaps", "Electrolytic caps 10-25 V... (bag: 470 µF 50 V low-ESR x10)", 15.28),
     ("ads", "ADS1115", 14.22),
     ("anl", "ANL fuse holder (2 lines)", 6.26 + 13.48),
     ("pcf", "PCF8574", 12.14),
-    ("pl2303", "PL2303 USB-TTL 3 pcs", 11.09),
+    ("pl2303", "PL2303 USB-TTL 3 pcs (a set: PL2303HX, CP2102, CH340G)", 11.09),
     ("inline", "12 AWG inline fuse holder x3", 9.22),
     ("irlz", "IRLZ44N x10", 7.88),
     ("hsdiode", "High-speed switching diodes x50", 6.74),
@@ -191,7 +191,7 @@ TOOLS = [dict(zip(("cat", "item", "mfr", "qty", "src", "lines", "premium", "link
      "Phases 3-4 run on its current limit instead of the battery"),
     ("Tool", "DC clamp meter", "UNI-T UT210E", 1, D.ORDER, ["clamp"], "", "", "Motor and coil current without cutting wires"),
     ("Tool", "18650 protected cell", "Vapcell N40", 2, D.ORDER, ["cells"], "", "", "For the T-Lite radio"),
-    ("Tool", "USB-TTL adapter", "Prolific PL2303 (generic)", 3, D.ORDER, ["pl2303"], "", "",
+    ("Tool", "USB-TTL adapter set: one each PL2303HX, CP2102, CH340G", "Prolific PL2303HX, Silicon Labs CP2102, WCH CH340G (generic modules)", 3, D.ORDER, ["pl2303"], "", "",
      "Not needed (the ESP32 has USB); harmless spare"),
     ("Tool", "ELRS radio transmitter", "Jumper T-Lite V2", 1, D.OWNED, [], "", "", "Parent transmitter"),
     ("Consumable", "Solder wire Sn63/Pb37 0.8 mm, rosin core 2 % flux, 100 g", "Generic 63/37 rosin core", 1, D.BUY, [],
@@ -506,9 +506,14 @@ def write_bom(out, parts, vb_parts):
            "**Links** for things to buy are AliExpress searches sorted by most orders (the cloud session can't open "
            "aliexpress.com listings); pick a top result that matches the spec.\n\n",
            "## Check the 24 Oct order (arrived 4 Nov)\n\n",
-           "- **470 µF capacitors (C111-C115):** the order line reads \"Electrolytic caps 10-25 V\". On a 24 V bus they must be "
-           "**35 V or more** (50 V preferred). If the bag says 25 V, do not fit them; buy 470 µF 50 V low-ESR.\n",
-           "- **ADS1115:** the order shows one line; the design needs 2 (U22, U23). Check the quantity.\n",
+           "- **470 µF capacitors (C111-C115): checked 9 Nov.** The bag reads 50 V 470 µF low-ESR, 10 pcs, so they fit the "
+           "24 V bus (the receipt's \"10-25 V\" was the listing name).\n",
+           "- **ADS1115:** two bags seen in the 9 Nov photos; the design needs 2 (U22, U23). Confirm each bag holds one module.\n",
+           "- **Inline fuse holders (O19):** 3 holders for 12 AWG arrived (the label says \"for 12V\"; ATO/ATC blades are rated "
+           "32 V DC, so they are fine on the 24 V system). They go to F2, F9 and F10. F11-F14 (one per drive motor) need 4 more: "
+           "still to buy.\n",
+           "- **Small parts, counted 9 Nov:** 1 A blades 10, 100 nF and 10 nF 50 V ceramics 100 each, 1N4007 100, 1N4148 50, "
+           "IRLZ44N 10, AMS1117-3.3 modules 5, 4.7k and 10k 1 % resistors 100 each. Plenty of spares for every line below.\n",
            "- **Blade fuse values:** the design uses 1, 2, 3, 10 and 15 A (F3-F10, F2). F8 is 1 A now (0.5 A in v0.2) and F10 "
            "is 10 A, so these five values cover every blade.\n",
            "- **K1 coil current:** measure it on the bench supply; over 0.6 A, F3 becomes 2 A.\n\n",

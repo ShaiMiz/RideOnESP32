@@ -14,18 +14,18 @@ All of these must be true and written down in [docs/COMMISSIONING.md](docs/COMMI
 - [ ] A fault that clears on its own does not restart the motors while the pedal or stick is held.
 - [ ] The battery chemistry is known and `include/config.h` battery thresholds match it.
 - [ ] The key switch is rated for what it carries (#19), or it drives a relay.
-- [ ] A fuse sits in each drive motor's + lead (F11-F14), sized from the motor label (#14).
-- [ ] Locked-wheel test: with one wheel held and full throttle, its fuse or a fault cuts it, and no wire, motor, driver or box surface gets too hot to keep a hand on.
+- [ ] A stalled drive motor draws more than `MOTOR_CURRENT_LIMIT_A` (measured with the clamp meter), so the over-current fault catches a stall. There is no fuse per motor (Shai, 10 Nov 2026): the firmware is the stall protection.
+- [ ] Locked-wheel test: with one wheel held and full throttle, the over-current fault cuts it, and no wire, motor, driver or box surface gets too hot to keep a hand on.
 - [ ] Parked on a 10° slope with a sandbag of the child's weight and the key off, the car moves no more than 5 cm.
 - [ ] Top speed at the highest cap is measured and within the limit for the rider's age: 16 km/h from age 6, 6 km/h under 6 (8.2 km/h only with a low/high switch that starts in low).
+- [ ] The current-sense resistor on the IBT-2 boards has been read and `IS_PIN_RESISTOR_OHMS` matches it (the firmware halves it, because R_IS and L_IS are joined).
+- [ ] Logged current agrees with a clamp meter.
 - [ ] No sharp edges, screw tips, cut metal or zip-tie ends where the child sits or reaches; fan guards on.
 
 ### Recommended
 
 Do these when convenient. A failure here turns that feature off; it doesn't hold the project, as long as the required list passes.
 
-- [ ] The current-sense resistor on the IBT-2 boards has been read and `IS_PIN_RESISTOR_OHMS` matches it (the firmware halves it, because R_IS and L_IS are joined). Required until F11-F14 are fitted.
-- [ ] Logged current agrees with a meter. Required until F11-F14 are fitted.
 - [ ] Stopping distance has been measured at the speed cap the child will use, with a sandbag of the child's weight.
 - [ ] The contactor weld and motor-bus checks (`K1_WELD`, `NO_BUS`) behave as phase 3 describes.
 

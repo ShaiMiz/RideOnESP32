@@ -76,7 +76,7 @@ Of these, the 24 Oct order covers the power and safety chain, the sensing ICs, t
 From the [safety-standards review](2026-10-safety-standards.md); none is fixed by this schematic:
 
 1. **Roll-away when killed.** Dropping DRIVE_EN or opening K1 leaves the motors free-wheeling, so the car can roll on a slope. Fixing it needs a brake that holds without power (or motor shorting through a normally-closed contact); not drawn.
-2. **Single-motor stall backstop.** One stalled motor likely draws less than the 40 A fuse and the 20 A software limit. Per-motor fuses or a lower firmware stall limit, then a stall test in commissioning.
+2. **Single-motor stall backstop.** One stalled motor likely draws less than the 40 A fuse and the 20 A software limit. Per-motor fuses or a lower firmware stall limit, then a stall test in commissioning. (10 Nov 2026: no per-motor fuses; the firmware limit plus the locked-wheel test cover it.)
 3. **Box fire rating.** Specified as UL94 V-0 or metal in the BOM; not bought.
 4. **EMC.** Motor caps C201-C205, twisted pairs and the ground star help; nothing is tested.
 

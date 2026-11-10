@@ -471,142 +471,6 @@
 		)
 		(embedded_fonts no)
 	)
-(symbol "Device:Fuse"
-		(pin_numbers
-			(hide yes)
-		)
-		(pin_names
-			(offset 0)
-		)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(property "Reference" "F"
-			(at 2.032 0 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Fuse"
-			(at -1.905 0 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at -1.778 0 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Fuse"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "ki_keywords" "fuse"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "ki_fp_filters" "*Fuse*"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(symbol "Fuse_0_1"
-			(rectangle
-				(start -0.762 -2.54)
-				(end 0.762 2.54)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy 0 2.54) (xy 0 -2.54)
-				)
-				(stroke
-					(width 0)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-		)
-		(symbol "Fuse_1_1"
-			(pin passive line
-				(at 0 3.81 270)
-				(length 1.27)
-				(name "~"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 0 -3.81 90)
-				(length 1.27)
-				(name "~"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-		)
-		(embedded_fonts no)
-	)
 (symbol "Device:R"
 		(pin_numbers
 			(hide yes)
@@ -801,7 +665,7 @@
 (wire (pts (xy 53.34 48.26) (xy 58.42 48.26)) (stroke (width 0) (type default)) (uuid "e1e3adcc-8e95-56d9-87a7-ba1d851a5a5b"))
 (global_label "GND" (shape passive) (at 58.42 48.26 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "2a94f3f9-904e-59f8-aa5e-3a1581cfd100") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 58.42 48.26 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (wire (pts (xy 53.34 53.34) (xy 58.42 53.34)) (stroke (width 0) (type default)) (uuid "f0290a64-65e0-5801-b430-c31c7413ef7a"))
-(label "FL_DRV_POS" (at 58.42 53.34 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "fd84765b-0924-5f7d-9d23-f71c8e43a01d"))
+(global_label "FL_M_POS" (shape passive) (at 58.42 53.34 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "fd84765b-0924-5f7d-9d23-f71c8e43a01d") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 58.42 53.34 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (wire (pts (xy 53.34 55.88) (xy 58.42 55.88)) (stroke (width 0) (type default)) (uuid "393c861b-0d70-55e2-97e9-45dfeceb5503"))
 (global_label "FL_M_NEG" (shape passive) (at 58.42 55.88 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "3093420c-8fd2-522f-a175-33af4d95f41a") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 58.42 55.88 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (symbol (lib_id "Device:C_Polarized") (at 38.1 78.74 90) (unit 1)
@@ -904,26 +768,6 @@
 (global_label "3V3_SENSE" (shape passive) (at 29.21 137.16 180) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "473bf163-dd2c-5636-b629-fa0f4a6d82e5") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 29.21 137.16 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (wire (pts (xy 41.91 137.16) (xy 46.99 137.16)) (stroke (width 0) (type default)) (uuid "fb9f164f-f866-56bd-9ebd-445c659e6c08"))
 (global_label "IS_FL" (shape passive) (at 46.99 137.16 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "5ae42bda-7e1a-59f4-8f41-90d681a68673") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 46.99 137.16 0) (effects (font (size 1.27 1.27)) (hide yes))))
-(symbol (lib_id "Device:Fuse") (at 35.56 149.86 90) (unit 1)
-  (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
-  (uuid "e352be4b-c310-5348-b488-328bcd0a3be7")
-  (property "Reference" "F11" (at 35.56 147.298 270) (effects (font (size 1.27 1.27))))
-  (property "Value" "15 A" (at 35.56 152.622 270) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "" (at 35.56 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 35.56 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Description" "Inline blade fuse holder (12 AWG) + 15 A blade" (at 35.56 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Part" "Inline blade fuse holder (12 AWG) + 15 A blade" (at 35.56 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Source" "To buy" (at 35.56 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Location" "box, in the FL motor + lead" (at 35.56 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Note" "Stalled-motor backstop (safety review M3): one stalled motor draws under the 20 A software limit and the 40 A main fuse. 15 A is a placeholder: set it from the motor label (#14), above the running current, below the stall current" (at 35.56 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid "bd6f70c1-11d5-5ebd-93b8-dabfc3771414"))
-  (pin "2" (uuid "6fc9a018-f0de-51db-9dbd-833cd0bb0b7f"))
-  (instances (project "rideonesp32" (path "/e0e78d72-bf5c-51da-8e0f-d8642949b63b/6e75f03c-d0d2-5a99-a681-1a6d7cbfcd29" (reference "F11") (unit 1))))
-)
-(wire (pts (xy 31.75 149.86) (xy 26.67 149.86)) (stroke (width 0) (type default)) (uuid "619d76f5-9181-53f7-8b1a-64fc8684bc00"))
-(label "FL_DRV_POS" (at 26.67 149.86 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "8e97e8d8-8cbd-5ffc-9bb0-3ef7dc304f0a"))
-(wire (pts (xy 39.37 149.86) (xy 44.45 149.86)) (stroke (width 0) (type default)) (uuid "1a0940b2-0c6b-5fd7-8122-49569d508925"))
-(global_label "FL_M_POS" (shape passive) (at 44.45 149.86 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "ba951312-2c80-5ee3-b5f5-41b91e75b9f0") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 44.45 149.86 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (text "FR (front-right)" (exclude_from_sim no) (at 81.1 32.4 0) (effects (font (size 2 2) (bold yes)) (justify left top)) (uuid "0e4ef44b-8d01-5e6f-9c6a-3ae6bfbd2cea"))
 (symbol (lib_id "rideonesp32:IBT2_BTS7960") (at 109.22 55.88 0) (unit 1)
   (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
@@ -972,7 +816,7 @@
 (wire (pts (xy 119.38 48.26) (xy 124.46 48.26)) (stroke (width 0) (type default)) (uuid "19e2bcf9-1534-5eda-aae1-68ca5bef0e5c"))
 (global_label "GND" (shape passive) (at 124.46 48.26 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "ece8d7ac-ecab-5f58-92da-0b917e2fc858") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 124.46 48.26 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (wire (pts (xy 119.38 53.34) (xy 124.46 53.34)) (stroke (width 0) (type default)) (uuid "620ac62e-a6a2-550e-a2d3-293f0b6ac930"))
-(label "FR_DRV_POS" (at 124.46 53.34 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "5bfe5468-cc57-5b95-b9ae-0cc2773d243e"))
+(global_label "FR_M_POS" (shape passive) (at 124.46 53.34 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "5bfe5468-cc57-5b95-b9ae-0cc2773d243e") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 124.46 53.34 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (wire (pts (xy 119.38 55.88) (xy 124.46 55.88)) (stroke (width 0) (type default)) (uuid "13d6fa60-1a6b-5227-a8bf-b1db88df3303"))
 (global_label "FR_M_NEG" (shape passive) (at 124.46 55.88 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "4c32cdbc-0add-5d87-9f76-b2992b9c2d8b") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 124.46 55.88 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (symbol (lib_id "Device:C_Polarized") (at 104.14 78.74 90) (unit 1)
@@ -1075,26 +919,6 @@
 (global_label "3V3_SENSE" (shape passive) (at 95.25 137.16 180) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "5e91e86e-0859-546a-bc2a-4d1e66170c07") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 95.25 137.16 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (wire (pts (xy 107.95 137.16) (xy 113.03 137.16)) (stroke (width 0) (type default)) (uuid "4ba1307c-36f4-501d-84c0-f0a5f9c78fdf"))
 (global_label "IS_FR" (shape passive) (at 113.03 137.16 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "154eec36-9935-534d-bcbf-b39fa3898406") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 113.03 137.16 0) (effects (font (size 1.27 1.27)) (hide yes))))
-(symbol (lib_id "Device:Fuse") (at 101.6 149.86 90) (unit 1)
-  (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
-  (uuid "8a86d7d1-bfa3-56a9-a0dd-3b920883e981")
-  (property "Reference" "F12" (at 101.6 147.298 270) (effects (font (size 1.27 1.27))))
-  (property "Value" "15 A" (at 101.6 152.622 270) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "" (at 101.6 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 101.6 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Description" "Inline blade fuse holder (12 AWG) + 15 A blade" (at 101.6 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Part" "Inline blade fuse holder (12 AWG) + 15 A blade" (at 101.6 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Source" "To buy" (at 101.6 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Location" "box, in the FR motor + lead" (at 101.6 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Note" "Stalled-motor backstop (safety review M3): one stalled motor draws under the 20 A software limit and the 40 A main fuse. 15 A is a placeholder: set it from the motor label (#14), above the running current, below the stall current" (at 101.6 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid "00066878-7814-54c1-a4ed-6836e4948831"))
-  (pin "2" (uuid "d3ff7d88-bb38-52bd-9f4a-656175d44168"))
-  (instances (project "rideonesp32" (path "/e0e78d72-bf5c-51da-8e0f-d8642949b63b/6e75f03c-d0d2-5a99-a681-1a6d7cbfcd29" (reference "F12") (unit 1))))
-)
-(wire (pts (xy 97.79 149.86) (xy 92.71 149.86)) (stroke (width 0) (type default)) (uuid "06d18e31-1f57-596e-81b4-c27828f935fc"))
-(label "FR_DRV_POS" (at 92.71 149.86 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "daab3f62-acd7-5580-b739-b01aaca16a3f"))
-(wire (pts (xy 105.41 149.86) (xy 110.49 149.86)) (stroke (width 0) (type default)) (uuid "d6661856-6660-5832-be6a-599338a79815"))
-(global_label "FR_M_POS" (shape passive) (at 110.49 149.86 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "caca3b64-3497-5831-8f7b-9cd8fbb15f9b") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 110.49 149.86 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (text "RL (rear-left)" (exclude_from_sim no) (at 147.2 32.4 0) (effects (font (size 2 2) (bold yes)) (justify left top)) (uuid "db541ab5-fecc-5ca4-ad4f-1d49c1e25ef0"))
 (symbol (lib_id "rideonesp32:IBT2_BTS7960") (at 175.26 55.88 0) (unit 1)
   (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
@@ -1143,7 +967,7 @@
 (wire (pts (xy 185.42 48.26) (xy 190.5 48.26)) (stroke (width 0) (type default)) (uuid "715cfcb8-c893-500d-a33c-a35c23121c66"))
 (global_label "GND" (shape passive) (at 190.5 48.26 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "ac45a1e5-f3ea-5625-9c3a-fe474590c228") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 190.5 48.26 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (wire (pts (xy 185.42 53.34) (xy 190.5 53.34)) (stroke (width 0) (type default)) (uuid "d588bbce-b6c4-53d8-981d-ece878b7ecdf"))
-(label "RL_DRV_POS" (at 190.5 53.34 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "05b077e9-5678-5006-94c7-308eeaa5d97b"))
+(global_label "RL_M_POS" (shape passive) (at 190.5 53.34 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "05b077e9-5678-5006-94c7-308eeaa5d97b") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 190.5 53.34 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (wire (pts (xy 185.42 55.88) (xy 190.5 55.88)) (stroke (width 0) (type default)) (uuid "f0906bb9-6f63-59b9-b67d-ae372c4dd859"))
 (global_label "RL_M_NEG" (shape passive) (at 190.5 55.88 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "2651d7dc-7859-5554-90e6-b08ee2d8aa62") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 190.5 55.88 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (symbol (lib_id "Device:C_Polarized") (at 170.18 78.74 90) (unit 1)
@@ -1246,26 +1070,6 @@
 (global_label "3V3_SENSE" (shape passive) (at 161.29 137.16 180) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "e8e99c43-1a93-5aa7-b72e-1d83623f94ed") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 161.29 137.16 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (wire (pts (xy 173.99 137.16) (xy 179.07 137.16)) (stroke (width 0) (type default)) (uuid "2a1f974d-7368-5516-ae02-a4efb07e6ca1"))
 (global_label "IS_RL" (shape passive) (at 179.07 137.16 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "4ea52737-ae90-52e5-a2ce-43a3828f620b") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 179.07 137.16 0) (effects (font (size 1.27 1.27)) (hide yes))))
-(symbol (lib_id "Device:Fuse") (at 167.64 149.86 90) (unit 1)
-  (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
-  (uuid "28a68736-27d4-517d-81fa-de2cf6922229")
-  (property "Reference" "F13" (at 167.64 147.298 270) (effects (font (size 1.27 1.27))))
-  (property "Value" "15 A" (at 167.64 152.622 270) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "" (at 167.64 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 167.64 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Description" "Inline blade fuse holder (12 AWG) + 15 A blade" (at 167.64 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Part" "Inline blade fuse holder (12 AWG) + 15 A blade" (at 167.64 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Source" "To buy" (at 167.64 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Location" "box, in the RL motor + lead" (at 167.64 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Note" "Stalled-motor backstop (safety review M3): one stalled motor draws under the 20 A software limit and the 40 A main fuse. 15 A is a placeholder: set it from the motor label (#14), above the running current, below the stall current" (at 167.64 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid "97117bc6-68c4-50c6-919e-82026b029858"))
-  (pin "2" (uuid "e1c07e84-7733-5321-971e-be86ca2455f4"))
-  (instances (project "rideonesp32" (path "/e0e78d72-bf5c-51da-8e0f-d8642949b63b/6e75f03c-d0d2-5a99-a681-1a6d7cbfcd29" (reference "F13") (unit 1))))
-)
-(wire (pts (xy 163.83 149.86) (xy 158.75 149.86)) (stroke (width 0) (type default)) (uuid "e7d449d9-26f3-53f5-81ba-c82e2547a336"))
-(label "RL_DRV_POS" (at 158.75 149.86 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "f024fbc4-bb7e-5f39-bbf7-0bb5a5f340d5"))
-(wire (pts (xy 171.45 149.86) (xy 176.53 149.86)) (stroke (width 0) (type default)) (uuid "64de13e5-679c-5c80-9f99-9e3788a7a47a"))
-(global_label "RL_M_POS" (shape passive) (at 176.53 149.86 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "eacb73f0-023c-5cf1-8492-b0e58461b838") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 176.53 149.86 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (text "RR (rear-right)" (exclude_from_sim no) (at 213.3 32.4 0) (effects (font (size 2 2) (bold yes)) (justify left top)) (uuid "b34d27a9-dea6-5201-8bbc-9548625d8f4b"))
 (symbol (lib_id "rideonesp32:IBT2_BTS7960") (at 241.3 55.88 0) (unit 1)
   (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
@@ -1314,7 +1118,7 @@
 (wire (pts (xy 251.46 48.26) (xy 256.54 48.26)) (stroke (width 0) (type default)) (uuid "1edf0db0-0654-5eba-8fa1-df5001073df9"))
 (global_label "GND" (shape passive) (at 256.54 48.26 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "e5bc450e-80af-596f-b605-db811b3685fa") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 256.54 48.26 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (wire (pts (xy 251.46 53.34) (xy 256.54 53.34)) (stroke (width 0) (type default)) (uuid "70a6bfec-6eb6-5595-afd2-47b6b6ea2b71"))
-(label "RR_DRV_POS" (at 256.54 53.34 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "c24a4dfc-ca23-5225-a54e-85922a45120c"))
+(global_label "RR_M_POS" (shape passive) (at 256.54 53.34 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "c24a4dfc-ca23-5225-a54e-85922a45120c") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 256.54 53.34 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (wire (pts (xy 251.46 55.88) (xy 256.54 55.88)) (stroke (width 0) (type default)) (uuid "9c5afda5-2de3-5a65-912c-6b52e4ed5fd9"))
 (global_label "RR_M_NEG" (shape passive) (at 256.54 55.88 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "4dcab1fb-ae83-544a-89fc-d1e16851f5e9") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 256.54 55.88 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (symbol (lib_id "Device:C_Polarized") (at 236.22 78.74 90) (unit 1)
@@ -1417,26 +1221,6 @@
 (global_label "3V3_SENSE" (shape passive) (at 227.33 137.16 180) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify right)) (uuid "0d06051e-913b-506b-8136-eb63a7f6b70a") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 227.33 137.16 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (wire (pts (xy 240.03 137.16) (xy 245.11 137.16)) (stroke (width 0) (type default)) (uuid "ef336583-3c61-594b-8fe7-dfce09a18732"))
 (global_label "IS_RR" (shape passive) (at 245.11 137.16 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "dbf2729f-6bb3-527b-afa8-7fb92ff97677") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 245.11 137.16 0) (effects (font (size 1.27 1.27)) (hide yes))))
-(symbol (lib_id "Device:Fuse") (at 233.68 149.86 90) (unit 1)
-  (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
-  (uuid "e9efe321-d284-5549-926d-4789d164383e")
-  (property "Reference" "F14" (at 233.68 147.298 270) (effects (font (size 1.27 1.27))))
-  (property "Value" "15 A" (at 233.68 152.622 270) (effects (font (size 1.27 1.27))))
-  (property "Footprint" "" (at 233.68 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Datasheet" "" (at 233.68 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Description" "Inline blade fuse holder (12 AWG) + 15 A blade" (at 233.68 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Part" "Inline blade fuse holder (12 AWG) + 15 A blade" (at 233.68 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Source" "To buy" (at 233.68 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Location" "box, in the RR motor + lead" (at 233.68 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (property "Note" "Stalled-motor backstop (safety review M3): one stalled motor draws under the 20 A software limit and the 40 A main fuse. 15 A is a placeholder: set it from the motor label (#14), above the running current, below the stall current" (at 233.68 149.86 270) (effects (font (size 1.27 1.27)) (hide yes)))
-  (pin "1" (uuid "acad971a-5921-5c96-88bb-ffaf28ad4096"))
-  (pin "2" (uuid "c23ec327-7bf1-5532-a4b3-cca849b3fa2e"))
-  (instances (project "rideonesp32" (path "/e0e78d72-bf5c-51da-8e0f-d8642949b63b/6e75f03c-d0d2-5a99-a681-1a6d7cbfcd29" (reference "F14") (unit 1))))
-)
-(wire (pts (xy 229.87 149.86) (xy 224.79 149.86)) (stroke (width 0) (type default)) (uuid "3a6947bf-62c0-5cac-8f3f-e3e15296aca4"))
-(label "RR_DRV_POS" (at 224.79 149.86 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "fc0ad187-611a-5725-a308-9218856ea6fb"))
-(wire (pts (xy 237.49 149.86) (xy 242.57 149.86)) (stroke (width 0) (type default)) (uuid "25200d30-25d9-54d8-b779-0c1ebfd0a90c"))
-(global_label "RR_M_POS" (shape passive) (at 242.57 149.86 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "bab3e524-0c26-53bb-84d8-73baa09c4911") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 242.57 149.86 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (text "STEER (steering)" (exclude_from_sim no) (at 279.4 32.4 0) (effects (font (size 2 2) (bold yes)) (justify left top)) (uuid "d31ef1b1-eafa-5225-9b8f-22487a91e15b"))
 (symbol (lib_id "rideonesp32:IBT2_BTS7960") (at 309.88 55.88 0) (unit 1)
   (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
@@ -1590,7 +1374,7 @@
 (global_label "IS_ST" (shape passive) (at 311.15 137.16 0) (fields_autoplaced yes) (effects (font (size 1.27 1.27)) (justify left)) (uuid "1cae57ae-9d74-56e4-a649-1854bcf72936") (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 311.15 137.16 0) (effects (font (size 1.27 1.27)) (hide yes))))
 (text "Layer 2: DRIVE_EN and STEER_EN are pulled down at every board, so boot, reset, flashing and crashes leave the drivers off." (exclude_from_sim no) (at 15 15 0) (effects (font (size 1.5 1.5) (italic yes)) (justify left top)) (uuid "07834f6c-b955-51dd-b185-e432f6065e56"))
 (text "IS sense: R_IS + L_IS joined (only one side conducts at a time) -> 4.7k -> ADS1115, 10 nF filter, clamp to 3.3 V." (exclude_from_sim no) (at 15 17.6 0) (effects (font (size 1.5 1.5) (italic yes)) (justify left top)) (uuid "d9fd8f0d-6c97-5241-ad59-aba68d9444e7"))
-(text "F11-F14: a fuse in each drive motor's + lead, so a stalled wheel blows its own fuse (safety review M3)." (exclude_from_sim no) (at 15 20.2 0) (effects (font (size 1.5 1.5) (italic yes)) (justify left top)) (uuid "66c5e069-bd45-5e17-a503-72894d133c6c"))
+(text "No fuse per motor (Shai, 10 Nov): a stalled wheel is stopped by the firmware current limit, proven by the locked-wheel test." (exclude_from_sim no) (at 15 20.2 0) (effects (font (size 1.5 1.5) (italic yes)) (justify left top)) (uuid "ef471798-c3a2-5dd4-ad18-0ccdbd2787b9"))
 (text "Variant B (2 x MDD20A) replaces this sheet: see variant_b/." (exclude_from_sim no) (at 15 22.8 0) (effects (font (size 1.5 1.5) (italic yes)) (justify left top)) (uuid "cb25202e-a70d-5ffb-896e-7d1e8d80c1af"))
 (embedded_fonts no)
 )

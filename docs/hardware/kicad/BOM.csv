@@ -38,7 +38,7 @@ Line,Category,Refs,Qty,Description,Manufacturer / part number,Where,Status,Order
 37,Discrete,D2,1,"Unidirectional TVS across MOTOR_24V, voltage set by the battery (TBD)",TBD (SMBJ/P6KE family),box,TBD,,,,,not fitted yet. Clamps the regen spike when K1 opens on a rolling car. Fit once the battery voltage is known. Issue #13
 38,Passive,C1 C2 C20 C21 C22 C201 C202 C203 C204 C205,10,"Ceramic capacitor 100n, 50 V",Generic MLCC,"A1, car",Received 4 Nov,O24,"AliExpress, 24 Oct order",,,C201-C204: across the motor terminals. Noise suppression; solder right on the motor tabs; C205: across the motor terminals
 39,Passive,C101 C102 C103 C104 C105,5,"Ceramic capacitor 10n, 50 V",Generic MLCC,A1,Received 4 Nov,O24,"AliExpress, 24 Oct order",,,IS filter
-40,Passive,C111 C112 C113 C114 C115,5,Electrolytic 470 µF ≥35 V low-ESR (50 V preferred),Generic low-ESR electrolytic,box,Received 4 Nov,O14,"AliExpress, 24 Oct order",,,CHECK the ordered caps are ≥35 V: the order line reads '10-25 V'
+40,Passive,C111 C112 C113 C114 C115,5,Electrolytic 470 µF 50 V low-ESR,Generic low-ESR electrolytic,box,Received 4 Nov,O14,"AliExpress, 24 Oct order",,,"50 V low-ESR, 10 pcs (bag label checked 9 Nov); anything ≥35 V works on the 24 V bus"
 41,Passive,R1 R22,2,"Resistor 100, metal film 1 %, 0.25 W",Generic metal film,A1,Received 4 Nov,"O13, O26","AliExpress, 24 Oct order",,,R1: Gate resistor; R22: Pedal supply; a shorted pedal cable can't pull down 3V3_SENSE
 42,Passive,R2 R20 R23 R24 R111 R112 R113 R114 R115,9,"Resistor 10k, metal film 1 %, 0.25 W",Generic metal film,"A1, box",Received 4 Nov,"O13, O26","AliExpress, 24 Oct order",,,"R2: Holds K1 open and strapping pin GPIO12 LOW at boot. Never a pull-up; R20: Series protection; R23: GPIO34 has no internal pull-up; R24: GPIO35 has no internal pull-up; R111-R115: Pull-down at each board, so a broken enable wire still leaves that board off"
 43,Passive,R3 R5,2,"Resistor 150k, metal film 1 %, 0.25 W",Generic metal film,"A1, box",Received 4 Nov,"O13, O26","AliExpress, 24 Oct order",,,"R3: 2.2 V at 29.4 V; R5: Motor-bus sense for the K1 checks; at the stud, so only the divided signal runs to A1"
@@ -62,7 +62,7 @@ Line,Category,Refs,Qty,Description,Manufacturer / part number,Where,Status,Order
 61,Audio,LS1,1,"3 in 4 Ω full-range speaker, car sounds",Generic,dash,To buy,,,,,
 62,Audio,LS2 LS3,2,"3 in full-range speaker (+ DDT-S30 tweeter via 10 µF film cap, AUDIO.md)",Generic,car,To buy,,,,,
 63,Wiring,,1,MRD068A screw-terminal adapter for the ESP32,Generic MRD068A,box,Owned,,Owned,,,
-64,Wiring,,1,"10 AWG wire, red + black, 10 m",Generic,box,Received 4 Nov,O3,"AliExpress, 24 Oct order",,,"Battery, contactor, driver B+/B−"
+64,Wiring,,1,"10 AWG silicone wire (200 °C), 5 m red + 5 m black",Generic,box,Received 4 Nov,O3,"AliExpress, 24 Oct order",,,"Battery, contactor, driver B+/B−"
 65,Wiring,,1,"12 AWG wire, red + black, 10 m",Generic,box,Received 4 Nov,O4,"AliExpress, 24 Oct order",,,Driver to motor plugs
 66,Wiring,,1,"Insulated ring terminal kit, red/blue/yellow (yellow 4-6 mm² takes 10 AWG; check the stud sizes)",Generic,box,Received 4 Nov,O10,"AliExpress, 24 Oct order",,,
 67,Wiring,,1,"Wire ferrule kit, 2000 pcs, 0.5-10 mm²",Generic,box,Received 4 Nov,O9,"AliExpress, 24 Oct order",,,"For the screw terminals (IBT-2, MRD068A, A1)"
@@ -100,7 +100,7 @@ Line,Category,Refs,Qty,Description,Manufacturer / part number,Where,Status,Order
 99,Tool,,1,"Crimping pliers, ratchet, 4 swap jaws (insulated terminals, ferrules, ...)",Lion Rage HS-30J,bench,Received 4 Nov,O6,"AliExpress, 24 Oct order",,,"Use the jaw marked with mm² ferrule sizes for ferrules, the red/blue/yellow one for insulated terminals"
 100,Tool,,1,DC clamp meter,UNI-T UT210E,bench,Received 4 Nov,O2,"AliExpress, 24 Oct order",,,Motor and coil current without cutting wires
 101,Tool,,1,"Programmable bench supply, 30 V 10 A",Wanptek WPS3010H,bench,Received 4 Nov,O1,"AliExpress, 24 Oct order",,,Phases 3-4 run on its current limit instead of the battery
-102,Tool,,3,USB-TTL adapter,Prolific PL2303 (generic),bench,Received 4 Nov,O18,"AliExpress, 24 Oct order",,,Not needed (the ESP32 has USB); harmless spare
+102,Tool,,3,"USB-TTL adapter set: one each PL2303HX, CP2102, CH340G","Prolific PL2303HX, Silicon Labs CP2102, WCH CH340G (generic modules)",bench,Received 4 Nov,O18,"AliExpress, 24 Oct order",,,Not needed (the ESP32 has USB); harmless spare
 103,Tool,,1,"Automatic wire stripper, 10-24 AWG",Generic self-adjusting stripper,bench,To buy,,AliExpress,Knipex 12 62 180 (local),https://www.aliexpress.com/w/wholesale-automatic-wire-stripper.html?SortType=total_tranpro_desc,
 104,Tool,,1,Brass-wool tip cleaner with holder,Generic brass wool in a metal cup,bench,To buy,,AliExpress,Hakko 599B (genuine sold locally),https://www.aliexpress.com/w/wholesale-brass-wire-tip-cleaner-holder.html?SortType=total_tranpro_desc,No water needed
 105,Tool,,1,Desoldering pump,Generic aluminium pump,bench,To buy,,AliExpress,Engineer SS-02,https://www.aliexpress.com/w/wholesale-desoldering-pump-aluminum.html?SortType=total_tranpro_desc,

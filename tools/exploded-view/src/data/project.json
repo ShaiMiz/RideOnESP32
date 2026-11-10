@@ -903,7 +903,7 @@
    "category": "Power",
    "where": "box",
    "status": "To buy",
-   "note": "Battery −, every driver B−, rails and logic ground meet here and nowhere else. Spec: M6 (or 1/4 in) stud bus bar, 60 A or more. TB1 takes about 12 ring terminals: pick a bar with enough studs or stack rings on two bars",
+   "note": "Battery −, every driver B−, rails and logic ground meet here and nowhere else. Spec: M6 (or 1/4 in) stud bus bar, 60 A or more. TB1 takes about 12 ring terminals: pick a bar with enough studs or stack rings on two bars. Value link: select the M6 option (the default is M8)",
    "fields": {
     "Line": "32",
     "Category": "Power",
@@ -915,7 +915,7 @@
     "Status": "To buy",
     "Supplier": "AliExpress",
     "Link": "value|https://www.aliexpress.com/item/1005004665757378.html / premium|https://www.aliexpress.com/item/1005007540174230.html",
-    "Notes": "Battery −, every driver B−, rails and logic ground meet here and nowhere else. Spec: M6 (or 1/4 in) stud bus bar, 60 A or more. TB1 takes about 12 ring terminals: pick a bar with enough studs or stack rings on two bars"
+    "Notes": "Battery −, every driver B−, rails and logic ground meet here and nowhere else. Spec: M6 (or 1/4 in) stud bus bar, 60 A or more. TB1 takes about 12 ring terminals: pick a bar with enough studs or stack rings on two bars. Value link: select the M6 option (the default is M8)"
    },
    "kind": "part",
    "issues": []
@@ -931,7 +931,7 @@
    "category": "Power",
    "where": "box",
    "status": "To buy",
-   "note": "Spec: M6 (or 1/4 in) stud bus bar, 60 A or more",
+   "note": "Spec: M6 (or 1/4 in) stud bus bar, 60 A or more. Value link: select the M6 option (the default is M8)",
    "fields": {
     "Line": "33",
     "Category": "Power",
@@ -943,7 +943,7 @@
     "Status": "To buy",
     "Supplier": "AliExpress",
     "Link": "value|https://www.aliexpress.com/item/1005004665757378.html / premium|https://www.aliexpress.com/item/1005007540174230.html",
-    "Notes": "Spec: M6 (or 1/4 in) stud bus bar, 60 A or more"
+    "Notes": "Spec: M6 (or 1/4 in) stud bus bar, 60 A or more. Value link: select the M6 option (the default is M8)"
    },
    "kind": "part",
    "issues": []
@@ -2034,7 +2034,7 @@
    "category": "Wiring",
    "where": "box",
    "status": "To buy",
-   "note": "Holds the EN and IS jumpers and the EN pull-down; a dab of hot glue against vibration. The pins need an SN-28B crimper (in the 10 Nov kit); check the kit has 1x8 housings",
+   "note": "Holds the EN and IS jumpers and the EN pull-down; a dab of hot glue against vibration. The pins need an SN-28B crimper: select \"SN-28B AND 310PCS\" (about 68.5 ILS); check the kit has 1x8 housings",
    "fields": {
     "Line": "72",
     "Category": "Wiring",
@@ -2045,7 +2045,7 @@
     "Status": "To buy",
     "Supplier": "AliExpress",
     "Link": "kit + SN-28B|https://www.aliexpress.com/item/1005001863745903.html",
-    "Notes": "Holds the EN and IS jumpers and the EN pull-down; a dab of hot glue against vibration. The pins need an SN-28B crimper (in the 10 Nov kit); check the kit has 1x8 housings"
+    "Notes": "Holds the EN and IS jumpers and the EN pull-down; a dab of hot glue against vibration. The pins need an SN-28B crimper: select \"SN-28B AND 310PCS\" (about 68.5 ILS); check the kit has 1x8 housings"
    },
    "kind": "material",
    "issues": []
@@ -2059,7 +2059,7 @@
    "category": "Wiring",
    "where": "box",
    "status": "To buy",
-   "note": "",
+   "note": "Select the PG9 and PG13.5 variants (the default is PG7)",
    "fields": {
     "Line": "73",
     "Category": "Wiring",
@@ -2069,7 +2069,8 @@
     "Where": "box",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/4001144039060.html / premium|https://www.aliexpress.com/item/1005006645820587.html"
+    "Link": "value|https://www.aliexpress.com/item/4001144039060.html / premium|https://www.aliexpress.com/item/1005006645820587.html",
+    "Notes": "Select the PG9 and PG13.5 variants (the default is PG7)"
    },
    "kind": "material",
    "issues": []
@@ -2133,7 +2134,7 @@
    "category": "Wiring",
    "where": "box",
    "status": "To buy",
-   "note": "",
+   "note": "Value link: select \"200PCS-M3 Mix\" (the default is M2)",
    "fields": {
     "Line": "76",
     "Category": "Wiring",
@@ -2143,7 +2144,8 @@
     "Where": "box",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/32862529967.html / premium|https://www.aliexpress.com/item/1005009130730366.html"
+    "Link": "value|https://www.aliexpress.com/item/32862529967.html / premium|https://www.aliexpress.com/item/1005009130730366.html",
+    "Notes": "Value link: select \"200PCS-M3 Mix\" (the default is M2)"
    },
    "kind": "material",
    "issues": []

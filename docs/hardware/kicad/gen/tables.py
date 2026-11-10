@@ -123,7 +123,7 @@ EXTRAS = [
     ("", 1, "MRD068A screw-terminal adapter for the ESP32", "Generic MRD068A", "box", D.OWNED, [], ""),
     ("", 5, "8-way 2.54 mm housing + crimp pins for each IBT-2 control header (or JST-XH adapter)", "Generic Dupont",
      "box", D.BUY, [], "Holds the EN and IS jumpers and the EN pull-down; a dab of hot glue against vibration. The pins need an "
-     "SN-28B crimper (in the 10 Nov kit); check the kit has 1x8 housings"),
+     "SN-28B crimper: select \"SN-28B AND 310PCS\" (about 68.5 ILS); check the kit has 1x8 housings"),
     ("", 4, "Deutsch DT mating pairs with seals: 4-way x2 (J9, J12), 6-way (J11), 8-way (J10)", "TE Deutsch DT (or clone)",
      "box edge", D.BUY, [], "Mates for J9-J12. Stamped pins crimp with an open-barrel jaw; solid pins need a "
      "Deutsch indent crimper (HDT-48-00 type), which the HS-30J is not. Check which pins the set has"),
@@ -143,8 +143,8 @@ EXTRAS = [
      "Not in the 24 Oct order: the line thought to be heat shrink was the ferrule kit"),
     ("", 1, "Box: flame-retardant (UL94 V-0) ABS or metal, ~250 x 200 x 100 mm, IP54", "TBD", "box", D.TBD, [],
      "Size waits on #18; V-0 or metal is item M7 of the safety review (EN 62115 fire test)"),
-    ("", 10, "Cable glands PG9 / PG13.5", "Generic nylon", "box", D.BUY, [], ""),
-    ("", 1, "Nylon M3 standoffs and a mounting plate", "Generic", "box", D.BUY, [], ""),
+    ("", 10, "Cable glands PG9 / PG13.5", "Generic nylon", "box", D.BUY, [], "Select the PG9 and PG13.5 variants (the default is PG7)"),
+    ("", 1, "Nylon M3 standoffs and a mounting plate", "Generic", "box", D.BUY, [], "Value link: select \"200PCS-M3 Mix\" (the default is M2)"),
 ]
 
 # Owned, but not in the design (from the gear photos of 17 Oct 2026): (qty, item, mfr, note)
@@ -198,8 +198,8 @@ BUY_LINKS = {
     "U14": ("IBT-2 board, 43 A. Only if you own 4; check the value link opens (odd item number)",
             picks(ai("1999464638", "value"), ai("1005010395322275", "premium"))),
     "TB1": ("M6 (or 1/4 in) stud bus bar, 60 A or more. TB1 takes about 12 ring terminals: pick a bar with enough "
-            "studs or stack rings on two bars", picks(ai("1005004665757378", "value"), ai("1005007540174230", "premium"))),
-    "TB2": ("M6 (or 1/4 in) stud bus bar, 60 A or more", picks(ai("1005004665757378", "value"), ai("1005007540174230", "premium"))),
+            "studs or stack rings on two bars. Value link: select the M6 option (the default is M8)", picks(ai("1005004665757378", "value"), ai("1005007540174230", "premium"))),
+    "TB2": ("M6 (or 1/4 in) stud bus bar, 60 A or more. Value link: select the M6 option (the default is M8)", picks(ai("1005004665757378", "value"), ai("1005007540174230", "premium"))),
     "J9": ("Deutsch DT set with pins and seals; confirm the wedge locks come in the set, and the pin type (see the "
            "crimping note on the mates line)", picks(ai("1005001675198701", "value"))),
     "J10": ("Deutsch DT 8-pin set with pins and seals", picks(ai("1005001675198701", "value"))),

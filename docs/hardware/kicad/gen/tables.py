@@ -135,7 +135,7 @@ EXTRAS = [
     ("", 1, "20 AWG 4-6 core cable for off-box harnesses (E-stop, sensors, dash)", "Generic", "harness", D.BUY, [],
      "Sold per metre: about 6 m covers the E-stop, dash and sensor runs (estimate)"),
     ("", 1, "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)", "Generic", "box", D.BUY, [],
-     "Was in the cart review, not in the order"),
+     "Was in the cart review, not in the order. The value listing has 8 colours: buy grey and violet from the second listing (one order line per colour)"),
     ("", 1, "Insulated ring terminal kit, red/blue/yellow (yellow 4-6 mm² takes 10 AWG; check the stud sizes)", "Generic", "box", D.ORDER, ["rings"], ""),
     ("", 1, "Wire ferrule kit, 2000 pcs, 0.5-10 mm²", "Generic", "box", D.ORDER, ["ferrules"],
      "For the screw terminals (IBT-2, MRD068A, A1)"),
@@ -143,7 +143,7 @@ EXTRAS = [
      "Not in the 24 Oct order: the line thought to be heat shrink was the ferrule kit"),
     ("", 1, "Box: flame-retardant (UL94 V-0) ABS or metal, ~250 x 200 x 100 mm, IP54", "TBD", "box", D.TBD, [],
      "Size waits on #18; V-0 or metal is item M7 of the safety review (EN 62115 fire test)"),
-    ("", 10, "Cable glands PG9 / PG13.5", "Generic nylon", "box", D.BUY, [], "Select the PG9 and PG13.5 variants (the default is PG7)"),
+    ("", 10, "Cable glands PG9 / PG13.5", "Generic nylon", "box", D.BUY, [], "The links open on PG9 and PG13.5 (the listing default is PG7)"),
     ("", 1, "Nylon M3 standoffs and a mounting plate", "Generic", "box", D.BUY, [], "Value link: select \"200PCS-M3 Mix\" (the default is M2)"),
 ]
 
@@ -171,8 +171,10 @@ def ae(terms):
 
 # Direct AliExpress listings Shai picked with Claude in Chrome on 10 Nov 2026 (Israel view, 11.11 sale prices, best
 # value first, premium second). Links are "label|url", joined by " / ". Prices change: check the variant before buying.
-def ai(item_id, label):
-    return f"{label}|https://www.aliexpress.com/item/{item_id}.html"
+# sku is the variant's skuId (read from each page by Claude in Chrome, 10 Nov): the link opens with that variant selected.
+def ai(item_id, label, sku=None):
+    url = f"https://www.aliexpress.com/item/{item_id}.html"
+    return f"{label}|{url}?sku_id={sku}" if sku else f"{label}|{url}"
 
 
 def picks(*links):
@@ -181,46 +183,54 @@ def picks(*links):
 
 BUY_LINKS = {
     "R7": ("2.2k, 3 W or more (5 W fine); a local shop has it too. Value: 5 % metal oxide x20, about 6.6 ILS",
-           picks(ai("1005005674103930", "value"), ai("1005001659207517", "premium"))),
+           picks(ai("1005005674103930", "value", "12000033973887818"), ai("1005001659207517", "premium", "12000017019627652"))),
     "FAN1": ("8025, 24 V DC, 2-wire, ball bearing; + 2 finger guards and a dust filter. Pick the 24 V dual-ball variant "
              "(about 16.4 ILS each), 80 mm guards and 80 mm filters",
-             picks(ai("1005002971846100", "fan"), ai("1005005467470242", "guard"), ai("4000118191927", "steel guards"),
-                   ai("4000991107131", "filter"))),
-    "U31": ("Stainless probe, 1 m cable, 3 wires", picks(ai("1005006090368473", "value"), ai("1005005488542048", "premium"))),
+             picks(ai("1005002971846100", "fan", "12000036189434568"), ai("1005005467470242", "guard", "12000033197897856"), ai("4000118191927", "steel guards", "10000011336307120"),
+                   ai("4000991107131", "filter", "12000033194742621"))),
+    "U31": ("Stainless probe, 1 m cable, 3 wires", picks(ai("1005006090368473", "value", "12000056584253654"), ai("1005005488542048", "premium", "12000033280462201"))),
     "U33": ("HM-10 BLE 4.0 (CC2541) on a 6-pin breakout with a 3.3 V regulator, 3.6-6 V in. BLE works with iPhone and Android. DSD TECH is the genuine one; clones (MLT-BT05, CC41-A) also work with bt_setup. The 10 Nov pick ships clone firmware",
-            picks(ai("1005005104904918", "pick"))),
+            picks(ai("1005005104904918", "pick", "12000031675853172"))),
     "U28": ("Blue Adafruit-layout board, address 0x40", ae("pca9685 16 channel")),
     "U29": ("Logic-level (switches from 3.3 V): LR7843 or AOD4184 boards, not IRF520", ae("4 channel mosfet module lr7843")),
-    "H1": ("Buy 10 A3144 + 10 neodymium magnets 10 x 5 mm", picks(ai("1005009945016406", "A3144 x10"),
-                                                                    ai("1005010377772528", "magnets x10"))),
+    "H1": ("Buy 10 A3144 + 10 neodymium magnets 10 x 5 mm", picks(ai("1005009945016406", "A3144 x10", "12000050647519428"),
+                                                                    ai("1005010377772528", "magnets x10", "12000052202890268"))),
     "U14": ("IBT-2 board, 43 A (Shai owns 4, 10 Nov: buy 1). The value listing has one option",
-            picks(ai("1999464638", "value"), ai("1005010395322275", "premium"))),
+            picks(ai("1999464638", "value", "58978063618"), ai("1005010395322275", "premium", "12000052272413081"))),
     "TB1": ("M6 (or 1/4 in) stud bus bar, 60 A or more. TB1 takes about 12 ring terminals: pick a bar with enough "
-            "studs or stack rings on two bars. Value link: select the M6 option (the default is M8)", picks(ai("1005004665757378", "value"), ai("1005007540174230", "premium"))),
-    "TB2": ("M6 (or 1/4 in) stud bus bar, 60 A or more. Value link: select the M6 option (the default is M8)", picks(ai("1005004665757378", "value"), ai("1005007540174230", "premium"))),
+            "studs or stack rings on two bars. The value link opens on the M6 option (its default is M8)", picks(ai("1005004665757378", "value M6", "12000033150663453"), ai("1005007540174230", "premium 12P", "12000041213639533"))),
+    "TB2": ("M6 (or 1/4 in) stud bus bar, 60 A or more. The value link opens on the M6 option (its default is M8)", picks(ai("1005004665757378", "value M6", "12000033150663453"), ai("1005007540174230", "premium 12P", "12000041213639533"))),
     "J9": ("Deutsch DT set with pins and seals; confirm the wedge locks come in the set, and the pin type (see the "
-           "crimping note on the mates line)", picks(ai("1005001675198701", "value"))),
-    "J10": ("Deutsch DT 8-pin set with pins and seals", picks(ai("1005001675198701", "value"))),
-    "J11": ("Deutsch DT 6-pin set with pins and seals", picks(ai("1005001675198701", "value"))),
+           "crimping note on the mates line)", picks(ai("1005001675198701", "4P", "12000017080714335"))),
+    "J10": ("Deutsch DT 8-pin set with pins and seals", picks(ai("1005001675198701", "8P", "12000017080714337"))),
+    "J11": ("Deutsch DT 6-pin set with pins and seals", picks(ai("1005001675198701", "6P", "12000017080714336"))),
 }
 
 EXTRA_LINKS = {
-    "Heat shrink assortment (also the colour bands)": picks(ai("1005008146302901", "value")),
+    "Heat shrink assortment (also the colour bands)": picks(ai("1005008146302901", "330 box", "12000049480138894"),
+                                                            ai("1005008146302901", "127 bag", "12000043985559287")),
     "Pigtail for the AS5600 board's 4-pin plug (match its pitch: JST-GH 1.25 or PH 2.0)": ae("jst gh 1.25 4 pin cable"),
-    "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)": picks(ai("1005001798119195", "value"),
-                                                                              ai("32429405173", "premium")),
+    "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)": picks(
+        *(ai("1005001798119195", c, k) for c, k in (
+            ("black", "12000025738201407"), ("red", "12000025738201485"), ("white", "12000025738201368"),
+            ("yellow", "12000025738201563"), ("green", "12000025738201446"), ("blue", "12000025738201524"),
+            ("orange", "12000025767922375"), ("brown", "12000025767922345"))),
+        ai("32429405173", "grey", "12000021233956910"), ai("32429405173", "violet", "12000021233956988")),
     "Interface board: screw-terminal proto board ~70 x 90 mm + 3.5 mm terminals": picks(
-        ai("1005006863899256", "board"), ai("1005007977006793", "board x5"), ai("1005003179482974", "terminals")),
+        ai("1005006863899256", "board", "12000061344262574"), ai("1005007977006793", "board x5", "12000043124727481"), ai("1005003179482974", "terminals 2P", "12000046374877795")),
     "8-way 2.54 mm housing + crimp pins for each IBT-2 control header (or JST-XH adapter)": picks(
-        ai("1005001863745903", "kit + SN-28B")),
+        ai("1005001863745903", "kit + SN-28B", "12000017979744503")),
     "Deutsch DT mating pairs with seals: 4-way x2 (J9, J12), 6-way (J11), 8-way (J10)": picks(
-        ai("1005001675198701", "value"), ai("10000319645984", "premium")),
-    "14-16 AWG wire, orange or red (key, F6 and 12 V branches)": picks(ai("1005008146134465", "value"),
-                                                                      ai("1005010370889360", "premium")),
-    "20 AWG 4-6 core cable for off-box harnesses (E-stop, sensors, dash)": picks(ai("33037204577", "value"),
-                                                                                ai("1005004178571358", "premium")),
-    "Cable glands PG9 / PG13.5": picks(ai("4001144039060", "value"), ai("1005006645820587", "premium")),
-    "Nylon M3 standoffs and a mounting plate": picks(ai("32862529967", "value"), ai("1005009130730366", "premium")),
+        ai("1005001675198701", "4P", "12000017080714335"), ai("1005001675198701", "6P", "12000017080714336"),
+        ai("1005001675198701", "8P", "12000017080714337"), ai("10000319645984", "premium 4P", "20000000170273872"),
+        ai("10000319645984", "premium 6P", "20000000170273873"), ai("10000319645984", "premium 8P", "20000000170273874")),
+    "14-16 AWG wire, orange or red (key, F6 and 12 V branches)": picks(ai("1005008146134465", "red 10 m", "12000057496275570"),
+        ai("1005008146134465", "red 1 m", "12000057496275567"), ai("1005010370889360", "premium 1 m", "12000052166754780")),
+    "20 AWG 4-6 core cable for off-box harnesses (E-stop, sensors, dash)": picks(ai("33037204577", "value, per metre", "12000057680508819"),
+                                                                                ai("1005004178571358", "premium 2 m", "12000028296290443")),
+    "Cable glands PG9 / PG13.5": picks(ai("4001144039060", "PG9", "10000014886370917"), ai("4001144039060", "PG13.5", "10000014886370919"),
+        ai("1005006645820587", "premium PG9", "12000037913246156"), ai("1005006645820587", "premium PG13.5", "12000037913246153")),
+    "Nylon M3 standoffs and a mounting plate": picks(ai("32862529967", "value", "10000000197494051"), ai("1005009130730366", "premium", "12000048022934970")),
 }
 
 # Tools and materials: not part of the car, but needed to build it. Value and premium picks come from the 25 Oct
@@ -234,10 +244,10 @@ TOOLS = [dict(zip(("cat", "item", "mfr", "qty", "src", "lines", "premium", "link
      "Not needed (the ESP32 has USB); harmless spare"),
     ("Tool", "ELRS radio transmitter", "Jumper T-Lite V2", 1, D.OWNED, [], "", "", "Parent transmitter"),
     ("Consumable", "Solder wire Sn63/Pb37 0.8 mm, rosin core 2 % flux, 100 g", "Generic 63/37 rosin core", 1, D.BUY, [],
-     "Kester 44 or Alpha Fry 63/37 (buy locally: fakes are common on AliExpress)", picks(ai("32889029087", "value"), ai("4000843584127", "Mechanic")),
+     "Kester 44 or Alpha Fry 63/37 (buy locally: fakes are common on AliExpress)", picks(ai("32889029087", "value 0.8", "12000036063038181"), ai("4000843584127", "Mechanic 0.8", "12000035204400002")),
      "Signals and the proto board. 63/37 melts at one point (183 °C), the easiest to use"),
     ("Consumable", "Solder wire Sn63/Pb37 1.0-1.2 mm, rosin core, 100 g", "Generic 63/37 rosin core", 1, D.BUY, [],
-     "Kester 44 or Alpha Fry (local)", picks(ai("32889029087", "value"), ai("4000843584127", "Mechanic")), "10/12 AWG lugs, XT60s, motor tabs"),
+     "Kester 44 or Alpha Fry (local)", picks(ai("32889029087", "value 1.0", "12000036063038179"), ai("4000843584127", "Mechanic 1.0", "12000035204244000")), "10/12 AWG lugs, XT60s, motor tabs"),
     ("Consumable", "Lead-free solder wire (instead of 63/37, if kids are near the bench)", "Sn99.3/Cu0.7 rosin core", 0, D.BUY, [],
      "SAC305 (Sn96.5/Ag3/Cu0.5)", ae("sac305 solder wire"), "Optional; harder to use than 63/37"),
     ("Consumable", "Flux paste, 10 cc syringe with plunger and needle", "MECHANIC UV-223 or RMA-223", 1, D.BUY, [],
@@ -253,7 +263,8 @@ TOOLS = [dict(zip(("cat", "item", "mfr", "qty", "src", "lines", "premium", "link
      "Flux-remover spray (local)", ae("esd anti static brush"), "Buy the alcohol locally: flammable, ships badly"),
     ("Tool", "Soldering iron, 60 W or more, 3-5 mm chisel + conical tip",
      "SEQURE S60 or FNIRSI HS-02 (USB-C PD pen iron, ~100 W; needs a 65-100 W PD charger)", 1, D.BUY, [],
-     "AIXUN T3A or SUGON T26D station (JBC C245-compatible tips)", picks(ai("1005006655028971", "FNIRSI HS-02")),
+     "AIXUN T3A or SUGON T26D station (JBC C245-compatible tips)", picks(ai("1005006655028971", "HS-02B-K iron only", "12000047206595751"),
+           ai("1005006655028971", "HS-02 kit with PSU", "12000047206595807")),
      "Skip if you already have one this strong: 10 AWG and XT60 need the power. The 10 Nov pick's HS-02B-K variant is "
      "the iron only: it needs a 65-100 W USB-C PD charger, or take a kit variant with a supply"),
     ("Tool", "Desoldering pump", "Generic aluminium pump", 1, D.BUY, [], "Engineer SS-02", ae("desoldering pump aluminum"), ""),
@@ -548,7 +559,7 @@ def write_bom(out, parts, vb_parts):
            "**Manufacturer / part number:** for generic modules this names the chip and its maker; the board is a clone. "
            "For tools it is the value pick; the premium pick is in Notes.\n\n"
            "**Links:** *value* / *premium* (and similar labels) are direct AliExpress listings Shai picked on 10 Nov 2026 "
-           "(11.11 sale prices; check the variant and price before buying). *search* links are AliExpress searches sorted "
+           "(11.11 sale prices). Each opens with the right variant selected (its skuId); if a page shows a different option, pick the one in the spec. Check the price before buying. *search* links are AliExpress searches sorted "
            "by most orders; pick a top result that matches the spec.\n\n",
            "## Check the 24 Oct order (arrived 4 Nov)\n\n",
            "- **470 µF capacitors (C111-C115): checked 9 Nov.** The bag reads 50 V 470 µF low-ESR, 10 pcs, so they fit the "

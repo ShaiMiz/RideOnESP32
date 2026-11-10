@@ -122,15 +122,18 @@ EXTRAS = [
      "Holds Q1, the sense networks, pull-ups and the battery divider"),
     ("", 1, "MRD068A screw-terminal adapter for the ESP32", "Generic MRD068A", "box", D.OWNED, [], ""),
     ("", 5, "8-way 2.54 mm housing + crimp pins for each IBT-2 control header (or JST-XH adapter)", "Generic Dupont",
-     "box", D.BUY, [], "Holds the EN and IS jumpers and the EN pull-down; a dab of hot glue against vibration"),
+     "box", D.BUY, [], "Holds the EN and IS jumpers and the EN pull-down; a dab of hot glue against vibration. The pins need an "
+     "SN-28B crimper (in the 10 Nov kit); check the kit has 1x8 housings"),
     ("", 4, "Deutsch DT mating pairs with seals: 4-way x2 (J9, J12), 6-way (J11), 8-way (J10)", "TE Deutsch DT (or clone)",
-     "box edge", D.BUY, [], "Mates for J9-J12"),
+     "box edge", D.BUY, [], "Mates for J9-J12. Stamped pins crimp with an open-barrel jaw; solid pins need a "
+     "Deutsch indent crimper (HDT-48-00 type), which the HS-30J is not. Check which pins the set has"),
     ("", 1, "10 AWG silicone wire (200 °C), 5 m red + 5 m black", "Generic", "box", D.ORDER, ["wire10"], "Battery, contactor, driver B+/B−"),
     ("", 1, "12 AWG wire, red + black, 10 m", "Generic", "box", D.ORDER, ["wire12"], "Driver to motor plugs"),
     ("", 1, "14-16 AWG wire, orange or red (key, F6 and 12 V branches)", "Generic", "box", D.BUY, [], "12 AWG from the order also works"),
     ("", 1, "Pigtail for the AS5600 board's 4-pin plug (match its pitch: JST-GH 1.25 or PH 2.0)", "Generic JST", "car",
      D.BUY, [], "Optional: lets the sensor unplug. Or solder the cable to the board's pads, with strain relief"),
-    ("", 1, "20 AWG 4-6 core cable for off-box harnesses (E-stop, sensors, dash)", "Generic", "harness", D.BUY, [], ""),
+    ("", 1, "20 AWG 4-6 core cable for off-box harnesses (E-stop, sensors, dash)", "Generic", "harness", D.BUY, [],
+     "Sold per metre: about 6 m covers the E-stop, dash and sensor runs (estimate)"),
     ("", 1, "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)", "Generic", "box", D.BUY, [],
      "Was in the cart review, not in the order"),
     ("", 1, "Insulated ring terminal kit, red/blue/yellow (yellow 4-6 mm² takes 10 AWG; check the stud sizes)", "Generic", "box", D.ORDER, ["rings"], ""),
@@ -166,22 +169,60 @@ def ae(terms):
     return f"https://www.aliexpress.com/w/wholesale-{terms.replace(' ', '-')}.html?SortType=total_tranpro_desc"
 
 
+# Direct AliExpress listings Shai picked with Claude in Chrome on 10 Nov 2026 (Israel view, 11.11 sale prices, best
+# value first, premium second). Links are "label|url", joined by " / ". Prices change: check the variant before buying.
+def ai(item_id, label):
+    return f"{label}|https://www.aliexpress.com/item/{item_id}.html"
+
+
+def picks(*links):
+    return " / ".join(links)
+
+
 BUY_LINKS = {
-    "R7": ("2.2k, 3 W or more (5 W fine); a local shop has it too", ae("2.2k 3w resistor")),
-    "FAN1": ("8025, 24 V DC, 2-wire, ball bearing; + 2 finger guards and a dust filter", ae("8025 24v fan")),
-    "U31": ("Stainless probe, 1 m cable, 3 wires", ae("ds18b20 waterproof probe")),
-    "U33": ("HM-10 BLE 4.0 (CC2541) on a 6-pin breakout with a 3.3 V regulator, 3.6-6 V in. BLE works with iPhone and Android. DSD TECH is the genuine one; clones (MLT-BT05, CC41-A) also work with bt_setup", ae("hm-10 ble cc2541 module")),
+    "R7": ("2.2k, 3 W or more (5 W fine); a local shop has it too. Value: 5 % metal oxide x20, about 6.6 ILS",
+           picks(ai("1005005674103930", "value"), ai("1005001659207517", "premium"))),
+    "FAN1": ("8025, 24 V DC, 2-wire, ball bearing; + 2 finger guards and a dust filter. Pick the 24 V dual-ball variant "
+             "(about 16.4 ILS each), 80 mm guards and 80 mm filters",
+             picks(ai("1005002971846100", "fan"), ai("1005005467470242", "guard"), ai("4000118191927", "steel guards"),
+                   ai("4000991107131", "filter"))),
+    "U31": ("Stainless probe, 1 m cable, 3 wires", picks(ai("1005006090368473", "value"), ai("1005005488542048", "premium"))),
+    "U33": ("HM-10 BLE 4.0 (CC2541) on a 6-pin breakout with a 3.3 V regulator, 3.6-6 V in. BLE works with iPhone and Android. DSD TECH is the genuine one; clones (MLT-BT05, CC41-A) also work with bt_setup. The 10 Nov pick ships clone firmware",
+            picks(ai("1005005104904918", "pick"))),
     "U28": ("Blue Adafruit-layout board, address 0x40", ae("pca9685 16 channel")),
     "U29": ("Logic-level (switches from 3.3 V): LR7843 or AOD4184 boards, not IRF520", ae("4 channel mosfet module lr7843")),
     "F11": ("Inline ATO/ATC blade fuse holder for 12 AWG, with cover; plus 15 A and 20 A blades (size from #14)",
             ae("inline blade fuse holder 12awg")),
-    "H1": ("Buy 5-10 A3144 + 10 neodymium magnets 10 x 5 mm", ae("a3144 hall sensor") + " / " + ae("neodymium magnet 10x5mm")),
+    "H1": ("Buy 10 A3144 + 10 neodymium magnets 10 x 5 mm", picks(ai("1005009945016406", "A3144 x10"),
+                                                                    ai("1005010377772528", "magnets x10"))),
+    "U14": ("IBT-2 board, 43 A. Only if you own 4; check the value link opens (odd item number)",
+            picks(ai("1999464638", "value"), ai("1005010395322275", "premium"))),
+    "TB1": ("M6 (or 1/4 in) stud bus bar, 60 A or more. TB1 takes about 12 ring terminals: pick a bar with enough "
+            "studs or stack rings on two bars", picks(ai("1005004665757378", "value"), ai("1005007540174230", "premium"))),
+    "TB2": ("M6 (or 1/4 in) stud bus bar, 60 A or more", picks(ai("1005004665757378", "value"), ai("1005007540174230", "premium"))),
+    "J9": ("Deutsch DT set with pins and seals; confirm the wedge locks come in the set, and the pin type (see the "
+           "crimping note on the mates line)", picks(ai("1005001675198701", "value"))),
+    "J10": ("Deutsch DT 8-pin set with pins and seals", picks(ai("1005001675198701", "value"))),
+    "J11": ("Deutsch DT 6-pin set with pins and seals", picks(ai("1005001675198701", "value"))),
 }
 
 EXTRA_LINKS = {
-    "Heat shrink assortment (also the colour bands)": ae("heat shrink tube assortment"),
+    "Heat shrink assortment (also the colour bands)": picks(ai("1005008146302901", "value")),
     "Pigtail for the AS5600 board's 4-pin plug (match its pitch: JST-GH 1.25 or PH 2.0)": ae("jst gh 1.25 4 pin cable"),
-    "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)": ae("22awg silicone wire 10 colors"),
+    "22 AWG silicone wire set, 10 colours (colour code in WIRE_LIST.md)": picks(ai("1005001798119195", "value"),
+                                                                              ai("32429405173", "premium")),
+    "Interface board: screw-terminal proto board ~70 x 90 mm + 3.5 mm terminals": picks(
+        ai("1005006863899256", "board"), ai("1005007977006793", "board x5"), ai("1005003179482974", "terminals")),
+    "8-way 2.54 mm housing + crimp pins for each IBT-2 control header (or JST-XH adapter)": picks(
+        ai("1005001863745903", "kit + SN-28B")),
+    "Deutsch DT mating pairs with seals: 4-way x2 (J9, J12), 6-way (J11), 8-way (J10)": picks(
+        ai("1005001675198701", "value"), ai("10000319645984", "premium")),
+    "14-16 AWG wire, orange or red (key, F6 and 12 V branches)": picks(ai("1005008146134465", "value"),
+                                                                      ai("1005010370889360", "premium")),
+    "20 AWG 4-6 core cable for off-box harnesses (E-stop, sensors, dash)": picks(ai("33037204577", "value"),
+                                                                                ai("1005004178571358", "premium")),
+    "Cable glands PG9 / PG13.5": picks(ai("4001144039060", "value"), ai("1005006645820587", "premium")),
+    "Nylon M3 standoffs and a mounting plate": picks(ai("32862529967", "value"), ai("1005009130730366", "premium")),
 }
 
 # Tools and materials: not part of the car, but needed to build it. Value and premium picks come from the 25 Oct
@@ -195,10 +236,10 @@ TOOLS = [dict(zip(("cat", "item", "mfr", "qty", "src", "lines", "premium", "link
      "Not needed (the ESP32 has USB); harmless spare"),
     ("Tool", "ELRS radio transmitter", "Jumper T-Lite V2", 1, D.OWNED, [], "", "", "Parent transmitter"),
     ("Consumable", "Solder wire Sn63/Pb37 0.8 mm, rosin core 2 % flux, 100 g", "Generic 63/37 rosin core", 1, D.BUY, [],
-     "Kester 44 or Alpha Fry 63/37 (buy locally: fakes are common on AliExpress)", ae("sn63pb37 solder wire 0.8mm"),
+     "Kester 44 or Alpha Fry 63/37 (buy locally: fakes are common on AliExpress)", picks(ai("32889029087", "value"), ai("4000843584127", "Mechanic")),
      "Signals and the proto board. 63/37 melts at one point (183 °C), the easiest to use"),
     ("Consumable", "Solder wire Sn63/Pb37 1.0-1.2 mm, rosin core, 100 g", "Generic 63/37 rosin core", 1, D.BUY, [],
-     "Kester 44 or Alpha Fry (local)", ae("sn63pb37 solder wire 1.0mm"), "10/12 AWG lugs, XT60s, motor tabs"),
+     "Kester 44 or Alpha Fry (local)", picks(ai("32889029087", "value"), ai("4000843584127", "Mechanic")), "10/12 AWG lugs, XT60s, motor tabs"),
     ("Consumable", "Lead-free solder wire (instead of 63/37, if kids are near the bench)", "Sn99.3/Cu0.7 rosin core", 0, D.BUY, [],
      "SAC305 (Sn96.5/Ag3/Cu0.5)", ae("sac305 solder wire"), "Optional; harder to use than 63/37"),
     ("Consumable", "Flux paste, 10 cc syringe with plunger and needle", "MECHANIC UV-223 or RMA-223", 1, D.BUY, [],
@@ -214,8 +255,9 @@ TOOLS = [dict(zip(("cat", "item", "mfr", "qty", "src", "lines", "premium", "link
      "Flux-remover spray (local)", ae("esd anti static brush"), "Buy the alcohol locally: flammable, ships badly"),
     ("Tool", "Soldering iron, 60 W or more, 3-5 mm chisel + conical tip",
      "SEQURE S60 or FNIRSI HS-02 (USB-C PD pen iron, ~100 W; needs a 65-100 W PD charger)", 1, D.BUY, [],
-     "AIXUN T3A or SUGON T26D station (JBC C245-compatible tips)", ae("fnirsi hs-02") + " / " + ae("aixun t3a"),
-     "Skip if you already have one this strong: 10 AWG and XT60 need the power"),
+     "AIXUN T3A or SUGON T26D station (JBC C245-compatible tips)", picks(ai("1005006655028971", "FNIRSI HS-02")),
+     "Skip if you already have one this strong: 10 AWG and XT60 need the power. The 10 Nov pick's HS-02B-K variant is "
+     "the iron only: it needs a 65-100 W USB-C PD charger, or take a kit variant with a supply"),
     ("Tool", "Desoldering pump", "Generic aluminium pump", 1, D.BUY, [], "Engineer SS-02", ae("desoldering pump aluminum"), ""),
     ("Tool", "Brass-wool tip cleaner with holder", "Generic brass wool in a metal cup", 1, D.BUY, [],
      "Hakko 599B (genuine sold locally)", ae("brass wire tip cleaner holder"), "No water needed"),
@@ -390,7 +432,11 @@ def write_connectors(out, parts, syms, rows):
 def links_md(links):
     if not links:
         return "-"
-    return ", ".join(f"[search]({u.strip()})" for u in links.split(" / "))
+    out = []
+    for u in links.split(" / "):
+        label, _, url = u.strip().rpartition("|")
+        out.append(f"[{label or 'search'}]({url})")
+    return ", ".join(out)
 
 
 def ref_key(r):
@@ -503,8 +549,9 @@ def write_bom(out, parts, vb_parts):
            "kept. A line with mixed status gives the count of each.\n\n"
            "**Manufacturer / part number:** for generic modules this names the chip and its maker; the board is a clone. "
            "For tools it is the value pick; the premium pick is in Notes.\n\n"
-           "**Links** for things to buy are AliExpress searches sorted by most orders (the cloud session can't open "
-           "aliexpress.com listings); pick a top result that matches the spec.\n\n",
+           "**Links:** *value* / *premium* (and similar labels) are direct AliExpress listings Shai picked on 10 Nov 2026 "
+           "(11.11 sale prices; check the variant and price before buying). *search* links are AliExpress searches sorted "
+           "by most orders; pick a top result that matches the spec.\n\n",
            "## Check the 24 Oct order (arrived 4 Nov)\n\n",
            "- **470 µF capacitors (C111-C115): checked 9 Nov.** The bag reads 50 V 470 µF low-ESR, 10 pcs, so they fit the "
            "24 V bus (the receipt's \"10-25 V\" was the listing name).\n",

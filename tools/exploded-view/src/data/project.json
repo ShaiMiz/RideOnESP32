@@ -77,7 +77,7 @@
     "Where": "box",
     "Status": "Owned 4, To buy 1",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/1999464638.html / premium|https://www.aliexpress.com/item/1005010395322275.html",
+    "Link": "value|https://www.aliexpress.com/item/1999464638.html?sku_id=58978063618 / premium|https://www.aliexpress.com/item/1005010395322275.html?sku_id=12000052272413081",
     "Notes": "VCC on 3.3 V so 3.3 V PWM reads as a clean HIGH. Never tie R_EN/L_EN to VCC. Spec: IBT-2 board, 43 A (Shai owns 4, 10 Nov: buy 1). The value listing has one option"
    },
    "kind": "part",
@@ -462,7 +462,7 @@
     "Where": "box",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/1005006090368473.html / premium|https://www.aliexpress.com/item/1005005488542048.html",
+    "Link": "value|https://www.aliexpress.com/item/1005006090368473.html?sku_id=12000056584253654 / premium|https://www.aliexpress.com/item/1005005488542048.html?sku_id=12000033280462201",
     "Notes": "Spec: Stainless probe, 1 m cable, 3 wires"
    },
    "kind": "part",
@@ -516,7 +516,7 @@
     "Where": "box",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "pick|https://www.aliexpress.com/item/1005005104904918.html",
+    "Link": "pick|https://www.aliexpress.com/item/1005005104904918.html?sku_id=12000031675853172",
     "Notes": "Listen-only log to a phone: hears TX0 (the USB serial log). TXD stays unconnected, so nothing can reach the ESP32. Set to 115200 with the bt_setup bench firmware first. Spec: HM-10 BLE 4.0 (CC2541) on a 6-pin breakout with a 3.3 V regulator, 3.6-6 V in. BLE works with iPhone and Android. DSD TECH is the genuine one; clones (MLT-BT05, CC41-A) also work with bt_setup. The 10 Nov pick ships clone firmware"
    },
    "kind": "part",
@@ -545,7 +545,7 @@
     "Where": "car",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "A3144 x10|https://www.aliexpress.com/item/1005009945016406.html / magnets x10|https://www.aliexpress.com/item/1005010377772528.html",
+    "Link": "A3144 x10|https://www.aliexpress.com/item/1005009945016406.html?sku_id=12000050647519428 / magnets x10|https://www.aliexpress.com/item/1005010377772528.html?sku_id=12000052202890268",
     "Notes": "Spec: Buy 10 A3144 + 10 neodymium magnets 10 x 5 mm"
    },
    "kind": "part",
@@ -896,7 +896,7 @@
    "category": "Power",
    "where": "box",
    "status": "To buy",
-   "note": "Battery −, every driver B−, rails and logic ground meet here and nowhere else. Spec: M6 (or 1/4 in) stud bus bar, 60 A or more. TB1 takes about 12 ring terminals: pick a bar with enough studs or stack rings on two bars. Value link: select the M6 option (the default is M8)",
+   "note": "Battery −, every driver B−, rails and logic ground meet here and nowhere else. Spec: M6 (or 1/4 in) stud bus bar, 60 A or more. TB1 takes about 12 ring terminals: pick a bar with enough studs or stack rings on two bars. The value link opens on the M6 option (its default is M8)",
    "fields": {
     "Line": "32",
     "Category": "Power",
@@ -907,8 +907,8 @@
     "Where": "box",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/1005004665757378.html / premium|https://www.aliexpress.com/item/1005007540174230.html",
-    "Notes": "Battery −, every driver B−, rails and logic ground meet here and nowhere else. Spec: M6 (or 1/4 in) stud bus bar, 60 A or more. TB1 takes about 12 ring terminals: pick a bar with enough studs or stack rings on two bars. Value link: select the M6 option (the default is M8)"
+    "Link": "value M6|https://www.aliexpress.com/item/1005004665757378.html?sku_id=12000033150663453 / premium 12P|https://www.aliexpress.com/item/1005007540174230.html?sku_id=12000041213639533",
+    "Notes": "Battery −, every driver B−, rails and logic ground meet here and nowhere else. Spec: M6 (or 1/4 in) stud bus bar, 60 A or more. TB1 takes about 12 ring terminals: pick a bar with enough studs or stack rings on two bars. The value link opens on the M6 option (its default is M8)"
    },
    "kind": "part",
    "issues": []
@@ -924,7 +924,7 @@
    "category": "Power",
    "where": "box",
    "status": "To buy",
-   "note": "Spec: M6 (or 1/4 in) stud bus bar, 60 A or more. Value link: select the M6 option (the default is M8)",
+   "note": "Spec: M6 (or 1/4 in) stud bus bar, 60 A or more. The value link opens on the M6 option (its default is M8)",
    "fields": {
     "Line": "33",
     "Category": "Power",
@@ -935,8 +935,8 @@
     "Where": "box",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/1005004665757378.html / premium|https://www.aliexpress.com/item/1005007540174230.html",
-    "Notes": "Spec: M6 (or 1/4 in) stud bus bar, 60 A or more. Value link: select the M6 option (the default is M8)"
+    "Link": "value M6|https://www.aliexpress.com/item/1005004665757378.html?sku_id=12000033150663453 / premium 12P|https://www.aliexpress.com/item/1005007540174230.html?sku_id=12000041213639533",
+    "Notes": "Spec: M6 (or 1/4 in) stud bus bar, 60 A or more. The value link opens on the M6 option (its default is M8)"
    },
    "kind": "part",
    "issues": []
@@ -1396,7 +1396,7 @@
     "Where": "box",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/1005005674103930.html / premium|https://www.aliexpress.com/item/1005001659207517.html",
+    "Link": "value|https://www.aliexpress.com/item/1005005674103930.html?sku_id=12000033973887818 / premium|https://www.aliexpress.com/item/1005001659207517.html?sku_id=12000017019627652",
     "Notes": "Bleed: drains the driver caps with K1 open (5 s time constant), so the boot weld check can see a welded K1. 0.4 W with K1 closed. Spec: 2.2k, 3 W or more (5 W fine); a local shop has it too. Value: 5 % metal oxide x20, about 6.6 ILS"
    },
    "kind": "part",
@@ -1425,7 +1425,7 @@
     "Where": "box edge",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/1005001675198701.html",
+    "Link": "4P|https://www.aliexpress.com/item/1005001675198701.html?sku_id=12000017080714335",
     "Notes": "J9: Our own plug: E-stop on the dash; J12: Our own plug; music path only, never shared with the ESP32. Spec: Deutsch DT set with pins and seals; confirm the wedge locks come in the set, and the pin type (see the crimping note on the mates line)"
    },
    "kind": "part",
@@ -1453,7 +1453,7 @@
     "Where": "box edge",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/1005001675198701.html",
+    "Link": "8P|https://www.aliexpress.com/item/1005001675198701.html?sku_id=12000017080714337",
     "Notes": "Our own plug: halls, steering angle, seat. Spec: Deutsch DT 8-pin set with pins and seals"
    },
    "kind": "part",
@@ -1481,7 +1481,7 @@
     "Where": "box edge",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/1005001675198701.html",
+    "Link": "6P|https://www.aliexpress.com/item/1005001675198701.html?sku_id=12000017080714336",
     "Notes": "Our own plug: OLED and alert speaker. Spec: Deutsch DT 6-pin set with pins and seals"
    },
    "kind": "part",
@@ -1736,7 +1736,7 @@
     "Where": "box wall",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "fan|https://www.aliexpress.com/item/1005002971846100.html / guard|https://www.aliexpress.com/item/1005005467470242.html / steel guards|https://www.aliexpress.com/item/4000118191927.html / filter|https://www.aliexpress.com/item/4000991107131.html",
+    "Link": "fan|https://www.aliexpress.com/item/1005002971846100.html?sku_id=12000036189434568 / guard|https://www.aliexpress.com/item/1005005467470242.html?sku_id=12000033197897856 / steel guards|https://www.aliexpress.com/item/4000118191927.html?sku_id=10000011336307120 / filter|https://www.aliexpress.com/item/4000991107131.html?sku_id=12000033194742621",
     "Notes": "FAN1: intake, with a dust filter; FAN2: exhaust. Spec: 8025, 24 V DC, 2-wire, ball bearing; + 2 finger guards and a dust filter. Pick the 24 V dual-ball variant (about 16.4 ILS each), 80 mm guards and 80 mm filters"
    },
    "kind": "part",
@@ -1937,7 +1937,7 @@
     "Where": "box",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "board|https://www.aliexpress.com/item/1005006863899256.html / board x5|https://www.aliexpress.com/item/1005007977006793.html / terminals|https://www.aliexpress.com/item/1005003179482974.html",
+    "Link": "board|https://www.aliexpress.com/item/1005006863899256.html?sku_id=12000061344262574 / board x5|https://www.aliexpress.com/item/1005007977006793.html?sku_id=12000043124727481 / terminals 2P|https://www.aliexpress.com/item/1005003179482974.html?sku_id=12000046374877795",
     "Notes": "Holds Q1, the sense networks, pull-ups and the battery divider"
    },
    "kind": "part",
@@ -1962,7 +1962,7 @@
     "Where": "box",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/1005008146134465.html / premium|https://www.aliexpress.com/item/1005010370889360.html",
+    "Link": "red 10 m|https://www.aliexpress.com/item/1005008146134465.html?sku_id=12000057496275570 / red 1 m|https://www.aliexpress.com/item/1005008146134465.html?sku_id=12000057496275567 / premium 1 m|https://www.aliexpress.com/item/1005010370889360.html?sku_id=12000052166754780",
     "Notes": "12 AWG from the order also works"
    },
    "kind": "material",
@@ -1987,7 +1987,7 @@
     "Where": "harness",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/33037204577.html / premium|https://www.aliexpress.com/item/1005004178571358.html",
+    "Link": "value, per metre|https://www.aliexpress.com/item/33037204577.html?sku_id=12000057680508819 / premium 2 m|https://www.aliexpress.com/item/1005004178571358.html?sku_id=12000028296290443",
     "Notes": "Sold per metre: about 6 m covers the E-stop, dash and sensor runs (estimate)"
    },
    "kind": "material",
@@ -2002,7 +2002,7 @@
    "category": "Wiring",
    "where": "box",
    "status": "To buy",
-   "note": "Was in the cart review, not in the order",
+   "note": "Was in the cart review, not in the order. The value listing has 8 colours: buy grey and violet from the second listing (one order line per colour)",
    "fields": {
     "Line": "71",
     "Category": "Wiring",
@@ -2012,8 +2012,8 @@
     "Where": "box",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/1005001798119195.html / premium|https://www.aliexpress.com/item/32429405173.html",
-    "Notes": "Was in the cart review, not in the order"
+    "Link": "black|https://www.aliexpress.com/item/1005001798119195.html?sku_id=12000025738201407 / red|https://www.aliexpress.com/item/1005001798119195.html?sku_id=12000025738201485 / white|https://www.aliexpress.com/item/1005001798119195.html?sku_id=12000025738201368 / yellow|https://www.aliexpress.com/item/1005001798119195.html?sku_id=12000025738201563 / green|https://www.aliexpress.com/item/1005001798119195.html?sku_id=12000025738201446 / blue|https://www.aliexpress.com/item/1005001798119195.html?sku_id=12000025738201524 / orange|https://www.aliexpress.com/item/1005001798119195.html?sku_id=12000025767922375 / brown|https://www.aliexpress.com/item/1005001798119195.html?sku_id=12000025767922345 / grey|https://www.aliexpress.com/item/32429405173.html?sku_id=12000021233956910 / violet|https://www.aliexpress.com/item/32429405173.html?sku_id=12000021233956988",
+    "Notes": "Was in the cart review, not in the order. The value listing has 8 colours: buy grey and violet from the second listing (one order line per colour)"
    },
    "kind": "material",
    "issues": []
@@ -2037,7 +2037,7 @@
     "Where": "box",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "kit + SN-28B|https://www.aliexpress.com/item/1005001863745903.html",
+    "Link": "kit + SN-28B|https://www.aliexpress.com/item/1005001863745903.html?sku_id=12000017979744503",
     "Notes": "Holds the EN and IS jumpers and the EN pull-down; a dab of hot glue against vibration. The pins need an SN-28B crimper: select \"SN-28B AND 310PCS\" (about 68.5 ILS); check the kit has 1x8 housings"
    },
    "kind": "material",
@@ -2052,7 +2052,7 @@
    "category": "Wiring",
    "where": "box",
    "status": "To buy",
-   "note": "Select the PG9 and PG13.5 variants (the default is PG7)",
+   "note": "The links open on PG9 and PG13.5 (the listing default is PG7)",
    "fields": {
     "Line": "73",
     "Category": "Wiring",
@@ -2062,8 +2062,8 @@
     "Where": "box",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/4001144039060.html / premium|https://www.aliexpress.com/item/1005006645820587.html",
-    "Notes": "Select the PG9 and PG13.5 variants (the default is PG7)"
+    "Link": "PG9|https://www.aliexpress.com/item/4001144039060.html?sku_id=10000014886370917 / PG13.5|https://www.aliexpress.com/item/4001144039060.html?sku_id=10000014886370919 / premium PG9|https://www.aliexpress.com/item/1005006645820587.html?sku_id=12000037913246156 / premium PG13.5|https://www.aliexpress.com/item/1005006645820587.html?sku_id=12000037913246153",
+    "Notes": "The links open on PG9 and PG13.5 (the listing default is PG7)"
    },
    "kind": "material",
    "issues": []
@@ -2087,7 +2087,7 @@
     "Where": "box edge",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/1005001675198701.html / premium|https://www.aliexpress.com/item/10000319645984.html",
+    "Link": "4P|https://www.aliexpress.com/item/1005001675198701.html?sku_id=12000017080714335 / 6P|https://www.aliexpress.com/item/1005001675198701.html?sku_id=12000017080714336 / 8P|https://www.aliexpress.com/item/1005001675198701.html?sku_id=12000017080714337 / premium 4P|https://www.aliexpress.com/item/10000319645984.html?sku_id=20000000170273872 / premium 6P|https://www.aliexpress.com/item/10000319645984.html?sku_id=20000000170273873 / premium 8P|https://www.aliexpress.com/item/10000319645984.html?sku_id=20000000170273874",
     "Notes": "Mates for J9-J12. Stamped pins crimp with an open-barrel jaw; solid pins need a Deutsch indent crimper (HDT-48-00 type), which the HS-30J is not. Check which pins the set has"
    },
    "kind": "material",
@@ -2112,7 +2112,7 @@
     "Where": "box",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/1005008146302901.html",
+    "Link": "330 box|https://www.aliexpress.com/item/1005008146302901.html?sku_id=12000049480138894 / 127 bag|https://www.aliexpress.com/item/1005008146302901.html?sku_id=12000043985559287",
     "Notes": "Not in the 24 Oct order: the line thought to be heat shrink was the ferrule kit"
    },
    "kind": "material",
@@ -2137,7 +2137,7 @@
     "Where": "box",
     "Status": "To buy",
     "Supplier": "AliExpress",
-    "Link": "value|https://www.aliexpress.com/item/32862529967.html / premium|https://www.aliexpress.com/item/1005009130730366.html",
+    "Link": "value|https://www.aliexpress.com/item/32862529967.html?sku_id=10000000197494051 / premium|https://www.aliexpress.com/item/1005009130730366.html?sku_id=12000048022934970",
     "Notes": "Value link: select \"200PCS-M3 Mix\" (the default is M2)"
    },
    "kind": "material",
@@ -3070,7 +3070,7 @@
     "Status": "To buy",
     "Supplier": "AliExpress",
     "Premium pick": "AIXUN T3A or SUGON T26D station (JBC C245-compatible tips)",
-    "Link": "FNIRSI HS-02|https://www.aliexpress.com/item/1005006655028971.html",
+    "Link": "HS-02B-K iron only|https://www.aliexpress.com/item/1005006655028971.html?sku_id=12000047206595751 / HS-02 kit with PSU|https://www.aliexpress.com/item/1005006655028971.html?sku_id=12000047206595807",
     "Notes": "Skip if you already have one this strong: 10 AWG and XT60 need the power. The 10 Nov pick's HS-02B-K variant is the iron only: it needs a 65-100 W USB-C PD charger, or take a kit variant with a supply"
    },
    "kind": "tool",
@@ -3225,7 +3225,7 @@
     "Status": "To buy",
     "Supplier": "AliExpress",
     "Premium pick": "Kester 44 or Alpha Fry 63/37 (buy locally: fakes are common on AliExpress)",
-    "Link": "value|https://www.aliexpress.com/item/32889029087.html / Mechanic|https://www.aliexpress.com/item/4000843584127.html",
+    "Link": "value 0.8|https://www.aliexpress.com/item/32889029087.html?sku_id=12000036063038181 / Mechanic 0.8|https://www.aliexpress.com/item/4000843584127.html?sku_id=12000035204400002",
     "Notes": "Signals and the proto board. 63/37 melts at one point (183 °C), the easiest to use"
    },
    "kind": "material",
@@ -3251,7 +3251,7 @@
     "Status": "To buy",
     "Supplier": "AliExpress",
     "Premium pick": "Kester 44 or Alpha Fry (local)",
-    "Link": "value|https://www.aliexpress.com/item/32889029087.html / Mechanic|https://www.aliexpress.com/item/4000843584127.html",
+    "Link": "value 1.0|https://www.aliexpress.com/item/32889029087.html?sku_id=12000036063038179 / Mechanic 1.0|https://www.aliexpress.com/item/4000843584127.html?sku_id=12000035204244000",
     "Notes": "10/12 AWG lugs, XT60s, motor tabs"
    },
    "kind": "material",

@@ -191,11 +191,9 @@ BUY_LINKS = {
             picks(ai("1005005104904918", "pick"))),
     "U28": ("Blue Adafruit-layout board, address 0x40", ae("pca9685 16 channel")),
     "U29": ("Logic-level (switches from 3.3 V): LR7843 or AOD4184 boards, not IRF520", ae("4 channel mosfet module lr7843")),
-    "F11": ("Inline ATO/ATC blade fuse holder for 12 AWG, with cover; plus 15 A and 20 A blades (size from #14)",
-            ae("inline blade fuse holder 12awg")),
     "H1": ("Buy 10 A3144 + 10 neodymium magnets 10 x 5 mm", picks(ai("1005009945016406", "A3144 x10"),
                                                                     ai("1005010377772528", "magnets x10"))),
-    "U14": ("IBT-2 board, 43 A. Only if you own 4; check the value link opens (odd item number)",
+    "U14": ("IBT-2 board, 43 A (Shai owns 4, 10 Nov: buy 1). The value listing has one option",
             picks(ai("1999464638", "value"), ai("1005010395322275", "premium"))),
     "TB1": ("M6 (or 1/4 in) stud bus bar, 60 A or more. TB1 takes about 12 ring terminals: pick a bar with enough "
             "studs or stack rings on two bars. Value link: select the M6 option (the default is M8)", picks(ai("1005004665757378", "value"), ai("1005007540174230", "premium"))),
@@ -555,15 +553,13 @@ def write_bom(out, parts, vb_parts):
            "## Check the 24 Oct order (arrived 4 Nov)\n\n",
            "- **470 µF capacitors (C111-C115): checked 9 Nov.** The bag reads 50 V 470 µF low-ESR, 10 pcs, so they fit the "
            "24 V bus (the receipt's \"10-25 V\" was the listing name).\n",
-           "- **ADS1115:** two bags seen in the 9 Nov photos; the design needs 2 (U22, U23). Confirm each bag holds one module.\n",
+           "- **ADS1115:** two modules (U22, U23), confirmed by Shai 10 Nov.\n",
            "- **Inline fuse holders (O19):** 3 holders for 12 AWG arrived (the label says \"for 12V\"; ATO/ATC blades are rated "
-           "32 V DC, so they are fine on the 24 V system). They go to F2, F9 and F10. F11-F14 (one per drive motor) need 4 more: "
-           "still to buy.\n",
+           "32 V DC, so they are fine on the 24 V system). They go to F2, F9 and F10.\n",
            "- **Small parts, counted 9 Nov:** 1 A blades 10, 100 nF and 10 nF 50 V ceramics 100 each, 1N4007 100, 1N4148 50, "
            "IRLZ44N 10, AMS1117-3.3 modules 5, 4.7k and 10k 1 % resistors 100 each. Plenty of spares for every line below.\n",
-           "- **Blade fuse values: checked 9 Nov.** The design uses 1, 2, 3, 10 and 15 A (F2-F14). All five bags are in hand, "
-           "10 of each (10 A seen 6 Nov). The 15 A bag covers F2 and F11-F14 with 5 spare; 15 A for F11-F14 is still a "
-           "placeholder until the motor label (#14).\n",
+           "- **Blade fuse values: checked 9 Nov.** The design uses 1, 2, 3, 10 and 15 A (F2-F10). All five bags are in hand, "
+           "10 of each (10 A seen 6 Nov).\n",
            "- **ANL (F1): checked 9 Nov.** One bolt-on ANL holder with a 40 A fuse, plus 2 spare 40 A ANL fuses. "
            "That is the whole F1 line.\n",
            "- **Also seen 9 Nov:** 10 AWG silicone wire (200 °C), 5 m red + 5 m black; the 60-value 1/4 W 1 % resistor kit "

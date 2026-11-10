@@ -21,10 +21,10 @@ This is the one list for the project: every part of the car, and every tool and 
 ## Check the 24 Oct order (arrived 4 Nov)
 
 - **470 µF capacitors (C111-C115): checked 9 Nov.** The bag reads 50 V 470 µF low-ESR, 10 pcs, so they fit the 24 V bus (the receipt's "10-25 V" was the listing name).
-- **ADS1115:** two bags seen in the 9 Nov photos; the design needs 2 (U22, U23). Confirm each bag holds one module.
-- **Inline fuse holders (O19):** 3 holders for 12 AWG arrived (the label says "for 12V"; ATO/ATC blades are rated 32 V DC, so they are fine on the 24 V system). They go to F2, F9 and F10. F11-F14 (one per drive motor) need 4 more: still to buy.
+- **ADS1115:** two modules (U22, U23), confirmed by Shai 10 Nov.
+- **Inline fuse holders (O19):** 3 holders for 12 AWG arrived (the label says "for 12V"; ATO/ATC blades are rated 32 V DC, so they are fine on the 24 V system). They go to F2, F9 and F10.
 - **Small parts, counted 9 Nov:** 1 A blades 10, 100 nF and 10 nF 50 V ceramics 100 each, 1N4007 100, 1N4148 50, IRLZ44N 10, AMS1117-3.3 modules 5, 4.7k and 10k 1 % resistors 100 each. Plenty of spares for every line below.
-- **Blade fuse values: checked 9 Nov.** The design uses 1, 2, 3, 10 and 15 A (F2-F14). All five bags are in hand, 10 of each (10 A seen 6 Nov). The 15 A bag covers F2 and F11-F14 with 5 spare; 15 A for F11-F14 is still a placeholder until the motor label (#14).
+- **Blade fuse values: checked 9 Nov.** The design uses 1, 2, 3, 10 and 15 A (F2-F10). All five bags are in hand, 10 of each (10 A seen 6 Nov).
 - **ANL (F1): checked 9 Nov.** One bolt-on ANL holder with a 40 A fuse, plus 2 spare 40 A ANL fuses. That is the whole F1 line.
 - **Also seen 9 Nov:** 10 AWG silicone wire (200 °C), 5 m red + 5 m black; the 60-value 1/4 W 1 % resistor kit (5 each, 300 pcs); the clamp meter parcel.
 - **K1 coil current:** measure it on the bench supply; over 0.6 A, F3 becomes 2 A.
@@ -34,7 +34,7 @@ This is the one list for the project: every part of the car, and every tool and 
 | # | Category | Refs | Qty | Description | Manufacturer / part number | Where | Status | Order line | Link | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1 | Module | U1 | 1 | LM2596 buck module set to 5.0 V (set it before connecting the ESP32) | TI LM2596 (generic module) | box | Owned | - | - | ESP32 VIN, receiver, halls, U2. About 0.5 A |
-| 2 | Module | U10 U11 U12 U13 U14 | 5 | IBT-2 (BTS7960) board | Infineon BTS7960B (IBT-2 module) | box | Owned 4, To buy 1 | - | [value](https://www.aliexpress.com/item/1999464638.html), [premium](https://www.aliexpress.com/item/1005010395322275.html) | VCC on 3.3 V so 3.3 V PWM reads as a clean HIGH. Never tie R_EN/L_EN to VCC. Spec: IBT-2 board, 43 A. Only if you own 4; check the value link opens (odd item number) |
+| 2 | Module | U10 U11 U12 U13 U14 | 5 | IBT-2 (BTS7960) board | Infineon BTS7960B (IBT-2 module) | box | Owned 4, To buy 1 | - | [value](https://www.aliexpress.com/item/1999464638.html), [premium](https://www.aliexpress.com/item/1005010395322275.html) | VCC on 3.3 V so 3.3 V PWM reads as a clean HIGH. Never tie R_EN/L_EN to VCC. Spec: IBT-2 board, 43 A (Shai owns 4, 10 Nov: buy 1). The value listing has one option |
 | 3 | Module | U20 | 1 | ESP32-WROOM-32D 30-pin DevKit, USB-C, on MRD068A | Espressif ESP32-WROOM-32D (DevKit V1 clone) | box | Owned | - | - | Pins from include/pins.h. 3V3 pin unused: sensors run from U2 |
 | 4 | Module | U21 | 1 | Jumper AION RX Mini ELRS receiver | Jumper AION RX Mini | box (antenna out of the box, away from motor wires) | Owned | - | - | CRSF 420000 baud |
 | 5 | Module | U26 | 1 | GY-521 MPU-6050 | TDK InvenSense MPU-6050 (GY-521) | box | Owned | - | - | Tilt and crash (later) |
@@ -54,7 +54,7 @@ This is the one list for the project: every part of the car, and every tool and 
 | 19 | Sensor | H1 H2 | 2 | A3144 hall switch + magnet | Allegro A3144 (or clone) | car | To buy | - | [A3144 x10](https://www.aliexpress.com/item/1005009945016406.html), [magnets x10](https://www.aliexpress.com/item/1005010377772528.html) | Spec: Buy 10 A3144 + 10 neodymium magnets 10 x 5 mm |
 | 20 | Sensor | SW5 | 1 | Seat switch, closes with a child seated (optional) | Generic | car | To buy | - | - |  |
 | 21 | Power | F1 | 1 | ANL fuse holder + 40 A ANL fuse | Generic ANL | car | Received 4 Nov | O16 | - | Unfused wire before F1 must stay under 15 cm. If the stock harness already has a 40 A fuse this close, that fuse is F1 |
-| 22 | Power | F2 F11 F12 F13 F14 | 5 | Inline blade fuse holder (12 AWG) + 15 A blade | Generic ATO/ATC blade | box | Received 4 Nov 1, To buy 4 | O19, O25 | [search](https://www.aliexpress.com/w/wholesale-inline-blade-fuse-holder-12awg.html?SortType=total_tranpro_desc) | F2: Feeds the key; protects the key wiring; F11-F14: Stalled-motor backstop (safety review M3): one stalled motor draws under the 20 A software limit and the 40 A main fuse. 15 A is a placeholder: set it from the motor label (#14), above the running current, below the stall current. Spec: Inline ATO/ATC blade fuse holder for 12 AWG, with cover; plus 15 A and 20 A blades (size from #14) |
+| 22 | Power | F2 | 1 | Inline blade fuse holder (12 AWG) + 15 A blade | Generic ATO/ATC blade | box | Received 4 Nov | O19, O25 | - | Feeds the key; protects the key wiring |
 | 23 | Power | F3 F7 F8 | 3 | Blade fuse 1 A in the fuse block | Generic ATO/ATC blade | box | Received 4 Nov | O25 | - | F3: K1 coil chain; F7: Box fans; F8: Battery divider wire (0.5 A in v0.2; 1 A is in the order) |
 | 24 | Power | F4 | 1 | Blade fuse 2 A in the fuse block | Generic ATO/ATC blade | box | Received 4 Nov | O25 | - | 5V_LOGIC buck input |
 | 25 | Power | F5 | 1 | Blade fuse 3 A in the fuse block | Generic ATO/ATC blade | box | Received 4 Nov | O25 | - | 5V_ACC buck input |

@@ -66,7 +66,7 @@
    "category": "Module",
    "where": "box",
    "status": "Owned 4, To buy 1",
-   "note": "VCC on 3.3 V so 3.3 V PWM reads as a clean HIGH. Never tie R_EN/L_EN to VCC. Spec: IBT-2 board, 43 A. Only if you own 4; check the value link opens (odd item number)",
+   "note": "VCC on 3.3 V so 3.3 V PWM reads as a clean HIGH. Never tie R_EN/L_EN to VCC. Spec: IBT-2 board, 43 A (Shai owns 4, 10 Nov: buy 1). The value listing has one option",
    "fields": {
     "Line": "2",
     "Category": "Module",
@@ -78,7 +78,7 @@
     "Status": "Owned 4, To buy 1",
     "Supplier": "AliExpress",
     "Link": "value|https://www.aliexpress.com/item/1999464638.html / premium|https://www.aliexpress.com/item/1005010395322275.html",
-    "Notes": "VCC on 3.3 V so 3.3 V PWM reads as a clean HIGH. Never tie R_EN/L_EN to VCC. Spec: IBT-2 board, 43 A. Only if you own 4; check the value link opens (odd item number)"
+    "Notes": "VCC on 3.3 V so 3.3 V PWM reads as a clean HIGH. Never tie R_EN/L_EN to VCC. Spec: IBT-2 board, 43 A (Shai owns 4, 10 Nov: buy 1). The value listing has one option"
    },
    "kind": "part",
    "issues": []
@@ -607,37 +607,30 @@
   {
    "line": "22",
    "refs": [
-    "F2",
-    "F11",
-    "F12",
-    "F13",
-    "F14"
+    "F2"
    ],
-   "qty": "5",
+   "qty": "1",
    "part": "Inline blade fuse holder (12 AWG) + 15 A blade",
    "model": "Generic ATO/ATC blade",
    "category": "Power",
    "where": "box",
-   "status": "Received 4 Nov 1, To buy 4",
-   "note": "F2: Feeds the key; protects the key wiring; F11-F14: Stalled-motor backstop (safety review M3): one stalled motor draws under the 20 A software limit and the 40 A main fuse. 15 A is a placeholder: set it from the motor label (#14), above the running current, below the stall current. Spec: Inline ATO/ATC blade fuse holder for 12 AWG, with cover; plus 15 A and 20 A blades (size from #14)",
+   "status": "Received 4 Nov",
+   "note": "Feeds the key; protects the key wiring",
    "fields": {
     "Line": "22",
     "Category": "Power",
-    "Refs": "F2 F11 F12 F13 F14",
-    "Qty": "5",
+    "Refs": "F2",
+    "Qty": "1",
     "Description": "Inline blade fuse holder (12 AWG) + 15 A blade",
     "Manufacturer / part number": "Generic ATO/ATC blade",
     "Where": "box",
-    "Status": "Received 4 Nov 1, To buy 4",
+    "Status": "Received 4 Nov",
     "Order line": "O19, O25",
     "Supplier": "AliExpress, 24 Oct order",
-    "Link": "https://www.aliexpress.com/w/wholesale-inline-blade-fuse-holder-12awg.html?SortType=total_tranpro_desc",
-    "Notes": "F2: Feeds the key; protects the key wiring; F11-F14: Stalled-motor backstop (safety review M3): one stalled motor draws under the 20 A software limit and the 40 A main fuse. 15 A is a placeholder: set it from the motor label (#14), above the running current, below the stall current. Spec: Inline ATO/ATC blade fuse holder for 12 AWG, with cover; plus 15 A and 20 A blades (size from #14)"
+    "Notes": "Feeds the key; protects the key wiring"
    },
    "kind": "part",
-   "issues": [
-    "14"
-   ]
+   "issues": []
   },
   {
    "line": "23",
@@ -3432,26 +3425,6 @@
    "bomLine": "22",
    "bomIndex": 21
   },
-  "F11": {
-   "ref": "F11",
-   "bomLine": "22",
-   "bomIndex": 21
-  },
-  "F12": {
-   "ref": "F12",
-   "bomLine": "22",
-   "bomIndex": 21
-  },
-  "F13": {
-   "ref": "F13",
-   "bomLine": "22",
-   "bomIndex": 21
-  },
-  "F14": {
-   "ref": "F14",
-   "bomLine": "22",
-   "bomIndex": 21
-  },
   "F3": {
    "ref": "F3",
    "bomLine": "23",
@@ -5294,35 +5267,18 @@
     "pin": "M+"
    },
    "to": {
-    "ref": "F11",
-    "pin": "1"
-   },
-   "net": "FL_DRV_POS",
-   "awg": "12",
-   "colour": "RD",
-   "protectedBy": "F1 40 A + driver current limit",
-   "route": "box",
-   "note": "Motor + to its inline fuse"
-  },
-  {
-   "id": "W081",
-   "from": {
-    "ref": "F11",
-    "pin": "2"
-   },
-   "to": {
     "ref": "J6",
     "pin": "1"
    },
    "net": "FL_M_POS",
    "awg": "12",
    "colour": "RD",
-   "protectedBy": "F11-F14 15 A (one per motor)",
+   "protectedBy": "F1 40 A + driver current limit",
    "route": "box",
    "note": ""
   },
   {
-   "id": "W082",
+   "id": "W081",
    "from": {
     "ref": "U10",
     "pin": "M-"
@@ -5339,7 +5295,7 @@
    "note": ""
   },
   {
-   "id": "W083",
+   "id": "W082",
    "from": {
     "ref": "U11",
     "pin": "3"
@@ -5356,7 +5312,7 @@
    "note": "Jumper in the plug: R_EN = L_EN; the 10k pull-down sits in the plug too"
   },
   {
-   "id": "W084",
+   "id": "W083",
    "from": {
     "ref": "U11",
     "pin": "5"
@@ -5373,7 +5329,7 @@
    "note": "Jumper in the plug: R_IS = L_IS"
   },
   {
-   "id": "W085",
+   "id": "W084",
    "from": {
     "ref": "U11",
     "pin": "5"
@@ -5390,7 +5346,7 @@
    "note": "IS to A1"
   },
   {
-   "id": "W086",
+   "id": "W085",
    "from": {
     "ref": "A1",
     "pin": "3V3"
@@ -5407,7 +5363,7 @@
    "note": "Logic VCC"
   },
   {
-   "id": "W087",
+   "id": "W086",
    "from": {
     "ref": "A1",
     "pin": "GND"
@@ -5424,27 +5380,10 @@
    "note": "Signal reference; B− is the power ground"
   },
   {
-   "id": "W088",
+   "id": "W087",
    "from": {
     "ref": "U11",
     "pin": "M+"
-   },
-   "to": {
-    "ref": "F12",
-    "pin": "1"
-   },
-   "net": "FR_DRV_POS",
-   "awg": "12",
-   "colour": "RD",
-   "protectedBy": "F1 40 A + driver current limit",
-   "route": "box",
-   "note": "Motor + to its inline fuse"
-  },
-  {
-   "id": "W089",
-   "from": {
-    "ref": "F12",
-    "pin": "2"
    },
    "to": {
     "ref": "J6",
@@ -5453,12 +5392,12 @@
    "net": "FR_M_POS",
    "awg": "12",
    "colour": "RD",
-   "protectedBy": "F11-F14 15 A (one per motor)",
+   "protectedBy": "F1 40 A + driver current limit",
    "route": "box",
    "note": ""
   },
   {
-   "id": "W090",
+   "id": "W088",
    "from": {
     "ref": "U11",
     "pin": "M-"
@@ -5475,7 +5414,7 @@
    "note": ""
   },
   {
-   "id": "W091",
+   "id": "W089",
    "from": {
     "ref": "U12",
     "pin": "3"
@@ -5492,7 +5431,7 @@
    "note": "Jumper in the plug: R_EN = L_EN; the 10k pull-down sits in the plug too"
   },
   {
-   "id": "W092",
+   "id": "W090",
    "from": {
     "ref": "U12",
     "pin": "5"
@@ -5509,7 +5448,7 @@
    "note": "Jumper in the plug: R_IS = L_IS"
   },
   {
-   "id": "W093",
+   "id": "W091",
    "from": {
     "ref": "U12",
     "pin": "5"
@@ -5526,7 +5465,7 @@
    "note": "IS to A1"
   },
   {
-   "id": "W094",
+   "id": "W092",
    "from": {
     "ref": "A1",
     "pin": "3V3"
@@ -5543,7 +5482,7 @@
    "note": "Logic VCC"
   },
   {
-   "id": "W095",
+   "id": "W093",
    "from": {
     "ref": "A1",
     "pin": "GND"
@@ -5560,27 +5499,10 @@
    "note": "Signal reference; B− is the power ground"
   },
   {
-   "id": "W096",
+   "id": "W094",
    "from": {
     "ref": "U12",
     "pin": "M+"
-   },
-   "to": {
-    "ref": "F13",
-    "pin": "1"
-   },
-   "net": "RL_DRV_POS",
-   "awg": "12",
-   "colour": "RD",
-   "protectedBy": "F1 40 A + driver current limit",
-   "route": "box",
-   "note": "Motor + to its inline fuse"
-  },
-  {
-   "id": "W097",
-   "from": {
-    "ref": "F13",
-    "pin": "2"
    },
    "to": {
     "ref": "J7",
@@ -5589,12 +5511,12 @@
    "net": "RL_M_POS",
    "awg": "12",
    "colour": "RD",
-   "protectedBy": "F11-F14 15 A (one per motor)",
+   "protectedBy": "F1 40 A + driver current limit",
    "route": "box",
    "note": ""
   },
   {
-   "id": "W098",
+   "id": "W095",
    "from": {
     "ref": "U12",
     "pin": "M-"
@@ -5611,7 +5533,7 @@
    "note": ""
   },
   {
-   "id": "W099",
+   "id": "W096",
    "from": {
     "ref": "U13",
     "pin": "3"
@@ -5628,7 +5550,7 @@
    "note": "Jumper in the plug: R_EN = L_EN; the 10k pull-down sits in the plug too"
   },
   {
-   "id": "W100",
+   "id": "W097",
    "from": {
     "ref": "U13",
     "pin": "5"
@@ -5645,7 +5567,7 @@
    "note": "Jumper in the plug: R_IS = L_IS"
   },
   {
-   "id": "W101",
+   "id": "W098",
    "from": {
     "ref": "U13",
     "pin": "5"
@@ -5662,7 +5584,7 @@
    "note": "IS to A1"
   },
   {
-   "id": "W102",
+   "id": "W099",
    "from": {
     "ref": "A1",
     "pin": "3V3"
@@ -5679,7 +5601,7 @@
    "note": "Logic VCC"
   },
   {
-   "id": "W103",
+   "id": "W100",
    "from": {
     "ref": "A1",
     "pin": "GND"
@@ -5696,27 +5618,10 @@
    "note": "Signal reference; B− is the power ground"
   },
   {
-   "id": "W104",
+   "id": "W101",
    "from": {
     "ref": "U13",
     "pin": "M+"
-   },
-   "to": {
-    "ref": "F14",
-    "pin": "1"
-   },
-   "net": "RR_DRV_POS",
-   "awg": "12",
-   "colour": "RD",
-   "protectedBy": "F1 40 A + driver current limit",
-   "route": "box",
-   "note": "Motor + to its inline fuse"
-  },
-  {
-   "id": "W105",
-   "from": {
-    "ref": "F14",
-    "pin": "2"
    },
    "to": {
     "ref": "J7",
@@ -5725,12 +5630,12 @@
    "net": "RR_M_POS",
    "awg": "12",
    "colour": "RD",
-   "protectedBy": "F11-F14 15 A (one per motor)",
+   "protectedBy": "F1 40 A + driver current limit",
    "route": "box",
    "note": ""
   },
   {
-   "id": "W106",
+   "id": "W102",
    "from": {
     "ref": "U13",
     "pin": "M-"
@@ -5747,7 +5652,7 @@
    "note": ""
   },
   {
-   "id": "W107",
+   "id": "W103",
    "from": {
     "ref": "U20",
     "pin": "R7"
@@ -5764,7 +5669,7 @@
    "note": "Control cable: twist PWM and EN with GND"
   },
   {
-   "id": "W108",
+   "id": "W104",
    "from": {
     "ref": "U20",
     "pin": "R6"
@@ -5781,7 +5686,7 @@
    "note": ""
   },
   {
-   "id": "W109",
+   "id": "W105",
    "from": {
     "ref": "U20",
     "pin": "R12"
@@ -5798,7 +5703,7 @@
    "note": "STEER_EN"
   },
   {
-   "id": "W110",
+   "id": "W106",
    "from": {
     "ref": "U14",
     "pin": "3"
@@ -5815,7 +5720,7 @@
    "note": "Jumper in the plug: R_EN = L_EN; the 10k pull-down sits in the plug too"
   },
   {
-   "id": "W111",
+   "id": "W107",
    "from": {
     "ref": "U14",
     "pin": "5"
@@ -5832,7 +5737,7 @@
    "note": "Jumper in the plug: R_IS = L_IS"
   },
   {
-   "id": "W112",
+   "id": "W108",
    "from": {
     "ref": "U14",
     "pin": "5"
@@ -5849,7 +5754,7 @@
    "note": "IS to A1"
   },
   {
-   "id": "W113",
+   "id": "W109",
    "from": {
     "ref": "A1",
     "pin": "3V3"
@@ -5866,7 +5771,7 @@
    "note": "Logic VCC"
   },
   {
-   "id": "W114",
+   "id": "W110",
    "from": {
     "ref": "A1",
     "pin": "GND"
@@ -5883,7 +5788,7 @@
    "note": "Signal reference; B− is the power ground"
   },
   {
-   "id": "W115",
+   "id": "W111",
    "from": {
     "ref": "U14",
     "pin": "M+"
@@ -5895,12 +5800,12 @@
    "net": "STEER_M_POS",
    "awg": "12",
    "colour": "RD",
-   "protectedBy": "F1 40 A",
+   "protectedBy": "F1 40 A + driver current limit",
    "route": "box",
    "note": ""
   },
   {
-   "id": "W116",
+   "id": "W112",
    "from": {
     "ref": "U14",
     "pin": "M-"
@@ -5917,7 +5822,7 @@
    "note": ""
   },
   {
-   "id": "W117",
+   "id": "W113",
    "from": {
     "ref": "J6",
     "pin": "1"
@@ -5929,12 +5834,12 @@
    "net": "FL_M_POS",
    "awg": "stock",
    "colour": "stock",
-   "protectedBy": "F11-F14 15 A (one per motor)",
+   "protectedBy": "F1 40 A + driver current limit",
    "route": "stock",
    "note": "Stock motor wiring (or the splitter, #33)"
   },
   {
-   "id": "W118",
+   "id": "W114",
    "from": {
     "ref": "J6",
     "pin": "2"
@@ -5951,7 +5856,7 @@
    "note": "Stock motor wiring (or the splitter, #33)"
   },
   {
-   "id": "W119",
+   "id": "W115",
    "from": {
     "ref": "J6",
     "pin": "3"
@@ -5963,12 +5868,12 @@
    "net": "FR_M_POS",
    "awg": "stock",
    "colour": "stock",
-   "protectedBy": "F11-F14 15 A (one per motor)",
+   "protectedBy": "F1 40 A + driver current limit",
    "route": "stock",
    "note": "Stock motor wiring (or the splitter, #33)"
   },
   {
-   "id": "W120",
+   "id": "W116",
    "from": {
     "ref": "J6",
     "pin": "4"
@@ -5985,7 +5890,7 @@
    "note": "Stock motor wiring (or the splitter, #33)"
   },
   {
-   "id": "W121",
+   "id": "W117",
    "from": {
     "ref": "J7",
     "pin": "1"
@@ -5997,12 +5902,12 @@
    "net": "RL_M_POS",
    "awg": "stock",
    "colour": "stock",
-   "protectedBy": "F11-F14 15 A (one per motor)",
+   "protectedBy": "F1 40 A + driver current limit",
    "route": "stock",
    "note": "Stock motor wiring (or the splitter, #33)"
   },
   {
-   "id": "W122",
+   "id": "W118",
    "from": {
     "ref": "J7",
     "pin": "2"
@@ -6019,7 +5924,7 @@
    "note": "Stock motor wiring (or the splitter, #33)"
   },
   {
-   "id": "W123",
+   "id": "W119",
    "from": {
     "ref": "J7",
     "pin": "3"
@@ -6031,12 +5936,12 @@
    "net": "RR_M_POS",
    "awg": "stock",
    "colour": "stock",
-   "protectedBy": "F11-F14 15 A (one per motor)",
+   "protectedBy": "F1 40 A + driver current limit",
    "route": "stock",
    "note": "Stock motor wiring (or the splitter, #33)"
   },
   {
-   "id": "W124",
+   "id": "W120",
    "from": {
     "ref": "J7",
     "pin": "4"
@@ -6053,7 +5958,7 @@
    "note": "Stock motor wiring (or the splitter, #33)"
   },
   {
-   "id": "W125",
+   "id": "W121",
    "from": {
     "ref": "J5",
     "pin": "1"
@@ -6065,12 +5970,12 @@
    "net": "STEER_M_POS",
    "awg": "stock",
    "colour": "stock",
-   "protectedBy": "F1 40 A",
+   "protectedBy": "F1 40 A + driver current limit",
    "route": "stock",
    "note": "Stock motor wiring (or the splitter, #33)"
   },
   {
-   "id": "W126",
+   "id": "W122",
    "from": {
     "ref": "J5",
     "pin": "2"
@@ -6087,7 +5992,7 @@
    "note": "Stock motor wiring (or the splitter, #33)"
   },
   {
-   "id": "W127",
+   "id": "W123",
    "from": {
     "ref": "U20",
     "pin": "L2"
@@ -6104,7 +6009,7 @@
    "note": "PEDAL to A1"
   },
   {
-   "id": "W128",
+   "id": "W124",
    "from": {
     "ref": "U20",
     "pin": "L3"
@@ -6121,7 +6026,7 @@
    "note": "BATTERY_SENSE to A1"
   },
   {
-   "id": "W129",
+   "id": "W125",
    "from": {
     "ref": "U20",
     "pin": "L4"
@@ -6138,7 +6043,7 @@
    "note": "WHEEL_SPEED_L to A1"
   },
   {
-   "id": "W130",
+   "id": "W126",
    "from": {
     "ref": "U20",
     "pin": "L5"
@@ -6155,7 +6060,7 @@
    "note": "WHEEL_SPEED_R to A1"
   },
   {
-   "id": "W131",
+   "id": "W127",
    "from": {
     "ref": "U20",
     "pin": "R13"
@@ -6172,7 +6077,7 @@
    "note": "ONEWIRE_TEMP to A1"
   },
   {
-   "id": "W132",
+   "id": "W128",
    "from": {
     "ref": "U20",
     "pin": "R8"
@@ -6189,7 +6094,7 @@
    "note": "SOUND_TX to A1"
   },
   {
-   "id": "W133",
+   "id": "W129",
    "from": {
     "ref": "R28",
     "pin": "2"
@@ -6206,7 +6111,7 @@
    "note": "DF_RX"
   },
   {
-   "id": "W134",
+   "id": "W130",
    "from": {
     "ref": "U20",
     "pin": "R3"
@@ -6223,7 +6128,7 @@
    "note": "LOG_TX (TX0) to A1"
   },
   {
-   "id": "W135",
+   "id": "W131",
    "from": {
     "ref": "R29",
     "pin": "2"
@@ -6240,7 +6145,7 @@
    "note": "BT_RXD. U33 TXD stays unconnected: listen-only"
   },
   {
-   "id": "W136",
+   "id": "W132",
    "from": {
     "ref": "A1",
     "pin": "5V"
@@ -6257,7 +6162,7 @@
    "note": "Bluetooth module VCC"
   },
   {
-   "id": "W137",
+   "id": "W133",
    "from": {
     "ref": "U33",
     "pin": "GND"
@@ -6274,7 +6179,7 @@
    "note": ""
   },
   {
-   "id": "W138",
+   "id": "W134",
    "from": {
     "ref": "U20",
     "pin": "R10"
@@ -6291,7 +6196,7 @@
    "note": "CRSF: receiver TX → ESP32 RX"
   },
   {
-   "id": "W139",
+   "id": "W135",
    "from": {
     "ref": "U20",
     "pin": "R9"
@@ -6308,7 +6213,7 @@
    "note": "CRSF: ESP32 TX → receiver RX"
   },
   {
-   "id": "W140",
+   "id": "W136",
    "from": {
     "ref": "R1",
     "pin": "2"
@@ -6325,7 +6230,7 @@
    "note": "On A1 (listed because Q1 is a TO-220 on flying leads if not on the board)"
   },
   {
-   "id": "W141",
+   "id": "W137",
    "from": {
     "ref": "R101",
     "pin": "2"
@@ -6342,7 +6247,7 @@
    "note": ""
   },
   {
-   "id": "W142",
+   "id": "W138",
    "from": {
     "ref": "R102",
     "pin": "2"
@@ -6359,7 +6264,7 @@
    "note": ""
   },
   {
-   "id": "W143",
+   "id": "W139",
    "from": {
     "ref": "R103",
     "pin": "2"
@@ -6376,7 +6281,7 @@
    "note": ""
   },
   {
-   "id": "W144",
+   "id": "W140",
    "from": {
     "ref": "R104",
     "pin": "2"
@@ -6393,7 +6298,7 @@
    "note": ""
   },
   {
-   "id": "W145",
+   "id": "W141",
    "from": {
     "ref": "R105",
     "pin": "2"
@@ -6410,7 +6315,7 @@
    "note": ""
   },
   {
-   "id": "W146",
+   "id": "W142",
    "from": {
     "ref": "R5",
     "pin": "2"
@@ -6427,7 +6332,7 @@
    "note": "BUS_SENSE from the R5 lead at TB2 to A1"
   },
   {
-   "id": "W147",
+   "id": "W143",
    "from": {
     "ref": "R6",
     "pin": "1"
@@ -6444,7 +6349,7 @@
    "note": ""
   },
   {
-   "id": "W148",
+   "id": "W144",
    "from": {
     "ref": "R7",
     "pin": "2"
@@ -6461,7 +6366,7 @@
    "note": "Bleed return"
   },
   {
-   "id": "W149",
+   "id": "W145",
    "from": {
     "ref": "A1",
     "pin": "3V3"
@@ -6478,7 +6383,7 @@
    "note": "On A1"
   },
   {
-   "id": "W150",
+   "id": "W146",
    "from": {
     "ref": "R22",
     "pin": "2"
@@ -6495,7 +6400,7 @@
    "note": "Pedal supply"
   },
   {
-   "id": "W151",
+   "id": "W147",
    "from": {
     "ref": "J3",
     "pin": "2"
@@ -6512,7 +6417,7 @@
    "note": "Pedal signal"
   },
   {
-   "id": "W152",
+   "id": "W148",
    "from": {
     "ref": "J3",
     "pin": "3"
@@ -6529,7 +6434,7 @@
    "note": ""
   },
   {
-   "id": "W153",
+   "id": "W149",
    "from": {
     "ref": "J3",
     "pin": "1"
@@ -6546,7 +6451,7 @@
    "note": ""
   },
   {
-   "id": "W154",
+   "id": "W150",
    "from": {
     "ref": "J3",
     "pin": "2"
@@ -6563,7 +6468,7 @@
    "note": ""
   },
   {
-   "id": "W155",
+   "id": "W151",
    "from": {
     "ref": "J3",
     "pin": "3"
@@ -6580,7 +6485,7 @@
    "note": ""
   },
   {
-   "id": "W156",
+   "id": "W152",
    "from": {
     "ref": "U31",
     "pin": "DQ"
@@ -6597,7 +6502,7 @@
    "note": "DS18B20 yellow"
   },
   {
-   "id": "W157",
+   "id": "W153",
    "from": {
     "ref": "U31",
     "pin": "VDD"
@@ -6614,7 +6519,7 @@
    "note": "DS18B20 red"
   },
   {
-   "id": "W158",
+   "id": "W154",
    "from": {
     "ref": "U31",
     "pin": "GND"
@@ -6631,7 +6536,7 @@
    "note": "DS18B20 black"
   },
   {
-   "id": "W159",
+   "id": "W155",
    "from": {
     "ref": "U20",
     "pin": "R2"
@@ -6648,7 +6553,7 @@
    "note": "I2C bus start; keep SCL and SDA beside GND"
   },
   {
-   "id": "W160",
+   "id": "W156",
    "from": {
     "ref": "U20",
     "pin": "R1"
@@ -6665,7 +6570,7 @@
    "note": ""
   },
   {
-   "id": "W161",
+   "id": "W157",
    "from": {
     "ref": "A1",
     "pin": "3V3"
@@ -6682,7 +6587,7 @@
    "note": ""
   },
   {
-   "id": "W162",
+   "id": "W158",
    "from": {
     "ref": "A1",
     "pin": "GND"
@@ -6699,13 +6604,81 @@
    "note": ""
   },
   {
-   "id": "W163",
+   "id": "W159",
    "from": {
     "ref": "U22",
     "pin": "SCL"
    },
    "to": {
     "ref": "U23",
+    "pin": "SCL"
+   },
+   "net": "I2C_SCL",
+   "awg": "22",
+   "colour": "GY",
+   "protectedBy": "-",
+   "route": "box",
+   "note": "I2C chain"
+  },
+  {
+   "id": "W160",
+   "from": {
+    "ref": "U22",
+    "pin": "SDA"
+   },
+   "to": {
+    "ref": "U23",
+    "pin": "SDA"
+   },
+   "net": "I2C_SDA",
+   "awg": "22",
+   "colour": "GN",
+   "protectedBy": "-",
+   "route": "box",
+   "note": "I2C chain"
+  },
+  {
+   "id": "W161",
+   "from": {
+    "ref": "U22",
+    "pin": "VDD"
+   },
+   "to": {
+    "ref": "U23",
+    "pin": "VDD"
+   },
+   "net": "3V3_SENSE",
+   "awg": "22",
+   "colour": "VT",
+   "protectedBy": "U2 current limit",
+   "route": "box",
+   "note": "I2C chain"
+  },
+  {
+   "id": "W162",
+   "from": {
+    "ref": "U22",
+    "pin": "GND"
+   },
+   "to": {
+    "ref": "U23",
+    "pin": "GND"
+   },
+   "net": "GND",
+   "awg": "22",
+   "colour": "BK",
+   "protectedBy": "-",
+   "route": "box",
+   "note": "I2C chain"
+  },
+  {
+   "id": "W163",
+   "from": {
+    "ref": "U23",
+    "pin": "SCL"
+   },
+   "to": {
+    "ref": "U24",
     "pin": "SCL"
    },
    "net": "I2C_SCL",
@@ -6718,11 +6691,11 @@
   {
    "id": "W164",
    "from": {
-    "ref": "U22",
+    "ref": "U23",
     "pin": "SDA"
    },
    "to": {
-    "ref": "U23",
+    "ref": "U24",
     "pin": "SDA"
    },
    "net": "I2C_SDA",
@@ -6735,12 +6708,12 @@
   {
    "id": "W165",
    "from": {
-    "ref": "U22",
+    "ref": "U23",
     "pin": "VDD"
    },
    "to": {
-    "ref": "U23",
-    "pin": "VDD"
+    "ref": "U24",
+    "pin": "VCC"
    },
    "net": "3V3_SENSE",
    "awg": "22",
@@ -6752,11 +6725,11 @@
   {
    "id": "W166",
    "from": {
-    "ref": "U22",
+    "ref": "U23",
     "pin": "GND"
    },
    "to": {
-    "ref": "U23",
+    "ref": "U24",
     "pin": "GND"
    },
    "net": "GND",
@@ -6769,11 +6742,11 @@
   {
    "id": "W167",
    "from": {
-    "ref": "U23",
+    "ref": "U24",
     "pin": "SCL"
    },
    "to": {
-    "ref": "U24",
+    "ref": "U26",
     "pin": "SCL"
    },
    "net": "I2C_SCL",
@@ -6786,11 +6759,11 @@
   {
    "id": "W168",
    "from": {
-    "ref": "U23",
+    "ref": "U24",
     "pin": "SDA"
    },
    "to": {
-    "ref": "U24",
+    "ref": "U26",
     "pin": "SDA"
    },
    "net": "I2C_SDA",
@@ -6803,11 +6776,11 @@
   {
    "id": "W169",
    "from": {
-    "ref": "U23",
-    "pin": "VDD"
+    "ref": "U24",
+    "pin": "VCC"
    },
    "to": {
-    "ref": "U24",
+    "ref": "U26",
     "pin": "VCC"
    },
    "net": "3V3_SENSE",
@@ -6820,11 +6793,11 @@
   {
    "id": "W170",
    "from": {
-    "ref": "U23",
+    "ref": "U24",
     "pin": "GND"
    },
    "to": {
-    "ref": "U24",
+    "ref": "U26",
     "pin": "GND"
    },
    "net": "GND",
@@ -6837,11 +6810,11 @@
   {
    "id": "W171",
    "from": {
-    "ref": "U24",
+    "ref": "U26",
     "pin": "SCL"
    },
    "to": {
-    "ref": "U26",
+    "ref": "U28",
     "pin": "SCL"
    },
    "net": "I2C_SCL",
@@ -6854,11 +6827,11 @@
   {
    "id": "W172",
    "from": {
-    "ref": "U24",
+    "ref": "U26",
     "pin": "SDA"
    },
    "to": {
-    "ref": "U26",
+    "ref": "U28",
     "pin": "SDA"
    },
    "net": "I2C_SDA",
@@ -6871,11 +6844,11 @@
   {
    "id": "W173",
    "from": {
-    "ref": "U24",
+    "ref": "U26",
     "pin": "VCC"
    },
    "to": {
-    "ref": "U26",
+    "ref": "U28",
     "pin": "VCC"
    },
    "net": "3V3_SENSE",
@@ -6888,11 +6861,11 @@
   {
    "id": "W174",
    "from": {
-    "ref": "U24",
+    "ref": "U26",
     "pin": "GND"
    },
    "to": {
-    "ref": "U26",
+    "ref": "U28",
     "pin": "GND"
    },
    "net": "GND",
@@ -6904,74 +6877,6 @@
   },
   {
    "id": "W175",
-   "from": {
-    "ref": "U26",
-    "pin": "SCL"
-   },
-   "to": {
-    "ref": "U28",
-    "pin": "SCL"
-   },
-   "net": "I2C_SCL",
-   "awg": "22",
-   "colour": "GY",
-   "protectedBy": "-",
-   "route": "box",
-   "note": "I2C chain"
-  },
-  {
-   "id": "W176",
-   "from": {
-    "ref": "U26",
-    "pin": "SDA"
-   },
-   "to": {
-    "ref": "U28",
-    "pin": "SDA"
-   },
-   "net": "I2C_SDA",
-   "awg": "22",
-   "colour": "GN",
-   "protectedBy": "-",
-   "route": "box",
-   "note": "I2C chain"
-  },
-  {
-   "id": "W177",
-   "from": {
-    "ref": "U26",
-    "pin": "VCC"
-   },
-   "to": {
-    "ref": "U28",
-    "pin": "VCC"
-   },
-   "net": "3V3_SENSE",
-   "awg": "22",
-   "colour": "VT",
-   "protectedBy": "U2 current limit",
-   "route": "box",
-   "note": "I2C chain"
-  },
-  {
-   "id": "W178",
-   "from": {
-    "ref": "U26",
-    "pin": "GND"
-   },
-   "to": {
-    "ref": "U28",
-    "pin": "GND"
-   },
-   "net": "GND",
-   "awg": "22",
-   "colour": "BK",
-   "protectedBy": "-",
-   "route": "box",
-   "note": "I2C chain"
-  },
-  {
-   "id": "W179",
    "from": {
     "ref": "U22",
     "pin": "ADDR"
@@ -6988,7 +6893,7 @@
    "note": "Address 0x48"
   },
   {
-   "id": "W180",
+   "id": "W176",
    "from": {
     "ref": "U23",
     "pin": "ADDR"
@@ -7005,7 +6910,7 @@
    "note": "Address 0x49"
   },
   {
-   "id": "W181",
+   "id": "W177",
    "from": {
     "ref": "U26",
     "pin": "AD0"
@@ -7022,7 +6927,7 @@
    "note": "Address 0x68"
   },
   {
-   "id": "W182",
+   "id": "W178",
    "from": {
     "ref": "U28",
     "pin": "OE"
@@ -7039,7 +6944,7 @@
    "note": "Outputs always enabled"
   },
   {
-   "id": "W183",
+   "id": "W179",
    "from": {
     "ref": "U28",
     "pin": "SCL"
@@ -7056,7 +6961,7 @@
    "note": "Off-box I2C branch: steering column"
   },
   {
-   "id": "W184",
+   "id": "W180",
    "from": {
     "ref": "U28",
     "pin": "SDA"
@@ -7073,7 +6978,7 @@
    "note": ""
   },
   {
-   "id": "W185",
+   "id": "W181",
    "from": {
     "ref": "A1",
     "pin": "3V3"
@@ -7090,7 +6995,7 @@
    "note": ""
   },
   {
-   "id": "W186",
+   "id": "W182",
    "from": {
     "ref": "A1",
     "pin": "GND"
@@ -7107,7 +7012,7 @@
    "note": ""
   },
   {
-   "id": "W187",
+   "id": "W183",
    "from": {
     "ref": "U28",
     "pin": "SCL"
@@ -7124,7 +7029,7 @@
    "note": "Off-box I2C branch: dash"
   },
   {
-   "id": "W188",
+   "id": "W184",
    "from": {
     "ref": "U28",
     "pin": "SDA"
@@ -7141,7 +7046,7 @@
    "note": ""
   },
   {
-   "id": "W189",
+   "id": "W185",
    "from": {
     "ref": "A1",
     "pin": "3V3"
@@ -7158,7 +7063,7 @@
    "note": ""
   },
   {
-   "id": "W190",
+   "id": "W186",
    "from": {
     "ref": "A1",
     "pin": "GND"
@@ -7175,7 +7080,7 @@
    "note": ""
   },
   {
-   "id": "W191",
+   "id": "W187",
    "from": {
     "ref": "U28",
     "pin": "PWM0"
@@ -7192,7 +7097,7 @@
    "note": "Lights PWM"
   },
   {
-   "id": "W192",
+   "id": "W188",
    "from": {
     "ref": "U28",
     "pin": "PWM1"
@@ -7209,7 +7114,7 @@
    "note": "Fan PWM"
   },
   {
-   "id": "W193",
+   "id": "W189",
    "from": {
     "ref": "U29",
     "pin": "GND"
@@ -7226,7 +7131,7 @@
    "note": ""
   },
   {
-   "id": "W194",
+   "id": "W190",
    "from": {
     "ref": "J4",
     "pin": "1"
@@ -7243,7 +7148,7 @@
    "note": ""
   },
   {
-   "id": "W195",
+   "id": "W191",
    "from": {
     "ref": "J4",
     "pin": "2"
@@ -7260,7 +7165,7 @@
    "note": ""
   },
   {
-   "id": "W196",
+   "id": "W192",
    "from": {
     "ref": "J4",
     "pin": "3"
@@ -7277,7 +7182,7 @@
    "note": ""
   },
   {
-   "id": "W197",
+   "id": "W193",
    "from": {
     "ref": "J4",
     "pin": "1"
@@ -7294,7 +7199,7 @@
    "note": ""
   },
   {
-   "id": "W198",
+   "id": "W194",
    "from": {
     "ref": "SW2",
     "pin": "2"
@@ -7311,7 +7216,7 @@
    "note": ""
   },
   {
-   "id": "W199",
+   "id": "W195",
    "from": {
     "ref": "J4",
     "pin": "2"
@@ -7328,7 +7233,7 @@
    "note": ""
   },
   {
-   "id": "W200",
+   "id": "W196",
    "from": {
     "ref": "SW3",
     "pin": "2"
@@ -7345,7 +7250,7 @@
    "note": ""
   },
   {
-   "id": "W201",
+   "id": "W197",
    "from": {
     "ref": "J8",
     "pin": "3"
@@ -7362,7 +7267,7 @@
    "note": "Horn button"
   },
   {
-   "id": "W202",
+   "id": "W198",
    "from": {
     "ref": "J8",
     "pin": "4"
@@ -7379,7 +7284,7 @@
    "note": ""
   },
   {
-   "id": "W203",
+   "id": "W199",
    "from": {
     "ref": "J8",
     "pin": "3"
@@ -7396,7 +7301,7 @@
    "note": ""
   },
   {
-   "id": "W204",
+   "id": "W200",
    "from": {
     "ref": "SW4",
     "pin": "2"
@@ -7413,7 +7318,7 @@
    "note": ""
   },
   {
-   "id": "W205",
+   "id": "W201",
    "from": {
     "ref": "J8",
     "pin": "1"
@@ -7430,7 +7335,7 @@
    "note": "Lights (voltage TBD)"
   },
   {
-   "id": "W206",
+   "id": "W202",
    "from": {
     "ref": "LP1",
     "pin": "2"
@@ -7447,7 +7352,7 @@
    "note": ""
   },
   {
-   "id": "W207",
+   "id": "W203",
    "from": {
     "ref": "J10",
     "pin": "8"
@@ -7464,7 +7369,7 @@
    "note": "Seat switch"
   },
   {
-   "id": "W208",
+   "id": "W204",
    "from": {
     "ref": "J10",
     "pin": "3"
@@ -7481,7 +7386,7 @@
    "note": "WHEEL_SPEED_L to A1"
   },
   {
-   "id": "W209",
+   "id": "W205",
    "from": {
     "ref": "J10",
     "pin": "4"
@@ -7498,7 +7403,7 @@
    "note": "WHEEL_SPEED_R to A1"
   },
   {
-   "id": "W210",
+   "id": "W206",
    "from": {
     "ref": "J10",
     "pin": "1"
@@ -7515,7 +7420,7 @@
    "note": "Split to both wheels"
   },
   {
-   "id": "W211",
+   "id": "W207",
    "from": {
     "ref": "J10",
     "pin": "1"
@@ -7532,7 +7437,7 @@
    "note": ""
   },
   {
-   "id": "W212",
+   "id": "W208",
    "from": {
     "ref": "J10",
     "pin": "2"
@@ -7549,7 +7454,7 @@
    "note": ""
   },
   {
-   "id": "W213",
+   "id": "W209",
    "from": {
     "ref": "J10",
     "pin": "2"
@@ -7566,7 +7471,7 @@
    "note": ""
   },
   {
-   "id": "W214",
+   "id": "W210",
    "from": {
     "ref": "J10",
     "pin": "3"
@@ -7583,7 +7488,7 @@
    "note": ""
   },
   {
-   "id": "W215",
+   "id": "W211",
    "from": {
     "ref": "J10",
     "pin": "4"
@@ -7600,7 +7505,7 @@
    "note": ""
   },
   {
-   "id": "W216",
+   "id": "W212",
    "from": {
     "ref": "J10",
     "pin": "5"
@@ -7617,7 +7522,7 @@
    "note": "AS5600: ≤ 30 cm of I2C, twisted with GND"
   },
   {
-   "id": "W217",
+   "id": "W213",
    "from": {
     "ref": "J10",
     "pin": "2"
@@ -7634,7 +7539,7 @@
    "note": ""
   },
   {
-   "id": "W218",
+   "id": "W214",
    "from": {
     "ref": "J10",
     "pin": "6"
@@ -7651,7 +7556,7 @@
    "note": ""
   },
   {
-   "id": "W219",
+   "id": "W215",
    "from": {
     "ref": "J10",
     "pin": "7"
@@ -7668,7 +7573,7 @@
    "note": ""
   },
   {
-   "id": "W220",
+   "id": "W216",
    "from": {
     "ref": "U25",
     "pin": "DIR"
@@ -7685,7 +7590,7 @@
    "note": "Jumper on the sensor board"
   },
   {
-   "id": "W221",
+   "id": "W217",
    "from": {
     "ref": "J10",
     "pin": "8"
@@ -7702,7 +7607,7 @@
    "note": ""
   },
   {
-   "id": "W222",
+   "id": "W218",
    "from": {
     "ref": "SW5",
     "pin": "2"
@@ -7719,7 +7624,7 @@
    "note": ""
   },
   {
-   "id": "W223",
+   "id": "W219",
    "from": {
     "ref": "J11",
     "pin": "1"
@@ -7736,7 +7641,7 @@
    "note": ""
   },
   {
-   "id": "W224",
+   "id": "W220",
    "from": {
     "ref": "J11",
     "pin": "2"
@@ -7753,7 +7658,7 @@
    "note": ""
   },
   {
-   "id": "W225",
+   "id": "W221",
    "from": {
     "ref": "J11",
     "pin": "3"
@@ -7770,7 +7675,7 @@
    "note": ""
   },
   {
-   "id": "W226",
+   "id": "W222",
    "from": {
     "ref": "J11",
     "pin": "4"
@@ -7787,7 +7692,7 @@
    "note": ""
   },
   {
-   "id": "W227",
+   "id": "W223",
    "from": {
     "ref": "U30",
     "pin": "6"
@@ -7804,7 +7709,7 @@
    "note": ""
   },
   {
-   "id": "W228",
+   "id": "W224",
    "from": {
     "ref": "U30",
     "pin": "8"
@@ -7821,7 +7726,7 @@
    "note": ""
   },
   {
-   "id": "W229",
+   "id": "W225",
    "from": {
     "ref": "J11",
     "pin": "5"
@@ -7838,7 +7743,7 @@
    "note": ""
   },
   {
-   "id": "W230",
+   "id": "W226",
    "from": {
     "ref": "J11",
     "pin": "6"
@@ -7855,7 +7760,7 @@
    "note": ""
   },
   {
-   "id": "W231",
+   "id": "W227",
    "from": {
     "ref": "U32",
     "pin": "L+"
@@ -7872,7 +7777,7 @@
    "note": ""
   },
   {
-   "id": "W232",
+   "id": "W228",
    "from": {
     "ref": "U32",
     "pin": "L-"
@@ -7889,7 +7794,7 @@
    "note": ""
   },
   {
-   "id": "W233",
+   "id": "W229",
    "from": {
     "ref": "U32",
     "pin": "R+"
@@ -7906,7 +7811,7 @@
    "note": ""
   },
   {
-   "id": "W234",
+   "id": "W230",
    "from": {
     "ref": "U32",
     "pin": "R-"
@@ -7923,7 +7828,7 @@
    "note": ""
   },
   {
-   "id": "W235",
+   "id": "W231",
    "from": {
     "ref": "J12",
     "pin": "1"
@@ -7940,7 +7845,7 @@
    "note": ""
   },
   {
-   "id": "W236",
+   "id": "W232",
    "from": {
     "ref": "J12",
     "pin": "2"
@@ -7957,7 +7862,7 @@
    "note": ""
   },
   {
-   "id": "W237",
+   "id": "W233",
    "from": {
     "ref": "J12",
     "pin": "3"
@@ -7974,7 +7879,7 @@
    "note": ""
   },
   {
-   "id": "W238",
+   "id": "W234",
    "from": {
     "ref": "J12",
     "pin": "4"
@@ -9282,7 +9187,7 @@
     "8": "GND",
     "B+": "MOTOR_24V",
     "B-": "GND",
-    "M+": "FL_DRV_POS",
+    "M+": "FL_M_POS",
     "M-": "FL_M_NEG"
    }
   },
@@ -9356,20 +9261,6 @@
     "2": "GND"
    }
   },
-  "F11": {
-   "ref": "F11",
-   "value": "15 A",
-   "part": "Inline blade fuse holder (12 AWG) + 15 A blade",
-   "source": "To buy",
-   "where": "box, in the FL motor + lead",
-   "note": "Stalled-motor backstop (safety review M3): one stalled motor draws under the 20 A software limit and the 40 A main fuse. 15 A is a placeholder: set it from the motor label (#14), above the running current, below the stall current",
-   "issue": "",
-   "sheet": "Drive, variant A (4 + 1 IBT-2)",
-   "pins": {
-    "1": "FL_DRV_POS",
-    "2": "FL_M_POS"
-   }
-  },
   "U11": {
    "ref": "U11",
    "value": "IBT-2 FR",
@@ -9390,7 +9281,7 @@
     "8": "GND",
     "B+": "MOTOR_24V",
     "B-": "GND",
-    "M+": "FR_DRV_POS",
+    "M+": "FR_M_POS",
     "M-": "FR_M_NEG"
    }
   },
@@ -9464,20 +9355,6 @@
     "2": "GND"
    }
   },
-  "F12": {
-   "ref": "F12",
-   "value": "15 A",
-   "part": "Inline blade fuse holder (12 AWG) + 15 A blade",
-   "source": "To buy",
-   "where": "box, in the FR motor + lead",
-   "note": "Stalled-motor backstop (safety review M3): one stalled motor draws under the 20 A software limit and the 40 A main fuse. 15 A is a placeholder: set it from the motor label (#14), above the running current, below the stall current",
-   "issue": "",
-   "sheet": "Drive, variant A (4 + 1 IBT-2)",
-   "pins": {
-    "1": "FR_DRV_POS",
-    "2": "FR_M_POS"
-   }
-  },
   "U12": {
    "ref": "U12",
    "value": "IBT-2 RL",
@@ -9498,7 +9375,7 @@
     "8": "GND",
     "B+": "MOTOR_24V",
     "B-": "GND",
-    "M+": "RL_DRV_POS",
+    "M+": "RL_M_POS",
     "M-": "RL_M_NEG"
    }
   },
@@ -9572,20 +9449,6 @@
     "2": "GND"
    }
   },
-  "F13": {
-   "ref": "F13",
-   "value": "15 A",
-   "part": "Inline blade fuse holder (12 AWG) + 15 A blade",
-   "source": "To buy",
-   "where": "box, in the RL motor + lead",
-   "note": "Stalled-motor backstop (safety review M3): one stalled motor draws under the 20 A software limit and the 40 A main fuse. 15 A is a placeholder: set it from the motor label (#14), above the running current, below the stall current",
-   "issue": "",
-   "sheet": "Drive, variant A (4 + 1 IBT-2)",
-   "pins": {
-    "1": "RL_DRV_POS",
-    "2": "RL_M_POS"
-   }
-  },
   "U13": {
    "ref": "U13",
    "value": "IBT-2 RR",
@@ -9606,7 +9469,7 @@
     "8": "GND",
     "B+": "MOTOR_24V",
     "B-": "GND",
-    "M+": "RR_DRV_POS",
+    "M+": "RR_M_POS",
     "M-": "RR_M_NEG"
    }
   },
@@ -9678,20 +9541,6 @@
    "pins": {
     "1": "DRIVE_EN",
     "2": "GND"
-   }
-  },
-  "F14": {
-   "ref": "F14",
-   "value": "15 A",
-   "part": "Inline blade fuse holder (12 AWG) + 15 A blade",
-   "source": "To buy",
-   "where": "box, in the RR motor + lead",
-   "note": "Stalled-motor backstop (safety review M3): one stalled motor draws under the 20 A software limit and the 40 A main fuse. 15 A is a placeholder: set it from the motor label (#14), above the running current, below the stall current",
-   "issue": "",
-   "sheet": "Drive, variant A (4 + 1 IBT-2)",
-   "pins": {
-    "1": "RR_DRV_POS",
-    "2": "RR_M_POS"
    }
   },
   "U14": {
@@ -10423,7 +10272,7 @@
    "sheet": "Drive, variant B (2 x MDD20A)",
    "pins": {
     "IP+": "FL_CS_IN",
-    "IP-": "FL_DRV_POS",
+    "IP-": "FL_M_POS",
     "VCC": "3V3_SENSE",
     "GND": "GND",
     "OUT": "IS_FL"
@@ -10440,7 +10289,7 @@
    "sheet": "Drive, variant B (2 x MDD20A)",
    "pins": {
     "IP+": "FR_CS_IN",
-    "IP-": "FR_DRV_POS",
+    "IP-": "FR_M_POS",
     "VCC": "3V3_SENSE",
     "GND": "GND",
     "OUT": "IS_FR"
@@ -10457,7 +10306,7 @@
    "sheet": "Drive, variant B (2 x MDD20A)",
    "pins": {
     "IP+": "RL_CS_IN",
-    "IP-": "RL_DRV_POS",
+    "IP-": "RL_M_POS",
     "VCC": "3V3_SENSE",
     "GND": "GND",
     "OUT": "IS_RL"
@@ -10474,7 +10323,7 @@
    "sheet": "Drive, variant B (2 x MDD20A)",
    "pins": {
     "IP+": "RR_CS_IN",
-    "IP-": "RR_DRV_POS",
+    "IP-": "RR_M_POS",
     "VCC": "3V3_SENSE",
     "GND": "GND",
     "OUT": "IS_RR"

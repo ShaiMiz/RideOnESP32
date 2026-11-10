@@ -8,7 +8,7 @@ Build the new electronics as a removable box and leave the stock wiring intact. 
 
 - [ ] Count the BTS7960 boards and confirm the four drive motors.
 - [ ] Read the battery label: voltage, Ah, chemistry. Write it in [hardware/CAR.md](hardware/CAR.md).
-- [ ] Read one drive motor label and the steering motor label. The drive motor current sets the F11-F14 fuse size.
+- [ ] Read one drive motor label and the steering motor label. Note the drive motor's rated and stall current: the stall current must be above `MOTOR_CURRENT_LIMIT_A` (20 A) for the over-current fault to catch a stalled wheel.
 - [ ] Read the key switch rating (#19).
 - [ ] Drive the car once on its stock controller, to know its normal speed and feel.
 
@@ -55,7 +55,7 @@ Passed: ____
 - [ ] Turning the radio off while the motor runs at full output brings the output to zero within 0.75 s.
 - [ ] After any fault, holding the throttle never restarts the motor. It restarts only after the mode switch goes through Locked with the stick centred.
 - [ ] The kill switch stops the motor and opens the contactor.
-- [ ] *(recommended once F11-F14 are fitted)* The logged current agrees with a clamp meter at three loads (free spin, light brake, heavy brake). If it reads about half or double, `IS_PIN_RESISTOR_OHMS` is wrong (the firmware halves it for the joined IS pins).
+- [ ] The logged current agrees with a clamp meter at three loads (free spin, light brake, heavy brake). If it reads about half or double, `IS_PIN_RESISTOR_OHMS` is wrong (the firmware halves it for the joined IS pins).
 - [ ] A driver or over-current fault opens the contactor as well as cutting the drive enable.
 - [ ] Driver temperature after 10 minutes at 16 kHz PWM is acceptable to the touch.
 
@@ -63,7 +63,7 @@ Passed: ____
 
 ## Phase 5: whole car, wheels off the ground
 
-- [ ] Car on blocks. All five drivers, both ADS1115s, the PCF8574, the PCA9685, the DS18B20 and the pedal connected. F11-F14 fitted, sized from the motor label. Steering calibrated (once `SteeringController` is written).
+- [ ] Car on blocks. All five drivers, both ADS1115s, the PCF8574, the PCA9685, the DS18B20 and the pedal connected. Steering calibrated (once `SteeringController` is written).
 - [ ] Wheel direction: give a small forward command and check each wheel on its own. Set `WHEEL_REVERSED` in `config.h` for any wheel that turns backwards, reflash, and check again.
 - [ ] Both box fans run from key-on (log `fan=1`), and the log shows a sensible `box=` temperature. Then set `BOX_TEMP_REQUIRED = true`.
 - [ ] Flash `pio run -e car -t upload`.
@@ -79,7 +79,7 @@ Passed: ____
 - [ ] Crash recorder: with the wheels turning in Parent mode, press the E-stop. The log shows `CRASH_SAVED cause=FAULT ESTOP`, and `crash` lists 50 samples with the output ramping up and the E-stop moment last. Power-cycle: `crash` still shows it
 
 **Gate:** heat and touch, as a toy lab tests a stock car:
-- [ ] Locked wheel: hold one wheel, full throttle for 30 s, then until its fuse blows or `OVERCUR`/`DRIVER` trips. Repeat for each wheel. Nothing smokes, and no wire, motor, driver heatsink or box surface is too hot to keep a hand on (about 50 °C; an IR thermometer helps)
+- [ ] Locked wheel: hold one wheel at full throttle until `OVERCUR` or `DRIVER` trips; it should trip within about 0.5 s (300 ms hold). If it doesn't trip within 30 s, stop: nothing else will cut that motor. Measure the stall current with the clamp meter: if it is below `MOTOR_CURRENT_LIMIT_A`, lower the limit (keeping it above the running current) and repeat. Repeat for each wheel. Nothing smokes, and no wire, motor, driver heatsink or box surface is too hot to keep a hand on (about 50 °C; an IR thermometer helps)
 - [ ] Walk round the car: no sharp edges, screw tips, cut metal or zip-tie ends where the child sits or reaches; fan guards on; our box can't come loose
 
 Passed: ____

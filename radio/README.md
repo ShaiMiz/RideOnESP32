@@ -22,17 +22,17 @@ Detail: [MODEL_SETUP.md](MODEL_SETUP.md) (the model, switch by switch), [ELRS_SE
 
 | Device | What it is | EdgeTX / ExpressLRS name |
 | --- | --- | --- |
-| Radio | Jumper T-Lite V2, STM32F4, 128×64 screen, EdgeTX | EdgeTX target `tlitef4` ("Jumper T-Lite (F4 MCU)" in EdgeTX Buddy) |
+| Radio | Jumper T-Lite V2, 128×64 screen, EdgeTX | EdgeTX target `tlite` ("Jumper T-Lite" in EdgeTX Buddy). Our unit came with `edgetx-tlite-2.7.1` (read from `FIRMWARE.TXT` on the radio's small USB drive, 12 Nov 2026). Some later units use `tlitef4`; check that file before flashing |
 | Radio's ELRS module | Internal 2.4 GHz ESP32 module | Configurator: Jumper 2.4 GHz → "Jumper AION T-Lite 2.4GHz TX" |
 | Receiver | Jumper AION RX Mini, ESP8285 + SX1280, 2.4 GHz | Configurator: Jumper 2.4 GHz → "Jumper AION Mini 2.4GHz RX" |
 
 The exact versions on your units are read in steps 1 and 7 and saved in `RideOn-radio.txt` on the SD card; `install_radio.py` prints them and keeps a dated copy on the PC. Put them in the version log in [DEVICE_FIRMWARE.md](../docs/hardware/DEVICE_FIRMWARE.md#version-log).
 
-## Target versions (checked 7 Nov 2026)
+## Target versions (checked 7 Nov 2026, EdgeTX corrected 12 Nov 2026)
 
 | Software | Version | Why |
 | --- | --- | --- |
-| EdgeTX | **2.12.5** | Latest stable release. The model file follows the 2.12 format; the installer refuses to call anything older than 2.10 good |
+| EdgeTX | **2.11.8** | The last release with a T-Lite build: EdgeTX 2.12 has no `tlite` or `tlitef4` firmware. The model file uses only keys that 2.11.8 and 2.12.5 both read; the installer refuses to call anything older than 2.10 good |
 | ExpressLRS (module and receiver) | **4.1.0** | Latest release. Both targets are still listed for 4.x in the ExpressLRS target list, and the setup tool's setting names were checked against 4.1.0 and 3.6.4. Module and receiver must run the same version: 3.x and 4.x do not link |
 | ExpressLRS Configurator | Latest from [github.com/ExpressLRS/ExpressLRS-Configurator/releases](https://github.com/ExpressLRS/ExpressLRS-Configurator/releases) | Flashes with the binding phrase and options built in |
 | EdgeTX Buddy | [buddy.edgetx.org](https://buddy.edgetx.org) in Chrome or Edge | Flashes EdgeTX and the SD card contents over USB |
@@ -56,7 +56,7 @@ Why this can't be done for you remotely: the PC has to leave your home Wi-Fi to 
 You need: the T-Lite with a charged 18650, a USB-C data cable, a Windows PC, and for steps 6 to 9 the receiver wired to the ESP32 (phase 2, [COMMISSIONING.md](../docs/COMMISSIONING.md)).
 
 1. **Back up and identify.** Turn the radio on, plug in USB, choose **USB Storage (SD)**. Double-click `radio/install_radio.cmd`. It backs up the whole SD card to `Documents\RideOnESP32-radio\backups\`, installs the RideOn files, prints the EdgeTX version and stick mode, and creates your **binding phrase** (saved in `Documents\RideOnESP32-radio\binding-phrase.txt`, never in git). Eject and unplug.
-2. **Update EdgeTX** if step 1 said it is older than 2.12.5: open EdgeTX Buddy, pick the latest release and "Jumper T-Lite (F4 MCU)", tick "update SD card contents", and follow it (radio off, plug USB in, it flashes in DFU mode). Then run `install_radio.cmd` again, because the new SD contents need the RideOn files put back.
+2. **Update EdgeTX** if step 1 said it is older than 2.11.8: open EdgeTX Buddy, pick release 2.11.8 and "Jumper T-Lite", tick "update SD card contents", and follow it (radio off, plug USB in, it flashes in DFU mode). Or use the radio's own bootloader with the firmware on the SD card, which needs no Windows driver ([DEVICE_FIRMWARE.md](../docs/hardware/DEVICE_FIRMWARE.md#jumper-t-lite-v2-radio-edgetx)). Then run `install_radio.cmd` again, because the new SD contents need the RideOn files put back.
 3. **Check the radio.** On the radio: SYS → Hardware → Internal RF is **CRSF** (it is from the factory on the ELRS T-Lite), and Radio setup → Mode is **2**. Select the RideOn model if it isn't already. The radio complains about switches until SA, SB and SC are all **up**: that is the start-up check working.
 4. **Flash the radio's ELRS module.** In the Configurator: Jumper 2.4 GHz → "Jumper AION T-Lite 2.4GHz TX", release 4.1.0, regulatory domain **ISM 2400 (FCC)**, paste the binding phrase, flashing method **EdgeTXPassthrough**. On the radio: SYS → Hardware → Serial port USB-VCP = **CLI**; plug USB, choose **USB Serial (VCP)**; click Flash. Details and the Wi-Fi alternative: [DEVICE_FIRMWARE.md](../docs/hardware/DEVICE_FIRMWARE.md#t-lite-internal-elrs-module-expresslrs-tx).
 5. **Flash the receiver** (or do it early, on the bench supply, [above](#before-the-radio-has-a-battery-the-receiver-alone)). Configurator: "Jumper AION Mini 2.4GHz RX", the same release, domain and phrase, and **untick AUTO_WIFI_ON_INTERVAL** (this turns the receiver's automatic Wi-Fi hotspot off). Flash over Wi-Fi: power the receiver (ESP32 on USB powers it), wait 60 s for its `ExpressLRS RX` hotspot (the current firmware still has auto Wi-Fi on), join it with password `expresslrs` and flash, or use the radio's ExpressLRS Lua → WiFi Connectivity → Enable RX WiFi if it is already bound. Recovery over UART: [DEVICE_FIRMWARE.md](../docs/hardware/DEVICE_FIRMWARE.md#jumper-aion-rx-mini-receiver-expresslrs-rx).
@@ -74,7 +74,7 @@ You need: the T-Lite with a charged 18650, a USB-C data cable, a Windows PC, and
 - `tools/check_radio_files.py`: every channel in `model42.yml` comes from the switch or stick [CHANNEL_MAP.md](../docs/firmware/CHANNEL_MAP.md) names, with the polarity the firmware expects (kill switch up = KILL); trims are off; the start-up switch warnings are on; receiver number 42; the alarm thresholds equal `BATTERY_LOW_WARN_V` and `LQ_DEGRADED_BELOW` in `config.h`; the file has no YAML comments (EdgeTX's reader has none).
 - `tools/test_radio_scripts.py`: the telemetry script runs in Lua 5.2, as on the radio, against a mock EdgeTX (screen with and without link, fault and mode alerts, low battery repeat, weak and lost link). The setup tool runs against a simulated ELRS module that answers like the real firmware, including chunked replies and refusing a packet-rate change while connected; it must refuse to do anything unless SC is on KILL and SA on Locked. The installer and log summary run against a fake SD card.
 
-What CI cannot check: that EdgeTX reads `model42.yml` exactly as intended (it was written against the EdgeTX 2.12.5 source, not loaded in a real radio), and the real radio link. Those are the bench and field checks.
+What CI cannot check: that EdgeTX reads `model42.yml` exactly as intended (its keys were checked against the EdgeTX 2.11.8 and 2.12.5 source, not loaded in a real radio), and the real radio link. Those are the bench and field checks.
 
 ### Bench, phase 2 (receiver on the ESP32, `radio_check` firmware)
 

@@ -18,7 +18,7 @@ Build the new electronics as a removable box and leave the stock wiring intact. 
 
 - [ ] Charge the T-Lite (18650 cell).
 - [ ] Wire only the receiver to the ESP32. Flash `pio run -e radio_check -t upload` and open the monitor.
-- [ ] Radio setup steps 1 to 8 in [radio/README.md](../radio/README.md): install the `RideOn` model and scripts, update to EdgeTX 2.12.5 and ExpressLRS 4.1.0 on both radio module and receiver with the binding phrase and receiver Wi-Fi off, run "RideOn ELRS setup" with the car off and then on (Model Match), and record the versions from `RideOn-radio.txt`.
+- [ ] Radio setup steps 1 to 8 in [radio/README.md](../radio/README.md): install the `RideOn` model and scripts, update to EdgeTX 2.11.8 and ExpressLRS 4.1.0 on both radio module and receiver with the binding phrase and receiver Wi-Fi off, run "RideOn ELRS setup" with the car off and then on (Model Match), and record the versions from `RideOn-radio.txt`.
 
 **Gate:**
 - [ ] Turning the radio off prints `link OK -> LOST` with the last packet under 200 ms old.

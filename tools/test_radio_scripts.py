@@ -53,7 +53,7 @@ class Radio:
         g.playTone = lambda *a: self.sounds.append(("tone",) + tuple(a))
         g.playHaptic = lambda *a: self.sounds.append(("haptic",) + tuple(a))
         g.playNumber = lambda *a: self.sounds.append(("number",) + tuple(a))
-        g.getVersion = lambda: ("2.12.5", "tlitef4", 2, 12, 5)
+        g.getVersion = lambda: ("2.11.8", "tlite", 2, 11, 8)
         g.getDateTime = lambda: self.lua.table_from(dict(year=2026, mon=11, day=7, hour=12, min=0))
         lcd = self.lua.table_from({})
         lcd.clear = lambda: self.screen.clear()
@@ -200,7 +200,7 @@ class ToolScript(unittest.TestCase):
         self.assertIn("elrs_rx: not found", rep)
         self.assertIn("Packet Rate: 150Hz ok", rep)
         self.assertIn("Model Match: Off, run again car ON", rep)
-        self.assertIn("edgetx: 2.12.5", rep)
+        self.assertIn("edgetx: 2.11.8", rep)
 
     def test_car_on_teaches_model_match_and_reads_receiver(self):
         r = Radio()

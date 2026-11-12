@@ -46,9 +46,10 @@ SCRIPTS = [
 REPORT = "RideOn-radio.txt"
 
 # Versions this repo was checked against (radio/README.md). Older works may still work,
-# but update first: the model file follows the EdgeTX 2.12 format.
+# but update first. EdgeTX 2.12 dropped the T-Lite, so 2.11.8 is the last release for it;
+# the model file uses only keys that 2.11.8 and 2.12.5 both read.
 MIN_EDGETX = (2, 10, 0)
-RECOMMENDED_EDGETX = "2.12.5"
+RECOMMENDED_EDGETX = "2.11.8"
 RECOMMENDED_ELRS = "4.1.0"  # radio and receiver must run the same major version (3.x does not link with 4.x)
 
 WORDS = (

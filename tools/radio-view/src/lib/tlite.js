@@ -94,7 +94,7 @@ export const BACK_PORTS = [
 
 export const SPECS = [
   ['Radio', 'Jumper T-Lite V2, ELRS version (internal 2.4 GHz ExpressLRS module)'],
-  ['Firmware', 'EdgeTX (target tlitef4), STM32F4'],
+  ['Firmware', 'EdgeTX 2.11.8, target tlite (EdgeTX 2.12 has no T-Lite build)'],
   ['Size', '166 x 106 x 56 mm'],
   ['Weight', '207 g, 258 g with the battery'],
   ['Battery', 'One 18650 Li-ion, flat top (button-top cells do not fit), charged over USB-C. No hot swap'],

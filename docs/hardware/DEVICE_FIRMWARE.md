@@ -24,8 +24,8 @@ Researched 17 Oct 2026. Sources are at the end.
 ## Compatibility rules
 
 - **Radio module and receiver must run the same ExpressLRS release.** ELRS 4.x does not link with 3.x. Update both in the same session, transmitter first.
-- **Target: ExpressLRS 4.1.0, EdgeTX 2.12.5** (the latest releases on 7 Nov 2026, [radio/README.md](../../radio/README.md#target-versions-checked-7-nov-2026)). The ExpressLRS target list (28 Oct 2026) still lists both "Jumper AION T-Lite 2.4GHz TX" and "Jumper AION Mini 2.4GHz RX" for 4.x, so 4.x is confirmed for both. 3.6.4 is the fallback. Before a later upgrade, check that the Configurator still lists both targets for that release. A working link is worth more than new features.
-- **The radio needs EdgeTX 2.10 or newer** for the RideOn model file (2.12 format). EdgeTX 2.7 broke the internal ELRS module; 2.8 fixed it.
+- **Target: ExpressLRS 4.1.0, EdgeTX 2.11.8.** EdgeTX 2.12 dropped the T-Lite, so 2.11.8 is the last release for it (checked 12 Nov 2026). ExpressLRS 4.1.0 was the latest release on 7 Nov 2026 ([radio/README.md](../../radio/README.md#target-versions-checked-7-nov-2026-edgetx-corrected-12-nov-2026)). The ExpressLRS target list (28 Oct 2026) still lists both "Jumper AION T-Lite 2.4GHz TX" and "Jumper AION Mini 2.4GHz RX" for 4.x, so 4.x is confirmed for both. 3.6.4 is the fallback. Before a later upgrade, check that the Configurator still lists both targets for that release. A working link is worth more than new features.
+- **The radio needs EdgeTX 2.10 or newer** for the RideOn model file. EdgeTX 2.7 broke the internal ELRS module; 2.8 fixed it.
 - **Write down every version** you flash in the table at the bottom of this file.
 
 ## ESP32 (car controller)
@@ -55,7 +55,7 @@ The board is an ESP32-WROOM-32D with a USB-C port and a USB-to-serial chip (usua
 **Easiest path: EdgeTX Buddy** (buddy.edgetx.org in Chrome or Edge). It downloads the firmware and SD card contents and flashes them over USB. To flash, the radio goes into DFU mode: with the radio **off**, plug in the USB cable. The T-Lite has no DFU button.
 
 **Bootloader path (SD card):**
-1. Download the EdgeTX release and copy the T-Lite `.bin` into the SD card's `FIRMWARE` folder.
+1. Download the EdgeTX 2.11.8 release (`edgetx-firmware-v2.11.8.zip`) and copy the T-Lite `.bin` (`tlite-*.bin`) into the SD card's `FIRMWARE` folder. Check the radio's build first: `FIRMWARE.TXT` on the radio's small USB drive names it (`edgetx-tlite-...` on our unit).
 2. Update the SD card contents from the `edgetx-sdcard` release for the 128×64 black-and-white screen (`bw128x64`).
 3. To update the bootloader: power on normally, open the SD card browser, select the `.bin` and choose "Flash bootloader".
 4. To write the firmware: with the radio off, push both inner horizontal trims toward the centre and press power. Choose "Write Firmware", pick the `.bin`, and long-press to flash. "Invalid firmware" means the file is for a different radio.

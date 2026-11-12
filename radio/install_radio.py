@@ -39,6 +39,10 @@ import radio_logs  # noqa: E402
 HERE = Path(__file__).resolve().parent
 SDCARD = HERE / "edgetx" / "sdcard"
 MODEL_SRC = SDCARD / "MODELS" / "model42.yml"
+# Name on the radio. The T-Lite numbers its model slots from the file names, counting
+# model00.yml as slot 1, so model01.yml is slot 2, right under the factory model.
+# The slot does not matter for Model Match: that uses the receiver number (42) inside the file.
+MODEL_TARGET = "model01.yml"
 SCRIPTS = [
     Path("SCRIPTS/TELEMETRY/rideon.lua"),
     Path("SCRIPTS/TOOLS/RideOnRF.lua"),
@@ -125,12 +129,12 @@ def model_name(path: Path) -> str | None:
 
 
 def choose_model_file(sd: Path) -> Path:
-    """The existing RideOn model if there is one, else model42.yml, else the first free name."""
+    """The existing RideOn model if there is one, else model01.yml (slot 2), else the first free name."""
     models = sd / "MODELS"
     for p in sorted(models.glob("model*.yml")):
         if model_name(p) == "RideOn":
             return p
-    preferred = models / MODEL_SRC.name
+    preferred = models / MODEL_TARGET
     if not preferred.exists():
         return preferred
     for n in range(1, 100):

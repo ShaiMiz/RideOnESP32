@@ -325,8 +325,8 @@ def fake_sd(root: Path, stick_mode=1, semver="2.12.5", extra_models=()):
     (root / "RADIO").mkdir(parents=True)
     (root / "MODELS").mkdir()
     (root / "RADIO/radio.yml").write_text(
-        f"semver: {semver}\nboard: tlitef4\nstickMode: {stick_mode}\ncurrModelFilename: \"model01.yml\"\n")
-    (root / "MODELS/model01.yml").write_text('semver: 2.12.5\nheader:\n  name: "Model01"\n')
+        f"semver: {semver}\nboard: tlite\nstickMode: {stick_mode}\ncurrModelFilename: \"model00.yml\"\n")
+    (root / "MODELS/model00.yml").write_text('semver: 2.11.8\nheader:\n  name: "Model01"\n')
     for name, model in extra_models:
         (root / "MODELS" / name).write_text(f'semver: 2.12.5\nheader:\n  name: "{model}"\n')
 
@@ -344,10 +344,10 @@ class Installer(unittest.TestCase):
             fake_sd(sd)
             rc, out = self.run_install(sd, home)
             self.assertEqual(rc, 0, out)
-            self.assertTrue((sd / "MODELS/model42.yml").read_bytes() == install_radio.MODEL_SRC.read_bytes())
+            self.assertTrue((sd / "MODELS/model01.yml").read_bytes() == install_radio.MODEL_SRC.read_bytes())
             self.assertTrue((sd / "SCRIPTS/TOOLS/RideOnRF.lua").is_file())
             self.assertTrue((sd / "SCRIPTS/TELEMETRY/rideon.lua").is_file())
-            self.assertIn('currModelFilename: "model42.yml"', (sd / "RADIO/radio.yml").read_text())
+            self.assertIn('currModelFilename: "model01.yml"', (sd / "RADIO/radio.yml").read_text())
             self.assertEqual(len(list((home / "backups").glob("*.zip"))), 1)
             phrase = (home / "binding-phrase.txt").read_text().strip()
             self.assertTrue(phrase.startswith("rideon-") and len(phrase.split("-")) == 6)
@@ -360,10 +360,10 @@ class Installer(unittest.TestCase):
     def test_reuses_existing_rideon_file_and_keeps_others(self):
         with tempfile.TemporaryDirectory() as d:
             sd, home = Path(d, "sd"), Path(d, "home")
-            fake_sd(sd, extra_models=[("model42.yml", "Plane"), ("model07.yml", "RideOn")])
+            fake_sd(sd, extra_models=[("model01.yml", "Plane"), ("model07.yml", "RideOn")])
             rc, out = self.run_install(sd, home, "--no-backup")
             self.assertEqual(rc, 0)
-            self.assertIn("Plane", (sd / "MODELS/model42.yml").read_text())
+            self.assertIn("Plane", (sd / "MODELS/model01.yml").read_text())
             self.assertIn("RideOn", (sd / "MODELS/model07.yml").read_text())
             self.assertIn("MODELS/model07.yml: updated", out)
 
@@ -377,7 +377,7 @@ class Installer(unittest.TestCase):
             self.assertIn("too old", out)
             self.assertIn("stick mode 1", out)
             self.assertIn("different versions", out)
-            self.assertFalse((sd / "MODELS/model42.yml").exists())  # dry run
+            self.assertFalse((sd / "MODELS/model01.yml").exists())  # dry run
 
     def test_not_an_sd_card(self):
         with tempfile.TemporaryDirectory() as d:
